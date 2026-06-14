@@ -6,4 +6,8 @@ import com.hoainhi.sportfields.entity.User;
 public interface AccountService {
     public User registerUser(AccountDTO accountDTO);
 
+    boolean existsByEmail(String email);
+
+    public User loginUser(AccountDTO accountDTO);
+
 }

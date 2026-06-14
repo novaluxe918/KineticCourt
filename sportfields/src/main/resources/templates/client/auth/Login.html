@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -98,9 +98,11 @@
                 <p id="form-subtitle" class="text-muted">
                     Đăng nhập để bắt đầu trận đấu của bạn
                 </p>
+                <p th:text="${message}" class="text-danger"></p>
             </div>
 
-            <form method="" action="">
+            <form method="post"  th:object="${accountDTO}"
+                  th:action="@{/login}">
 
                 <!-- Email -->
                 <div class="mb-3">
@@ -114,9 +116,13 @@
                                 </span>
                             </span>
 
-                        <input type="text"
+                        <input th:field="*{email}" type="text"
                                class="form-control"
                                placeholder="name@example.com">
+                    </div>
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('email')}"
+                         th:errors="*{email}">
                     </div>
                 </div>
 
@@ -133,7 +139,7 @@
                                 </span>
                             </span>
 
-                        <input type="password"
+                        <input th:field="*{password}" type="password"
                                id="password"
                                class="form-control"
                                placeholder="••••••••">
@@ -146,6 +152,11 @@
                                     visibility
                                 </span>
                         </button>
+                    </div>
+
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('password')}"
+                         th:errors="*{password}">
                     </div>
                 </div>
 

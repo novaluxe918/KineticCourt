@@ -15,7 +15,8 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    @Column(name = "id_user")
+    private Long id;
 
     @Column(columnDefinition = "varchar(100) not null")
     private String name_user;
