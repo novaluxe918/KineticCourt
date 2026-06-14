@@ -33,7 +33,7 @@ public class HomeController {
             return new ModelAndView("client/auth/Register", model);
         }
         accountSercive.registerUser(accountDTO);
-         
+
         return new ModelAndView("forward:client/auth/Login", model);
     }
 }
