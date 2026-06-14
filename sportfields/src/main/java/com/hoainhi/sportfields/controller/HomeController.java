@@ -29,6 +29,14 @@ public class HomeController {
 
     @PostMapping("/register")
     public ModelAndView registerUser(@Valid  @ModelAttribute AccountDTO accountDTO , BindingResult result, ModelMap model){
+
+        if(!accountDTO.getPassword().equals(accountDTO.getConfirmPassword())){
+            result.rejectValue(
+                    "confirmPassword",
+                    "error.accountDTO",
+                    "Mật khẩu nhập lại không khớp"
+            );
+        }
         if(result.hasErrors()){
             return new ModelAndView("client/auth/Register", model);
         }
