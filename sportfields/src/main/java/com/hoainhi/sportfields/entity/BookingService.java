@@ -9,7 +9,8 @@ import lombok.Data;
 public class BookingService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_bkService;
+    @Column(name = "id_bkService")
+    private long id;
     private double price;
     private int quantity;
 

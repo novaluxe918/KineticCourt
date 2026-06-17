@@ -11,7 +11,8 @@ import java.time.LocalDate;
 public class BookingDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private long id_bkDetail;
+    @Column(name = "id_bkDetail")
+   private long id;
    private LocalDate booking_date;
 
     @ManyToOne

@@ -24,7 +24,12 @@ public class HomeController {
     @RequestMapping("/home")
     public String showHome(Model model){
         model.addAttribute("accountDTO", new AccountDTO() );
-        return "client/auth/Register";
+        return "client/Home";
+    }
+
+    @RequestMapping("/dashboard")
+    public String showDasboard(Model model){
+        return "admin/dashboard/Dashboard";
     }
 
     @RequestMapping("/login")
@@ -33,13 +38,19 @@ public class HomeController {
         return "client/auth/Login";
     }
 
+    @RequestMapping("/register")
+    public String showRegister(Model model){
+        model.addAttribute("accountDTO", new AccountDTO());
+        return "client/auth/Register";
+    }
+
     @PostMapping("/register")
     public ModelAndView registerUser(@Valid  @ModelAttribute AccountDTO accountDTO , BindingResult result, ModelMap model){
         if(accountSercive.existsByEmail(accountDTO.getEmail())){
             result.rejectValue(
                     "email",
                     "error.accountDTO",
-                    "Email da duoc su dung"
+                    "Email đã được sử dụng"
             );
         }
         if(!accountDTO.getPassword().equals(accountDTO.getConfirmPassword())){
@@ -61,9 +72,10 @@ public class HomeController {
     public ModelAndView loginUser(@Valid @ModelAttribute AccountDTO accountDTO, BindingResult result, ModelMap modelMap){
         User user = accountSercive.loginUser(accountDTO);
         if(user == null){
-            modelMap.addAttribute("message", "Email khong ton tai");
+            modelMap.addAttribute("message", "Email không tồn tại");
             return new ModelAndView("client/auth/Login", modelMap);
         }
         return new ModelAndView("client/Home", modelMap);
     }
 }
+

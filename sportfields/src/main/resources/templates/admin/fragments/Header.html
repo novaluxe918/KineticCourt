@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:fragment="header" class="ml-64 h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center px-gutter sticky top-0 z-40">
+    <div class="flex items-center gap-4 flex-1">
+        <div class="relative w-full max-w-md">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+            <input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-body-md focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all" placeholder="Search for bookings, users, or courts..." type="text"/>
+        </div>
+    </div>
+    <div class="flex items-center gap-4">
+        <button class="p-2 hover:bg-surface-container-high rounded-full transition-all text-on-surface-variant">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button class="p-2 hover:bg-surface-container-high rounded-full transition-all text-on-surface-variant">
+            <span class="material-symbols-outlined">help_outline</span>
+        </button>
+        <div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+            <img alt="Admin User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a modern corporate administrator in a clean-lit office setting. The person has a friendly, authoritative expression, wearing business casual attire. The image has a soft focus background with professional corporate office elements, maintaining a high-contrast and bright light-mode aesthetic consistent with a premium booking platform interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5CMioV4LwVnF3gJMe0QGSYueCo3HUCTBdiPoBqoqIQGJ9R-xJUHsvyfO_gP0TLcTgj0Mg-bZN940lkER7PxXVMru6fy279mCmqjiMCpJ-aUy80mgZpP9oxaNIC_2i-ifTyQ7M44t948VYMkCoKWbk1_ooDHXaVLZUlGn1FxGWIHHIl8jzjSID2aQdAK_JEhwCx83D9yKxDhWsjlgr-EjhVAK3NCQ8umiuRu7br85_iFjOR9zkYS42qgZnsP2ZjJGqqMctl3pU4FY"/>
+        </div>
+    </div>
+</header>
+</body>
+</html>

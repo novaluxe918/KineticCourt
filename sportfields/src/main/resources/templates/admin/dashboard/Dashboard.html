@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout/LayoutAdmin}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main layout:fragment="content" class="ml-64 p-8 min-h-[calc(100vh-64px)]">
+    <div class="max-w-container-max mx-auto space-y-8">
+        <!-- Header Section -->
+        <div class="flex items-end justify-between">
+            <div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">Dashboard Overview</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">Welcome back, Admin. Here is what's happening today at Kinetic Court.</p>
+            </div>
+            <div class="flex gap-3">
+                <button class="px-4 py-2 border border-outline text-on-surface-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined">download</span> Export Report
+                </button>
+                <button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined">calendar_today</span> View Schedule
+                </button>
+            </div>
+        </div>
+        <!-- Key Metrics Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Metric 1: Total Bookings -->
+            <div class="bento-card p-6 rounded-xl flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <div class="p-3 rounded-lg bg-primary-fixed text-on-primary-fixed">
+                        <span class="material-symbols-outlined">confirmation_number</span>
+                    </div>
+                    <span class="text-xs font-bold text-green-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                        </span>
+                </div>
+                <div class="mt-4">
+                    <p class="font-label-md text-label-md text-on-surface-variant">Total Bookings</p>
+                    <h3 class="font-headline-md text-headline-md">1,284</h3>
+                </div>
+            </div>
+            <!-- Metric 2: Active Facilities -->
+            <div class="bento-card p-6 rounded-xl flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <div class="p-3 rounded-lg bg-secondary-fixed text-on-secondary-fixed">
+                        <span class="material-symbols-outlined">stadium</span>
+                    </div>
+                    <span class="text-xs font-bold text-on-surface-variant">Full Capacity</span>
+                </div>
+                <div class="mt-4">
+                    <p class="font-label-md text-label-md text-on-surface-variant">Active Facilities</p>
+                    <h3 class="font-headline-md text-headline-md">24</h3>
+                </div>
+            </div>
+            <!-- Metric 3: Revenue Today -->
+            <div class="bento-card p-6 rounded-xl flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <div class="p-3 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed">
+                        <span class="material-symbols-outlined">payments</span>
+                    </div>
+                    <span class="text-xs font-bold text-green-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +8%
+                        </span>
+                </div>
+                <div class="mt-4">
+                    <p class="font-label-md text-label-md text-on-surface-variant">Revenue Today</p>
+                    <h3 class="font-headline-md text-headline-md">$4,290.50</h3>
+                </div>
+            </div>
+            <!-- Metric 4: New Users -->
+            <div class="bento-card p-6 rounded-xl flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <div class="p-3 rounded-lg bg-outline-variant text-on-primary-fixed">
+                        <span class="material-symbols-outlined">person_add</span>
+                    </div>
+                    <span class="text-xs font-bold text-primary flex items-center gap-1">
+                            New Peak
+                        </span>
+                </div>
+                <div class="mt-4">
+                    <p class="font-label-md text-label-md text-on-surface-variant">New Users</p>
+                    <h3 class="font-headline-md text-headline-md">156</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Visual Data Section: Chart and Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Court Usage Chart Placeholder -->
+            <div class="bento-card p-6 rounded-xl lg:col-span-2 flex flex-col">
+                <div class="flex justify-between items-center mb-8">
+                    <h4 class="font-headline-md text-headline-md text-on-surface">Court Usage Trends</h4>
+                    <select class="bg-surface-container-low border-none rounded-lg text-label-md font-label-md px-3 py-1">
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days</option>
+                    </select>
+                </div>
+                <!-- Chart Placeholder UI -->
+                <div class="flex-1 min-h-[300px] relative flex items-end justify-between gap-2 pt-10">
+                    <!-- Simulated Chart Bars -->
+                    <div class="w-full flex items-end justify-between group gap-2 h-full">
+                        <div class="w-full bg-surface-container-highest rounded-t-lg h-[40%] hover:bg-primary transition-colors relative">
+                            <div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-inverse-on-surface text-[10px] px-2 py-1 rounded">40%</div>
+                        </div>
+                        <div class="w-full bg-surface-container-highest rounded-t-lg h-[65%] hover:bg-primary transition-colors relative"></div>
+                        <div class="w-full bg-surface-container-highest rounded-t-lg h-[85%] hover:bg-primary transition-colors relative"></div>
+                        <div class="w-full bg-primary-container rounded-t-lg h-[95%] relative">
+                            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] px-2 py-1 rounded">Peak: 95%</div>
+                        </div>
+                        <div class="w-full bg-surface-container-highest rounded-t-lg h-[70%] hover:bg-primary transition-colors relative"></div>
+                        <div class="w-full bg-surface-container-highest rounded-t-lg h-[55%] hover:bg-primary transition-colors relative"></div>
+                        <div class="w-full bg-surface-container-highest rounded-t-lg h-[45%] hover:bg-primary transition-colors relative"></div>
+                    </div>
+                    <!-- Grid Lines -->
+                    <div class="absolute inset-0 flex flex-col justify-between pointer-events-none border-b border-outline-variant">
+                        <div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+                        <div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+                        <div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+                        <div class="h-0"></div>
+                    </div>
+                </div>
+                <div class="flex justify-between mt-4 text-label-md text-on-surface-variant">
+                    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+            </div>
+            <!-- Recent Activity Feed -->
+            <div class="bento-card p-6 rounded-xl flex flex-col">
+                <h4 class="font-headline-md text-headline-md text-on-surface mb-6">Facility Alerts</h4>
+                <div class="space-y-6 flex-1">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined">report</span>
+                        </div>
+                        <div>
+                            <p class="text-label-md font-bold">Maintenance Required</p>
+                            <p class="text-body-md text-on-surface-variant text-sm">Court #4 Lighting issues reported by staff.</p>
+                            <span class="text-[10px] text-on-surface-variant">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <div>
+                            <p class="text-label-md font-bold">New Review</p>
+                            <p class="text-body-md text-on-surface-variant text-sm">"Excellent facility, very easy to book!" - Sarah J.</p>
+                            <span class="text-[10px] text-on-surface-variant">5 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <div>
+                            <p class="text-label-md font-bold">Schedule Update</p>
+                            <p class="text-body-md text-on-surface-variant text-sm">Weekend morning slots are now 98% occupied.</p>
+                            <span class="text-[10px] text-on-surface-variant">8 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="mt-6 w-full text-center py-2 text-primary font-label-md text-label-md border-t border-outline-variant hover:bg-surface-container-low transition-colors">
+                    View All Alerts
+                </button>
+            </div>
+        </div>
+        <!-- Recent Bookings Table Section -->
+        <div class="bento-card rounded-xl overflow-hidden">
+            <div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center">
+                <h4 class="font-headline-md text-headline-md text-on-surface">Recent Bookings</h4>
+                <button class="text-primary font-label-md text-label-md hover:underline">See full history</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+                    <tr>
+                        <th class="px-6 py-3">User</th>
+                        <th class="px-6 py-3">Facility / Court</th>
+                        <th class="px-6 py-3">Time Slot</th>
+                        <th class="px-6 py-3">Amount</th>
+                        <th class="px-6 py-3">Status</th>
+                        <th class="px-6 py-3">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant">
+                    <tr class="hover:bg-surface-container-low transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">MA</div>
+                                <div>
+                                    <p class="font-label-md">Marcus Aurelius</p>
+                                    <p class="text-xs text-on-surface-variant">marcus.a@gmail.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-body-md">Grand Arena - Court 12</td>
+                        <td class="px-6 py-4 text-body-md">Today, 18:00 - 19:00</td>
+                        <td class="px-6 py-4 font-bold">$24.00</td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-800 text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="p-2 hover:bg-surface-container-high rounded-lg"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-low transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold text-xs">LZ</div>
+                                <div>
+                                    <p class="font-label-md">Linda Zhang</p>
+                                    <p class="text-xs text-on-surface-variant">lzhang.pro@outlook.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-body-md">Downtown Hub - Court 3</td>
+                        <td class="px-6 py-4 text-body-md">Today, 19:30 - 21:00</td>
+                        <td class="px-6 py-4 font-bold">$36.50</td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-wider">Pending</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="p-2 hover:bg-surface-container-high rounded-lg"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-low transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary font-bold text-xs">RK</div>
+                                <div>
+                                    <p class="font-label-md">Robert Kim</p>
+                                    <p class="text-xs text-on-surface-variant">rkim@techcorp.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-body-md">North Wing - Court 1</td>
+                        <td class="px-6 py-4 text-body-md">Tomorrow, 08:00 - 09:00</td>
+                        <td class="px-6 py-4 font-bold">$18.00</td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-800 text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="p-2 hover:bg-surface-container-high rounded-lg"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-low transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">EW</div>
+                                <div>
+                                    <p class="font-label-md">Emma Watson</p>
+                                    <p class="text-xs text-on-surface-variant">emma.w@gmail.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-body-md">Grand Arena - Court 5</td>
+                        <td class="px-6 py-4 text-body-md">Tomorrow, 14:00 - 15:00</td>
+                        <td class="px-6 py-4 font-bold">$24.00</td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 rounded-full bg-gray-100 text-gray-800 text-[10px] font-bold uppercase tracking-wider">Cancelled</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="p-2 hover:bg-surface-container-high rounded-lg"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<aside th:fragment="navbaradmin" class="h-screen w-64 fixed left-0 top-0 bg-on-secondary-fixed dark:bg-surface-container-lowest shadow-md flex flex-col py-6 px-4 z-50 overflow-y-auto">
+    <div class="mb-8 px-2">
+        <h1 class="font-headline-md text-headline-md font-bold text-primary-container">Kinetic Court</h1>
+        <p class="font-label-md text-label-md text-secondary-fixed-dim uppercase tracking-widest mt-1">Admin Portal</p>
+    </div>
+    <button class="mb-8 w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+        <span class="material-symbols-outlined">add</span>
+        New Booking
+    </button>
+    <nav class="flex-1 space-y-2">
+        <!-- Active State: Dashboard -->
+        <a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg opacity-90 transition-opacity duration-150" href="#">
+            <span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+            <span class="material-symbols-outlined">location_on</span>
+            <span class="font-label-md text-label-md">Facilities</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+            <span class="material-symbols-outlined">sports_tennis</span>
+            <span class="font-label-md text-label-md">Courts</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span class="font-label-md text-label-md">Schedules</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+            <span class="material-symbols-outlined">layers</span>
+            <span class="font-label-md text-label-md">Services</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-label-md text-label-md">Users</span>
+        </a>
+    </nav>
+    <div class="mt-auto border-t border-on-secondary-fixed-variant pt-4 space-y-2">
+        <a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-label-md text-label-md">Settings</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+            <span class="material-symbols-outlined">logout</span>
+            <span class="font-label-md text-label-md">Logout</span>
+        </a>
+    </div>
+</aside>
+</body>
+</html>
