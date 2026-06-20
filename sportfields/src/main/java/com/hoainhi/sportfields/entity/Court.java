@@ -18,13 +18,6 @@ public class Court {
     private String name_court;
 
 
-    private double price;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-    private String ing_url;
 
     @ManyToOne
     @JoinColumn(name = "facility_id", nullable = false)
@@ -33,6 +26,5 @@ public class Court {
     @OneToMany(mappedBy = "court", fetch = FetchType.EAGER)
     private List<Schedule> schedules;
 
-    @OneToMany(mappedBy = "court", fetch = FetchType.EAGER)
-    private List<Review> review;
+
 }

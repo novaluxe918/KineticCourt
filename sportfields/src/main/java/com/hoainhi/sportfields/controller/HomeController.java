@@ -18,8 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-    @Autowired
-    private AccountService accountSercive;
+
 
     @RequestMapping("/home")
     public String showHome(Model model){
@@ -32,50 +31,6 @@ public class HomeController {
         return "admin/dashboard/Dashboard";
     }
 
-    @RequestMapping("/login")
-    public String showLogin(Model model){
-        model.addAttribute("accountDTO", new AccountDTO());
-        return "client/auth/Login";
-    }
 
-    @RequestMapping("/register")
-    public String showRegister(Model model){
-        model.addAttribute("accountDTO", new AccountDTO());
-        return "client/auth/Register";
-    }
-
-    @PostMapping("/register")
-    public ModelAndView registerUser(@Valid  @ModelAttribute AccountDTO accountDTO , BindingResult result, ModelMap model){
-        if(accountSercive.existsByEmail(accountDTO.getEmail())){
-            result.rejectValue(
-                    "email",
-                    "error.accountDTO",
-                    "Email đã được sử dụng"
-            );
-        }
-        if(!accountDTO.getPassword().equals(accountDTO.getConfirmPassword())){
-            result.rejectValue(
-                    "confirmPassword",
-                    "error.accountDTO",
-                    "Mật khẩu nhập lại không khớp"
-            );
-        }
-        if(result.hasErrors()){
-            return new ModelAndView("client/auth/Register", model);
-        }
-        accountSercive.registerUser(accountDTO);
-
-        return new ModelAndView("forward:client/auth/Login", model);
-    }
-
-    @PostMapping("/login")
-    public ModelAndView loginUser(@Valid @ModelAttribute AccountDTO accountDTO, BindingResult result, ModelMap modelMap){
-        User user = accountSercive.loginUser(accountDTO);
-        if(user == null){
-            modelMap.addAttribute("message", "Email không tồn tại");
-            return new ModelAndView("client/auth/Login", modelMap);
-        }
-        return new ModelAndView("client/Home", modelMap);
-    }
 }
 

@@ -21,6 +21,6 @@ public class Review {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "id_court" , nullable = false)
-    private Court court;
+    @JoinColumn(name = "id_facility" , nullable = false)
+    private Facility facility;
 }

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout/LayoutAdmin}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main layout:fragment="content" class="ml-64 p-gutter max-w-container-max">
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">User Management</h2>
+            <nav class="flex text-label-md text-on-surface-variant gap-2">
+                <a class="hover:text-primary" href="#">Dashboard</a>
+                <span class="">/</span>
+                <span class="text-primary font-bold">Users</span>
+            </nav>
+        </div>
+    </div>
+    <!-- Filters & Stats Bento -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <!-- Stat Cards -->
+        <div class="md:col-span-1 bg-white p-6 rounded-xl border border-outline-variant flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+            </div>
+            <div>
+                <p class="text-label-md text-on-surface-variant">Total Users</p>
+                <p class="font-headline-md text-headline-md">1,284</p>
+            </div>
+        </div>
+        <div class="md:col-span-1 bg-white p-6 rounded-xl border border-outline-variant flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-secondary-container/50 flex items-center justify-center text-secondary">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+            </div>
+            <div>
+                <p class="text-label-md text-on-surface-variant">Active Now</p>
+                <p class="font-headline-md text-headline-md">42</p>
+            </div>
+        </div>
+        <!-- Filter Controls -->
+        <div class="md:col-span-2 bg-white p-6 rounded-xl border border-outline-variant flex items-center gap-4">
+            <div class="flex-1 grid grid-cols-2 gap-4">
+                <select class="bg-surface-container-low border-outline-variant rounded-lg text-body-md py-2 focus:ring-primary focus:border-primary">
+                    <option value="">All Roles</option>
+                    <option value="admin">Admin</option>
+                    <option value="customer">Customer</option>
+                </select>
+                <select class="bg-surface-container-low border-outline-variant rounded-lg text-body-md py-2 focus:ring-primary focus:border-primary">
+                    <option value="">Joined Date</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                </select>
+            </div>
+            <button class="bg-surface-container-high p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+                <span class="material-symbols-outlined">filter_list</span>
+            </button>
+        </div>
+    </div>
+    <!-- User Table Section -->
+    <div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+        <div class="user-table-container overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                <tr class="bg-surface-container-low border-b border-outline-variant">
+                    <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">User</th>
+                    <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Email</th>
+                    <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Role</th>
+                    <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Gender</th>
+                    <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Joined Date</th>
+                    <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant">
+                <!-- Table Row 1 -->
+                <tr class="hover:bg-surface-container-low/50 transition-colors" style="transition: transform 0.2s ease-out; transform: translateX(0px);">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <img alt="User Avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A close-up headshot of a friendly middle-aged male customer in athletic wear. The image is bright with high-contrast lighting, set against a soft-focus background of a vibrant orange and blue badminton facility. The style is clean, corporate, and professional, maintaining the brand's energetic yet polished visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ8JDDS0MdrxPGfuHZieKvhGge7eTblzV4G5UQNqvDWZkuRmNdUnUhqqpr3DTcl4oqGRDd82JglIHRt38XCttq9syOum6R7tqr8i7yxg4mntPi3w2qfg_O7GBa7ybP3F1LfFJSmehVJ83FKKufEAWU4eYD7zaKC5gdDZKF1P8-8mJU9vBWFpl5UZCZTHOgqhXI-2RcPbAC5dlUgs8f4oZQHIImXXlps4wIHJCD1uy61YoCrTMODTChxMFCYgoMFjsES9fJp8o2-E8">
+                            <span class="font-body-md font-semibold text-on-surface">Alex Thompson</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">alex.t@example.com</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-[12px] font-bold uppercase tracking-tight bg-secondary-container text-on-secondary-container">Admin</span>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Male</td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Oct 12, 2023</td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex items-center justify-end gap-2"><button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">lock</span></button></div>
+                    </td>
+                </tr>
+                <!-- Table Row 2 -->
+                <tr class="hover:bg-surface-container-low/50 transition-colors" style="transition: transform 0.2s ease-out; transform: translateX(0px);">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <img alt="User Avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A detailed portrait of a young female athlete with a focused and confident expression. She is wearing a modern, high-performance orange sports jersey. The background shows a high-end badminton court with sharp architectural lines and corporate branding elements. The lighting is professional and dynamic, highlighting the premium nature of the facility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBFgBr3jXn8-0Bo8i1qFt13VOQi0UoQlp8HeN8ud1FOnYmS_XkiCnB8Tho4-ENU7TrMx8JU3oxXyB2AFDL6hYcNZii4HcqU88StVPBQEe7vthn3KaByv76etC6S1FPfamN_77yqN0glYbeLqVuroICWqqbgkrxM8mlGEOCnxZg9rMfArt4i7Bv3xZBTdrReFemjE-AkTAdKjjIW_OO14bGwZtMplwCTTS94yVFd4TbtAgQSz_cwkkk_9DX8Z_cvxoTN4y6O2CNIZM">
+                            <span class="font-body-md font-semibold text-on-surface">Sarah Jenkins</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">s.jenkins@webmail.com</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-[12px] font-bold uppercase tracking-tight bg-surface-container-high text-on-surface-variant">Customer</span>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Female</td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Nov 04, 2023</td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex items-center justify-end gap-2"><button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">lock</span></button></div>
+                    </td>
+                </tr>
+                <!-- Table Row 3 -->
+                <tr class="hover:bg-surface-container-low/50 transition-colors" style="transition: transform 0.2s ease-out; transform: translateX(0px);">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <img alt="User Avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a diverse male user in high-contrast studio lighting. He wears a neutral charcoal grey shirt that fits the modern corporate aesthetic. The background is a clean, minimalist gradient of soft blues and greys, reflecting the digital, tech-forward nature of the Kinetic Court administrative platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGya0fAycE-Db4GRbbJOPuDMd_0lLskmKdKhf-7t-VeRO7KEDXKZXrwGouUNhACkZsnve9esrVaHOr9CbPo0U40c-dZFrOtEwqRh7fOutDJG_GZsoOSI01ONdln-fLeDdCZlrruiEeDlhhwdTq8tJOec5Gb-SdnBQ_jOpXJlmZtsJGM-M0DiV4-ptv0qaLUFN30U-BgZXA-BV-b4xsVGO8sV-RdOvV2-ntCTAxdvsfXl6P9hNEgDDJG8sBqwX_9Xxf8_b0arCCjNc">
+                            <span class="font-body-md font-semibold text-on-surface">Michael Chen</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">m.chen@provider.net</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-[12px] font-bold uppercase tracking-tight bg-surface-container-high text-on-surface-variant">Customer</span>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Male</td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Jan 18, 2024</td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex items-center justify-end gap-2"><button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">lock</span></button></div>
+                    </td>
+                </tr>
+                <!-- Table Row 4 -->
+                <tr class="hover:bg-surface-container-low/50 transition-colors" style="transition: transform 0.2s ease-out;">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">RK</div>
+                            <span class="font-body-md font-semibold text-on-surface">Rachel Kim</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">rachel.k@kinetic.com</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-[12px] font-bold uppercase tracking-tight bg-secondary-container text-on-secondary-container">Admin</span>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Female</td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Feb 22, 2024</td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex items-center justify-end gap-2"><button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">lock</span></button></div>
+                    </td>
+                </tr>
+                <!-- Table Row 5 -->
+                <tr class="hover:bg-surface-container-low/50 transition-colors" style="transition: transform 0.2s ease-out;">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <img alt="User Avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a sophisticated female professional in her late 20s. She is set against a brightly lit, modern architectural space with glass and steel elements. The lighting is high-key and optimistic, adhering to the high-contrast corporate style of the design system. The overall mood is reliable, efficient, and forward-thinking." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG6dyTBl3fTFv3BRVfwpnsWik0Wop86pPzlRzlwvdmFhkIJ5WL_ve0W_jI6cE_ZEMcLutJDREJngSM_3jrpAMODOaKLnJYf9bP-mEQwx9eAE-f63cXrYxoTyNiX_13CmyqlC-krYDNeUV--nWe4n98ukUHHbnKUjdo0sxUHWNBMVDNRingHlWT6FSy_aPhRmzS1j2KmAPZ1KphuOk2Vs7gKQyOMerP4skFNY8QIe9c51v52_v__25OLw1b096pOZ_liRKJsba_qdU">
+                            <span class="font-body-md font-semibold text-on-surface">Jessica Wu</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">jess.wu@gmail.com</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-[12px] font-bold uppercase tracking-tight bg-surface-container-high text-on-surface-variant">Customer</span>
+                    </td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Female</td>
+                    <td class="px-6 py-4 text-body-md text-on-surface-variant">Mar 05, 2024</td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex items-center justify-end gap-2"><button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">lock</span></button></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Table Footer / Pagination -->
+        <div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+            <p class="text-label-md text-on-surface-variant">Showing 1 to 5 of 1,284 users</p>
+            <div class="flex items-center gap-2">
+                <button class="px-3 py-1 rounded border border-outline-variant text-on-surface-variant hover:bg-white transition-colors disabled:opacity-50" disabled="">Previous</button>
+                <button class="px-3 py-1 rounded bg-primary text-white font-bold">1</button>
+                <button class="px-3 py-1 rounded hover:bg-white text-on-surface-variant transition-colors">2</button>
+                <button class="px-3 py-1 rounded hover:bg-white text-on-surface-variant transition-colors">3</button>
+                <span class="px-2">...</span>
+                <button class="px-3 py-1 rounded hover:bg-white text-on-surface-variant transition-colors">257</button>
+                <button class="px-3 py-1 rounded border border-outline-variant text-on-surface-variant hover:bg-white transition-colors">Next</button>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

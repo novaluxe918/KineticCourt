@@ -103,71 +103,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
-    <div class="container">
-
-        <a class="navbar-brand text-orange" href="#">
-            <i class="fa-solid fa-shuttlecock"></i>
-            Kinetic Court
-        </a>
-
-        <button class="navbar-toggler"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbar">
-
-            <span class="navbar-toggler-icon"></span>
-
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbar">
-
-            <ul class="navbar-nav mx-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">
-                        Trang chủ
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Sân cầu lông
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Đặt sân
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Dịch vụ
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Liên hệ
-                    </a>
-                </li>
-
-            </ul>
-
-            <div>
-                <a th:href="@{/login}" href="#" class="btn btn-outline-warning me-2">
-                    Đăng nhập
-                </a>
-
-                <a th:href="@{/register}" href="#" class="btn btn-orange">
-                    Đăng ký
-                </a>
-            </div>
-
-        </div>
-    </div>
-</nav>
+<div th:replace="~{client/fragments/Header :: header}"></div>
 
 <!-- Hero -->
 <section class="hero">

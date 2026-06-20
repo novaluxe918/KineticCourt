@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout/LayoutAdmin}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main  layout:fragment="content" class="ml-64 min-h-screen">
+
+    <!-- Content Canvas -->
+    <div class="p-gutter max-w-container-max mx-auto">
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">Facilities Management</h2>
+                <p class="font-body-md text-on-surface-variant mt-1">Oversee and manage all active badminton centers across your network.</p>
+            </div>
+            <button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-md">
+                <span class="material-symbols-outlined">add_circle</span>
+                Add Facility
+            </button>
+        </div>
+        <!-- Dashboard Stats (Bento Style) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">location_on</span>
+                </div>
+                <div>
+                    <p class="font-label-md text-on-surface-variant">Total Facilities</p>
+                    <p class="font-headline-md text-headline-md">24</p>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+                    <span class="material-symbols-outlined">check_circle</span>
+                </div>
+                <div>
+                    <p class="font-label-md text-on-surface-variant">Active Now</p>
+                    <p class="font-headline-md text-headline-md">22</p>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+                    <span class="material-symbols-outlined">pending</span>
+                </div>
+                <div>
+                    <p class="font-label-md text-on-surface-variant">Maintenance</p>
+                    <p class="font-headline-md text-headline-md">2</p>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-error">
+                    <span class="material-symbols-outlined">trending_up</span>
+                </div>
+                <div>
+                    <p class="font-label-md text-on-surface-variant">Avg. Revenue</p>
+                    <p class="font-headline-md text-headline-md">$1.2k<span class="text-label-md font-normal text-on-surface-variant">/day</span></p>
+                </div>
+            </div>
+        </div>
+        <!-- Facilities Table Section -->
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+            <div class="p-6 border-b border-outline-variant flex items-center justify-between bg-surface-container-low">
+                <h3 class="font-headline-md text-headline-md text-on-surface">Active Facilities</h3>
+                <div class="flex gap-2">
+                    <button class="p-2 hover:bg-surface-container-high rounded transition-all text-on-surface-variant"><span class="material-symbols-outlined">filter_list</span></button>
+                    <button class="p-2 hover:bg-surface-container-high rounded transition-all text-on-surface-variant"><span class="material-symbols-outlined">download</span></button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                    <tr class="bg-surface-container-low border-b border-outline-variant">
+                        <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Facility Name</th>
+                        <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Address</th>
+                        <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Owner</th>
+                        <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Phone</th>
+                        <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant">
+                    <!-- Row 1 -->
+                    <tr class="hover:bg-surface transition-colors">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img alt="Grand Smash Center" class="w-full h-full object-cover" data-alt="An interior shot of a high-end badminton facility featuring multiple bright green courts under professional LED stadium lighting. The atmosphere is energetic and clean, showcasing a premium sports environment with sleek architectural lines and high-contrast surfaces. The lighting is crisp and modern, creating a professional and inviting athletic space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo2FCgI3lAmxEI-TZ6jxoVMrkp5ixLhMRISH6bLT94xQBxqEn4Wkq8VZVI2Kg-qYWFoYOZrNx2wcZjCK4WInrdM62TrbSqHpL7HoSeB9j6MOz422sDfwPOAc4w53YMyZ_Z-9zEvxJPRX_K3vorKhpYhfTYYrPsWLvs-gt0q_moUFDEtmlTyirbgZfnnL3JxfspmUP_V0vDExR1Un5Ng77V--ooLfaR_TVrwc3klBaF-6gzhpPJRptduGZJMccG5A-EP-WSx_DcliM">
+                                </div>
+                                <div>
+                                    <p class="font-bold text-on-surface">Grand Smash Center</p>
+                                    <p class="text-[12px] text-on-surface-variant">ID: FAC-001</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5 text-on-surface-variant font-body-md">123 Badminton Way, Seattle, WA</td>
+                        <td class="px-6 py-5 text-on-surface">Johnathan Doe</td>
+                        <td class="px-6 py-5 text-on-surface-variant font-body-md">(206) 555-0123</td>
+                        <td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#dcfce7] text-[#166534]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#166534] mr-1.5"></span>
+                                        Confirmed
+                                    </span>
+                        </td>
+                        <td class="px-6 py-5 text-right space-x-2">
+                            <button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-fixed rounded transition-all"><span class="material-symbols-outlined">edit</span></button>
+                            <button class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container rounded transition-all"><span class="material-symbols-outlined">delete</span></button>
+                        </td>
+                    </tr>
+                    <!-- Row 2 -->
+                    <tr class="hover:bg-surface transition-colors">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img alt="Elite Court Arena" class="w-full h-full object-cover" data-alt="A dynamic, low-angle shot of a pristine indoor badminton court with vibrant blue flooring and crisp white lines. The facility is illuminated by soft, diffused daylight through high windows, creating a bright and airy professional sports setting. The vibe is modern and corporate, emphasizing high-quality infrastructure for elite athletes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-WFUuAXw6_lHkmid2D4omW7M9mkZp7nNYmJ_Wl9vtjV1bIDlRVBwNRGFCfD4GaDT_C-hArvraFLkC6crwpGcP73g-oJYKYk8RahL5iXXcVaCzby75lVPIRkJfCmXaKr0HPxuqy43OxyfbDW0HHyatXTyZoTT_TblRPbCaSmjNpo4M1u6v0ujf_WuVOHCCZU4Y-9Yd_mYh3IpfZN_WGqpl7NyPZYDSK7lyqYCgNbUDpAqKDHeirX7Gw7xY7LYe3wbIveybLIUMC0o">
+                                </div>
+                                <div>
+                                    <p class="font-bold text-on-surface">Elite Court Arena</p>
+                                    <p class="text-[12px] text-on-surface-variant">ID: FAC-002</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5 text-on-surface-variant font-body-md">456 Shuttlecock Ave, Portland, OR</td>
+                        <td class="px-6 py-5 text-on-surface">Sarah Mitchell</td>
+                        <td class="px-6 py-5 text-on-surface-variant font-body-md">(503) 555-0456</td>
+                        <td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#ffedd5] text-[#9a3412]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9a3412] mr-1.5"></span>
+                                        Pending
+                                    </span>
+                        </td>
+                        <td class="px-6 py-5 text-right space-x-2">
+                            <button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-fixed rounded transition-all"><span class="material-symbols-outlined">edit</span></button>
+                            <button class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container rounded transition-all"><span class="material-symbols-outlined">delete</span></button>
+                        </td>
+                    </tr>
+                    <!-- Row 3 -->
+                    <tr class="hover:bg-surface transition-colors">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img alt="Ace Badminton Hub" class="w-full h-full object-cover" data-alt="A close-up view of professional badminton equipment—a high-quality racket and shuttlecock—resting on a polished wooden court surface. The lighting is dramatic and focused, highlighting the textures of the gear and the grain of the floor. The setting is a world-class training facility designed for high-performance sports and corporate events." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeLnp4kqjTUfFF-rURIZvAVwOytUYAuhdBYoW2fniTPF6V1E_JyaXkVbsJuI22t60wh9TajZpM_cpj4bwOyhvo8xtLu-4Nm5dGIhLZW5vZJB_7TDovmkflfuqTg5xmQb5jKc73YXA0wOboE6CFBlm_7euk6rIhdcwWG4boeiBgmM0v6hxVXBzAAzJdZH91s7DfOEg-NNHjUm5e3GUqAdWq1_dTvWkC_QJy7jjcMk8cHu6BIFPstfR3kxyoTefsU83D88WQYrk9uQ8">
+                                </div>
+                                <div>
+                                    <p class="font-bold text-on-surface">Ace Badminton Hub</p>
+                                    <p class="text-[12px] text-on-surface-variant">ID: FAC-003</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5 text-on-surface-variant font-body-md">789 Net Point Dr, San Jose, CA</td>
+                        <td class="px-6 py-5 text-on-surface">Marcus Chen</td>
+                        <td class="px-6 py-5 text-on-surface-variant font-body-md">(408) 555-0789</td>
+                        <td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#f3f4f6] text-[#374151]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#374151] mr-1.5"></span>
+                                        Cancelled
+                                    </span>
+                        </td>
+                        <td class="px-6 py-5 text-right space-x-2">
+                            <button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-fixed rounded transition-all"><span class="material-symbols-outlined">edit</span></button>
+                            <button class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container rounded transition-all"><span class="material-symbols-outlined">delete</span></button>
+                        </td>
+                    </tr>
+                    <!-- Row 4 -->
+                    <tr class="hover:bg-surface transition-colors">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img alt="Skyline Courts" class="w-full h-full object-cover" data-alt="A wide-angle landscape shot of a modern urban sports complex with outdoor badminton courts nestled between contemporary glass skyscrapers. The setting sun casts a warm, golden glow across the scene, creating long shadows and a sophisticated metropolitan vibe. The design is sleek and luxurious, catering to high-end urban sports enthusiasts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_SS7AK7_tjCcLRMzweJqPGZL7usIWg-oVreKIxaIxU4St5CVSjgnRfkDgdShiGRl7qf8qjHkobrpHojOSqajWN03bdOf6Ay3EXdTmhI0JXn5G2ePRqJH9pHqriYfPpM2lCecxDYes9PVdUpq-njoNEwbfYUbd-ORHUJkaosHY5PVB18XqzuaR-XmfI4fXSQn6K15d2GDg1HH4Dd6Bg1P2bolehUmpANrw3liKxJkWe3Cvfe63ujgRgnRoBcj0pSt-o3Ebv-GnZfs">
+                                </div>
+                                <div>
+                                    <p class="font-bold text-on-surface">Skyline Courts</p>
+                                    <p class="text-[12px] text-on-surface-variant">ID: FAC-004</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5 text-on-surface-variant font-body-md">101 Metro Plaza, Vancouver, BC</td>
+                        <td class="px-6 py-5 text-on-surface">Elena Rodriguez</td>
+                        <td class="px-6 py-5 text-on-surface-variant font-body-md">(604) 555-0101</td>
+                        <td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#dcfce7] text-[#166534]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#166534] mr-1.5"></span>
+                                        Confirmed
+                                    </span>
+                        </td>
+                        <td class="px-6 py-5 text-right space-x-2">
+                            <button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary-fixed rounded transition-all"><span class="material-symbols-outlined">edit</span></button>
+                            <button class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container rounded transition-all"><span class="material-symbols-outlined">delete</span></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+                <p class="text-label-md text-on-surface-variant">Showing 1 to 4 of 24 facilities</p>
+                <div class="flex gap-2">
+                    <button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container-high transition-all text-on-surface disabled:opacity-50" disabled="">Previous</button>
+                    <button class="px-3 py-1 bg-primary text-on-primary rounded font-bold shadow-sm">1</button>
+                    <button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container-high transition-all text-on-surface">2</button>
+                    <button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container-high transition-all text-on-surface">3</button>
+                    <button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container-high transition-all text-on-surface">Next</button>
+                </div>
+            </div>
+        </div>
+        <!-- Contextual Help / Activity -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="col-span-2 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 opacity-5 translate-x-8 -translate-y-8">
+                    <span class="material-symbols-outlined text-[120px] text-primary">info</span>
+                </div>
+                <h4 class="font-headline-md text-headline-md text-on-surface mb-2">Management Tips</h4>
+                <p class="font-body-md text-on-surface-variant mb-4">Keep your facility details up to date to ensure accurate booking availability for members. New facilities take 24 hours to sync with the public app.</p>
+                <a class="text-primary font-bold inline-flex items-center gap-1 hover:underline" href="#">
+                    View Documentation
+                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+            </div>
+            <div class="bg-primary-container text-on-primary-container p-6 rounded-xl shadow-lg relative overflow-hidden flex flex-col justify-between">
+                <div class="relative z-10">
+                    <h4 class="font-headline-md text-headline-md mb-2">Need Help?</h4>
+                    <p class="font-label-md opacity-90">Our dedicated support team is available 24/7 for technical issues.</p>
+                </div>
+                <button class="bg-on-primary-container text-primary-container py-2 px-4 rounded-lg font-bold w-fit mt-4 hover:scale-105 transition-transform z-10">
+                    Contact Support
+                </button>
+                <!-- Decorative Circle -->
+                <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-on-primary-container opacity-10 rounded-full"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="p-gutter text-center border-t border-outline-variant mt-12 bg-surface">
+        <p class="text-label-md text-on-surface-variant">© 2024 Kinetic Court Admin. All Rights Reserved. Built for high-performance management.</p>
+    </footer>
+</main>
+</body>
+</html>

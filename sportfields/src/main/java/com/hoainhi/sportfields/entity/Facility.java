@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.entity;
 
+import com.hoainhi.sportfields.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,6 +32,11 @@ public class Facility {
     @Column(nullable = false)
     private String wards;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    private String img_url;
+
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private User user;
@@ -41,5 +47,6 @@ public class Facility {
     @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER)
     private List<Service> service;
 
-
+    @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER)
+    private List<Review> review;
 }

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+       lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    :root {
+        --primary-color: #ff6b00;
+    }
+
+    body {
+        background: #f8f9fa;
+    }
+
+    .text-orange {
+        color: var(--primary-color);
+    }
+
+    .btn-orange {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .btn-orange:hover {
+        background: #e65f00;
+        color: white;
+    }
+
+    .navbar-brand {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .hero {
+        min-height: 700px;
+        display: flex;
+        align-items: center;
+        background:
+            linear-gradient(rgba(255,255,255,.9),
+                rgba(255,255,255,.9)),
+            url("https://images.unsplash.com/photo-1612872087720-bb876e2e67d1")
+            center/cover;
+    }
+
+    .hero-title {
+        font-size: 70px;
+        font-weight: 800;
+    }
+
+    .search-box {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        margin-top: 40px;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        height: 100%;
+    }
+
+    .court-card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: .3s;
+    }
+
+    .court-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .court-card img {
+        height: 220px;
+        object-fit: cover;
+    }
+
+    .price {
+        color: var(--primary-color);
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    footer {
+        background: #212529;
+        color: white;
+    }
+    .dropdown-toggle::after{
+    margin-left: 10px;
+}
+
+.dropdown-menu{
+    border-radius: 12px;
+}
+
+.dropdown-item{
+    padding: 10px 16px;
+}
+</style>
+<body>
+<nav th:fragment="header" class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+    <div class="container">
+
+        <a class="navbar-brand text-orange" href="#">
+            <i class="fa-solid fa-shuttlecock"></i>
+            Kinetic Court
+        </a>
+
+        <button class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbar">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+
+            <ul class="navbar-nav mx-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Sân cầu lông
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Đặt sân
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Dịch vụ
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Liên hệ
+                    </a>
+                </li>
+
+            </ul>
+
+            <div th:if="${session.loginUser == null}">
+                <a th:href="@{/login}" href="#" class="btn btn-outline-warning me-2">
+                    Đăng nhập
+                </a>
+
+                <a th:href="@{/register}" href="#" class="btn btn-orange">
+                    Đăng ký
+                </a>
+            </div>
+
+                <div th:if="${session.loginUser != null}" class="dropdown">
+                    <button class="btn btn-light border dropdown-toggle d-flex align-items-center"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+
+                        <img th:src="${session.loginUser.avatar != null ? session.loginUser.avatar : 'https://cdn-media.sforum.vn/storage/app/media/ctv_seo8/ctv_phung/avatar-vo-tri-nam/avatar-vo-tri-nam-2.jpg'}"
+                             alt="avatar"
+                             width="35"
+                             height="35"
+                             class="rounded-circle me-2">
+
+                        <span th:text="${session.loginUser.name_user}">
+        User
+    </span>
+
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+
+                        <li>
+                            <h6 class="dropdown-header"
+                                th:text="${session.loginUser.email}">
+                                email@gmail.com
+                            </h6>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" >
+                                <i class="fa-solid fa-user me-2"></i>
+                                Hồ sơ cá nhân
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" >
+                                <i class="fa-solid fa-clock-rotate-left me-2"></i>
+                                Lịch sử đặt sân
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" >
+                                <i class="fa-solid fa-gear me-2"></i>
+                                Cài đặt
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item text-danger"
+                               th:href="@{/logout}">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

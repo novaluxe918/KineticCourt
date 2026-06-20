@@ -1,227 +1,276 @@
-<!doctype html>
-<html lang="vi" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập | Kinetic Court</title>
-
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Font -->
-    <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-            rel="stylesheet">
-
-    <!-- Material Icon -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
+<html class="light" lang="vi" xmlns:th="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Đăng Nhập | Kinetic Court</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#eceef0",
+                      "on-background": "#191c1e",
+                      "outline": "#8e7164",
+                      "primary-fixed": "#ffdbcd",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#b9c7e0",
+                      "secondary": "#565e74",
+                      "background": "#f7f9fb",
+                      "tertiary-container": "#8998af",
+                      "on-primary-fixed-variant": "#7c2e00",
+                      "secondary-fixed": "#dae2fd",
+                      "surface": "#f7f9fb",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#dae2fd",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed-dim": "#ffb596",
+                      "on-secondary-container": "#5c647a",
+                      "surface-dim": "#d8dadc",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-tertiary-fixed-variant": "#3a485c",
+                      "inverse-primary": "#ffb596",
+                      "surface-variant": "#e0e3e5",
+                      "on-surface": "#191c1e",
+                      "on-tertiary-fixed": "#0d1c2f",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "inverse-surface": "#2d3133",
+                      "surface-bright": "#f7f9fb",
+                      "on-surface-variant": "#5a4136",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#131b2e",
+                      "primary": "#a33e00",
+                      "on-tertiary-container": "#223043",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#515f74",
+                      "surface-tint": "#a33e00",
+                      "outline-variant": "#e3bfb1",
+                      "on-primary-container": "#561d00",
+                      "surface-container-low": "#f2f4f6",
+                      "primary-container": "#ff6600",
+                      "inverse-on-surface": "#eff1f3",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "tertiary-fixed": "#d5e3fd",
+                      "surface-container-high": "#e6e8ea",
+                      "on-primary-fixed": "#360f00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "margin-desktop": "2rem",
+                      "gutter": "1.5rem",
+                      "container-max": "1320px",
+                      "margin-mobile": "1rem"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Montserrat"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Montserrat"],
+                      "headline-md": ["Montserrat"],
+                      "headline-lg": ["Montserrat"]
+              },
+              "fontSize": {
+                      "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
     <style>
         body {
-            background: #fcf9f8;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-        }
-
-        .logo-title {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            color: #a73b00;
+            overflow-x: hidden;
         }
-
-        .primary-color {
-            color: #a73b00;
+        .bg-hero {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuCttx0JYG_26JAmi_46pmhkNwM-rIZIskEKDsvCyA_wc1kQdvvas0wYAgdPj0kDdWePinWwRN0lHgzBrO4kKF_RGSZFFf9zHgFTxAzYR-ShhHbGbq0F7JOAFyZhbsaJIHx4NT2goS3m-yNiTOo6ys9Mq3lf8TXBzJQUsMHCi56BYwmHOh7qVBFD7ocRj5dl3t2yYLNWKfffjSYURMtOW3osfLAotoxHrT8qoleA-kVX5Bcohk0stIERT_bjS3cvkIipgQxithZiP7I');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
-
-        .btn-login {
-            background: #ff5f05;
-            color: white;
-            font-weight: 700;
-            border: none;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-
-        .btn-login:hover {
-            background: #e55400;
-            color: white;
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
-
-        .active-tab {
-            border-bottom: 3px solid #a73b00;
-            color: #a73b00 !important;
-            font-weight: 600;
+        .focus-ring:focus-within {
+            border-color: #ff6600;
+            box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2);
         }
-
-        .login-card {
-            max-width: 480px;
-            margin: auto;
+        .btn-gradient {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6600 100%);
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #ff9e22 0%, #ff751a 100%);
+            transform: translateY(-1px);
         }
     </style>
 </head>
+<body class="bg-hero min-h-screen flex flex-col items-center justify-center text-white">
+<header class="absolute top-0 w-full flex justify-center py-8">
+    <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">sports_tennis</span>
+        <span class="font-headline-lg text-2xl font-extrabold tracking-tight">Kinetic Court</span>
+    </div>
+</header>
+<main class="w-full max-w-[480px] px-margin-mobile">
+    <div class="glass-card rounded-lg p-8 md:p-10 mt-6 mb-6">
 
-<body>
-
-<div class="container py-5">
-
-    <!-- Logo -->
-    <div class="text-center mb-4">
-        <h1 class="logo-title display-5">Kinetic Court</h1>
-        <p class="text-secondary fw-bold text-uppercase">
-            Professional Athletics
+        <div class="text-center mb-10">
+            <h1 class="font-headline-xl text-3xl md:text-4xl font-bold mb-3">Chào mừng trở lại!</h1>
+            <p class="font-body-md text-white/70">Vui lòng đăng nhập để tiếp tục tập luyện.</p>
+        </div>
+        <!-- Login Form -->
+        <form method="post"  th:object="${accountDTO}"
+              th:action="@{/login}"  class="space-y-6"><div class="flex p-1 bg-white/5 border border-white/10 rounded-lg mb-6">
+            <button class="flex-1 py-2 px-4 rounded font-label-md text-xs uppercase tracking-widest transition-all bg-primary-container text-white" type="button">
+                Người chơi
+            </button>
+            <button class="flex-1 py-2 px-4 rounded font-label-md text-xs uppercase tracking-widest transition-all text-white/60 hover:text-white hover:bg-white/5" type="button">
+                Chủ sân
+            </button>
+        </div>
+            <!-- Username/Email -->
+            <div class="space-y-2">
+                <label class="font-label-md text-xs text-white/60 uppercase tracking-widest" for="email">Email / Tên đăng nhập</label>
+                <div class="relative focus-ring border border-white/20 rounded-lg transition-all overflow-hidden bg-white/5">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40">person</span>
+                    <input th:field="*{email}" class="w-full bg-transparent pl-10 pr-4 py-3 border-none focus:ring-0 font-body-md text-white placeholder:text-white/20" id="email" name="email" placeholder="Ví dụ: athlete@kinetic.vn" type="text"/>
+                </div>
+                <div class="text-danger mt-1"
+                     th:if="${#fields.hasErrors('email')}"
+                     th:errors="*{email}">
+                </div>
+            </div>
+            <!-- Password -->
+            <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                    <label class="font-label-md text-xs text-white/60 uppercase tracking-widest" for="password">Mật khẩu</label>
+                    <a class="text-xs text-primary-container hover:text-white transition-colors" href="#">Quên mật khẩu?</a>
+                </div>
+                <div class="relative focus-ring border border-white/20 rounded-lg transition-all overflow-hidden bg-white/5">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40">lock</span>
+                    <input th:field="*{password}" class="w-full bg-transparent pl-10 pr-12 py-3 border-none focus:ring-0 font-body-md text-white placeholder:text-white/20" id="password" name="password" placeholder="••••••••" type="password"/>
+                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors" type="button">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </button>
+                </div>
+                <div class="text-danger mt-1"
+                     th:if="${#fields.hasErrors('password')}"
+                     th:errors="*{password}">
+                </div>
+            </div>
+            <!-- Remember Me -->
+            <div class="flex items-center gap-2">
+                <input class="w-4 h-4 rounded border-white/20 bg-white/5 text-primary-container focus:ring-primary-container/40" id="remember" name="remember" type="checkbox"/>
+                <label class="text-sm text-white/60 cursor-pointer select-none" for="remember">Ghi nhớ đăng nhập</label>
+            </div>
+            <!-- Submit Button -->
+            <button class="btn-gradient w-full text-white py-4 px-6 rounded-lg font-headline-md text-lg font-bold transition-all active:scale-[0.98]" type="submit">
+                Đăng Nhập
+            </button>
+        </form>
+        <!-- Divider -->
+        <div class="relative my-10">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-white/10"></div>
+            </div>
+            <div class="relative flex justify-center text-xs">
+                <span class="bg-transparent px-4 text-white/40 uppercase tracking-[0.2em] font-semibold">Hoặc đăng nhập với</span>
+            </div>
+        </div>
+        <!-- Social Logins -->
+        <div class="grid grid-cols-2 gap-4">
+            <button class="flex items-center justify-center gap-2 py-3 px-4 bg-white/5 border border-white/10 rounded-lg text-sm font-semibold text-white hover:bg-white/10 transition-all active:scale-[0.98]">
+                <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtWMINiT5GIf4jirbY8ngPx2XUpb4V2NJUyg_NvwCsZ5uW1cS1vYZJzRtcHvTLPEo5BmZjAm88fZEfIZ6YLssmvnBwZXHFLyUI8tW_UYFFc0o0AJAraWvmiP7W-HHi3hab7dYpTQ2xsaBNjqZHN6i8xMQSQOGYhVYC6gVoS8-pwcV_DstaB69S7s4gp8JT3npu9eTqb0bnloHN8OQWrS9Hwlt1mqRZdvoOHKj4AWgVN53uvep2aDPkp7iv8fH7l5TNgB_c8ptz174"/>
+                <span>Google</span>
+            </button>
+            <button class="flex items-center justify-center gap-2 py-3 px-4 bg-white/5 border border-white/10 rounded-lg text-sm font-semibold text-white hover:bg-white/10 transition-all active:scale-[0.98]">
+                <svg class="w-5 h-5 text-[#1877F2]" fill="currentColor" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+                <span>Facebook</span>
+            </button>
+        </div>
+        <!-- Footer Link -->
+        <p class="text-center mt-10 text-sm text-white/50">
+            Chưa có tài khoản?
+            <a th:href="@{/register}" class="text-primary-container font-bold hover:text-white transition-all underline decoration-primary-container/30 underline-offset-4" href="#">Đăng ký ngay</a>
         </p>
     </div>
-
-    <!-- Card -->
-    <div class="card shadow-sm login-card">
-
-        <!-- Tabs -->
-        <div class="card-header bg-white p-0">
-            <div class="d-flex">
-                <button id="tab-player"
-                        class="btn flex-fill rounded-0 active-tab"
-                        >
-                    Người chơi
-                </button>
-
-                <button id="tab-owner"
-                        class="btn flex-fill rounded-0 text-secondary"
-                        >
-                    Chủ sân
-                </button>
-            </div>
+</main>
+<footer class="absolute bottom-8 w-full px-margin-mobile">
+    <div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-white/30 tracking-wide">
+        <p>© 2024 Kinetic Court. All rights reserved.</p>
+        <div class="flex gap-8">
+            <a class="hover:text-white/60 transition-colors uppercase" href="#">Privacy Policy</a>
+            <a class="hover:text-white/60 transition-colors uppercase" href="#">Terms of Service</a>
+            <a class="hover:text-white/60 transition-colors uppercase" href="#">Support</a>
         </div>
-
-        <div class="card-body p-4">
-
-            <div class="text-center mb-4">
-                <h3>Chào mừng trở lại</h3>
-                <p id="form-subtitle" class="text-muted">
-                    Đăng nhập để bắt đầu trận đấu của bạn
-                </p>
-                <p th:text="${message}" class="text-danger"></p>
-            </div>
-
-            <form method="post"  th:object="${accountDTO}"
-                  th:action="@{/login}">
-
-                <!-- Email -->
-                <div class="mb-3">
-                    <label class="form-label">
-                        Email hoặc Số điện thoại
-                    </label>
-                    <div class="input-group">
-                            <span class="input-group-text">
-                                <span class="material-symbols-outlined">
-                                    person
-                                </span>
-                            </span>
-
-                        <input th:field="*{email}" type="text"
-                               class="form-control"
-                               placeholder="name@example.com">
-                    </div>
-                    <div class="text-danger mt-1"
-                         th:if="${#fields.hasErrors('email')}"
-                         th:errors="*{email}">
-                    </div>
-                </div>
-
-                <!-- Password -->
-                <div class="mb-3">
-                    <label class="form-label">
-                        Mật khẩu
-                    </label>
-
-                    <div class="input-group">
-                            <span class="input-group-text">
-                                <span class="material-symbols-outlined">
-                                    lock
-                                </span>
-                            </span>
-
-                        <input th:field="*{password}" type="password"
-                               id="password"
-                               class="form-control"
-                               placeholder="••••••••">
-
-                        <button type="button"
-                                class="btn btn-outline-secondary">
-
-                                <span id="eye"
-                                      class="material-symbols-outlined">
-                                    visibility
-                                </span>
-                        </button>
-                    </div>
-
-                    <div class="text-danger mt-1"
-                         th:if="${#fields.hasErrors('password')}"
-                         th:errors="*{password}">
-                    </div>
-                </div>
-
-                <!-- Remember -->
-                <div class="d-flex justify-content-between mb-4">
-                    <div class="form-check">
-                        <input class="form-check-input"
-                               type="checkbox">
-
-                        <label class="form-check-label">
-                            Ghi nhớ đăng nhập
-                        </label>
-                    </div>
-
-                    <a href="#" class="text-decoration-none primary-color">
-                        Quên mật khẩu?
-                    </a>
-                </div>
-
-                <!-- Button -->
-                <button class="btn btn-login w-100 py-3">
-                    Đăng nhập ngay
-                </button>
-
-            </form>
-
-            <!-- Divider -->
-            <div class="text-center my-4 position-relative">
-                <hr>
-                <span class="bg-white px-3 position-absolute top-50 start-50 translate-middle text-muted">
-                        Hoặc tiếp tục với
-                    </span>
-            </div>
-
-            <!-- Social -->
-            <div class="row g-2">
-                <div class="col-6">
-                    <button class="btn btn-outline-secondary w-100">
-                        Google
-                    </button>
-                </div>
-
-                <div class="col-6">
-                    <button class="btn btn-outline-secondary w-100">
-                        Facebook
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Footer -->
-        <div class="card-footer text-center bg-light">
-            Chưa có tài khoản?
-            <a th:href="@{/register}" href="#"
-               class="text-decoration-none fw-bold primary-color">
-                Đăng ký ngay
-            </a>
-        </div>
-
     </div>
+</footer>
+<script>
+    // Simple visibility toggle for password
+    const toggleBtn = document.querySelector('button .material-symbols-outlined:contains("visibility")') || document.querySelector('button span:nth-child(1)');
+    if(toggleBtn) {
+        const passwordInput = document.getElementById('password');
+        toggleBtn.parentElement.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = 'visibility';
+            }
+        });
+    }
 
-</div>
-
-
-</body>
-
-</html>
+    // Custom selector fix for Material Symbols
+    const icons = document.querySelectorAll('.material-symbols-outlined');
+    icons.forEach(icon => {
+        if(icon.textContent.includes('visibility')) {
+            const parent = icon.parentElement;
+            parent.addEventListener('click', () => {
+               const input = parent.previousElementSibling;
+               if(input && input.id === 'password') {
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.textContent = 'visibility_off';
+                    } else {
+                        input.type = 'password';
+                        icon.textContent = 'visibility';
+                    }
+               }
+            });
+        }
+    });
+</script>
+</body></html>
