@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.entity;
 
+import com.hoainhi.sportfields.enums.ScheduleStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,7 +24,7 @@ public class Schedule {
     private double price;
     private LocalDate time_start;
     private LocalDate time_end;
-
+    private ScheduleStatus status;
     @ManyToOne
     @JoinColumn(name = "id_court", nullable = false)
     private Court court;

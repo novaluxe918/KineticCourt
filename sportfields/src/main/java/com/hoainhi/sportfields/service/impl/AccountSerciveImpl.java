@@ -24,10 +24,15 @@ public class AccountSerciveImpl implements AccountService {
 
     @Override
     public User registerUser(AccountDTO accountDTO) {
+
         accountDTO.setPassword(new BCryptPasswordEncoder().encode(accountDTO.getPassword()));
         User user = new User();
         BeanUtils.copyProperties(accountDTO, user);
-        user.setRole(Role.User);
+        if(accountDTO.getRole() == Role.Owner){
+            user.setRole(Role.Owner);
+        }else{
+            user.setRole(Role.User);
+        }
         accountRepository.save(user);
         return user;
     }

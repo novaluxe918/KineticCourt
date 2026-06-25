@@ -25,7 +25,7 @@ public class AuthController {
         return "client/auth/Login";
     }
 
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public String showRegister(Model model, @RequestParam(defaultValue = "User") Role role){
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setRole(role);
@@ -34,7 +34,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ModelAndView registerUser(@Valid @ModelAttribute AccountDTO accountDTO , BindingResult result, ModelMap model){
+    public ModelAndView registerUser(@Valid @ModelAttribute AccountDTO accountDTO , BindingResult result, ModelMap model, HttpSession session){
+
+
         if(accountSercive.existsByEmail(accountDTO.getEmail())){
             result.rejectValue(
                     "email",
@@ -50,10 +52,13 @@ public class AuthController {
             );
         }
         if(result.hasErrors()){
+            model.addAttribute("accountDTO", accountDTO);
+
             return new ModelAndView("client/auth/Register", model);
         }
-        accountSercive.registerUser(accountDTO);
 
+      User user =  accountSercive.registerUser(accountDTO);
+        session.setAttribute("loginUser", user);
         return new ModelAndView("client/Home", model);
     }
 

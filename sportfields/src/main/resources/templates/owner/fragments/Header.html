@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header  th:fragment="header_owner" class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40 flex items-center justify-between px-8">
+  <div class="flex items-center gap-10">
+    <h2 class="font-headline-md text-xl font-bold text-on-surface">Overview</h2>
+    <nav class="hidden lg:flex gap-8 items-center h-full">
+      <a class="text-on-surface font-label-md relative py-5 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary" href="#">Active Clubs</a>
+      <a class="text-on-surface-variant hover:text-primary font-label-md py-5 transition-colors" href="#">Performance</a>
+      <a class="text-on-surface-variant hover:text-primary font-label-md py-5 transition-colors" href="#">Staffing</a>
+    </nav>
+  </div>
+  <div class="flex items-center gap-5">
+    <div class="relative hidden xl:block">
+      <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+      <input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-sm w-72 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search facilities..." type="text"/>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+        <span class="material-symbols-outlined">light_mode</span>
+      </button>
+    </div>
+    <div class="h-6 w-[1px] bg-outline-variant mx-1"></div>
+    <div class="flex items-center gap-3 pl-2">
+      <div class="text-right hidden sm:block">
+        <p class="text-xs font-bold text-on-surface">Marcus Chen</p>
+        <p class="text-[10px] text-on-surface-variant">Admin</p>
+      </div>
+      <img alt="Profile" class="w-9 h-9 rounded-full border-2 border-primary-container object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDimZ0a7rKsvaaVafrG0cjpT4pfpQQRKp_KRUOnwC7jsSX6Rmtmx2xMPwhck3hD5yneCxjsGJCUIMxFId_0OiZnDn3hyCLCcL79V-Rpd2zkv9BOJHjb4VG4bVJMknS2l4bZ3otoG_q4WRtoG8VgaGzolLjTuyircOFWdPXpkdzi2kfTL7jQyB3rgSa-TSJpmB0cz5n5G2LMe_48__3ApYasQRYJd67upWs75WYKZTXCFn1fcVR1Lod6zTN8cdnoWjFchNVCmWq090"/>
+    </div>
+  </div>
+</header>
+</body>
+</html>

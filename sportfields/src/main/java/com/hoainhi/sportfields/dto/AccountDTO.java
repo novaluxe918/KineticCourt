@@ -16,7 +16,7 @@ public class AccountDTO {
     @NotEmpty(message = "Email cannot be empty")
     private String email;
 
-    @NotEmpty(message = "Phone cannot be empty")
+
     private String phone;
 
     @NotEmpty(message = "Password cannot be empty")

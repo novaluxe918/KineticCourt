@@ -178,18 +178,34 @@
 
                 <a th:href="@{/register(role='User')}"
                    class="flex-1 pb-4 text-center relative">
-        <span class="font-headline text-label-md text-primary-container">
-            Người chơi
-        </span>
-                    <div class="absolute active-tab-indicator w-full left-0"></div>
+
+    <span
+            th:class="${accountDTO.role.name() == 'User'}
+            ? 'font-headline text-label-md text-primary-container'
+            : 'font-headline text-label-md text-secondary hover:text-primary-container transition-colors'">
+        Người chơi
+    </span>
+
+                    <div
+                            th:class="${accountDTO.role.name() == 'User'}
+            ? 'absolute active-tab-indicator w-full left-0'
+            : 'absolute bottom-0 h-[1px] bg-outline-variant w-full left-0'">
+                    </div>
+
                 </a>
 
                 <a th:href="@{/register(role='Owner')}"
                    class="flex-1 pb-4 text-center relative group">
-        <span class="font-headline text-label-md text-secondary group-hover:text-primary-container">
+        <span  th:class="${accountDTO.role.name() == 'Owner'}
+            ? 'font-headline text-label-md text-primary-container'
+            : 'font-headline text-label-md text-secondary hover:text-primary-container transition-colors'">
             Chủ sân
         </span>
-                    <div class="absolute bottom-0 h-[1px] bg-outline-variant w-full left-0"></div>
+                    <div
+                            th:class="${accountDTO.role.name() == 'Owner'}
+            ? 'absolute active-tab-indicator w-full left-0'
+            : 'absolute bottom-0 h-[1px] bg-outline-variant w-full left-0'">
+                    </div>
                 </a>
 
             </div>
@@ -259,11 +275,11 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="space-y-1">
-                        <label class="block font-label-md text-on-surface-variant ml-1" for="password">Mật khẩu</label>
+                        <label class="block font-label-md text-on-surface-variant ml-1" >Mật khẩu</label>
                         <div class="relative group">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
                             <input th:field="*{password}"
-                                   type="password" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input" id="password" placeholder="••••••••" />
+                                   type="password" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input"  placeholder="••••••••" />
 
                         </div>
 
@@ -273,10 +289,10 @@
                         </div>
                     </div>
                     <div class="space-y-1">
-                        <label class="block font-label-md text-on-surface-variant ml-1" for="confirmPassword">Xác nhận mật khẩu</label>
+                        <label class="block font-label-md text-on-surface-variant ml-1" >Xác nhận mật khẩu</label>
                         <div class="relative group">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock_reset</span>
-                            <input th:field="*{confirmPassword}"  class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input" id="confirmPassword" placeholder="••••••••" type="password"/>
+                            <input th:field="*{confirmPassword}"  class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input"  placeholder="••••••••" type="password"/>
 
 
                         </div>
@@ -323,43 +339,4 @@
         </div>
     </section>
 </main>
-<script>
-    // Simple tab interaction
-    const playerTab = document.getElementById('playerTab');
-    const ownerTab = document.getElementById('ownerTab');
-
-    function setTabActive(active, inactive) {
-        const activeSpan = active.querySelector('span');
-        const inactiveSpan = inactive.querySelector('span');
-        const activeInd = active.querySelector('div');
-        const inactiveInd = inactive.querySelector('div');
-
-        activeSpan.classList.remove('text-secondary');
-        activeSpan.classList.add('text-primary-container');
-        activeInd.classList.add('active-tab-indicator');
-        activeInd.classList.remove('h-[1px]', 'bg-outline-variant');
-
-        inactiveSpan.classList.remove('text-primary-container');
-        inactiveSpan.classList.add('text-secondary');
-        inactiveInd.classList.remove('active-tab-indicator');
-        inactiveInd.classList.add('h-[1px]', 'bg-outline-variant');
-    }
-
-    playerTab.addEventListener('click', () => setTabActive(playerTab, ownerTab));
-    ownerTab.addEventListener('click', () => setTabActive(ownerTab, playerTab));
-
-    // Hover effect for whole input groups
-    document.querySelectorAll('.group').forEach(group => {
-        const input = group.querySelector('input');
-        const icon = group.querySelector('.material-symbols-outlined');
-        if(input && icon) {
-            input.addEventListener('focus', () => {
-                icon.style.fontVariationSettings = "'FILL' 1";
-            });
-            input.addEventListener('blur', () => {
-                icon.style.fontVariationSettings = "'FILL' 0";
-            });
-        }
-    });
-</script>
 </body></html>

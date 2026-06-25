@@ -1,8 +1,7 @@
 package com.hoainhi.sportfields.enums;
 
-public enum Status {
+public enum ScheduleStatus {
     AVAILABLE,
+    BOOKED,
     MAINTENANCE,
-            INACTIVE,
-
 }
