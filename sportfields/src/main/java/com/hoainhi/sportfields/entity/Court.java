@@ -17,7 +17,8 @@ public class Court {
     @Column(columnDefinition = "varchar(100) not null")
     private String name_court;
 
-
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "facility_id", nullable = false)

@@ -21,6 +21,9 @@ public class User {
     @Column(columnDefinition = "varchar(100) not null")
     private String name_user;
 
+    @Column(columnDefinition = "varchar(100) not null")
+    private String full_name;
+
     @Column(nullable = false)
     private String password;
 

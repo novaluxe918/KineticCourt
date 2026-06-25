@@ -1,0 +1,12 @@
+package com.hoainhi.sportfields.repository;
+
+import com.hoainhi.sportfields.entity.Facility;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface FaciRepository extends JpaRepository<Facility, String> {
+
+}

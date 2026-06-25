@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.entity;
 
+import com.hoainhi.sportfields.enums.FaciStatus;
 import com.hoainhi.sportfields.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -27,13 +28,10 @@ public class Facility {
     private String phone;
 
     @Column(nullable = false)
-    private String district;
-
-    @Column(nullable = false)
     private String wards;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private FaciStatus status;
 
     private String img_url;
 

@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -29,8 +26,10 @@ public class AuthController {
     }
 
     @RequestMapping("/register")
-    public String showRegister(Model model){
-        model.addAttribute("accountDTO", new AccountDTO());
+    public String showRegister(Model model, @RequestParam(defaultValue = "User") Role role){
+        AccountDTO accountDTO = new AccountDTO();
+        accountDTO.setRole(role);
+        model.addAttribute("accountDTO", accountDTO);
         return "client/auth/Register";
     }
 

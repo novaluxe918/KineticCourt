@@ -17,49 +17,11 @@
                 <h2 class="font-headline-lg text-headline-lg text-on-surface">Facilities Management</h2>
                 <p class="font-body-md text-on-surface-variant mt-1">Oversee and manage all active badminton centers across your network.</p>
             </div>
-            <button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-md">
-                <span class="material-symbols-outlined">add_circle</span>
+            <a th:href="@{/addfaci}"  class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-bold d-inline-flex align-items-center gap-2 text-decoration-none">
+                <span  class="material-symbols-outlined">add_circle</span>
                 Add Facility
-            </button>
-        </div>
-        <!-- Dashboard Stats (Bento Style) -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
-                    <span class="material-symbols-outlined">location_on</span>
-                </div>
-                <div>
-                    <p class="font-label-md text-on-surface-variant">Total Facilities</p>
-                    <p class="font-headline-md text-headline-md">24</p>
-                </div>
-            </div>
-            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
-                    <span class="material-symbols-outlined">check_circle</span>
-                </div>
-                <div>
-                    <p class="font-label-md text-on-surface-variant">Active Now</p>
-                    <p class="font-headline-md text-headline-md">22</p>
-                </div>
-            </div>
-            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
-                    <span class="material-symbols-outlined">pending</span>
-                </div>
-                <div>
-                    <p class="font-label-md text-on-surface-variant">Maintenance</p>
-                    <p class="font-headline-md text-headline-md">2</p>
-                </div>
-            </div>
-            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-error">
-                    <span class="material-symbols-outlined">trending_up</span>
-                </div>
-                <div>
-                    <p class="font-label-md text-on-surface-variant">Avg. Revenue</p>
-                    <p class="font-headline-md text-headline-md">$1.2k<span class="text-label-md font-normal text-on-surface-variant">/day</span></p>
-                </div>
-            </div>
+            </a>
+
         </div>
         <!-- Facilities Table Section -->
         <div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">

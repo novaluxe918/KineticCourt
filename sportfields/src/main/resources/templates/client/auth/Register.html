@@ -1,352 +1,365 @@
-<!doctype html>
-<html lang="vi" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký | Kinetic Court</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+<html class="light" lang="vi" xmlns:th="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Kinetic Court - Đăng ký Người chơi</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#f2f4f6",
+                      "surface-container-highest": "#e0e3e5",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "on-surface-variant": "#5a4136",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-container": "#223043",
+                      "on-secondary-fixed": "#131b2e",
+                      "surface-dim": "#d8dadc",
+                      "secondary-fixed": "#dae2fd",
+                      "primary-fixed-dim": "#ffb596",
+                      "on-primary-container": "#561d00",
+                      "tertiary": "#515f74",
+                      "primary": "#a33e00",
+                      "primary-container": "#ff6600",
+                      "secondary-container": "#dae2fd",
+                      "on-surface": "#191c1e",
+                      "outline": "#8e7164",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#191c1e",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#eff1f3",
+                      "tertiary-container": "#8998af",
+                      "surface-tint": "#a33e00",
+                      "on-tertiary-fixed-variant": "#3a485c",
+                      "on-primary-fixed-variant": "#7c2e00",
+                      "on-error": "#ffffff",
+                      "surface": "#f7f9fb",
+                      "secondary": "#565e74",
+                      "primary-fixed": "#ffdbcd",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#b9c7e0",
+                      "surface-container": "#eceef0",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "on-primary-fixed": "#360f00",
+                      "surface-variant": "#e0e3e5",
+                      "surface-container-high": "#e6e8ea",
+                      "outline-variant": "#e3bfb1",
+                      "background": "#f7f9fb",
+                      "inverse-surface": "#2d3133",
+                      "error-container": "#ffdad6",
+                      "surface-bright": "#f7f9fb",
+                      "on-tertiary-fixed": "#0d1c2f",
+                      "on-secondary-container": "#5c647a",
+                      "inverse-primary": "#ffb596",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "tertiary-fixed": "#d5e3fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "gutter": "1.5rem",
+                      "container-max": "1320px",
+                      "margin-desktop": "2rem",
+                      "margin-mobile": "1rem"
+              },
+              "fontFamily": {
+                      "headline-md": ["Montserrat"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Montserrat"],
+                      "body-md": ["Inter"],
+                      "headline-xl": ["Montserrat"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Montserrat"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
     <style>
-        :root {
-            --primary: #ff6b00;
-            --primary-hover: #e65f00;
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Montserrat', sans-serif; }
+        .registration-split { min-height: 100vh; }
+
+        .custom-input {
+            transition: all 0.2s ease;
+        }
+        .custom-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #ff660044;
+            border-color: #a33e00;
         }
 
-        body {
-            background: #f5f7fa;
+        .active-tab-indicator {
+            height: 3px;
+            bottom: -1px;
+            background-color: #ff6600;
         }
 
-        .brand-color {
-            color: var(--primary);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .btn-orange {
-            background: var(--primary);
-            color: white;
-            border: none;
-        }
-
-        .btn-orange:hover {
-            background: var(--primary-hover);
-            color: white;
-        }
-
-        .register-container {
-            min-height: 100vh;
-        }
-
-        .left-panel {
-            background:
-                linear-gradient(rgba(255, 107, 0, .85),
-                    rgba(255, 107, 0, .9)),
-                url('https://images.unsplash.com/photo-1626224583764-f87db24ac4ea')
-                center/cover;
-            color: white;
-            padding: 60px;
-            border-radius: 20px 0 0 20px;
-        }
-
-        .right-panel {
-            background: white;
-            padding: 60px;
-            border-radius: 0 20px 20px 0;
-        }
-
-        .logo {
-            font-size: 40px;
-            font-weight: bold;
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: white;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        .social-btn {
-            border: 1px solid #ddd;
-            background: white;
-            height: 55px;
-        }
-
-        .social-btn:hover {
-            background: #f8f9fa;
-        }
-
-        @media(max-width:992px) {
-
-            .left-panel {
-                display: none;
-            }
-
-            .right-panel {
-                border-radius: 20px;
-            }
-        }
+        .animate-fade { animation: fadeIn 0.6s ease forwards; }
     </style>
 </head>
-
-<body>
-
-<div class="container py-5">
-
-    <div class="row shadow-lg rounded-4 overflow-hidden register-container">
-
-        <!-- Left Side -->
-        <div class="col-lg-5 left-panel d-flex flex-column justify-content-between">
-
-            <div>
-
-                <div class="logo mb-5">
-                    <i class="fa-solid fa-shuttlecock"></i>
-                    Kinetic Court
-                </div>
-
-                <h1 class="fw-bold display-5">
-                    Đặt sân cầu lông
-                    nhanh chóng & tiện lợi
-                </h1>
-
-                <p class="mt-4 fs-5">
-                    Tham gia Kinetic Court để trải nghiệm hệ thống
-                    đặt sân hiện đại, quản lý lịch chơi và nhận
-                    nhiều ưu đãi hấp dẫn.
-                </p>
-
-            </div>
-
-            <div class="row mt-5">
-
-                <div class="col-4">
-
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-
-                    <h6>Đặt sân nhanh</h6>
-
-                    <small>
-                        Chỉ vài giây để hoàn tất đặt sân.
-                    </small>
-
-                </div>
-
-                <div class="col-4">
-
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-shield"></i>
-                    </div>
-
-                    <h6>Xác nhận tức thì</h6>
-
-                    <small>
-                        Hệ thống xử lý tự động.
-                    </small>
-
-                </div>
-
-                <div class="col-4">
-
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-gift"></i>
-                    </div>
-
-                    <h6>Ưu đãi</h6>
-
-                    <small>
-                        Nhiều chương trình hấp dẫn.
-                    </small>
-
-                </div>
-
-            </div>
-
+<body class="bg-background text-on-background m-0 p-0 overflow-x-hidden">
+<main class="registration-split flex flex-col md:flex-row w-full">
+    <!-- Left Side: Visual & Inspiration -->
+    <section class="hidden md:flex md:w-1/2 lg:w-3/5 relative overflow-hidden bg-inverse-surface">
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-10000 hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida/AP1WRLviAoI50hoiA_UxzE6VX2jHCX9HGY2iU6BS5hCRznJ_zX6Ajla-GRs6zPzNI3ogsuPjO_071vDXqjneSh0uBPSC9_fbEiJ1u3PqwFBH_n9rKvruKN1C1Px-NWTuEeIl3od-5vlaelD2kkrrmdxhD0e6l3f5Mc6vwQHHdmmpyYTth57NfRnPPAC5aaKUj_Au5eNhxRMGXUWNU77S_zsjgd_d9NmDFv7sYLrsaQfCTiR19WCGp1RUkPJL50c')">
+            <div class="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/40 to-transparent"></div>
         </div>
-
-        <!-- Right Side -->
-        <div class="col-lg-7 right-panel">
-
-            <div class="text-center mb-5">
-
-                <h1 class="fw-bold">
-                    Đăng ký tài khoản
-                </h1>
-
-                <p class="text-muted">
-                    Tạo tài khoản để bắt đầu hành trình cùng Kinetic Court
+        <div class="relative z-10 p-12 lg:p-20 flex flex-col justify-between w-full">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">shift_lock</span>
+                <span class="font-headline font-extrabold text-white text-3xl tracking-tight">Kinetic Court</span>
+            </div>
+            <div class="max-w-xl animate-fade">
+                <h1 class="font-headline text-white text-headline-xl mb-6">Nâng Tầm Trải Nghiệm Cầu Lông</h1>
+                <p class="text-white/80 font-body-lg mb-8 leading-relaxed">
+                    Tham gia cộng đồng cầu lông chuyên nghiệp, tìm sân nhanh chóng và nâng cao trình độ cùng hàng ngàn tay vợt khác tại Kinetic Court.
                 </p>
-
-            </div>
-
-            <form method="post"
-                  th:object="${accountDTO}"
-                  th:action="@{/register}">
-
-                <div class="row">
-
-                    <div class="col-md-6 mb-3">
-
-                        <label class="form-label">
-                            Họ và tên
-                        </label>
-
-                        <input th:field="*{name_user}"
-                               type="text"
-                               class="form-control form-control-lg"
-                               placeholder="Nhập họ và tên">
-
-                        <div class="text-danger mt-1"
-                             th:if="${#fields.hasErrors('name_user')}"
-                             th:errors="*{name_user}">
+                <div class="flex items-center gap-6">
+                    <div class="flex -space-x-3">
+                        <div class="w-10 h-10 rounded-full border-2 border-white bg-surface-container-highest flex items-center justify-center overflow-hidden">
+                            <span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
                         </div>
-
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-
-                        <label class="form-label">
-                            Email
-                        </label>
-
-                        <input th:field="*{email}"
-                               type="email"
-                               class="form-control form-control-lg"
-                               placeholder="Nhập email">
-
-                        <div class="text-danger mt-1"
-                             th:if="${#fields.hasErrors('email')}"
-                             th:errors="*{email}">
+                        <div class="w-10 h-10 rounded-full border-2 border-white bg-surface-container-highest flex items-center justify-center overflow-hidden">
+                            <span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
                         </div>
-
+                        <div class="w-10 h-10 rounded-full border-2 border-white bg-surface-container-highest flex items-center justify-center overflow-hidden">
+                            <span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+                        </div>
                     </div>
-
+                    <span class="text-white font-label-md">Hơn 5,000+ người chơi đã gia nhập</span>
                 </div>
-
-
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Mật khẩu
-                    </label>
-
-                    <input th:field="*{password}"
-                           type="password"
-                           class="form-control form-control-lg"
-                           placeholder="Nhập mật khẩu">
-                    <div class="text-danger mt-1"
-                         th:if="${#fields.hasErrors('password')}"
-                         th:errors="*{password}">
-                    </div>
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Xác nhận mật khẩu
-                    </label>
-
-                    <input th:field="*{confirmPassword}" type="password"
-                           class="form-control form-control-lg"
-                           placeholder="Nhập lại mật khẩu">
-                    <div class="text-danger mt-1"
-                         th:if="${#fields.hasErrors('confirmPassword')}"
-                         th:errors="*{confirmPassword}">
-                    </div>
-
-                </div>
-
-
-                <div class="form-check mb-4">
-
-                    <input class="form-check-input"
-                           type="checkbox">
-
-                    <label class="form-check-label">
-
-                        Tôi đồng ý với
-                        <span class="brand-color">
-                            Điều khoản sử dụng
-                        </span>
-
-                    </label>
-
-                </div>
-
-                <button type="submit"
-                        class="btn btn-orange btn-lg w-100">
-
-                    Đăng ký
-
-                </button>
-
-            </form>
-
-            <div class="text-center my-4">
-
-                <span class="text-muted">
-                    Hoặc đăng ký bằng
-                </span>
-
             </div>
-
-            <div class="row">
-
-                <div class="col-6">
-
-                    <button class="btn social-btn w-100">
-
-                        <i class="fa-brands fa-google me-2"></i>
-                        Google
-
-                    </button>
-
-                </div>
-
-                <div class="col-6">
-
-                    <button class="btn social-btn w-100">
-
-                        <i class="fa-brands fa-facebook me-2"></i>
-                        Facebook
-
-                    </button>
-
-                </div>
-
+            <div class="text-white/60 font-label-md">
+                © 2024 Kinetic Court. Professional Court Management.
             </div>
+        </div>
+    </section>
+    <!-- Right Side: Form Content -->
+    <section class="w-full md:w-1/2 lg:w-2/5 bg-surface flex flex-col items-center justify-center p-gutter md:p-12 lg:p-16">
+        <div class="w-full max-w-md animate-fade">
+            <!-- Mobile Logo -->
+            <div class="md:hidden flex items-center justify-center gap-2 mb-12">
+                <span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">shift_lock</span>
+                <span class="font-headline font-extrabold text-primary text-2xl tracking-tight">Kinetic Court</span>
+            </div>
+            <div class="mb-10 text-center md:text-left">
+                <h2 class="font-headline text-headline-lg text-on-surface mb-2">Tạo tài khoản mới</h2>
+                <p class="text-secondary font-body-md">Bắt đầu hành trình chinh phục sân đấu ngay hôm nay</p>
+            </div>
+            <!-- Role Tabs -->
+            <div class="flex border-b border-outline-variant mb-8 w-full">
 
-            <div class="text-center mt-5">
+                <a th:href="@{/register(role='User')}"
+                   class="flex-1 pb-4 text-center relative">
+        <span class="font-headline text-label-md text-primary-container">
+            Người chơi
+        </span>
+                    <div class="absolute active-tab-indicator w-full left-0"></div>
+                </a>
 
-                Đã có tài khoản?
-
-                <a th:href="@{/login}" href="#" class="text-decoration-none fw-bold brand-color">
-                    Đăng nhập ngay
+                <a th:href="@{/register(role='Owner')}"
+                   class="flex-1 pb-4 text-center relative group">
+        <span class="font-headline text-label-md text-secondary group-hover:text-primary-container">
+            Chủ sân
+        </span>
+                    <div class="absolute bottom-0 h-[1px] bg-outline-variant w-full left-0"></div>
                 </a>
 
             </div>
+            <!-- Registration Form -->
+            <form method="post"
+                  th:object="${accountDTO}"
+                  th:action="@{/register}" class="space-y-5" >
+                <input type="hidden" th:field="*{role}">
+                <div class="space-y-1">
+                    <label class="block font-label-md text-on-surface-variant ml-1">Họ và Tên</label>
+                    <div class="relative group">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
+                        <input th:field="*{full_name}" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input"  placeholder="Nguyễn Văn A" type="text"/>
+                    </div>
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('full_name')}"
+                         th:errors="*{full_name}">
+                    </div>
+                </div>
 
+                <div class="space-y-1">
+                    <label class="block font-label-md text-on-surface-variant ml-1" >Tên Người Dùng</label>
+                    <div class="relative group">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
+                        <input th:field="*{name_user}" type="text" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input"  />
+                    </div>
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('name_user')}"
+                         th:errors="*{name_user}">
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <label class="block font-label-md text-on-surface-variant ml-1" >Email</label>
+                    <div class="relative group">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
+                        <input th:field="*{email}"
+                               type="email" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input"  placeholder="example@email.com" />
+                    </div>
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('email')}"
+                         th:errors="*{email}">
+                    </div>
+                </div>
+                <div th:if="${accountDTO.role.name() == 'Owner'}" class="space-y-1">
+
+                    <label class="block font-label-md text-on-surface-variant ml-1">
+                        Số điện thoại
+                    </label>
+
+                    <div class="relative group">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">
+            phone
+        </span>
+
+                        <input
+                                th:field="*{phone}"
+                                type="tel"
+                                placeholder="Nhập số điện thoại"
+                                class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input" />
+                    </div>
+
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('phone')}"
+                         th:errors="*{phone}">
+                    </div>
+
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="block font-label-md text-on-surface-variant ml-1" for="password">Mật khẩu</label>
+                        <div class="relative group">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
+                            <input th:field="*{password}"
+                                   type="password" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input" id="password" placeholder="••••••••" />
+
+                        </div>
+
+                        <div class="text-danger mt-1"
+                             th:if="${#fields.hasErrors('password')}"
+                             th:errors="*{password}">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block font-label-md text-on-surface-variant ml-1" for="confirmPassword">Xác nhận mật khẩu</label>
+                        <div class="relative group">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock_reset</span>
+                            <input th:field="*{confirmPassword}"  class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input" id="confirmPassword" placeholder="••••••••" type="password"/>
+
+
+                        </div>
+
+                        <div class="text-danger mt-1"
+                             th:if="${#fields.hasErrors('confirmPassword')}"
+                             th:errors="*{confirmPassword}">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 py-2">
+                    <input class="mt-1 w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary-container cursor-pointer" id="terms" type="checkbox"/>
+                    <label class="text-label-md text-secondary" for="terms">
+                        Tôi đồng ý với <a class="text-primary hover:underline transition-all" href="#">Điều khoản dịch vụ</a> và <a class="text-primary hover:underline transition-all" href="#">Chính sách bảo mật</a>
+                    </label>
+                </div>
+                <button type="submit" class="w-full bg-primary-container text-white font-headline text-label-md py-4 rounded-lg hover:bg-primary transition-all shadow-lg shadow-primary-container/20 active:scale-95 duration-150 transform">
+                    Đăng Ký Ngay
+                </button>
+            </form>
+            <!-- Divider -->
+            <div class="relative my-8">
+                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant"></div></div>
+                <div class="relative flex justify-center text-label-md"><span class="bg-surface px-4 text-secondary uppercase tracking-widest">Hoặc đăng ký bằng</span></div>
+            </div>
+            <!-- Social Logins -->
+            <div class="grid grid-cols-2 gap-4">
+                <button class="flex items-center justify-center gap-2 py-3 px-4 bg-white border border-outline-variant rounded-lg hover:bg-surface-container-low transition-all active:scale-95">
+                    <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7KE-Agy5i3pQbtWoR7D0UcMl631yy2PpSFv8VnPLvSbrhSI5aaUjG0-seB8ZDyNQL2uSVlo-2Ny4un2AcsxwGu6oKEj-qaddCH8rTAo_YTpdX7dXFbEktZA1TKHs3Wpv09duKVPrXEwLwnikKvo_pKvwxJStVfmKx_PULIxu-dFxlKsAtqCrXlTV_ouuFsWL07QGc68GXU3VAAempLaW66WQ-7h8sauFvE3Th9tdYv3VgjONQMAR2deiJPQ1eHyK5clIofbxdmn8"/>
+                    <span class="font-headline text-label-md text-secondary">Google</span>
+                </button>
+                <button class="flex items-center justify-center gap-2 py-3 px-4 bg-white border border-outline-variant rounded-lg hover:bg-surface-container-low transition-all active:scale-95">
+                    <img alt="Facebook" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-yOfOjjayGtCYOTewwtWz8H5-FrDGqJYNcJTheXaCqBAtfmCljDO8dWbm4UTjJua3UzzEnAnt15HKxAEnrWq0VW6eXRuRpSH7aVLv0MMqOIkBalHt-gXRvuQvZHov-aJNhytS7CYbzGPd4bJEqg8PVpml1FXbndqx4-M_RZqg9KE-O2lG7shd76CNKkADqunmrQaKN98rzVTRf7pPi8E5ytAPnuFx9Yb1G3PnlVxdADg7GnleTNf6HOwpMBI-PwNdCwhbrhtNQgM"/>
+                    <span class="font-headline text-label-md text-secondary">Facebook</span>
+                </button>
+            </div>
+            <!-- Login Link -->
+            <div class="mt-10 text-center">
+                <p class="text-secondary font-body-md">
+                    Bạn đã có tài khoản?
+                    <a  th:href="@{/login}" class="text-primary-container font-headline font-bold ml-1 hover:underline transition-all" >Đăng nhập</a>
+                </p>
+            </div>
         </div>
+    </section>
+</main>
+<script>
+    // Simple tab interaction
+    const playerTab = document.getElementById('playerTab');
+    const ownerTab = document.getElementById('ownerTab');
 
-    </div>
+    function setTabActive(active, inactive) {
+        const activeSpan = active.querySelector('span');
+        const inactiveSpan = inactive.querySelector('span');
+        const activeInd = active.querySelector('div');
+        const inactiveInd = inactive.querySelector('div');
 
-</div>
+        activeSpan.classList.remove('text-secondary');
+        activeSpan.classList.add('text-primary-container');
+        activeInd.classList.add('active-tab-indicator');
+        activeInd.classList.remove('h-[1px]', 'bg-outline-variant');
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+        inactiveSpan.classList.remove('text-primary-container');
+        inactiveSpan.classList.add('text-secondary');
+        inactiveInd.classList.remove('active-tab-indicator');
+        inactiveInd.classList.add('h-[1px]', 'bg-outline-variant');
+    }
 
-</body>
+    playerTab.addEventListener('click', () => setTabActive(playerTab, ownerTab));
+    ownerTab.addEventListener('click', () => setTabActive(ownerTab, playerTab));
 
-</html>
+    // Hover effect for whole input groups
+    document.querySelectorAll('.group').forEach(group => {
+        const input = group.querySelector('input');
+        const icon = group.querySelector('.material-symbols-outlined');
+        if(input && icon) {
+            input.addEventListener('focus', () => {
+                icon.style.fontVariationSettings = "'FILL' 1";
+            });
+            input.addEventListener('blur', () => {
+                icon.style.fontVariationSettings = "'FILL' 0";
+            });
+        }
+    });
+</script>
+</body></html>

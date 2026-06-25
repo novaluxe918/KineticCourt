@@ -15,7 +15,6 @@ public class AdminController {
         User user = (User) httpSession.getAttribute("loginUser");
 
                 if(user == null){
-
                    return "client/auth/Login";
                 }
                 if(user.getRole() != Role.Admin){
@@ -32,5 +31,10 @@ public class AdminController {
     @GetMapping("/facilities")
     public String showFacilities(){
         return "admin/facilities/Facilities";
+    }
+
+    @GetMapping("/addfaci")
+    public String showCreate(){
+        return "admin/facilities/CreateFacilities";
     }
 }
