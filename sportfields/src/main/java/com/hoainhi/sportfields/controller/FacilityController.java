@@ -1,19 +1,27 @@
 package com.hoainhi.sportfields.controller;
 
 import com.hoainhi.sportfields.dto.FacilityDTO;
+import com.hoainhi.sportfields.entity.User;
+import com.hoainhi.sportfields.service.CloudinaryService;
 import com.hoainhi.sportfields.service.FacilityService;
 import com.hoainhi.sportfields.service.WardSevice;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FacilityController {
     @Autowired
     private FacilityService facilityService;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
     @Autowired
     private WardSevice wardSevice;
@@ -26,9 +34,11 @@ public class FacilityController {
     }
 
     @PostMapping("/add")
-    public String saveFacility(@ModelAttribute FacilityDTO facilityDTO){
-
-        facilityService.addfacility(facilityDTO);
+    public String saveFacility(@ModelAttribute FacilityDTO facilityDTO, @RequestParam("image") MultipartFile image, HttpSession session){
+        User user = (User) session.getAttribute("loginUser");
+        String imglUrl = cloudinaryService.uploadFile(image);
+        facilityDTO.setImg_url(imglUrl);
+        facilityService.addfacility(facilityDTO, user);
         return "owner/facility/Facility";
 
     }

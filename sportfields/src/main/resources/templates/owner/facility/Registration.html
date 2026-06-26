@@ -14,7 +14,7 @@
     <p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">Start your journey with Kinetic Court. Register your badminton facility to reach thousands of players and manage your bookings effortlessly.</p>
   </div>
   <!-- Registration Bento Layout -->
-  <form th:action="@{/add}" th:object="${facilityDTO}" class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start" method="post">
+  <form th:action="@{/add}" th:object="${facilityDTO}" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start" method="post">
     <!-- Left Column: Form Details -->
     <div class="lg:col-span-7 space-y-gutter">
       <!-- Basic Info Card -->
@@ -38,7 +38,7 @@
 
           <div class="md:col-span-2">
             <label class="block font-label-md text-label-md text-on-surface mb-2">Ward / Sub-district</label>
-            <select class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary h-12 px-4 font-body-md text-body-md transition-all">
+            <select name="wards" class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary h-12 px-4 font-body-md text-body-md transition-all">
               <option disabled="" selected="" value="">Select ward</option>
               <option th:each="ward: ${wards}" th:value="${ward.name}" th:text="${ward.name}" ></option>
 
@@ -61,7 +61,7 @@
         </div>
         <div>
           <label class="block font-label-md text-label-md text-on-surface mb-2">Detailed Description</label>
-          <textarea class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary p-4 font-body-md text-body-md transition-all" placeholder="Describe your facility, court quality, parking, changing rooms, and other amenities..." rows="5"></textarea>
+          <textarea th:field="*{description}" class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary p-4 font-body-md text-body-md transition-all" placeholder="Describe your facility, court quality, parking, changing rooms, and other amenities..." rows="5"></textarea>
         </div>
       </div>
     </div>
@@ -73,15 +73,22 @@
           <span class="bg-tertiary-fixed text-on-tertiary-fixed p-2 rounded-lg material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">image</span>
           <h3 class="font-headline-md text-headline-md">Cover Photo</h3>
         </div>
-        <div class="group relative flex flex-col items-center justify-center border-2 border-dashed border-outline-variant rounded-xl h-64 hover:border-primary hover:bg-surface-container-low transition-all cursor-pointer overflow-hidden">
-          <img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity" data-alt="A professional, high-end badminton facility with multiple pristine wooden courts illuminated by bright overhead LED sports lighting. The perspective is from the entrance, looking into a modern, clean indoor athletic hall with high ceilings and blue-tinted walls. The atmosphere is energetic and welcoming, designed for a corporate sports booking platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtA7rG8i0PRVCNGdrxqC-CG7FY61mFSPtVO-x4N6YBiK5ChphdvCXFXTJxSpkxFbW3_8Lvt32i6d6NESZm12UF8WrzGfXTTapRWMKFGs9N2mvAA6iuEY8XT39-Qd2qX8jPq2lMdYjd_Ubyf0HNxsugPwiOY7yeypgfVXIGtSjzPzbHbFOZ7Do3sfDjeozDWvm4EMhz52Wzvpc1ImK6ytQdCr9Qac68Yp9eMsxZYU0zUJbW8ApqP9prYGAnZ_hbo7KpHhyEtRgDEAc">
+        <div id="uploadArea" class="group relative flex flex-col items-center justify-center border-2 border-dashed border-outline-variant rounded-xl h-64 hover:border-primary hover:bg-surface-container-low transition-all cursor-pointer overflow-hidden">
+          <img
+                  id="previewImage"
+                  class="absolute inset-0 w-full h-full object-cover hidden">
           <div class="relative z-10 flex flex-col items-center p-6 text-center">
             <span class="material-symbols-outlined text-5xl text-primary mb-4">cloud_upload</span>
             <p class="font-body-lg text-body-lg text-on-surface font-semibold mb-1">Click to upload or drag &amp; drop</p>
             <p class="font-body-md text-body-md text-on-surface-variant">JPG, PNG or WEBP (Max 5MB)</p>
             <p class="mt-4 px-4 py-2 bg-white text-primary font-label-md text-label-md border border-primary rounded-full group-hover:bg-primary group-hover:text-white transition-all">Select Image</p>
           </div>
-          <input accept="image/*" class="hidden" type="file">
+          <input
+                  id="imageInput"
+                  name="image"
+                  accept="image/*"
+                  class="hidden"
+                  type="file">
         </div>
         <div class="mt-6 flex items-start gap-3 p-4 bg-surface-container-low rounded-lg">
           <span class="material-symbols-outlined text-on-surface-variant">lightbulb</span>
@@ -104,6 +111,41 @@
       </div>
     </div>
   </form>
+  <script>
+    const uploadArea = document.getElementById("uploadArea");
+    const imageInput = document.getElementById("imageInput");
+    const previewImage = document.getElementById("previewImage");
+
+    // Click vào khung để chọn ảnh
+    uploadArea.addEventListener("click", function () {
+        imageInput.click();
+    });
+
+    // Hiển thị ảnh sau khi chọn
+    imageInput.addEventListener("change", function () {
+
+        const file = this.files[0];
+
+        if (file) {
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+
+                // Hiện ảnh rõ nét
+                previewImage.classList.remove("hidden");
+                previewImage.style.opacity = "1";
+
+                // Ẩn phần chữ upload
+                uploadArea.querySelector(".relative.z-10").style.display = "none";
+            }
+
+            reader.readAsDataURL(file);
+        }
+
+    });
+  </script>
 </main>
 </body>
 </html>
