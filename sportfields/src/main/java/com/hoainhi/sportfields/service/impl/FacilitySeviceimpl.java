@@ -6,7 +6,9 @@ import com.hoainhi.sportfields.repository.FaciRepository;
 import com.hoainhi.sportfields.service.FacilityService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FacilitySeviceimpl  implements FacilityService {
 
     @Autowired

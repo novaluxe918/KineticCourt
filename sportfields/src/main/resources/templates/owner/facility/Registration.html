@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{owner/layout/LayoutOwner}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main layout:fragment="main" class="ml-64 mt-16 p-10 min-h-[calc(100vh-4rem)]">
+  <!-- Page Header -->
+  <div class="mb-gutter">
+    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Register Your Facility</h2>
+    <p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">Start your journey with Kinetic Court. Register your badminton facility to reach thousands of players and manage your bookings effortlessly.</p>
+  </div>
+  <!-- Registration Bento Layout -->
+  <form th:action="@{/add}" th:object="${facilityDTO}" class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start" method="post">
+    <!-- Left Column: Form Details -->
+    <div class="lg:col-span-7 space-y-gutter">
+      <!-- Basic Info Card -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 transition-all hover:shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="bg-primary-fixed text-on-primary-fixed p-2 rounded-lg material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">info</span>
+          <h3 class="font-headline-md text-headline-md">General Information</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-2">
+            <label class="block font-label-md text-label-md text-on-surface mb-2">Facility Name</label>
+            <input th:field="*{name_facility}" class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary h-12 px-4 font-body-md text-body-md transition-all" placeholder="e.g. Kinetic Smash Arena" type="text">
+          </div>
+          <div class="md:col-span-2">
+            <label class="block font-label-md text-label-md text-on-surface mb-2">Facility Address</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant">location_on</span>
+              <input th:field="*{address}" class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary h-12 pl-10 pr-4 font-body-md text-body-md transition-all" placeholder="Street name, building number..." type="text">
+            </div>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block font-label-md text-label-md text-on-surface mb-2">Ward / Sub-district</label>
+            <select class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary h-12 px-4 font-body-md text-body-md transition-all">
+              <option disabled="" selected="" value="">Select ward</option>
+              <option th:each="ward: ${wards}" th:value="${ward.name}" th:text="${ward.name}" ></option>
+
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label class="block font-label-md text-label-md text-on-surface mb-2">Phone Number</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant">phone</span>
+              <input th:field="*{phone}" class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary h-12 pl-10 pr-4 font-body-md text-body-md transition-all" placeholder="+84 000 000 000" type="tel">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Description Card -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 transition-all hover:shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="bg-secondary-container text-on-secondary-container p-2 rounded-lg material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+          <h3 class="font-headline-md text-headline-md">Facilities &amp; Services</h3>
+        </div>
+        <div>
+          <label class="block font-label-md text-label-md text-on-surface mb-2">Detailed Description</label>
+          <textarea class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-primary p-4 font-body-md text-body-md transition-all" placeholder="Describe your facility, court quality, parking, changing rooms, and other amenities..." rows="5"></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- Right Column: Media & Submission -->
+    <div class="lg:col-span-5 space-y-gutter sticky top-20">
+      <!-- Image Upload Card -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 transition-all hover:shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="bg-tertiary-fixed text-on-tertiary-fixed p-2 rounded-lg material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">image</span>
+          <h3 class="font-headline-md text-headline-md">Cover Photo</h3>
+        </div>
+        <div class="group relative flex flex-col items-center justify-center border-2 border-dashed border-outline-variant rounded-xl h-64 hover:border-primary hover:bg-surface-container-low transition-all cursor-pointer overflow-hidden">
+          <img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity" data-alt="A professional, high-end badminton facility with multiple pristine wooden courts illuminated by bright overhead LED sports lighting. The perspective is from the entrance, looking into a modern, clean indoor athletic hall with high ceilings and blue-tinted walls. The atmosphere is energetic and welcoming, designed for a corporate sports booking platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtA7rG8i0PRVCNGdrxqC-CG7FY61mFSPtVO-x4N6YBiK5ChphdvCXFXTJxSpkxFbW3_8Lvt32i6d6NESZm12UF8WrzGfXTTapRWMKFGs9N2mvAA6iuEY8XT39-Qd2qX8jPq2lMdYjd_Ubyf0HNxsugPwiOY7yeypgfVXIGtSjzPzbHbFOZ7Do3sfDjeozDWvm4EMhz52Wzvpc1ImK6ytQdCr9Qac68Yp9eMsxZYU0zUJbW8ApqP9prYGAnZ_hbo7KpHhyEtRgDEAc">
+          <div class="relative z-10 flex flex-col items-center p-6 text-center">
+            <span class="material-symbols-outlined text-5xl text-primary mb-4">cloud_upload</span>
+            <p class="font-body-lg text-body-lg text-on-surface font-semibold mb-1">Click to upload or drag &amp; drop</p>
+            <p class="font-body-md text-body-md text-on-surface-variant">JPG, PNG or WEBP (Max 5MB)</p>
+            <p class="mt-4 px-4 py-2 bg-white text-primary font-label-md text-label-md border border-primary rounded-full group-hover:bg-primary group-hover:text-white transition-all">Select Image</p>
+          </div>
+          <input accept="image/*" class="hidden" type="file">
+        </div>
+        <div class="mt-6 flex items-start gap-3 p-4 bg-surface-container-low rounded-lg">
+          <span class="material-symbols-outlined text-on-surface-variant">lightbulb</span>
+          <p class="text-body-md font-body-md text-on-surface-variant">Pro tip: High-quality photos of your courts increase bookings by up to 40%!</p>
+        </div>
+      </div>
+      <!-- Action Card -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 transition-all hover:shadow-sm">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-2">
+            <input class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" id="terms" type="checkbox">
+            <label class="text-body-md font-body-md text-on-surface-variant" for="terms">I agree to the <a class="text-primary hover:underline font-semibold" href="#">Terms of Service</a> and <a class="text-primary hover:underline font-semibold" href="#">Privacy Policy</a>.</label>
+          </div>
+          <button class="w-full bg-primary-container text-on-primary-container hover:bg-opacity-90 active:scale-95 transition-all py-4 rounded-xl font-headline-md text-headline-md font-bold shadow-lg shadow-primary-container/20 flex items-center justify-center gap-3" type="submit">
+            <span class="material-symbols-outlined">how_to_reg</span>
+            Đăng ký cơ sở
+          </button>
+          <p class="text-center font-label-md text-label-md text-on-surface-variant">Your registration will be reviewed within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</main>
+</body>
+</html>

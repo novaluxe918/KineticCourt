@@ -152,14 +152,9 @@
         </div>
         <!-- Login Form -->
         <form method="post"  th:object="${accountDTO}"
-              th:action="@{/login}"  class="space-y-6"><div class="flex p-1 bg-white/5 border border-white/10 rounded-lg mb-6">
-            <button class="flex-1 py-2 px-4 rounded font-label-md text-xs uppercase tracking-widest transition-all bg-primary-container text-white" type="button">
-                Người chơi
-            </button>
-            <button class="flex-1 py-2 px-4 rounded font-label-md text-xs uppercase tracking-widest transition-all text-white/60 hover:text-white hover:bg-white/5" type="button">
-                Chủ sân
-            </button>
-        </div>
+              th:action="@{/login}"  class="space-y-6">
+
+
             <!-- Username/Email -->
             <div class="space-y-2">
                 <label class="font-label-md text-xs text-white/60 uppercase tracking-widest" for="email">Email / Tên đăng nhập</label>

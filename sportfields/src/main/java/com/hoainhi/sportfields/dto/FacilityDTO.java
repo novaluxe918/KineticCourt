@@ -1,5 +1,8 @@
 package com.hoainhi.sportfields.dto;
 
+import lombok.Data;
+
+@Data
 public class FacilityDTO {
    private String name_facility;
     private String address;

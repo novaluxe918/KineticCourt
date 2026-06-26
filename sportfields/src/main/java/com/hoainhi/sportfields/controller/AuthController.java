@@ -59,6 +59,9 @@ public class AuthController {
 
       User user =  accountSercive.registerUser(accountDTO);
         session.setAttribute("loginUser", user);
+        if(user.getRole() == Role.Owner){
+            return new ModelAndView("owner/facility/Facility", model);
+        }
         return new ModelAndView("client/Home", model);
     }
 
@@ -75,7 +78,7 @@ public class AuthController {
 
         }
         if(user.getRole() == Role.Owner){
-            return new ModelAndView("owner/dashboard/Dashboard");
+            return new ModelAndView("owner/facility/Facility");
 
         }
         return new ModelAndView("client/Home");
