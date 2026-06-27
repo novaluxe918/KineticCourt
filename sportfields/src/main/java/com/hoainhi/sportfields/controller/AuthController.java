@@ -66,22 +66,22 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ModelAndView loginUser(@Valid @ModelAttribute AccountDTO accountDTO, BindingResult result, ModelMap modelMap,  HttpSession session){
+    public String loginUser(@Valid @ModelAttribute AccountDTO accountDTO, BindingResult result, ModelMap modelMap, HttpSession session){
         User user = accountSercive.loginUser(accountDTO);
         if(user == null){
             modelMap.addAttribute("message", "Email không tồn tại");
-            return new ModelAndView("client/auth/Login", modelMap);
+            return "client/auth/Login";
         }
         session.setAttribute("loginUser", user);
         if(user.getRole() == Role.Admin){
-            return new ModelAndView("admin/dashboard/Dashboard");
+            return "admin/dashboard/Dashboard";
 
         }
         if(user.getRole() == Role.Owner){
-            return new ModelAndView("owner/facility/Facility");
+            return "redirect:/facilities_owner";
 
         }
-        return new ModelAndView("client/Home");
+        return "client/Home";
     }
 
     @GetMapping("/logout")

@@ -11,11 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FacilitySeviceimpl  implements FacilityService {
 
     @Autowired
     private FaciRepository faciRepository;
+
+
 
     @Override
     public Facility addfacility(FacilityDTO facilityDTO, User user) {
@@ -24,5 +28,10 @@ public class FacilitySeviceimpl  implements FacilityService {
         facility.setStatus(FaciStatus.PENDING);
         facility.setUser(user);
         return faciRepository.save(facility);
+    }
+
+    @Override
+    public List<Facility> getFacilitiesByUser(User user) {
+        return faciRepository.findByUser_Id(user.getId());
     }
 }

@@ -19,55 +19,6 @@
       <span>New Facility</span>
     </button>
   </div>
-  <!-- Stats Grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
-    <div class="stat-card-gradient p-7 rounded-3xl border border-white premium-card-shadow flex flex-col group hover:border-primary/20 transition-all">
-      <div class="flex items-center justify-between mb-5">
-        <div class="w-12 h-12 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-          <span class="material-symbols-outlined">apartment</span>
-        </div>
-        <div class="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-lg text-xs font-bold">
-          <span class="material-symbols-outlined text-xs">trending_up</span> 12%
-        </div>
-      </div>
-      <p class="text-on-surface-variant text-[11px] font-bold uppercase tracking-widest mb-1">Total Clubs</p>
-      <h4 class="font-headline-md text-3xl font-extrabold text-on-surface">08</h4>
-    </div>
-    <div class="stat-card-gradient p-7 rounded-3xl border border-white premium-card-shadow flex flex-col group hover:border-secondary/20 transition-all">
-      <div class="flex items-center justify-between mb-5">
-        <div class="w-12 h-12 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
-          <span class="material-symbols-outlined">sports_tennis</span>
-        </div>
-        <span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-wider bg-surface-container-low px-2 py-1 rounded-lg">Stable</span>
-      </div>
-      <p class="text-on-surface-variant text-[11px] font-bold uppercase tracking-widest mb-1">Active Courts</p>
-      <h4 class="font-headline-md text-3xl font-extrabold text-on-surface">42</h4>
-    </div>
-    <div class="stat-card-gradient p-7 rounded-3xl border border-white premium-card-shadow flex flex-col group hover:border-tertiary/20 transition-all">
-      <div class="flex items-center justify-between mb-5">
-        <div class="w-12 h-12 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
-          <span class="material-symbols-outlined">confirmation_number</span>
-        </div>
-        <div class="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-lg text-xs font-bold">
-          <span class="material-symbols-outlined text-xs">trending_up</span> 24%
-        </div>
-      </div>
-      <p class="text-on-surface-variant text-[11px] font-bold uppercase tracking-widest mb-1">Today's Bookings</p>
-      <h4 class="font-headline-md text-3xl font-extrabold text-on-surface">156</h4>
-    </div>
-    <div class="stat-card-gradient p-7 rounded-3xl border border-white premium-card-shadow flex flex-col group hover:border-primary/20 transition-all">
-      <div class="flex items-center justify-between mb-5">
-        <div class="w-12 h-12 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-          <span class="material-symbols-outlined">payments</span>
-        </div>
-        <div class="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-lg text-xs font-bold">
-          <span class="material-symbols-outlined text-xs">trending_up</span> 8%
-        </div>
-      </div>
-      <p class="text-on-surface-variant text-[11px] font-bold uppercase tracking-widest mb-1">Monthly Rev</p>
-      <h4 class="font-headline-md text-3xl font-extrabold text-on-surface">$12,400</h4>
-    </div>
-  </div>
   <!-- Facility List -->
   <div class="space-y-8">
     <div class="flex items-center justify-between pb-2 border-b border-outline-variant/30">
@@ -79,129 +30,50 @@
     </div>
     <div class="grid grid-cols-1 gap-6">
       <!-- Facility Card 1 -->
-      <div class="bg-white rounded-[2rem] border border-outline-variant/50 overflow-hidden flex flex-col md:flex-row premium-card-shadow group hover:border-primary/30 transition-all duration-300">
+      <div th:each="facility : ${facilities}" class="bg-white rounded-[2rem] border border-outline-variant/50 overflow-hidden flex flex-col md:flex-row premium-card-shadow group hover:border-primary/30 transition-all duration-300">
         <div class="md:w-80 h-56 md:h-auto overflow-hidden relative">
-          <img alt="Smash Central" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdVBBU8b5stzZpes5MZY8TRzNii6MlZsZhYKStc-pLh7CQ09seTbXmEUIkEBCQecSwibGevDMY85j069OaSMOb86Ke6Pdz03z3JVwub9L2K1YRfcjt_jB0BhcnrZWLgHPg_hyMq3MB9FQZtJitdC5r3pz3JjxFSLt_yY6iNn7uXo_0x9n7_4h0DwHbByjiMZDpZnXslGXf5sZ9d9XAT7QquMJtkboxvUeOPT25X7mUcp_PBkzp2_IjbXZwtdVZFquoSNa7w9q4rng"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-            <span class="text-white text-xs font-bold flex items-center gap-2"><span class="material-symbols-outlined text-sm">photo_camera</span> 12 Photos</span>
-          </div>
-          <div class="absolute top-5 left-5">
-<span class="bg-white/95 backdrop-blur shadow-xl text-green-700 px-4 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Active
-                        </span>
+          <img alt="Smash Central" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" th:src="${facility.img_url}"/>
+          <div th:switch="${facility.status}" class="absolute top-5 left-5">
+
+    <span th:case="'ACTIVE'"
+          class="bg-white/95 backdrop-blur shadow-xl text-green-700 px-4 py-1.5 rounded-full">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        Active
+    </span>
+
+            <span th:case="'PENDING'"
+                  class="bg-white/95 backdrop-blur shadow-xl text-yellow-700 px-4 py-1.5 rounded-full">
+        Pending
+    </span>
+
+            <span th:case="'CLOSED'"
+                  class="bg-white/95 backdrop-blur shadow-xl text-red-700 px-4 py-1.5 rounded-full">
+        Closed
+    </span>
+
           </div>
         </div>
         <div class="flex-grow p-8 flex flex-col justify-between">
           <div class="flex justify-between items-start">
             <div>
-              <h5 class="font-headline-md text-2xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Smash Central Elite</h5>
+              <h5 th:text="${facility.name_facility}" class="font-headline-md text-2xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors"></h5>
               <div class="flex items-center gap-2 text-on-surface-variant">
                 <span class="material-symbols-outlined text-base">location_on</span>
-                <span class="text-sm">122 Downtown Boulevard, Metro City</span>
+                <span th:text="${facility.address}" class="text-sm"></span>
               </div>
             </div>
             <div class="text-right">
               <p class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Capacity</p>
               <p class="font-headline-md text-2xl font-extrabold text-primary">12 <span class="text-xs text-on-surface-variant font-normal">Courts</span></p>
             </div>
-          </div>
-          <div class="flex items-center justify-between mt-8 pt-6 border-t border-outline-variant/30">
-            <div class="flex items-center gap-4">
-              <div class="flex -space-x-3">
-                <img alt="Staff" class="w-10 h-10 rounded-full border-2 border-white ring-1 ring-black/5 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACzmTQE0H7inH37kECENMwiadBh_Pnb6DVgySFN_QeeGVj-nMrFnSkT3HdpdyXYjkCmLwZ_NHwecSUXBqEBM93J2cSMl29F91GMdxrchioVdi9Jz25tGG0g0WbaRaVMrblWEzv3NH67a4P0ZDATD-Ko38y7QESpI8Q6WpM_qrVhQp34Gu11WHoVsIXOJoZOtb5ilDGSOE6O6xO4oWQ6D8XpAnp-iMXbiVYw2Fq0LZ0mE3g8iwoMu2ucFqplcoqI7GfUvVF5iB6XcA"/>
-                <img alt="Staff" class="w-10 h-10 rounded-full border-2 border-white ring-1 ring-black/5 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgKs15VTzYJW0e2lkZXI_zeXv8JiQv4TFUVIRyKTtwWi8dovB7PZPSLbasMgKBTuXJGC9wkm6djeU7qt-Ijbd2AgJ1r7IMt0XPnY04VjpI8MwlxgSdDbsfQN7B8moNqVjKi4eZwDxg78qvz5ubWOySGBDyl1q3CELUfXBqJRhbEwRyFRcdg_lrR6lFj5cA4KlUu3l7gfz6lZyft9D7ypZ3tKAc42AlaPX6dixR4fADSrbKXatl74fXB3APRxGwn0naCfNKlpHQU5s"/>
-                <div class="w-10 h-10 rounded-full border-2 border-white ring-1 ring-black/5 bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+4</div>
+              <div class="flex gap-4">
+                  <button class="px-5 py-2.5 bg-surface-container-low text-on-surface font-bold rounded-xl text-sm hover:bg-surface-container transition-all flex items-center gap-2">
+                      <span class="material-symbols-outlined text-lg">settings</span> Edit
+                  </button>
+                  <button class="px-5 py-2.5 bg-secondary text-white font-bold rounded-xl text-sm shadow-md shadow-secondary/10 hover:shadow-secondary/30 hover:brightness-110 transition-all flex items-center gap-2">
+                      <span class="material-symbols-outlined text-lg">visibility</span> Details
+                  </button>
               </div>
-              <span class="text-xs text-on-surface-variant font-medium">On-site Staff</span>
-            </div>
-            <div class="flex gap-4">
-              <button class="px-5 py-2.5 bg-surface-container-low text-on-surface font-bold rounded-xl text-sm hover:bg-surface-container transition-all flex items-center gap-2">
-                <span class="material-symbols-outlined text-lg">settings</span> Edit
-              </button>
-              <button class="px-5 py-2.5 bg-secondary text-white font-bold rounded-xl text-sm shadow-md shadow-secondary/10 hover:shadow-secondary/30 hover:brightness-110 transition-all flex items-center gap-2">
-                <span class="material-symbols-outlined text-lg">visibility</span> Details
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Facility Card 2 (Pending) -->
-      <div class="bg-white rounded-[2rem] border border-outline-variant/50 overflow-hidden flex flex-col md:flex-row premium-card-shadow group hover:border-secondary/30 transition-all duration-300">
-        <div class="md:w-80 h-56 md:h-auto overflow-hidden relative">
-          <img alt="The Racket Park" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwT8uFCgMKoA81IbnmnC3P7EztkdUjXVMywZ_nT1sHBCY10J4BK7fRg-yh7dC7iJoimy8AQjnuRcM39hL7ON9ZR2fICwcJl9M9j5Z4UkQrpBlZLcw8raymZK3sJmEQDpxdFrq1VLe-_A4GMuw83CdYS8vLxU7KcJW9oIMwEqxuccti1d7GqUXe6AsitaSy01TYC0FkY5n5Qf_MXGyuFKyyAQeNn8vVdVhE-ruAKidwCb3lcYMzlK2APlZcS3kYAkVkCTpAIRurNjE"/>
-          <div class="absolute top-5 left-5">
-<span class="bg-white/95 backdrop-blur shadow-xl text-secondary px-4 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">hourglass_empty</span> Pending
-                        </span>
-          </div>
-        </div>
-        <div class="flex-grow p-8 flex flex-col justify-between">
-          <div class="flex justify-between items-start">
-            <div>
-              <h5 class="font-headline-md text-2xl font-bold text-on-surface mb-2 group-hover:text-secondary transition-colors">The Racket Park</h5>
-              <div class="flex items-center gap-2 text-on-surface-variant">
-                <span class="material-symbols-outlined text-base">location_on</span>
-                <span class="text-sm">45 Suburban Greens, West District</span>
-              </div>
-            </div>
-            <div class="text-right">
-              <p class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Capacity</p>
-              <p class="font-headline-md text-2xl font-extrabold text-secondary">06 <span class="text-xs text-on-surface-variant font-normal">Courts</span></p>
-            </div>
-          </div>
-          <div class="flex items-center justify-between mt-8 pt-6 border-t border-outline-variant/30">
-            <div class="flex items-center gap-2 px-3 py-1.5 bg-secondary-container/30 rounded-lg">
-              <span class="material-symbols-outlined text-base text-secondary">info</span>
-              <span class="text-xs font-medium text-on-secondary-container">Awaiting document verification</span>
-            </div>
-            <div class="flex gap-4">
-              <button class="px-5 py-2.5 bg-surface-container-low text-on-surface font-bold rounded-xl text-sm hover:bg-surface-container transition-all flex items-center gap-2">
-                <span class="material-symbols-outlined text-lg">settings</span> Edit
-              </button>
-              <button class="px-5 py-2.5 bg-secondary text-white font-bold rounded-xl text-sm shadow-md shadow-secondary/10 hover:shadow-secondary/30 hover:brightness-110 transition-all flex items-center gap-2">
-                <span class="material-symbols-outlined text-lg">visibility</span> Details
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Facility Card 3 (Closed) -->
-      <div class="bg-white/60 rounded-[2rem] border border-outline-variant/30 overflow-hidden flex flex-col md:flex-row premium-card-shadow grayscale opacity-75 group transition-all duration-300">
-        <div class="md:w-80 h-56 md:h-auto overflow-hidden relative">
-          <img alt="Old Town" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaK0UjL2IkqjzyUNiP1pkGbh5cZm2K_efSTeJ48zpzauzGf7R5v9GV-M8xmCSgeDx4yq3y9NXziIt35RQcoeMAsQDWbi7-gsNVv0LiDcPNk-MKZM09vlPAPM2XD0wLp9UEyvyjRzmcFYNZZ8Wmoj_SvsCd_ScA5exfER1PPpynbCrmIKekjqoWcof37gb7uc3Yvv81l_RojGRN22GCUNBJo-x8yQdQMX-aYPm2XhaY-Avwidykf60ZV9AmVy8cafaa_pW3il16jrg"/>
-          <div class="absolute top-5 left-5">
-<span class="bg-on-background/80 backdrop-blur text-white px-4 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">lock</span> Closed
-                        </span>
-          </div>
-        </div>
-        <div class="flex-grow p-8 flex flex-col justify-between">
-          <div class="flex justify-between items-start">
-            <div>
-              <h5 class="font-headline-md text-2xl font-bold text-on-surface mb-2">Old Town Arena</h5>
-              <div class="flex items-center gap-2 text-on-surface-variant">
-                <span class="material-symbols-outlined text-base">location_on</span>
-                <span class="text-sm">7 North Pier, Industrial Zone</span>
-              </div>
-            </div>
-            <div class="text-right">
-              <p class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Capacity</p>
-              <p class="font-headline-md text-2xl font-extrabold text-on-surface-variant">04</p>
-            </div>
-          </div>
-          <div class="flex items-center justify-between mt-8 pt-6 border-t border-outline-variant/30">
-            <div class="flex items-center gap-2 px-3 py-1.5 bg-error-container/20 rounded-lg">
-              <span class="material-symbols-outlined text-base text-error">engineering</span>
-              <span class="text-xs font-bold text-error">Renovations until Sept 2024</span>
-            </div>
-            <div class="flex gap-4">
-              <button class="px-5 py-2.5 bg-surface-container-low text-on-surface font-bold rounded-xl text-sm hover:bg-surface-container transition-all flex items-center gap-2">
-                <span class="material-symbols-outlined text-lg">settings</span> Edit
-              </button>
-              <button class="px-5 py-2.5 bg-secondary text-white font-bold rounded-xl text-sm hover:brightness-110 transition-all flex items-center gap-2">
-                <span class="material-symbols-outlined text-lg">visibility</span> Details
-              </button>
-            </div>
           </div>
         </div>
       </div>
