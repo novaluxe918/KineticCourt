@@ -9,5 +9,5 @@ import java.util.List;
 public interface FacilityService {
     public Facility addfacility(FacilityDTO facilityDTO,  User user);
     List<Facility> getFacilitiesByUser(User user);
-
+    List<Facility> getPending();
 }

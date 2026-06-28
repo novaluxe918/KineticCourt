@@ -33,7 +33,7 @@
       <div th:each="facility : ${facilities}" class="bg-white rounded-[2rem] border border-outline-variant/50 overflow-hidden flex flex-col md:flex-row premium-card-shadow group hover:border-primary/30 transition-all duration-300">
         <div class="md:w-80 h-56 md:h-auto overflow-hidden relative">
           <img alt="Smash Central" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" th:src="${facility.img_url}"/>
-          <div th:switch="${facility.status}" class="absolute top-5 left-5">
+          <div th:switch="${facility.status.name()}" class="absolute top-5 left-5">
 
     <span th:case="'ACTIVE'"
           class="bg-white/95 backdrop-blur shadow-xl text-green-700 px-4 py-1.5 rounded-full">

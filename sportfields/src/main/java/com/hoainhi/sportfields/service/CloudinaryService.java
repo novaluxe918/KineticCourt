@@ -1,4 +1,4 @@
-package com.hoainhi.sportfields.service.config;
+package com.hoainhi.sportfields.service;
 
 
 import com.cloudinary.Cloudinary;

@@ -34,4 +34,10 @@ public class FacilitySeviceimpl  implements FacilityService {
     public List<Facility> getFacilitiesByUser(User user) {
         return faciRepository.findByUser_Id(user.getId());
     }
+
+    @Override
+    public List<Facility> getPending() {
+
+        return faciRepository.findByStatus(FaciStatus.PENDING);
+    }
 }
