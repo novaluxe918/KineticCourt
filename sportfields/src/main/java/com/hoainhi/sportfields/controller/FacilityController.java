@@ -7,17 +7,16 @@ import com.hoainhi.sportfields.service.CloudinaryService;
 import com.hoainhi.sportfields.service.FacilityService;
 import com.hoainhi.sportfields.service.WardSevice;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@RequestMapping("facility")
 @Controller
 public class FacilityController {
     @Autowired
@@ -36,13 +35,21 @@ public class FacilityController {
         return "owner/facility/Registration";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/save")
     public String saveFacility(@ModelAttribute FacilityDTO facilityDTO, @RequestParam("image") MultipartFile image, HttpSession session){
         User user = (User) session.getAttribute("loginUser");
-        String imglUrl = cloudinaryService.uploadFile(image);
-        facilityDTO.setImg_url(imglUrl);
-        facilityService.addfacility(facilityDTO, user);
-        return "redirect:/facilities_owner";
+        if(image != null && !image.isEmpty()){
+            String imglUrl = cloudinaryService.uploadFile(image);
+            facilityDTO.setImg_url(imglUrl);
+
+        }
+        if (facilityDTO.getId_facility() == null){
+            facilityService.addfacility(facilityDTO, user);
+
+        }else {
+            facilityService.updateFacility(user, facilityDTO);
+        }
+        return "redirect:/facility/facilities_owner";
 
     }
     @GetMapping("/facilities_owner")
@@ -56,4 +63,29 @@ public class FacilityController {
         model.addAttribute("facilities", facilities);
         return "owner/facility/Facility";
     }
+
+   @GetMapping("/{id}/approve")
+    public String approve(@PathVariable Long id){
+         facilityService.approve(id);
+         return "admin/facilities/Facilities";
+    }
+
+    @GetMapping("edit/{id}")
+    public String editFacility(@PathVariable Long id, Model model){
+
+        Facility facility = facilityService.findById(id);
+
+        FacilityDTO dto = new FacilityDTO();
+
+        BeanUtils.copyProperties(facility, dto);
+
+        dto.setIsEdit(true);
+
+        model.addAttribute("facilityDTO", dto);
+        model.addAttribute("wards", wardSevice.getDaNangWards());
+
+        return "owner/facility/Registration";
+    }
+
+
 }

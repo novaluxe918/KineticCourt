@@ -13,7 +13,7 @@ import java.util.List;
 public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_facility;
+    private Long id_facility;
     @Column(columnDefinition = "varchar(100) not null")
     private String name_facility;
 

@@ -10,4 +10,10 @@ public interface FacilityService {
     public Facility addfacility(FacilityDTO facilityDTO,  User user);
     List<Facility> getFacilitiesByUser(User user);
     List<Facility> getPending();
+
+    public void approve(Long id);
+
+    Facility findById(Long id);
+
+    Facility updateFacility( User user, FacilityDTO facilityDTO);
 }

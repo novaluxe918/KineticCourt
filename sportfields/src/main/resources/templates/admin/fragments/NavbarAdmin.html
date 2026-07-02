@@ -17,11 +17,16 @@
     </button>
     <nav class="flex-1 space-y-2">
         <!-- Active State: Dashboard -->
-        <a th:href="@{/dashboard}" class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg opacity-90 transition-opacity duration-150" >
-            <span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+        <a th:href="@{/dashboard}" th:classappend="${activePage == 'dashboard'}  ?
+        ' bg-primary-container text-on-primary-container'
+        : ' text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant'"
+           class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" >
+            <span class="material-symbols-outlined" >dashboard</span>
             <span class="font-label-md text-label-md">Dashboard</span>
         </a>
-        <a th:href="@{/facilities}" class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" >
+        <a th:href="@{/facilities}" th:classappend="${activePage == 'facilities'}
+        ?' bg-primary-container text-on-primary-container'
+        : ' text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant'" class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" >
             <span class="material-symbols-outlined">location_on</span>
             <span class="font-label-md text-label-md">Facilities</span>
         </a>
@@ -29,7 +34,10 @@
             <span class="material-symbols-outlined">event_available</span>
             Bookings
         </a>
-        <a th:href="@{/usermanagement}" class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" >
+        <a th:href="@{/usermanagement}"  th:classappend="${activePage == 'users'}
+        ? ' bg-primary-container text-on-primary-container'
+        : ' text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant'"
+           class="flex items-center gap-3 px-4 py-3 text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" >
             <span class="material-symbols-outlined">group</span>
             <span class="font-label-md text-label-md">Users</span>
         </a>

@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class FacilityDTO {
+ private Long id_facility;
    private String name_facility;
     private String address;
     private String description;
@@ -12,4 +13,6 @@ public class FacilityDTO {
     private String wards;
     private String img_url;
     private FaciStatus status;
+
+    private Boolean isEdit = false;
 }

@@ -40,4 +40,41 @@ public class FacilitySeviceimpl  implements FacilityService {
 
         return faciRepository.findByStatus(FaciStatus.PENDING);
     }
+
+    @Override
+    public void approve(Long id) {
+        Facility facility = faciRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Khong tim thay"));
+        facility.setStatus(FaciStatus.APPROVED);
+        faciRepository.save(facility);
+
+    }
+
+    @Override
+    public Facility findById(Long id) {
+        return faciRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Facility updateFacility(User user, FacilityDTO facilityDTO) {
+
+        Facility facility = faciRepository.findById(facilityDTO.getId_facility())
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy"));
+
+        facility.setName_facility(facilityDTO.getName_facility());
+        facility.setAddress(facilityDTO.getAddress());
+        facility.setPhone(facilityDTO.getPhone());
+        facility.setDescription(facilityDTO.getDescription());
+        facility.setWards(facilityDTO.getWards());
+
+        facility.setUser(user);
+
+        if (facilityDTO.getImg_url() != null) {
+            facility.setImg_url(facilityDTO.getImg_url());
+        }
+
+        return faciRepository.save(facility);
+    }
+
+
 }

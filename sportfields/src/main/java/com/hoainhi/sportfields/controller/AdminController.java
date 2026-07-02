@@ -16,7 +16,7 @@ public class AdminController {
     private FacilitySeviceimpl facilitySeviceimpl;
 
     @GetMapping("/dashboard")
-    public String dashboard(HttpSession httpSession){
+    public String dashboard(HttpSession httpSession, Model model){
 
         User user = (User) httpSession.getAttribute("loginUser");
 
@@ -26,16 +26,19 @@ public class AdminController {
                 if(user.getRole() != Role.Admin){
                     return "client/Home";
                 }
+                model.addAttribute("activePage", "dashboard");
                 return "admin/dashboard/Dashboard";
     }
 
     @GetMapping("/usermanagement")
-    public String showUserManage(){
+    public String showUserManage(Model model){
+        model.addAttribute("activePage", "users");
         return "admin/usermanagement/Usermanagement";
     }
 
     @GetMapping("/facilities")
     public String showFacilities(Model model){
+        model.addAttribute("activePage", "facilities");
         model.addAttribute("facilities", facilitySeviceimpl.getPending());
         return "admin/facilities/Facilities";
     }

@@ -78,7 +78,7 @@ public class AuthController {
 
         }
         if(user.getRole() == Role.Owner){
-            return "redirect:/facilities_owner";
+            return "redirect:/facility/facilities_owner";
 
         }
         return "client/Home";
