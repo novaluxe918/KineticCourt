@@ -76,5 +76,24 @@ public class FacilitySeviceimpl  implements FacilityService {
         return faciRepository.save(facility);
     }
 
+    @Override
+    public FacilityDTO getFacilityById(Long id) {
+        Facility facility = faciRepository.findById(id).orElseThrow(() ->  new RuntimeException("Facility not found"));
+
+        FacilityDTO facilityDTO = new FacilityDTO();
+        BeanUtils.copyProperties(facility, facilityDTO);
+        return facilityDTO;
+    }
+
+    @Override
+    public List<Facility> getAll() {
+        return faciRepository.findAll();
+    }
+
+    @Override
+    public List<Facility> getApproved() {
+         return faciRepository.findByStatus(FaciStatus.APPROVED);
+    }
+
 
 }

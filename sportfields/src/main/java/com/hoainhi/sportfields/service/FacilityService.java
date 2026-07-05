@@ -16,4 +16,7 @@ public interface FacilityService {
     Facility findById(Long id);
 
     Facility updateFacility( User user, FacilityDTO facilityDTO);
+    FacilityDTO getFacilityById(Long id);
+    List<Facility> getAll();
+    List<Facility> getApproved();
 }

@@ -87,5 +87,11 @@ public class FacilityController {
         return "owner/facility/Registration";
     }
 
+    @GetMapping("/detail/{id}")
+    @ResponseBody
+    public FacilityDTO getFacilityDetail(@PathVariable Long id) {
+        return facilityService.getFacilityById(id);
+    }
+
 
 }

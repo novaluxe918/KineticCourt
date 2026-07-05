@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{owner/layout/LayoutOwner}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main layout:fragment="main" class="flex-1 md:ml-64 p-6 md:p-8">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-10">
+      <h1 class="font-headline-lg text-headline-lg text-on-background mb-2">Add New Court</h1>
+      <p class="font-body-lg text-body-lg text-secondary">Enter the details of the new court to make it available for booking.</p>
+    </div>
+    <!-- Form Card -->
+    <div class="bg-surface-container-lowest rounded-xl border border-surface-container-highest overflow-hidden shadow-sm">
+      <form method="post" th:action="@{/court/save}" th:object="${court}" class="p-8 space-y-8">
+        <!-- Grid Layout for Fields -->
+        <div class="grid grid-cols-1 gap-8 max-w-xl mx-auto">
+          <!-- Court Name -->
+          <div class="space-y-2">
+            <label class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider" for="facility-select">Select Facility</label>
+            <div class="relative">
+              <select th:field="*{facility_id}" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none appearance-none transition-all" id="facility-select">
+                <option value="" disabled="" selected="">Choose a facility...</option>
+                <option th:each="f: ${facilities}" th:value="${f.id_facility}" th:text="${f.name_facility}"></option>
+              </select>
+              <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-secondary pointer-events-none">expand_more</span>
+            </div>
+          </div><div class="space-y-2">
+          <label class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider" for="court-name">Court Name</label>
+          <input th:field="*{name_court}" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none transition-all" id="court-name" placeholder="e.g., Court 05, Pro-Match Gamma" type="text">
+        </div>
+          <!-- Hourly Rate -->
+
+          <!-- Surface Type -->
+
+          <!-- Status -->
+          <div class="space-y-2">
+            <label class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider" for="status">Initial Status</label>
+            <select th:field="*{status}" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none appearance-none transition-all" id="status">
+              <option  value="AVAILABLE">Available</option>
+              <option value="MAINTENANCE">Maintenance</option>
+              <option value="INACTIVE">Closed</option>
+            </select>
+          </div>
+          <!-- Description (Full Width) -->
+
+          <!-- Image Upload (Full Width) -->
+
+        </div>
+        <!-- Form Actions -->
+        <div class="flex items-center justify-end gap-4 pt-8 border-t border-surface-container-highest">
+          <button class="px-6 py-3 rounded-lg border border-secondary text-secondary font-headline-md text-label-md hover:bg-surface-container-high transition-all active:scale-95" type="button">
+            Cancel
+          </button>
+          <button class="px-10 py-3 rounded-lg bg-primary-container text-white font-headline-md text-label-md shadow-lg shadow-primary-container/20 hover:opacity-90 hover:shadow-xl transition-all active:scale-95" type="submit">
+            Save Court
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- Guidance Note -->
+    <div class="mt-8 p-4 bg-tertiary-fixed rounded-lg flex gap-4 items-start">
+      <span class="material-symbols-outlined text-on-tertiary-fixed">info</span>
+      <div>
+        <p class="font-label-md text-label-md text-on-tertiary-fixed mb-1">PRO TIP</p>
+        <p class="font-body-md text-body-md text-on-tertiary-fixed-variant">Courts saved with 'Available' status will immediately appear on the public booking portal. You can toggle visibility at any time from the dashboard.</p>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

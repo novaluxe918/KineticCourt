@@ -22,13 +22,16 @@ public class Schedule {
     private LocalDate date_end;
 
     private double price;
-    private LocalDate time_start;
-    private LocalDate time_end;
+
     private ScheduleStatus status;
+
     @ManyToOne
     @JoinColumn(name = "id_court", nullable = false)
     private Court court;
 
     @OneToMany(mappedBy = "schedule", fetch = FetchType.EAGER)
     private List<BookingDetails> bookingDetails;
+
+    @OneToMany(mappedBy = "schedule", fetch = FetchType.EAGER)
+    private List<ScheduleDetails> scheduleDetails;
 }
