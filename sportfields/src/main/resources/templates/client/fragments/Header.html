@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
 <header th:fragment="header" class="glass-nav fixed top-0 w-full z-50 border-b border-surface-variant/30 transition-all duration-300">
     <nav class="flex justify-between items-center px-gutter py-4 w-full max-w-container-max mx-auto">
@@ -19,7 +20,7 @@
                 <a class="text-secondary hover:text-primary-container transition-colors font-medium font-Inter" href="#">About</a>
             </div>
         </div>
-        <div class="flex items-center gap-6">
+        <div th:if="${session.loginUser == null}" class="flex items-center gap-6">
             <a th:href="@{/login}" class="hidden sm:block text-on-background font-semibold hover:text-primary-container transition-colors">Login</a>
             <a th:href="@{/register}" class="bg-primary-container text-white font-bold px-8 py-2.5 rounded-full hover:shadow-lg hover:shadow-primary-container/20 active:scale-95 transition-all">Sign Up</a>
         </div>
@@ -47,7 +48,7 @@
 
             <!-- Dropdown -->
             <div id="userDropdown"
-                 class="hidden absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-xl border overflow-hidden z-50">
+                 class=" hidden absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-xl border overflow-hidden z-50">
 
                 <a
                    class="block px-5 py-3 hover:bg-gray-100">
@@ -72,4 +73,5 @@
     </nav>
 </header>
 </body>
+
 </html>

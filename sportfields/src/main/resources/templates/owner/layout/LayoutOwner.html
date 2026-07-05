@@ -128,6 +128,16 @@
         }
     </style>
 </head>
+<script>
+    function toggleDropdown(event) {
+      event.stopPropagation();
+      document.getElementById("profileDropdown").classList.toggle("hidden");
+  }
+
+  window.addEventListener("click", function () {
+      document.getElementById("profileDropdown").classList.add("hidden");
+  });
+</script>
 <body class="bg-surface-bright text-on-background font-body-md text-body-md overflow-x-hidden">
 <!-- SIDE NAVIGATION SHELL -->
 <div th:replace="owner/fragments/Navbar:: navbar"></div>

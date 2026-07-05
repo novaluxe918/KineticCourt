@@ -21,9 +21,7 @@ public class Schedule {
 
     private LocalDate date_end;
 
-    private double price;
 
-    private ScheduleStatus status;
 
     @ManyToOne
     @JoinColumn(name = "id_court", nullable = false)

@@ -6,6 +6,8 @@ import com.hoainhi.sportfields.entity.User;
 import com.hoainhi.sportfields.service.CloudinaryService;
 import com.hoainhi.sportfields.service.FacilityService;
 import com.hoainhi.sportfields.service.WardSevice;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,13 +55,14 @@ public class FacilityController {
 
     }
     @GetMapping("/facilities_owner")
-    public String listFacilities(Model model, HttpSession session){
+    public String listFacilities(Model model, HttpSession session, HttpServletRequest request){
         User loginUser = (User) session.getAttribute("loginUser");
         if (loginUser == null) {
             return "redirect:/login";
         }
 
         List<Facility> facilities = facilityService.getFacilitiesByUser(loginUser);
+        model.addAttribute("currentUrl", request.getRequestURI());
         model.addAttribute("facilities", facilities);
         return "owner/facility/Facility";
     }

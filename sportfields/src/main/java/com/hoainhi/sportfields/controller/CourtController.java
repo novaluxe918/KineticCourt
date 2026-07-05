@@ -6,6 +6,7 @@ import com.hoainhi.sportfields.entity.Facility;
 import com.hoainhi.sportfields.enums.Status;
 import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +26,8 @@ public class CourtController {
     @Autowired
     private CourtServiceImpl courtService;
     @GetMapping("/court_owner")
-    public String showCourt(){
-
+    public String showCourt(HttpServletRequest request, Model model){
+        model.addAttribute("currentUrl", request.getRequestURI());
         return "owner/courts/Court";
     }
 

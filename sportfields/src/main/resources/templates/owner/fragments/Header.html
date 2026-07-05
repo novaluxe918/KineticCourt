@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
 <header  th:fragment="header_owner" class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40 flex items-center justify-between px-8">
   <div class="flex items-center gap-10">
@@ -29,12 +30,31 @@
       </button>
     </div>
     <div class="h-6 w-[1px] bg-outline-variant mx-1"></div>
-    <div class="flex items-center gap-3 pl-2">
-      <div class="text-right hidden sm:block">
-        <p class="text-xs font-bold text-on-surface">Marcus Chen</p>
-        <p class="text-[10px] text-on-surface-variant">Admin</p>
+    <div th:if="${session.loginUser != null}"  class="relative flex items-center gap-3 pl-2">
+      <button type="button" onclick="toggleDropdown(event)"
+              class="flex items-center gap-3 pl-2">
+        <div class="text-right hidden sm:block">
+          <p th:text="${session.loginUser.name_user}" class="text-xs font-bold text-on-surface"></p>
+          <p class="text-[10px] text-on-surface-variant">Admin</p>
+        </div>
+        <img th:src="${session.loginUser.avatar != null ? session.loginUser.avatar : 'https://cdn-media.sforum.vn/storage/app/media/ctv_seo8/ctv_phung/avatar-vo-tri-nam/avatar-vo-tri-nam-2.jpg'}" alt="Profile" class="w-9 h-9 rounded-full border-2 border-primary-container object-cover" />
+      </button>
+      <div id="profileDropdown"
+           class="hidden absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-lg border z-50">
+
+        <a
+           class="block px-4 py-3 hover:bg-gray-100">
+          My Profile
+        </a>
+
+        <hr>
+
+        <a th:href="@{/logout}"
+           class="block px-4 py-3 text-red-600 hover:bg-red-50">
+          Logout
+        </a>
+
       </div>
-      <img alt="Profile" class="w-9 h-9 rounded-full border-2 border-primary-container object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDimZ0a7rKsvaaVafrG0cjpT4pfpQQRKp_KRUOnwC7jsSX6Rmtmx2xMPwhck3hD5yneCxjsGJCUIMxFId_0OiZnDn3hyCLCcL79V-Rpd2zkv9BOJHjb4VG4bVJMknS2l4bZ3otoG_q4WRtoG8VgaGzolLjTuyircOFWdPXpkdzi2kfTL7jQyB3rgSa-TSJpmB0cz5n5G2LMe_48__3ApYasQRYJd67upWs75WYKZTXCFn1fcVR1Lod6zTN8cdnoWjFchNVCmWq090"/>
     </div>
   </div>
 </header>
