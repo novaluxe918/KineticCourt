@@ -18,9 +18,21 @@
                     <div class="flex items-center justify-between bg-surface-container-lowest border border-outline-variant rounded-xl px-5 py-3 cursor-pointer hover:border-primary transition-all premium-shadow">
                         <div class="flex items-center gap-3">
                             <span class="material-symbols-outlined text-primary">location_on</span>
-                            <h3 class="font-headline-md text-headline-md font-bold text-on-surface">Smash Central Elite</h3>
+
+                            <select id="facilitySelect" class="font-headline-md text-headline-md font-bold text-on-surface bg-transparent outline-none">
+                                <option value="">-- Chọn cơ sở --</option>
+                                <option th:each="facility : ${facilities}"
+                                        th:value="${facility.id}"
+                                        th:text="${facility.name_facility}"
+                                        th:selected="${facility.id == selectedFacility }"
+                                ></option>
+
+                            </select>
                         </div>
-                        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">expand_more</span>
+
+                        <span class="material-symbols-outlined text-on-surface-variant">
+    expand_more
+</span>
                     </div>
                 </div>
                 <p class="text-on-surface-variant body-md mt-3">Choose a facility to manage its courts and view performance insights.</p>
@@ -39,15 +51,13 @@
         <!-- Bento Grid of Courts -->
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 items-start ">
             <!-- Court Card 01 - Available -->
-            <div class="bg-surface-container-lowest border border-outline-variant/60 rounded-2xl p-6 court-card-hover flex flex-col h-full premium-shadow">
+            <div th:each="c: ${court}" class="bg-surface-container-lowest border border-outline-variant/60 rounded-2xl p-6 court-card-hover flex flex-col h-full premium-shadow">
                 <div class="flex justify-between items-start mb-3">
-                    <div class="flex flex-col">
-                        <span class="text-on-surface-variant font-label-md text-[11px] uppercase tracking-[0.15em] opacity-60 mb-1">Court 01</span>
-                        <h3 class="font-headline-md text-headline-md font-bold tracking-tight">Pro-Match Alpha</h3>
+                    <div   class="flex flex-col">
+                        <h3 th:text="${c.name_court}" class="font-headline-md text-headline-md font-bold tracking-tight"></h3>
                     </div>
-                    <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold flex items-center gap-1.5 border border-emerald-100 uppercase tracking-wider">
+                    <span th:text="${c.status}" class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold flex items-center gap-1.5 border border-emerald-100 uppercase tracking-wider">
 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
-                        Available
                     </span>
                 </div>
                 <div class="flex justify-between items-center mt-auto pt-4 border-t border-outline-variant/30">
@@ -57,74 +67,6 @@
                             <span class="material-symbols-outlined text-lg">edit_note</span>
                         </button>
                         <button class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-error-container hover:text-error transition-all flex items-center justify-center text-on-surface-variant" title="Maintenance Mode">
-                            <span class="material-symbols-outlined text-lg">build</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Court Card 02 - Available -->
-            <div class="bg-surface-container-lowest border border-outline-variant/60 rounded-2xl p-6 court-card-hover flex flex-col h-full premium-shadow">
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex flex-col">
-                        <span class="text-on-surface-variant font-label-md text-[11px] uppercase tracking-[0.15em] opacity-60 mb-1">Court 02</span>
-                        <h3 class="font-headline-md text-headline-md font-bold tracking-tight">Classic Timber 02</h3>
-                    </div>
-                    <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold flex items-center gap-1.5 border border-emerald-100 uppercase tracking-wider">
-<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
-                        Available
-                    </span>
-                </div>
-                <div class="flex justify-between items-center mt-auto pt-4 border-t border-outline-variant/30">
-
-                    <div class="flex gap-2">
-                        <button class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant hover:text-primary">
-                            <span class="material-symbols-outlined text-lg">edit_note</span>
-                        </button>
-                        <button class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-error-container hover:text-error transition-all flex items-center justify-center text-on-surface-variant">
-                            <span class="material-symbols-outlined text-lg">build</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Court Card 03 - Maintenance -->
-            <div class="bg-surface-container-low border border-outline-variant/60 rounded-2xl p-6 flex flex-col h-full opacity-90 relative overflow-hidden">
-                <div class="absolute inset-0 pointer-events-none border-2 border-dashed border-error/10 rounded-2xl"></div>
-                <div class="flex justify-between items-start relative z-10 mb-3">
-                    <div class="flex flex-col">
-                        <span class="text-on-surface-variant font-label-md text-[11px] uppercase tracking-[0.15em] opacity-60 mb-1">Court 03</span>
-                        <h3 class="font-headline-md text-headline-md font-bold tracking-tight">Standard PVC 03</h3>
-                    </div>
-                    <span class="px-3 py-1.5 rounded-full bg-error-container/40 text-error text-[11px] font-bold flex items-center gap-1.5 border border-error/20 uppercase tracking-wider">
-<span class="material-symbols-outlined text-[14px] fill-current">engineering</span>
-                        Maintenance
-                    </span>
-                </div>
-                <div class="flex justify-between items-center mt-auto pt-4 border-t border-outline-variant/30 relative z-10">
-
-                    <button class="px-5 py-2.5 bg-inverse-surface text-inverse-on-surface rounded-xl font-bold text-xs hover:brightness-110 transition-all flex items-center gap-2 shadow-lg">
-                        <span class="material-symbols-outlined text-sm">settings_backup_restore</span> Complete Job
-                    </button>
-                </div>
-            </div>
-            <!-- Court Card 04 - Available -->
-            <div class="bg-surface-container-lowest border border-outline-variant/60 rounded-2xl p-6 court-card-hover flex flex-col h-full premium-shadow">
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex flex-col">
-                        <span class="text-on-surface-variant font-label-md text-[11px] uppercase tracking-[0.15em] opacity-60 mb-1">Court 04</span>
-                        <h3 class="font-headline-md text-headline-md font-bold tracking-tight">Elite PVC Green</h3>
-                    </div>
-                    <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold flex items-center gap-1.5 border border-emerald-100 uppercase tracking-wider">
-<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
-                        Available
-                    </span>
-                </div>
-                <div class="flex justify-between items-center mt-auto pt-4 border-t border-outline-variant/30">
-
-                    <div class="flex gap-2">
-                        <button class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant hover:text-primary">
-                            <span class="material-symbols-outlined text-lg">edit_note</span>
-                        </button>
-                        <button class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-error-container hover:text-error transition-all flex items-center justify-center text-on-surface-variant">
                             <span class="material-symbols-outlined text-lg">build</span>
                         </button>
                     </div>
@@ -142,78 +84,11 @@
                 </div>
             </div>
         </div>
-        <!-- Stats Overview -->
-        <section class="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- Utilization Card -->
-            <div class="lg:col-span-8 bg-surface-container-high rounded-3xl p-10 flex flex-col md:flex-row items-center gap-10 relative overflow-hidden shadow-lg border border-white/20">
-                <div class="absolute -right-20 -top-20 opacity-[0.03]">
-                    <span class="material-symbols-outlined text-[320px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
-                </div>
-                <div class="flex-grow z-10">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mb-4">
-                        <span class="material-symbols-outlined text-sm">trending_up</span> Insight Report
-                    </div>
-                    <h4 class="font-headline-lg text-headline-lg font-bold mb-3 tracking-tight">Facility Utilization</h4>
-                    <p class="text-on-surface-variant body-md mb-8 max-w-md leading-relaxed">Your courts are operating at <strong class="text-on-surface">85% peak capacity</strong>. Demand for weekend slots has increased by 12% compared to last month.</p>
-                    <div class="flex gap-12">
-                        <div class="flex flex-col">
-                            <span class="text-5xl font-black text-primary leading-none">11/12</span>
-                            <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mt-3 opacity-60">Active Courts</span>
-                        </div>
-                        <div class="h-16 w-px bg-outline-variant/50 self-end"></div>
-                        <div class="flex flex-col">
-                            <span class="text-5xl font-black text-secondary-fixed-dim text-on-secondary-container leading-none">92%</span>
-                            <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mt-3 opacity-60">Service Score</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full md:w-72 bg-surface-container-lowest rounded-2xl p-6 shadow-2xl z-10 border border-white/40">
-                    <div class="flex items-center justify-between mb-6">
-                        <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">Weekly Peak</span>
-                        <span class="text-[10px] text-emerald-600 font-bold">+4.2%</span>
-                    </div>
-                    <div class="h-40 flex items-end gap-3 px-2">
-                        <div class="flex-1 bg-primary/20 hover:bg-primary/40 transition-all h-[40%] rounded-lg cursor-pointer" title="Mon"></div>
-                        <div class="flex-1 bg-primary/20 hover:bg-primary/40 transition-all h-[60%] rounded-lg cursor-pointer" title="Tue"></div>
-                        <div class="flex-1 bg-primary/60 hover:bg-primary/80 transition-all h-[95%] rounded-lg cursor-pointer" title="Wed"></div>
-                        <div class="flex-1 bg-primary/20 hover:bg-primary/40 transition-all h-[75%] rounded-lg cursor-pointer" title="Thu"></div>
-                        <div class="flex-1 bg-primary/20 hover:bg-primary/40 transition-all h-[55%] rounded-lg cursor-pointer" title="Fri"></div>
-                        <div class="flex-1 bg-primary/90 hover:bg-primary transition-all h-[88%] rounded-lg cursor-pointer shadow-lg" title="Sat"></div>
-                        <div class="flex-1 bg-primary/80 hover:bg-primary transition-all h-[82%] rounded-lg cursor-pointer" title="Sun"></div>
-                    </div>
-                    <div class="flex justify-between mt-4 px-1">
-                        <span class="text-[9px] font-bold text-on-surface-variant/40">M</span>
-                        <span class="text-[9px] font-bold text-on-surface-variant/40">T</span>
-                        <span class="text-[9px] font-bold text-primary font-black">W</span>
-                        <span class="text-[9px] font-bold text-on-surface-variant/40">T</span>
-                        <span class="text-[9px] font-bold text-on-surface-variant/40">F</span>
-                        <span class="text-[9px] font-bold text-primary font-black">S</span>
-                        <span class="text-[9px] font-bold text-on-surface-variant/40">S</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Revenue Card -->
-            <div class="lg:col-span-4 bg-primary text-on-primary rounded-3xl p-10 flex flex-col justify-between shadow-xl relative overflow-hidden">
-                <div class="absolute -right-4 top-0 opacity-10">
-                    <span class="material-symbols-outlined text-[180px] rotate-12">payments</span>
-                </div>
-                <div class="relative z-10">
-                    <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-8 shadow-inner border border-white/10">
-                        <span class="material-symbols-outlined text-white text-3xl">query_stats</span>
-                    </div>
-                    <h4 class="font-headline-md text-headline-md font-bold mb-4 tracking-tight leading-tight">Optimized Revenue Growth</h4>
-                    <p class="text-white/80 body-md leading-relaxed">Dynamic pricing on <strong>Premium Wood Courts</strong> has successfully increased net margins by <span class="text-white font-bold">18.4%</span> this quarter.</p>
-                </div>
-                <div class="relative z-10 pt-8">
-                    <button class="w-full py-4 bg-white text-primary font-bold rounded-2xl hover:bg-primary-fixed transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95 group">
-                        View Full Revenue Report
-                        <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                    </button>
-                    <p class="text-center text-white/50 text-[10px] mt-4 font-medium uppercase tracking-widest">Next report: Nov 1st, 2023</p>
-                </div>
-            </div>
-        </section>
+
     </div>
+
+
 </main>
 </body>
+
 </html>

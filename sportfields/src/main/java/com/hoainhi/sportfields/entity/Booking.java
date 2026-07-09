@@ -12,7 +12,8 @@ import java.util.List;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_booking;
+    @Column(name = "id_booking")
+    private long id;
 
     private double total;
     private String status;

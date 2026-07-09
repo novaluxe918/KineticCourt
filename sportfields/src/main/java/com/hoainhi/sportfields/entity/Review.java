@@ -9,7 +9,8 @@ import lombok.Data;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_review;
+    @Column(name = "id_review")
+    private long id;
 
     @Column(columnDefinition = "text")
     private String comment;

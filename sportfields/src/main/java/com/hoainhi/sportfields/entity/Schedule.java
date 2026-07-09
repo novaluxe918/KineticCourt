@@ -13,6 +13,7 @@ import java.util.List;
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_schedule")
     private long id_schedule;
 
 

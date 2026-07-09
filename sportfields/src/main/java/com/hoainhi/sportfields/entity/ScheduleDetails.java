@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class ScheduleDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_schedule")
     private Long id;
 
     private LocalDate time_start;
@@ -21,6 +22,6 @@ public class ScheduleDetails {
 
     private ScheduleStatus status;
     @ManyToOne
-    @JoinColumn(name = "id_schedule", nullable = false)
+    @JoinColumn(name = "id_scheduleDetail", nullable = false)
     private Schedule schedule;
 }

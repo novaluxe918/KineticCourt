@@ -3,31 +3,70 @@ package com.hoainhi.sportfields.controller;
 import com.hoainhi.sportfields.dto.CourtDTO;
 import com.hoainhi.sportfields.entity.Court;
 import com.hoainhi.sportfields.entity.Facility;
+import com.hoainhi.sportfields.entity.User;
 import com.hoainhi.sportfields.enums.Status;
 import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("court")
-public class CourtController {
+ public class CourtController {
     @Autowired
     private FacilitySeviceimpl facilitySeviceimpl;
 
     @Autowired
     private CourtServiceImpl courtService;
     @GetMapping("/court_owner")
-    public String showCourt(HttpServletRequest request, Model model){
+    public String showCourt(
+            HttpServletRequest request,
+            Model model,
+            @RequestParam(required = false) Long facilityId,
+            HttpSession session) {
+
+        // 1. Lấy user đang login
+        User user = (User) session.getAttribute("loginUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        // 2. Load danh sách facility của owner
+        List<Facility> facilities =
+                facilitySeviceimpl.getFacilityByOwner(user.getId());
+
+
+        List<Court> courts;
+
+        if (facilityId == null) {
+            // chưa chọn facility → lấy tất cả court của owner
+            courts = courtService.getCourtByOwner(user.getId());
+        } else {
+
+            courts = courtService.getCourtByFacility(facilityId);
+        }
+
+
+        if (courts == null) {
+            courts = new ArrayList<>();
+        }
+
+
+        // 6. đẩy dữ liệu ra view
+        model.addAttribute("facilities", facilities);
+        model.addAttribute("court", courts);
+        model.addAttribute("selectedFacility", facilityId);
         model.addAttribute("currentUrl", request.getRequestURI());
+
         return "owner/courts/Court";
     }
 

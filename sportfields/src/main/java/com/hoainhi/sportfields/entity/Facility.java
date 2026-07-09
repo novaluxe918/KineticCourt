@@ -13,7 +13,8 @@ import java.util.List;
 public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_facility;
+    @Column(name = "id_facility")
+    private Long id;
     @Column(columnDefinition = "varchar(100) not null")
     private String name_facility;
 
@@ -39,7 +40,7 @@ public class Facility {
     @JoinColumn(name = "owner_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "facility", fetch = FetchType.LAZY)
     private List<Court> court;
 
     @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER)

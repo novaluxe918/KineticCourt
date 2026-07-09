@@ -95,5 +95,11 @@ public class FacilitySeviceimpl  implements FacilityService {
          return faciRepository.findByStatus(FaciStatus.APPROVED);
     }
 
+    @Override
+    public List<Facility> getFacilityByOwner(Long userId) {
+        return faciRepository.findByUser_IdAndStatus(userId, FaciStatus.APPROVED);
+    }
+
+
 
 }

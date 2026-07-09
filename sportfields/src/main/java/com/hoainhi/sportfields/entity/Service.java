@@ -11,7 +11,8 @@ import java.util.List;
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_service;
+    @Column(name = "id_service")
+    private long id;
 
     @Column(columnDefinition = "varchar(100) not null")
     private String title;

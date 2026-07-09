@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface FaciRepository extends JpaRepository<Facility, Long> {
     List<Facility> findByUser_Id(Long userId);
     List<Facility> findByStatus(FaciStatus status);
+    List<Facility> findByUser_IdAndStatus(Long userId, FaciStatus status);
+
 }

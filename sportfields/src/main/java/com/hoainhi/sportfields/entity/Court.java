@@ -12,7 +12,8 @@ import java.util.List;
 public class Court {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_court;
+    @Column(name = "id_court")
+    private long id;
 
     @Column(columnDefinition = "varchar(100) not null")
     private String name_court;

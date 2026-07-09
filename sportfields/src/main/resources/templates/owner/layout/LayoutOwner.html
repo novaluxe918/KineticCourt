@@ -166,5 +166,17 @@
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
         });
     });
+
+
+    document.getElementById("facilitySelect").addEventListener("change", function () {
+        const facilityId = this.value;
+
+        if (facilityId) {
+            window.location.href = "/court/court_owner?facilityId=" + facilityId;
+        } else {
+            window.location.href = "/court/court_owner";
+        }
+    });
 </script>
+
 </body></html>

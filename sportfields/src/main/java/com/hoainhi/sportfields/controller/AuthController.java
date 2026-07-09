@@ -74,7 +74,7 @@ public class AuthController {
         }
         session.setAttribute("loginUser", user);
         if(user.getRole() == Role.Admin){
-            return "admin/dashboard/Dashboard";
+            return "redirect:/dashboard";
 
         }
         if(user.getRole() == Role.Owner){

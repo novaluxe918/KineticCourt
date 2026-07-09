@@ -19,4 +19,6 @@ public interface FacilityService {
     FacilityDTO getFacilityById(Long id);
     List<Facility> getAll();
     List<Facility> getApproved();
+
+    List<Facility> getFacilityByOwner(Long userId);
 }

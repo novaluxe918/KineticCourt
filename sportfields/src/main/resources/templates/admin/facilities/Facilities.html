@@ -71,7 +71,7 @@
                                           Pending
                                     </span>
 
-                            <span th:if="${facility.status.name() == ' APPROVED'}"
+                            <span th:if="${facility.status.name() == 'APPROVED'}"
                                   class="bg-green-100 text-green-700 rounded-full px-3 py-1">
     Active
 </span>
@@ -84,7 +84,7 @@
                         <td class="px-6 py-5 text-right space-x-2">
                             <button class="p-2 text-secondary hover:bg-surface-container-high rounded-lg transition-all">
                                 <span class="material-symbols-outlined">visibility</span></button>
-                            <a th:href="@{/facility/{id}/approve(id=${facility.id_facility})}"
+                            <a th:href="@{/facility/{id}/approve(id=${facility.id})}"
                                class="bg-green-500 text-white px-3 py-1 rounded">
                                 <span class="material-symbols-outlined">check_circle</span></a>
                             <button class="p-2 text-error hover:bg-error-container rounded-lg transition-all">
