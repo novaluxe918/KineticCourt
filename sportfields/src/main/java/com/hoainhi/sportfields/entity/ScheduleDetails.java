@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -15,8 +16,8 @@ public class ScheduleDetails {
     @Column(name = "id_schedule")
     private Long id;
 
-    private LocalDate time_start;
-    private LocalDate time_end;
+    private LocalTime time_start;
+    private LocalTime time_end;
 
     private double price;
 

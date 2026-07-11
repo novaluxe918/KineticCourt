@@ -30,7 +30,10 @@
         <span class="material-symbols-outlined group-hover:text-primary">sports_tennis</span>
         <span class="font-label-md">Courts</span>
       </a>
-      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all group" href="#">
+      <a th:href="@{/schedule/schedule_owner}"
+         th:classappend="${currentUrl == '/schedule/schedule_owner'} ?
+   ' bg-primary-fixed text-on-primary-fixed-variant font-bold shadow-sm' : ''"
+         class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all group">
         <span class="material-symbols-outlined group-hover:text-primary">calendar_month</span>
         <span class="font-label-md">Schedule</span>
       </a>

@@ -21,4 +21,6 @@ public interface FacilityService {
     List<Facility> getApproved();
 
     List<Facility> getFacilityByOwner(Long userId);
+
+    public void deleteFaci(Long id);
 }

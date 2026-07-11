@@ -44,5 +44,15 @@ public class CourtServiceImpl implements CourtService {
         );
     }
 
+    @Override
+    public void delteteCourt(Long id) {
+        if(!courtRepository.existsById(id)){
+            throw new RuntimeException("ko tim thay");
+        }
+
+        courtRepository.deleteById(id);
+
+    }
+
 
 }

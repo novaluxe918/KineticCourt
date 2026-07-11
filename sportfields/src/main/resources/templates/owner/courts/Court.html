@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:hover="http://www.w3.org/1999/xhtml"
       layout:decorate="~{owner/layout/LayoutOwner}" lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,29 +13,68 @@
         <!-- Facility Selection Header -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
             <div class="flex-1">
-                <label class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider opacity-60 mb-2 block">Select Facility</label>
-                <div class="relative group max-w-md">
-                    <div class="flex items-center justify-between bg-surface-container-lowest border border-outline-variant rounded-xl px-5 py-3 cursor-pointer hover:border-primary transition-all premium-shadow">
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-primary">location_on</span>
 
-                            <select id="facilitySelect" class="font-headline-md text-headline-md font-bold text-on-surface bg-transparent outline-none">
-                                <option value="">-- Chọn cơ sở --</option>
+                <label class="text-on-surface-variant font-label-md uppercase tracking-wider opacity-60 mb-2 block">
+                    Select Facility
+                </label>
+
+                <div class="relative max-w-md">
+
+                    <div class="flex items-center gap-3
+                    bg-white
+                    border border-outline-variant
+                    rounded-xl
+                    px-5 py-3
+                    hover:border-primary
+                    transition-all">
+
+            <span class="material-symbols-outlined text-primary text-2xl">
+                location_on
+            </span>
+
+
+                        <div class="relative flex-1">
+
+                            <select id="facilitySelect"
+                                    class="appearance-none w-full
+                               cursor-pointer
+                               font-bold text-base
+                               text-on-surface
+                               bg-transparent
+                               outline-none
+                               pr-8">
+
+
+                                <option value="">
+                                    -- Chọn cơ sở --
+                                </option>
+
+
                                 <option th:each="facility : ${facilities}"
                                         th:value="${facility.id}"
                                         th:text="${facility.name_facility}"
-                                        th:selected="${facility.id == selectedFacility }"
-                                ></option>
+                                        th:selected="${facility.id == selectedFacility}">
+                                </option>
+
 
                             </select>
+
+
+
+
+
                         </div>
 
-                        <span class="material-symbols-outlined text-on-surface-variant">
-    expand_more
-</span>
                     </div>
+
+
                 </div>
-                <p class="text-on-surface-variant body-md mt-3">Choose a facility to manage its courts and view performance insights.</p>
+
+
+                <p class="text-on-surface-variant body-md mt-3">
+                    Choose a facility to manage its courts and view performance insights.
+                </p>
+
             </div>
             <div class="flex items-center gap-3 bg-surface-container-lowest p-1.5 rounded-xl border border-outline-variant premium-shadow">
                 <span class="text-xs font-bold px-3 text-on-surface-variant uppercase tracking-tighter">Filter by</span>
@@ -63,12 +102,24 @@
                 <div class="flex justify-between items-center mt-auto pt-4 border-t border-outline-variant/30">
 
                     <div class="flex gap-2">
-                        <button class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant hover:text-primary" title="Edit Rate">
+                        <a class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant hover:text-primary" title="Edit Rate">
                             <span class="material-symbols-outlined text-lg">edit_note</span>
-                        </button>
-                        <button class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-error-container hover:text-error transition-all flex items-center justify-center text-on-surface-variant" title="Maintenance Mode">
+                        </a>
+                        <a class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-error-container hover:text-error transition-all flex items-center justify-center text-on-surface-variant" title="Maintenance Mode">
                             <span class="material-symbols-outlined text-lg">build</span>
-                        </button>
+                        </a>
+
+                        <a th:href="@{/court/delete/{id}(id=${c.id})}"
+                           class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant hover:text-primary"
+                           title="Delete">
+
+    <span class="material-symbols-outlined">
+        delete
+    </span>
+
+                        </a>
+                            <span class="material-symbols-outlined text-lg">delete</span>
+                        </a>
                     </div>
                 </div>
             </div>

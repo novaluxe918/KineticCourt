@@ -100,6 +100,13 @@ public class FacilitySeviceimpl  implements FacilityService {
         return faciRepository.findByUser_IdAndStatus(userId, FaciStatus.APPROVED);
     }
 
+    @Override
+    public void deleteFaci(Long id) {
+        if(!faciRepository.existsById(id)){
+            throw new RuntimeException("Ko tim thay");
+        }
+        faciRepository.deleteById(id);
+    }
 
 
 }

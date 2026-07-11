@@ -16,12 +16,7 @@ public class Schedule {
     @Column(name = "id_schedule")
     private long id_schedule;
 
-
-
-    private LocalDate date_start;
-
-    private LocalDate date_end;
-
+    private LocalDate schedule_date;
 
 
     @ManyToOne

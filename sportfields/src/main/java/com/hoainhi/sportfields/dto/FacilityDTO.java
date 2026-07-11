@@ -3,6 +3,9 @@ package com.hoainhi.sportfields.dto;
 import com.hoainhi.sportfields.enums.FaciStatus;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Data
 public class FacilityDTO {
  private Long id_facility;
@@ -13,6 +16,7 @@ public class FacilityDTO {
     private String wards;
     private String img_url;
     private FaciStatus status;
-
+    private LocalTime open_time;
+    private LocalTime close_time;
     private Boolean isEdit = false;
 }

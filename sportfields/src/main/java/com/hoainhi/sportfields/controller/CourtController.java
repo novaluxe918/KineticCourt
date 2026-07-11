@@ -85,4 +85,10 @@ import java.util.List;
         return "owner/courts/AddCourt";
 
     }
+
+    @GetMapping("delete/{id}")
+    public String deleteCourt(Long id){
+        courtService.delteteCourt(id);
+        return "redirect:/court/court_owner";
+    }
 }

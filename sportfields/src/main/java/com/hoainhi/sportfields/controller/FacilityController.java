@@ -96,5 +96,9 @@ public class FacilityController {
         return facilityService.getFacilityById(id);
     }
 
-
+    @GetMapping("delete/{id}")
+    public String deleteFaci(@PathVariable Long id){
+        facilityService.deleteFaci(id);
+        return "redirect:/facility/facilities_owner";
+    }
 }

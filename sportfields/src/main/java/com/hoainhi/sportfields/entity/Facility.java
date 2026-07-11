@@ -5,6 +5,8 @@ import com.hoainhi.sportfields.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -35,6 +37,10 @@ public class Facility {
     private FaciStatus status;
 
     private String img_url;
+
+    private LocalTime open_time;
+
+    private LocalTime close_time;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)

@@ -11,4 +11,6 @@ public interface CourtService {
     Court addCourt(CourtDTO courtDTO);
     List<Court> getCourtByFacility(Long facilityId);
     List<Court> getCourtByOwner(Long ownerId);
+
+    public void delteteCourt(Long id);
 }
