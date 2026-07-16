@@ -10,7 +10,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_review")
-    private long id;
+    private Long id;
 
     @Column(columnDefinition = "text")
     private String comment;

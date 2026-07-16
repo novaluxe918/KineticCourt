@@ -13,4 +13,6 @@ public interface CourtService {
     List<Court> getCourtByOwner(Long ownerId);
 
     public void delteteCourt(Long id);
+
+    List<Court> getAllCourt();
 }

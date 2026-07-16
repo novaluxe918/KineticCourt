@@ -14,10 +14,11 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_schedule")
-    private long id_schedule;
+    private Long id_schedule;
 
-    private LocalDate schedule_date;
+    private LocalDate date_start;
 
+    private LocalDate date_end;
 
     @ManyToOne
     @JoinColumn(name = "id_court", nullable = false)

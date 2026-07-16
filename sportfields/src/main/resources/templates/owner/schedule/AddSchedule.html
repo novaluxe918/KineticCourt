@@ -1,10 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{owner/layout/LayoutOwner}" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<main layout:fragment="main" class="ml-64  mt-16 p-10 min-h-[calc(100vh-4rem)] flex-1 p-margin-desktop bg-background">
+    <div class="max-w-container-max mx-auto">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <div class="flex items-center gap-2 text-secondary mb-2">
+                <span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+                <a class="font-label-md text-label-md hover:text-primary" href="#">Quay lại danh sách</a>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Tạo lịch sân mới</h2>
+            <p class="font-body-md text-body-md text-secondary max-w-2xl">Thiết lập khung giờ hoạt động và giá thuê linh hoạt cho các sân trong cơ sở của bạn.</p>
+        </div>
+        <form th:object="${schedules}" method="post" th:action="@{/schedules/add}" class="grid grid-cols-12 gap-gutter" id="schedule-form">
+            <!-- Left Column: Core Setup -->
+            <div class="col-span-12 lg:col-span-8 space-y-gutter">
+                <!-- Facility & Court Selection Card -->
+                <div class="bg-white border border-outline-variant rounded-xl p-6 custom-shadow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Thông tin cơ sở &amp; Sân</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="block font-label-md text-label-md text-secondary">Chọn cơ sở</label>
+                            <select id="facility" class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none">
+                                <option value="">-- Chọn cơ sở --</option>
+                                <option  th:each="f : ${facilities}"
+                                         th:value="${f.id}"
+                                         th:text="${f.name_facility}"></option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+
+                            <label class="block font-label-md text-label-md text-secondary">
+                                Chọn sân áp dụng
+                            </label>
+
+
+                            <select id="court"
+                                    th:field="*{id_court}"
+                                    class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg">
+
+
+                                <option value="">
+                                    -- Chọn sân --
+                                </option>
+
+
+                                <option th:each="c : ${courts}"
+                                        th:value="${c.id}"
+                                        th:data-facility="${c.facility.id}"
+                                        th:text="${c.name_court}">
+                                </option>
+
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Time Slots Card -->
+                <div class="bg-white border border-outline-variant rounded-xl p-6 custom-shadow">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary" data-icon="schedule">schedule</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Khung giờ &amp; Đơn giá</h3>
+                        </div>
+                        <button  class="flex items-center gap-2 text-primary font-label-md text-label-md hover:underline decoration-2 underline-offset-4" onclick="addTimeSlot()" type="button">
+                            <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                            Thêm khung giờ
+                        </button>
+                    </div>
+                    <div class="space-y-4" id="time-slots-container">
+                        <!-- Slot Row 1 -->
+                        <div class="time-slot grid grid-cols-12 gap-4 items-end p-4 bg-surface-container-lowest border border-outline-variant rounded-lg transition-all hover:border-primary-container/50">
+                            <div class="col-span-4 space-y-2">
+                                <label class="block font-label-md text-label-md text-secondary">Giờ bắt đầu</label>
+                                <div class="relative">
+                                    <input name="scheduleDetails[0].time_start" class="w-full p-3 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="time" />
+                                </div>
+                            </div>
+                            <div class="col-span-4 space-y-2">
+                                <label class="block font-label-md text-label-md text-secondary">Giờ kết thúc</label>
+                                <div class="relative">
+                                    <input name="scheduleDetails[0].time_end" class="w-full p-3 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="time" />
+                                </div>
+                            </div>
+                            <div class="col-span-3 space-y-2">
+                                <label class="block font-label-md text-label-md text-secondary">Đơn giá (1h)</label>
+                                <div class="relative">
+                                    <input name="scheduleDetails[0].price" class="w-full p-3 pr-12 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none text-right" type="number" />
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-secondary text-xs font-bold">VND</span>
+                                </div>
+                            </div>
+                            <div class="col-span-1 flex justify-center">
+                                <button class="delete-slot p-2 text-error hover:bg-error/10 rounded-lg transition-colors" type="button">
+                                    <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-primary-container/5 rounded-lg border border-primary-container/20 border-dashed flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary-container" data-icon="info">info</span>
+                        <p class="text-sm text-on-surface-variant">Lưu ý: Các khung giờ không được trùng lặp. Hệ thống sẽ tự động thông báo nếu có xung đột.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Timeline & Settings -->
+            <div class="col-span-12 lg:col-span-4 space-y-gutter">
+                <!-- Date Selection Card -->
+                <div class="bg-white border border-outline-variant rounded-xl p-6 custom-shadow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Thời gian áp dụng</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="space-y-2">
+                            <label class="block font-label-md text-label-md text-secondary">Từ ngày</label>
+                            <input class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="date" value="2024-05-20"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block font-label-md text-label-md text-secondary">Đến ngày</label>
+                            <input class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="date" value="2024-12-31"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Summary Card -->
+                <div class="bg-inverse-surface text-white rounded-xl p-6 shadow-lg overflow-hidden relative">
+                    <!-- Background Accent -->
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary opacity-20 rounded-full blur-3xl"></div>
+                    <h4 class="font-headline-md text-headline-md mb-4 relative z-10">Tổng quan thiết lập</h4>
+                    <ul class="space-y-4 relative z-10 opacity-90 font-body-md text-sm">
+                        <li class="flex justify-between">
+                            <span>Cơ sở:</span>
+                            <span class="font-semibold">Quận 7</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Số sân áp dụng:</span>
+                            <span class="font-semibold">02 sân</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Số khung giờ:</span>
+                            <span class="font-semibold">02 khung</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Giá trung bình:</span>
+                            <span class="font-semibold text-primary-fixed-dim">70.000 VND</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-6 border-t border-white/10 space-y-3 relative z-10">
+                        <button class="w-full bg-primary-container hover:bg-[#ff8533] text-white py-4 rounded-xl font-headline-md text-headline-md font-bold transition-all shadow-lg active:scale-[0.98]" type="submit">
+                            Tạo lịch ngay
+                        </button>
+                        <button class="w-full py-3 text-white/70 hover:text-white font-label-md text-label-md transition-colors" type="button">
+                            Hủy thiết lập
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
 
 </body>
 </html>

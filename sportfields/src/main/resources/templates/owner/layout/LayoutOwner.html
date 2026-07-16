@@ -185,16 +185,10 @@
         });
     });
 
-
-    document.getElementById("facilitySelect").addEventListener("change", function () {
-        const facilityId = this.value;
-
-        if (facilityId) {
-            window.location.href = "/court/court_owner?facilityId=" + facilityId;
-        } else {
-            window.location.href = "/court/court_owner";
-        }
-    });
 </script>
+
+<script th:src="@{/js/court.js}"></script>
+<script th:src="@{/js/facility-filter.js}"></script>
+<script th:src="@{/js/time_slot.js}"></script>
 
 </body></html>

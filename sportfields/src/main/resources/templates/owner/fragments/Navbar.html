@@ -37,7 +37,10 @@
         <span class="material-symbols-outlined group-hover:text-primary">calendar_month</span>
         <span class="font-label-md">Schedule</span>
       </a>
-      <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all group" href="#">
+      <a th:href="@{/service/service_home}"
+         th:classappend="${currentUrl == '/service/service_home'} ?
+   ' bg-primary-fixed text-on-primary-fixed-variant font-bold shadow-sm' : ''"
+         class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-xl transition-all group">
         <span class="material-symbols-outlined group-hover:text-primary">inventory_2</span>
         <span class="font-label-md">Services</span>
       </a>

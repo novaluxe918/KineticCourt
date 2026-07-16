@@ -20,5 +20,5 @@ public class BookingService {
 
     @ManyToOne
     @JoinColumn(name = "id_service", nullable = false)
-    private Service service;
+    private Services service;
 }

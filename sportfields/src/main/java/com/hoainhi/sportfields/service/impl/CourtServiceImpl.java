@@ -54,5 +54,10 @@ public class CourtServiceImpl implements CourtService {
 
     }
 
+    @Override
+    public List<Court> getAllCourt() {
+        return courtRepository.findAll();
+    }
+
 
 }

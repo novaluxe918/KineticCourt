@@ -87,8 +87,14 @@ import java.util.List;
     }
 
     @GetMapping("delete/{id}")
-    public String deleteCourt(Long id){
+    public String deleteCourt( @PathVariable Long id){
         courtService.delteteCourt(id);
         return "redirect:/court/court_owner";
+    }
+
+    @GetMapping("/courts/{facilityId}")
+    @ResponseBody
+    public List<Court> getCourts(@PathVariable Long facilityId){
+        return courtService.getCourtByFacility(facilityId);
     }
 }

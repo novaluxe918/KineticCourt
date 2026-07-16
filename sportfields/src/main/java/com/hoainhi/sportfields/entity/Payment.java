@@ -12,7 +12,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_payment")
-    private long id;
+    private Long id;
     private String payment_method;
     private LocalDate payment_date;
     private String status;

@@ -1,11 +1,9 @@
 package com.hoainhi.sportfields.entity;
 
 import com.hoainhi.sportfields.enums.FaciStatus;
-import com.hoainhi.sportfields.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class Facility {
     private List<Court> court;
 
     @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER)
-    private List<Service> service;
+    private List<Services> service;
 
     @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER)
     private List<Review> review;
