@@ -19,8 +19,9 @@ public class ScheduleDetails {
     private LocalTime time_start;
     private LocalTime time_end;
 
-    private double price;
+    private Double price;
 
+    @Enumerated(EnumType.STRING)
     private ScheduleStatus status;
     @ManyToOne
     @JoinColumn(name = "id_schedule", nullable = false)

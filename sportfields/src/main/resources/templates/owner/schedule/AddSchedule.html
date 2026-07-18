@@ -17,7 +17,7 @@
             <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Tạo lịch sân mới</h2>
             <p class="font-body-md text-body-md text-secondary max-w-2xl">Thiết lập khung giờ hoạt động và giá thuê linh hoạt cho các sân trong cơ sở của bạn.</p>
         </div>
-        <form th:object="${schedules}" method="post" th:action="@{/schedules/add}" class="grid grid-cols-12 gap-gutter" id="schedule-form">
+        <form th:object="${schedules}" method="post" th:action="@{/schedule/save}" class="grid grid-cols-12 gap-gutter" id="schedule-form">
             <!-- Left Column: Core Setup -->
             <div class="col-span-12 lg:col-span-8 space-y-gutter">
                 <!-- Facility & Court Selection Card -->
@@ -124,11 +124,11 @@
                     <div class="space-y-4">
                         <div class="space-y-2">
                             <label class="block font-label-md text-label-md text-secondary">Từ ngày</label>
-                            <input class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="date" value="2024-05-20"/>
+                            <input th:field="*{date_start}" class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="date" />
                         </div>
                         <div class="space-y-2">
                             <label class="block font-label-md text-label-md text-secondary">Đến ngày</label>
-                            <input class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="date" value="2024-12-31"/>
+                            <input th:field="*{date_end}" class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="date" />
                         </div>
                     </div>
                 </div>

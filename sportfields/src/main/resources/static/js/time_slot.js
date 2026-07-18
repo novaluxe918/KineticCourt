@@ -24,6 +24,12 @@ function addTimeSlot(){
                                               </div>
                                           </div>
 
+                                          <div class="col-span-1 flex justify-center">
+                                                                          <button class="delete-slot p-2 text-error hover:bg-error/10 rounded-lg transition-colors" type="button">
+                                                                              <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                                                          </button>
+                                                                      </div>
+
                                       </div>`
                                        container.insertAdjacentHTML(
                                               "beforeend",
@@ -34,3 +40,22 @@ function addTimeSlot(){
                                           slotIndex++;
 
 }
+
+document.addEventListener("click", function (e) {
+
+    const deleteButton = e.target.closest(".delete-slot");
+
+    if (!deleteButton) {
+        return;
+    }
+
+    const slots = document.querySelectorAll(".time-slot");
+
+    if (slots.length === 1) {
+        alert("Phải có ít nhất một khung giờ.");
+        return;
+    }
+
+    deleteButton.closest(".time-slot").remove();
+
+});

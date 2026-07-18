@@ -6,12 +6,15 @@ import com.hoainhi.sportfields.entity.Facility;
 import com.hoainhi.sportfields.entity.User;
 import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
+import com.hoainhi.sportfields.service.impl.ScheduleServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -21,6 +24,9 @@ import java.util.List;
 public class ScheduleController {
     @Autowired
     private FacilitySeviceimpl facilitySeviceimpl;
+
+    @Autowired
+    private ScheduleServiceImpl scheduleService;
 
     @Autowired
     private CourtServiceImpl courtService;
@@ -41,5 +47,11 @@ public class ScheduleController {
         model.addAttribute("facilities", facilities);
 
         return "owner/schedule/AddSchedule";
+    }
+
+    @PostMapping("/save")
+    public String saveSchedule(@ModelAttribute("schedules") ScheduleDTO scheduleDTO){
+        scheduleService.addSchedule(scheduleDTO);
+        return "redirect:/schedule/add";
     }
 }
