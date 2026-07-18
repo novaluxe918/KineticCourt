@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.service.impl;
 
+import com.hoainhi.sportfields.dto.CalendarCourtDTO;
 import com.hoainhi.sportfields.dto.ScheduleDTO;
 import com.hoainhi.sportfields.dto.ScheduleDetailDTO;
 import com.hoainhi.sportfields.entity.Court;
@@ -15,6 +16,9 @@ import com.hoainhi.sportfields.service.ScheduleService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -42,5 +46,13 @@ public class ScheduleServiceImpl implements ScheduleService {
             scheduleDetailRepository.save(scheduleDetails);
         }
         return schedule;
+    }
+
+    @Override
+    public List<CalendarCourtDTO> getCalendar(Long ownerId) {
+        List<Court> courts = courtRepository.findByFacility_User_Id(ownerId);
+        List<CalendarCourtDTO> calendarCourtDTOS = new ArrayList<>();
+
+        return List.of();
     }
 }
