@@ -1,5 +1,7 @@
 package com.hoainhi.sportfields.controller;
 
+import com.hoainhi.sportfields.dto.CalendarCourtDTO;
+import com.hoainhi.sportfields.dto.CourtDTO;
 import com.hoainhi.sportfields.dto.ScheduleDTO;
 import com.hoainhi.sportfields.entity.Court;
 import com.hoainhi.sportfields.entity.Facility;
@@ -32,11 +34,30 @@ public class ScheduleController {
     private CourtServiceImpl courtService;
 
     @GetMapping("/schedule_owner")
-    public String showSchedule(Model model, HttpServletRequest request){
+    public String showSchedule(
+            Model model,
+            HttpServletRequest request,
+            HttpSession session){
+
+        User user = (User) session.getAttribute("loginUser");
+
+        List<Court> courts = courtService.getCourtByOwner(user.getId());
+
+        List<Facility> facilities =
+                facilitySeviceimpl.getFacilityByOwner(user.getId());
+
+
+        List<CalendarCourtDTO> calendarCourtDTOS =
+                scheduleService.getCalendar(user.getId());
+
+
+        model.addAttribute("calendar", calendarCourtDTOS);
+        model.addAttribute("courts", courts);
+        model.addAttribute("facilities", facilities);
         model.addAttribute("currentUrl", request.getRequestURI());
+
         return "owner/schedule/Schedule";
     }
-
     @GetMapping("/add")
     public String addSchedule(Model model, HttpSession session){
         User user = (User) session.getAttribute("loginUser");
@@ -54,4 +75,6 @@ public class ScheduleController {
         scheduleService.addSchedule(scheduleDTO);
         return "redirect:/schedule/add";
     }
+
+
 }

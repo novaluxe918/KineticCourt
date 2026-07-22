@@ -52,7 +52,28 @@ public class ScheduleServiceImpl implements ScheduleService {
     public List<CalendarCourtDTO> getCalendar(Long ownerId) {
         List<Court> courts = courtRepository.findByFacility_User_Id(ownerId);
         List<CalendarCourtDTO> calendarCourtDTOS = new ArrayList<>();
+         for(Court court : courts){
+             CalendarCourtDTO courtDTO = new CalendarCourtDTO();
+             courtDTO.setCourtId(court.getId());
+             courtDTO.setCourtName(court.getName_court());
+             List<ScheduleDetailDTO> scheduleDetailDTOS = new ArrayList<>();
+             for(Schedule schedule : court.getSchedules()){
+                 for(ScheduleDetails detail : schedule.getScheduleDetails()){
+                     ScheduleDetailDTO dto = new ScheduleDetailDTO();
+                     dto.setTime_start(detail.getTime_start());
+                     dto.setTime_end(detail.getTime_end());
+                     dto.setPrice(detail.getPrice());
+                     dto.setStatus(detail.getStatus());
+                     scheduleDetailDTOS.add(dto);
 
-        return List.of();
+
+                 }
+
+             }
+             courtDTO.setSlots(scheduleDetailDTOS);
+             calendarCourtDTOS.add(courtDTO);
+
+         }
+        return calendarCourtDTOS;
     }
 }
