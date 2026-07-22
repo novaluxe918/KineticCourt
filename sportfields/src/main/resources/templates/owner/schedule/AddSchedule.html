@@ -96,7 +96,7 @@
                             <div class="col-span-3 space-y-2">
                                 <label class="block font-label-md text-label-md text-secondary">Đơn giá (1h)</label>
                                 <div class="relative">
-                                    <input name="scheduleDetails[0].price" class="w-full p-3 pr-12 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none text-right" type="number" />
+                                    <input  name="scheduleDetails[0].price" class=" price-input w-full p-3 pr-12 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none text-right" type="number" />
                                     <span class="absolute right-3 top-1/2 -translate-y-1/2 text-secondary text-xs font-bold">VND</span>
                                 </div>
                             </div>
@@ -140,19 +140,19 @@
                     <ul class="space-y-4 relative z-10 opacity-90 font-body-md text-sm">
                         <li class="flex justify-between">
                             <span>Cơ sở:</span>
-                            <span class="font-semibold">Quận 7</span>
+                            <span id="summaryFacility" class="font-semibold"></span>
                         </li>
                         <li class="flex justify-between">
-                            <span>Số sân áp dụng:</span>
-                            <span class="font-semibold">02 sân</span>
+                            <span> Sân áp dụng:</span>
+                            <span id="summaryCourt" class="font-semibold"></span>
                         </li>
                         <li class="flex justify-between">
                             <span>Số khung giờ:</span>
-                            <span class="font-semibold">02 khung</span>
+                            <span id="summarySlot" class="font-semibold">1</span>
                         </li>
                         <li class="flex justify-between">
                             <span>Giá trung bình:</span>
-                            <span class="font-semibold text-primary-fixed-dim">70.000 VND</span>
+                            <span id="summaryPrice" class="font-semibold text-primary-fixed-dim"></span>
                         </li>
                     </ul>
                     <div class="mt-8 pt-6 border-t border-white/10 space-y-3 relative z-10">
@@ -168,6 +168,7 @@
         </form>
     </div>
 </main>
+
 
 </body>
 </html>
