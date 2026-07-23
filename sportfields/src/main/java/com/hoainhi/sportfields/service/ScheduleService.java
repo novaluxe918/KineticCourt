@@ -11,5 +11,6 @@ import java.util.List;
 public interface ScheduleService {
     Schedule addSchedule(ScheduleDTO scheduleDTO);
     List<CalendarCourtDTO> getCalendar(Long ownerId);
+    List<CalendarCourtDTO> getCalendarByFacility(Long facilityId);
 
 }

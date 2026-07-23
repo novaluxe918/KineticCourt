@@ -15,6 +15,7 @@ public interface CourtRepository extends JpaRepository<Court, Long> {
              Long facilityId,
              FaciStatus status
      );
+     List<Court> findByFacility_Id(Long facilityId);
      List<Court> findByFacility_User_IdAndFacility_Status(
              Long ownerId,
              FaciStatus status

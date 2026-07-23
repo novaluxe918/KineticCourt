@@ -76,4 +76,33 @@ public class ScheduleServiceImpl implements ScheduleService {
          }
         return calendarCourtDTOS;
     }
+
+    @Override
+    public List<CalendarCourtDTO> getCalendarByFacility(Long facilityId) {
+        List<Court> courts = courtRepository.findByFacility_Id(facilityId);
+        List<CalendarCourtDTO> calendarCourtDTOS = new ArrayList<>();
+        for(Court court : courts){
+            CalendarCourtDTO courtDTO = new CalendarCourtDTO();
+            courtDTO.setCourtId(court.getId());
+            courtDTO.setCourtName(court.getName_court());
+            List<ScheduleDetailDTO> scheduleDetailDTOS = new ArrayList<>();
+            for(Schedule schedule : court.getSchedules()){
+                for(ScheduleDetails detail : schedule.getScheduleDetails()){
+                    ScheduleDetailDTO dto = new ScheduleDetailDTO();
+                    dto.setTime_start(detail.getTime_start());
+                    dto.setTime_end(detail.getTime_end());
+                    dto.setPrice(detail.getPrice());
+                    dto.setStatus(detail.getStatus());
+                    scheduleDetailDTOS.add(dto);
+
+
+                }
+
+            }
+            courtDTO.setSlots(scheduleDetailDTOS);
+            calendarCourtDTOS.add(courtDTO);
+
+        }
+        return calendarCourtDTOS;
+    }
 }

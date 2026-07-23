@@ -14,11 +14,9 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,19 +43,41 @@ public class ScheduleController {
 
         List<Facility> facilities =
                 facilitySeviceimpl.getFacilityByOwner(user.getId());
+        List<String> times = new ArrayList<>();
 
+        for(int i = 5; i <= 24; i++){
 
-        List<CalendarCourtDTO> calendarCourtDTOS =
-                scheduleService.getCalendar(user.getId());
+            if(i == 24){
+                times.add("12:00 AM");
+            }
+            else if(i < 12){
+                times.add(String.format("%02d:00 AM", i));
+            }
+            else if(i == 12){
+                times.add("12:00 PM");
+            }
+            else{
+                times.add(String.format("%02d:00 PM", i - 12));
+            }
 
+        }
 
-        model.addAttribute("calendar", calendarCourtDTOS);
-        model.addAttribute("courts", courts);
+        model.addAttribute("time", times);
+
         model.addAttribute("facilities", facilities);
         model.addAttribute("currentUrl", request.getRequestURI());
 
         return "owner/schedule/Schedule";
     }
+
+    @GetMapping("/calendar/{facilityId}")
+    @ResponseBody
+    public List<CalendarCourtDTO> getCalendar(@PathVariable Long facilityId){
+
+        return scheduleService.getCalendarByFacility(facilityId);
+
+    }
+
     @GetMapping("/add")
     public String addSchedule(Model model, HttpSession session){
         User user = (User) session.getAttribute("loginUser");

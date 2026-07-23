@@ -4,7 +4,6 @@ const court = document.getElementById("court");
 const summaryFacility = document.getElementById("summaryFacility");
 const summaryCourt = document.getElementById("summaryCourt");
 
-
 // Chọn cơ sở
 facility.addEventListener("change", function () {
 
@@ -51,6 +50,7 @@ facility.addEventListener("change", function () {
 
 
 
+
 // Chọn sân
 court.addEventListener("change", function () {
 
@@ -63,3 +63,4 @@ court.addEventListener("change", function () {
     }
 
 });
+
