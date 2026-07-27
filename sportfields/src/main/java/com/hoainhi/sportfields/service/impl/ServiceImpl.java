@@ -8,7 +8,11 @@ import com.hoainhi.sportfields.repository.ServiceRepository;
 import com.hoainhi.sportfields.service.Service_sv;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ServiceImpl implements Service_sv {
@@ -19,6 +23,16 @@ public class ServiceImpl implements Service_sv {
      private ServiceRepository serviceRepository;
 
     @Override
+    public Page<Services> findPaginated(Pageable pageable) {
+        return serviceRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Services> getServiceByFacility(Long facilityId) {
+        return serviceRepository.findByFacility_Id(facilityId);
+    }
+
+    @Override
     public Services addService(ServiceDTO serviceDTO) {
         Services services = new Services();
         BeanUtils.copyProperties(serviceDTO, services);
@@ -26,4 +40,11 @@ public class ServiceImpl implements Service_sv {
         services.setFacility(facility);
         return serviceRepository.save(services) ;
     }
+
+    @Override
+    public Page<Services> findByTitleContaining(String name, Pageable pageable) {
+        return serviceRepository.findByTitleContaining(name, pageable);
+    }
+
+
 }

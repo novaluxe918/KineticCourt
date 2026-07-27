@@ -44,6 +44,13 @@ tinhavg ();
                                           slotIndex++;
 
 }
+document.addEventListener("input", function(e){
+
+    if(e.target.name && e.target.name.includes(".price")){
+        tinhavg();
+    }
+
+});
 
 document.addEventListener("click", function (e) {
 
@@ -87,21 +94,42 @@ function updateSlotIndex(){
     });
 
     slotIndex = slots.length;
+    tinhavg();
 
 }
 // tong
-function tinhavg () {
+function tinhavg() {
 
-    const priceInput = document.querySelectorAll(".price-input");
-    // gan lai
-console.log(priceInput);
-priceInput.forEach(p => {
- p.addEventListener("change", () => {
-   console.log(priceInput)
-    const summaryPrice = document.getElementById("summaryPrice");
-//    const avg = priceInput.reduce((sum, item) => sum + item.value, 0)/ priceInput.length;
-//    summaryPrice.innerText = avg;
+    let priceInput = document.querySelectorAll('.price-input');
 
- })
-})
+    let total = 0;
+    let count = 0;
+
+
+    priceInput.forEach(p => {
+
+        let price = Number(p.value);
+
+        if(price > 0){
+            total += price;
+            count++;
+        }
+
+    });
+
+
+    let avg = 0;
+
+    if(count > 0){
+        avg = total / count;
+    }
+
+
+    document.getElementById("summaryPrice").innerText =
+        avg.toLocaleString("vi-VN") + " VNĐ";
+
+
+    console.log("Tổng:", total);
+    console.log("Số lượng:", count);
+    console.log("Trung bình:", avg);
 }

@@ -101,6 +101,11 @@ public class FacilitySeviceimpl  implements FacilityService {
     }
 
     @Override
+    public List<Facility> getFacilityByStatus(Long facility) {
+        return faciRepository.findByStatus(FaciStatus.APPROVED);
+    }
+
+    @Override
     public void deleteFaci(Long id) {
         if(!faciRepository.existsById(id)){
             throw new RuntimeException("Ko tim thay");

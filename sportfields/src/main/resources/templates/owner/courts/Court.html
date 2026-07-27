@@ -36,13 +36,7 @@
                         <div class="relative flex-1">
 
                             <select id="facilitySelect"
-                                    class="appearance-none w-full
-                               cursor-pointer
-                               font-bold text-base
-                               text-on-surface
-                               bg-transparent
-                               outline-none
-                               pr-8">
+                                    >
 
 
                                 <option value="">
@@ -84,9 +78,9 @@
             </div>
         </div>
         <!-- Bento Grid of Courts -->
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 items-start ">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 items-stretch ">
             <!-- Court Card 01 - Available -->
-            <div th:each="c: ${court}" class="bg-surface-container-lowest border border-outline-variant/60 rounded-2xl p-6 court-card-hover flex flex-col h-full premium-shadow">
+            <div th:each="c: ${court}" class="bg-surface-container-lowest border border-outline-variant/60 rounded-2xl p-4 court-card-hover flex flex-col h-[220px] premium-shadow">
                 <div class="flex justify-between items-start mb-3">
                     <div   class="flex flex-col">
                         <h3 th:text="${c.name_court}" class="font-headline-md text-headline-md font-bold tracking-tight"></h3>
@@ -117,15 +111,11 @@
                 </div>
             </div>
             <!-- Add New Court Placeholder -->
-            <div class="border-2 border-dashed border-primary/20 rounded-2xl p-8 flex flex-col items-center justify-center min-h-[420px] bg-white/40 hover:bg-primary/5 hover:border-primary/40 transition-all duration-300 cursor-pointer group premium-shadow">
-                <div class="w-20 h-20 rounded-full bg-primary-fixed flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 shadow-inner">
+            <div class="border-2 border-dashed border-primary/20 rounded-2xl p-4 flex flex-col items-center justify-center h-[220px] bg-white/40 hover:bg-primary/5 hover:border-primary/40 transition-all duration-300 cursor-pointer group premium-shadow">
+                <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 shadow-inner">
                     <a th:href="@{/court/add}"><span class="material-symbols-outlined text-primary text-4xl group-hover:rotate-90 transition-transform duration-500">add_circle</span></a>
                 </div>
                 <h3 class="font-headline-md text-headline-md font-bold text-on-surface text-center">Add New Court</h3>
-                <p class="text-on-surface-variant body-md text-center max-w-[240px] mt-3 leading-relaxed opacity-80">Easily expand your facility capacity and manage bookings in real-time.</p>
-                <div class="mt-8 px-6 py-2.5 bg-primary-fixed-dim text-primary rounded-full font-bold text-sm group-hover:bg-primary group-hover:text-on-primary transition-all shadow-sm">
-                    Register Facility
-                </div>
             </div>
         </div>
 

@@ -40,7 +40,7 @@ public class ScheduleController {
         User user = (User) session.getAttribute("loginUser");
 
         List<Court> courts = courtService.getCourtByOwner(user.getId());
-
+        List<CalendarCourtDTO> calendarCourtDTOS = scheduleService.getCalendar(user.getId());
         List<Facility> facilities =
                 facilitySeviceimpl.getFacilityByOwner(user.getId());
         List<String> times = new ArrayList<>();
@@ -63,7 +63,7 @@ public class ScheduleController {
         }
 
         model.addAttribute("time", times);
-
+        model.addAttribute("calendar", calendarCourtDTOS);
         model.addAttribute("facilities", facilities);
         model.addAttribute("currentUrl", request.getRequestURI());
 

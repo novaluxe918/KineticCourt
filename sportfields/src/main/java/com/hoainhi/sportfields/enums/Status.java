@@ -4,5 +4,4 @@ public enum Status {
     AVAILABLE,
     MAINTENANCE,
     INACTIVE,
-
 }

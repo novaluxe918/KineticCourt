@@ -15,22 +15,43 @@
         <h3 class="font-headline-lg text-[2.75rem] font-black text-on-surface tracking-tight leading-none mb-3">Court Schedule</h3>
         <p class="text-on-surface-variant/70 font-medium text-lg">Real-time availability and booking management for Arena 1.</p>
       </div>
-      <div class="space-y-2">
+      <div class="relative space-y-2 w-full lg:w-[320px]">
 
-        <label>Chọn cơ sở</label>
+    <span class="absolute left-3 top-1/2 -translate-y-1/2
+                 material-symbols-outlined
+                 text-on-surface-variant text-xl pointer-events-none">
+        location_on
+    </span>
+
 
         <select id="schedule-facility"
-                class="w-full border rounded-lg p-3">
+                class="w-full h-12
+                   pl-10 pr-4
+                   rounded-xl
+                   border border-outline-variant
+                   bg-white
+                   text-on-surface
+                   font-medium
+                   appearance-none
+                   focus:outline-none
+                   focus:ring-2
+                   focus:ring-primary
+                   focus:border-primary
+                   transition-all">
 
-          <option value="">-- Chọn cơ sở --</option>
+          <option value="">
+            -- Chọn cơ sở --
+          </option>
 
-          <option
-                  th:each="facility : ${facilities}"
+          <option th:each="facility : ${facilities}"
                   th:value="${facility.id}"
-                  th:text="${facility.name_facility}">
+                  th:text="${facility.name_facility}"
+          >
           </option>
 
         </select>
+
+
 
       </div>
       <div class="flex flex-wrap items-center gap-4">
@@ -40,28 +61,8 @@
             <span class="material-symbols-outlined text-lg">add_circle</span>
             Tạo lịch sân
           </a>
-          <button class="bg-white text-on-surface-variant px-5 py-3 rounded-xl font-headline-md text-xs font-black uppercase tracking-wider border border-outline-variant/50 hover:bg-surface-container-low transition-all flex items-center gap-2">
-            <span class="material-symbols-outlined text-lg">edit_calendar</span>
-            Cập nhật
-          </button>
-          <button class="bg-slate-50 text-slate-500 px-5 py-3 rounded-xl font-headline-md text-xs font-black uppercase tracking-wider border border-slate-200 hover:bg-slate-100 transition-all flex items-center gap-2">
-            <span class="material-symbols-outlined text-lg">lock_reset</span>
-            Khóa bảo trì
-          </button>
         </div>
         <!-- DATE NAV -->
-        <div class="flex items-center gap-1 bg-white p-1.5 rounded-2xl border border-outline-variant/30 shadow-sm">
-          <button class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-surface-container rounded-xl transition-colors">
-            <span class="material-symbols-outlined">chevron_left</span>
-          </button>
-          <div class="px-6 flex flex-col items-center min-w-[180px]">
-            <span class="font-headline-md text-base font-black text-on-surface">October 24, 2023</span>
-            <span class="text-[10px] uppercase font-black text-primary tracking-[0.25em] mt-0.5">Today</span>
-          </div>
-          <button class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-surface-container rounded-xl transition-colors">
-            <span class="material-symbols-outlined">chevron_right</span>
-          </button>
-        </div>
       </div>
     </div>
     <!-- LEGEND & STATS -->
@@ -103,7 +104,7 @@
       </div>
       <!-- SCROLLABLE GRID BODY -->
       <div class="flex-1 overflow-y-auto custom-scrollbar relative">
-        <div class="schedule-grid min-h-full">
+        <div class="schedule-grid min-h-full"  style="grid-auto-rows:90px;">
           <!-- TIME LABELS (Y-AXIS) -->
           <div class="col-start-1 row-start-1 row-span-full border-r border-outline-variant/10 bg-surface-container-lowest/50">
             <div th:each="time : ${time}" class="h-[90px] flex items-center justify-center text-[12px] font-black text-on-surface-variant/40 border-b border-outline-variant/5">
@@ -112,42 +113,8 @@
 
           </div>
           <!-- SLOTS -->
-          <!-- COURT 1 -->
-          <div class="col-start-2 row-start-1 row-span-2 p-3 border-r border-b border-outline-variant/5">
-            <div class="h-full w-full rounded-2xl bg-primary shadow-xl shadow-primary/20 p-5 flex flex-col justify-between hover:scale-[1.02] hover:-translate-y-1 cursor-pointer transition-all duration-300 group" onclick="showBookingDetails('Alex Rivera', '05:00 - 07:00', 'Confirmed')">
-              <div class="flex justify-between items-start">
-                <span class="text-[10px] font-black text-primary bg-white px-2.5 py-1.5 rounded-lg uppercase tracking-widest shadow-sm">Booked</span>
-                <span class="material-symbols-outlined text-white/40 text-lg group-hover:text-white transition-colors">info</span>
-              </div>
-              <div>
-                <p class="text-base font-black text-white font-headline-md tracking-tight leading-none mb-1">Alex Rivera</p>
-                <p class="text-[11px] text-white/60 font-bold uppercase tracking-widest">Morning Practice</p>
-              </div>
-            </div>
-          </div>
-          <!-- COURT 2 -->
-          <div class="col-start-3 row-start-1 row-span-4 p-3 border-r border-b border-outline-variant/5">
-            <div class="h-full w-full rounded-2xl bg-slate-50 border-2 border-slate-200/60 border-dashed p-6 flex flex-col items-center justify-center text-center space-y-3 group transition-all">
-              <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-slate-200 transition-colors">
-                <span class="material-symbols-outlined text-2xl">construction</span>
-              </div>
-              <div class="space-y-1">
-                <p class="text-[12px] uppercase font-black text-slate-600 tracking-[0.2em] font-headline-md">Bảo trì</p>
-                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">05:00 - 09:00</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- AVAILABLE SLOTS -->
-          <div class="col-start-2 row-start-5 p-3 border-r border-b border-outline-variant/5">
-            <div class="h-full w-full rounded-2xl bg-emerald-50 border-2 border-emerald-100/50 p-5 flex flex-col justify-between hover:bg-emerald-100/30 hover:border-emerald-200 cursor-pointer transition-all group">
-              <div class="flex justify-between items-start">
-                <span class="text-[10px] font-black text-emerald-700 bg-emerald-200/50 px-2.5 py-1.5 rounded-lg uppercase tracking-widest">Free</span>
-                <span class="material-symbols-outlined text-emerald-400 text-xl opacity-0 group-hover:opacity-100 transition-opacity">add_circle</span>
-              </div>
-              <p class="text-[11px] font-black text-emerald-800/40 uppercase tracking-[0.15em] font-headline-md">Reserve Space</p>
-            </div>
-          </div>
+            <!-- SLOTS -->
+            <div id="scheduleBody" class="contents"></div>
 
           <!-- BACKGROUND LINES (FOR EMPTY SPACE) -->
           <div class="col-start-2 row-start-6 row-span-12 border-r border-outline-variant/5 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:100%_90px]"></div>

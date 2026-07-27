@@ -220,7 +220,7 @@
                         <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
                         <input th:field="*{full_name}" class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md custom-input"  placeholder="Nguyễn Văn A" type="text"/>
                     </div>
-                    <div class="text-danger mt-1"
+                    <div class="text-red-300 mt-1"
                          th:if="${#fields.hasErrors('full_name')}"
                          th:errors="*{full_name}">
                     </div>

@@ -1,6 +1,9 @@
 package com.hoainhi.sportfields.controller;
 
+import ch.qos.logback.core.util.StringUtil;
 import com.hoainhi.sportfields.dto.ServiceDTO;
+import com.hoainhi.sportfields.entity.Facility;
+import com.hoainhi.sportfields.entity.Services;
 import com.hoainhi.sportfields.entity.User;
 
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
@@ -8,12 +11,17 @@ import com.hoainhi.sportfields.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 
 @Controller
 @RequestMapping("service")
@@ -25,7 +33,33 @@ public class ServiceController {
     private ServiceImpl service;
 
     @GetMapping("/service_home")
-    public String showService(Model model, HttpServletRequest request){
+    public String showService(Model model, HttpServletRequest request, HttpSession session,
+                              @RequestParam (required = false) Long facilityId,
+                              @RequestParam(name = "name", required = false) String name,
+                              @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                              @RequestParam(value = "size", required = false, defaultValue = "5") int size){
+
+        User user = (User) session.getAttribute("loginUser");
+
+        List<Facility> facilities =
+                facilitySeviceimpl.getFacilityByOwner(user.getId());
+        Pageable pageable = (Pageable) PageRequest.of(page, size);
+        Page<Services> servicesPage;
+
+        if(StringUtils.hasText(name)){
+            servicesPage = service.findByTitleContaining(name, pageable);
+        }else {
+            servicesPage = service.findPaginated(pageable);
+
+        }
+
+        if(facilityId !=null){
+            model.addAttribute("services", service.getServiceByFacility(facilityId));
+
+        }
+        model.addAttribute("selectFacility", facilityId);
+        model.addAttribute("facilities", facilities);
+        model.addAttribute("page", servicesPage);
         model.addAttribute("currentUrl", request.getRequestURI());
         return "owner/services/Service";
     }

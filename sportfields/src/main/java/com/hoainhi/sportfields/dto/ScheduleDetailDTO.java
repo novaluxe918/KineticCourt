@@ -12,4 +12,6 @@ public class ScheduleDetailDTO {
     private LocalTime time_end;
     private Double price;
     private ScheduleStatus status;
+    private Integer rowStart;
+    private Integer rowSpan;
 }

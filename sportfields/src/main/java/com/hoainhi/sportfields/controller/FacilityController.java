@@ -1,6 +1,7 @@
 package com.hoainhi.sportfields.controller;
 
 import com.hoainhi.sportfields.dto.FacilityDTO;
+import com.hoainhi.sportfields.dto.WardsDTO;
 import com.hoainhi.sportfields.entity.Facility;
 import com.hoainhi.sportfields.entity.User;
 import com.hoainhi.sportfields.service.CloudinaryService;
@@ -9,10 +10,12 @@ import com.hoainhi.sportfields.service.WardSevice;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,29 +34,50 @@ public class FacilityController {
     private WardSevice wardSevice;
 
     @GetMapping("/add")
-    public String addFacility(Model model){
+    public String addFacility( Model model){
         model.addAttribute("facilityDTO" , new FacilityDTO());
         model.addAttribute("wards", wardSevice.getDaNangWards());
         return "owner/facility/Registration";
     }
 
+
     @PostMapping("/save")
-    public String saveFacility(@ModelAttribute FacilityDTO facilityDTO, @RequestParam("image") MultipartFile image, HttpSession session){
-        User user = (User) session.getAttribute("loginUser");
-        if(image != null && !image.isEmpty()){
-            String imglUrl = cloudinaryService.uploadFile(image);
-            facilityDTO.setImg_url(imglUrl);
+    public String saveFacility(
+            @Valid @ModelAttribute("facilityDTO") FacilityDTO facilityDTO,
+            BindingResult result,
+            @RequestParam("image") MultipartFile image,
+            HttpSession session,
+            Model model) {
 
+
+        if (result.hasErrors()) {
+            List<WardsDTO> wards = wardSevice.getDaNangWards();
+            model.addAttribute("wards", wards);
+            return "owner/facility/Registration";
         }
-        if (facilityDTO.getId_facility() == null){
-            facilityService.addfacility(facilityDTO, user);
 
-        }else {
+        User user = (User) session.getAttribute("loginUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        // Upload ảnh nếu có
+        if (image != null && !image.isEmpty()) {
+            String imgUrl = cloudinaryService.uploadFile(image);
+            facilityDTO.setImg_url(imgUrl);
+        }
+
+
+        if (facilityDTO.getId_facility() == null) {
+            facilityService.addfacility(facilityDTO, user);
+        } else {
             facilityService.updateFacility(user, facilityDTO);
         }
-        return "redirect:/facility/facilities_owner";
 
+        return "redirect:/facility/facilities_owner";
     }
+
     @GetMapping("/facilities_owner")
     public String listFacilities(Model model, HttpSession session, HttpServletRequest request){
         User loginUser = (User) session.getAttribute("loginUser");

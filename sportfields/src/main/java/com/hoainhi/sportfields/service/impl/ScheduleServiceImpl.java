@@ -62,8 +62,12 @@ public class ScheduleServiceImpl implements ScheduleService {
                      ScheduleDetailDTO dto = new ScheduleDetailDTO();
                      dto.setTime_start(detail.getTime_start());
                      dto.setTime_end(detail.getTime_end());
+                     int start = detail.getTime_start().getHour();
+                     int end = detail.getTime_end().getHour();
                      dto.setPrice(detail.getPrice());
                      dto.setStatus(detail.getStatus());
+                     dto.setRowStart(start - 4);
+                     dto.setRowSpan(end - start);
                      scheduleDetailDTOS.add(dto);
 
 
@@ -93,6 +97,11 @@ public class ScheduleServiceImpl implements ScheduleService {
                     dto.setTime_end(detail.getTime_end());
                     dto.setPrice(detail.getPrice());
                     dto.setStatus(detail.getStatus());
+                    int start = detail.getTime_start().getHour();
+                    int end = detail.getTime_end().getHour();
+
+                    dto.setRowStart(start - 4);
+                    dto.setRowSpan(end - start);
                     scheduleDetailDTOS.add(dto);
 
 
