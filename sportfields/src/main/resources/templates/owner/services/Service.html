@@ -90,17 +90,29 @@
                 </table>
             </div>
             <div class="p-4 border-t border-outline-variant/30 flex items-center justify-between bg-surface-container-low">
-                <p class="font-body-md text-[14px] text-on-surface-variant">Hiển thị <span th:text="${page.number * page.size +1 }"></span></p>
                 <div class="flex gap-2">
-                    <button class="h-8 w-8 flex items-center justify-center rounded-lg border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">
+                    <a th:if="${page.hasPrevious()}"
+                       th:href="@{/service/service_home(page=${page.number - 1}, size=${page.size}, facilityId=${selectFacility})}"
+                       class="h-8 w-8 flex items-center justify-center rounded-lg border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">
                         <span class="material-symbols-outlined !text-[18px]">chevron_left</span>
-                    </button>
-                    <button class="h-8 w-8 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold text-[13px]">1</button>
-                    <button class="h-8 w-8 flex items-center justify-center rounded-lg border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container transition-colors font-bold text-[13px]">2</button>
-                    <button class="h-8 w-8 flex items-center justify-center rounded-lg border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container transition-colors font-bold text-[13px]">3</button>
-                    <button class="h-8 w-8 flex items-center justify-center rounded-lg border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container transition-colors">
+                    </a>
+                    <th:block th:if="${page.totalPages > 0}">
+                        <a th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+                           th:href="@{/service/service_home(
+        page=${i},
+        size=${page.size},
+        facilityId=${selectFacility})}"
+                           th:text="${i + 1}" class="h-8 w-8 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold text-[13px]">
+
+                        </a>
+                    </th:block>
+
+
+                    <a th:if="${page.hasNext()}"
+                       th:href="@{/service/service_home(page=${page.number + 1}, size=${page.size}, facilityId=${selectFacility})}"
+                            class="h-8 w-8 flex items-center justify-center rounded-lg border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container transition-colors">
                         <span class="material-symbols-outlined !text-[18px]">chevron_right</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

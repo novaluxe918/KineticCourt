@@ -43,23 +43,24 @@ public class ServiceController {
 
         List<Facility> facilities =
                 facilitySeviceimpl.getFacilityByOwner(user.getId());
-        Pageable pageable = (Pageable) PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size);
         Page<Services> servicesPage;
 
-        if(StringUtils.hasText(name)){
+        if(facilityId !=null){
+            servicesPage = service.getServiceByFacility(facilityId, pageable);
+
+        } else if(StringUtils.hasText(name)){
             servicesPage = service.findByTitleContaining(name, pageable);
         }else {
             servicesPage = service.findPaginated(pageable);
 
         }
 
-        if(facilityId !=null){
-            model.addAttribute("services", service.getServiceByFacility(facilityId));
 
-        }
         model.addAttribute("selectFacility", facilityId);
         model.addAttribute("facilities", facilities);
         model.addAttribute("page", servicesPage);
+        model.addAttribute("services", servicesPage.getContent());
         model.addAttribute("currentUrl", request.getRequestURI());
         return "owner/services/Service";
     }

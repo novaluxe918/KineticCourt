@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public interface Service_sv {
     Page<Services> findPaginated(Pageable pageable);
-    List<Services> getServiceByFacility(Long facilityId);
+    Page<Services> getServiceByFacility(Long facilityId, Pageable pageable);
     Services addService(ServiceDTO serviceDTO);
     Page<Services> findByTitleContaining(String name, Pageable pageable);
 }

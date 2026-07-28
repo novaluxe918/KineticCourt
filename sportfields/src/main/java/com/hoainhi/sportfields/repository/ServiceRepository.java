@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface ServiceRepository extends JpaRepository<Services, Long> {
     Page<Services> findByTitleContaining(String name, Pageable pageable);
-    List<Services> findByFacility_Id(Long facilityId);
+    Page<Services> findByFacility_Id(Long facilityId,Pageable pageable);
 }

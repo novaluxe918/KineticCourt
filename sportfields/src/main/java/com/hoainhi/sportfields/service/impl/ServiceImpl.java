@@ -28,8 +28,8 @@ public class ServiceImpl implements Service_sv {
     }
 
     @Override
-    public List<Services> getServiceByFacility(Long facilityId) {
-        return serviceRepository.findByFacility_Id(facilityId);
+    public Page<Services> getServiceByFacility(Long facilityId, Pageable pageable) {
+        return serviceRepository.findByFacility_Id(facilityId, pageable);
     }
 
     @Override
