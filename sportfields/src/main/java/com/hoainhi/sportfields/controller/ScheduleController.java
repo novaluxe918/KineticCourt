@@ -40,30 +40,15 @@ public class ScheduleController {
         User user = (User) session.getAttribute("loginUser");
 
         List<Court> courts = courtService.getCourtByOwner(user.getId());
-        List<CalendarCourtDTO> calendarCourtDTOS = scheduleService.getCalendar(user.getId());
+
         List<Facility> facilities =
                 facilitySeviceimpl.getFacilityByOwner(user.getId());
         List<String> times = new ArrayList<>();
 
-        for(int i = 5; i <= 24; i++){
 
-            if(i == 24){
-                times.add("12:00 AM");
-            }
-            else if(i < 12){
-                times.add(String.format("%02d:00 AM", i));
-            }
-            else if(i == 12){
-                times.add("12:00 PM");
-            }
-            else{
-                times.add(String.format("%02d:00 PM", i - 12));
-            }
-
-        }
 
         model.addAttribute("time", times);
-        model.addAttribute("calendar", calendarCourtDTOS);
+
         model.addAttribute("facilities", facilities);
         model.addAttribute("currentUrl", request.getRequestURI());
 
