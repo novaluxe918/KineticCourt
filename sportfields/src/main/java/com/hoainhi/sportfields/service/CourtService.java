@@ -2,6 +2,7 @@ package com.hoainhi.sportfields.service;
 
 import com.hoainhi.sportfields.dto.CourtDTO;
 import com.hoainhi.sportfields.entity.Court;
+import com.hoainhi.sportfields.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface CourtService {
     List<Court> getCourtByOwner(Long ownerId);
 
     public void delteteCourt(Long id);
-
+    Court updateCourt(CourtDTO courtDTO);
     List<Court> getAllCourt();
     Court getById(Long id);
     public void save(Court court);

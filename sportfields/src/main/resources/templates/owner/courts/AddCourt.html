@@ -11,12 +11,13 @@
   <div class="max-w-4xl mx-auto">
     <!-- Header -->
     <div class="mb-10">
-      <h1 class="font-headline-lg text-headline-lg text-on-background mb-2">Add New Court</h1>
+      <h1 th:text="${court.isEdit} ? 'Update Court' : 'Add Court'" class="font-headline-lg text-headline-lg text-on-background mb-2"></h1>
       <p class="font-body-lg text-body-lg text-secondary">Enter the details of the new court to make it available for booking.</p>
     </div>
     <!-- Form Card -->
     <div class="bg-surface-container-lowest rounded-xl border border-surface-container-highest overflow-hidden shadow-sm">
       <form method="post" th:action="@{/court/save}" th:object="${court}" class="p-8 space-y-8">
+        <input type="hidden" th:field="*{id}">
         <!-- Grid Layout for Fields -->
         <div class="grid grid-cols-1 gap-8 max-w-xl mx-auto">
           <!-- Court Name -->
@@ -56,8 +57,7 @@
           <button class="px-6 py-3 rounded-lg border border-secondary text-secondary font-headline-md text-label-md hover:bg-surface-container-high transition-all active:scale-95" type="button">
             Cancel
           </button>
-          <button class="px-10 py-3 rounded-lg bg-primary-container text-white font-headline-md text-label-md shadow-lg shadow-primary-container/20 hover:opacity-90 hover:shadow-xl transition-all active:scale-95" type="submit">
-            Save Court
+          <button th:text="${court.isEdit} ? 'Update Court' : 'Add Court' " class="px-10 py-3 rounded-lg bg-primary-container text-white font-headline-md text-label-md shadow-lg shadow-primary-container/20 hover:opacity-90 hover:shadow-xl transition-all active:scale-95" type="submit">
           </button>
         </div>
       </form>

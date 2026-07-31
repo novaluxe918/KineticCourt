@@ -9,6 +9,7 @@ import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.stereotype.Controller;
@@ -81,8 +82,14 @@ import java.util.List;
 
     @PostMapping("/save")
     public String saveCourt(@ModelAttribute("court") CourtDTO courtDTO){
-        courtService.addCourt(courtDTO);
-        return "owner/courts/AddCourt";
+        if(courtDTO.getId() == null){
+
+            courtService.addCourt(courtDTO);
+
+        }else {
+            courtService.updateCourt(courtDTO);
+        }
+        return "redirect:/court/court_owner";
 
     }
 
@@ -108,5 +115,15 @@ import java.util.List;
 
         }
         return "redirect:/court/court_owner";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editCourt(@PathVariable Long id, Model model){
+        Court court = courtService.getById(id);
+        CourtDTO courtDTO = new CourtDTO();
+        BeanUtils.copyProperties(court, courtDTO);
+        courtDTO.setIsEdit(true);
+        model.addAttribute("court", courtDTO);
+        return "owner/courts/AddCourt";
     }
 }

@@ -55,6 +55,12 @@ public class CourtServiceImpl implements CourtService {
     }
 
     @Override
+    public Court updateCourt(CourtDTO courtDTO) {
+        return null;
+    }
+
+
+    @Override
     public List<Court> getAllCourt() {
         return courtRepository.findAll();
     }

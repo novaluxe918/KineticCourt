@@ -31,10 +31,6 @@
             <span class="material-symbols-outlined text-primary text-2xl">
                 location_on
             </span>
-
-
-                        <div class="relative flex-1">
-
                             <select id="facilitySelect"
                                     >
 
@@ -54,10 +50,6 @@
                             </select>
 
                         </div>
-
-                    </div>
-
-
                 </div>
 
 
@@ -92,7 +84,7 @@
                 <div class="flex justify-between items-center mt-auto pt-4 border-t border-outline-variant/30">
 
                     <div class="flex gap-2">
-                        <a class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant hover:text-primary" title="Edit Rate">
+                        <a th:href="@{/court/edit/{id}(id=${c.id})}" class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant hover:text-primary" title="Edit Rate">
                             <span class="material-symbols-outlined text-lg">edit_note</span>
                         </a>
                         <a th:href="@{/court/maintenance/{id}(id=${c.id})}"
