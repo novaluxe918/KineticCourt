@@ -5,15 +5,19 @@ import com.hoainhi.sportfields.dto.CourtDTO;
 import com.hoainhi.sportfields.dto.ScheduleDTO;
 import com.hoainhi.sportfields.entity.Court;
 import com.hoainhi.sportfields.entity.Facility;
+import com.hoainhi.sportfields.entity.ScheduleDetails;
 import com.hoainhi.sportfields.entity.User;
 import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
+import com.hoainhi.sportfields.service.impl.ScheduleDetailSerivceimp;
 import com.hoainhi.sportfields.service.impl.ScheduleServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,37 +35,36 @@ public class ScheduleController {
     @Autowired
     private CourtServiceImpl courtService;
 
+    @Autowired
+    private ScheduleDetailSerivceimp scheduleDetailSerivceimp;
+
     @GetMapping("/schedule_owner")
     public String showSchedule(
+            @RequestParam(required = false) Long facilityId,
             Model model,
             HttpServletRequest request,
             HttpSession session){
 
         User user = (User) session.getAttribute("loginUser");
 
-        List<Court> courts = courtService.getCourtByOwner(user.getId());
+        List<ScheduleDetails > schedules;
 
+        if (facilityId == null){
+            schedules = scheduleDetailSerivceimp.getAll();
+        }else {
+            schedules = scheduleDetailSerivceimp.getByFacility(facilityId);
+        }
         List<Facility> facilities =
                 facilitySeviceimpl.getFacilityByOwner(user.getId());
-        List<String> times = new ArrayList<>();
 
-
-
-        model.addAttribute("time", times);
-
+        model.addAttribute("selectFacility", facilityId);
         model.addAttribute("facilities", facilities);
         model.addAttribute("currentUrl", request.getRequestURI());
+        model.addAttribute("schedules", schedules);
 
         return "owner/schedule/Schedule";
     }
 
-    @GetMapping("/calendar/{facilityId}")
-    @ResponseBody
-    public List<CalendarCourtDTO> getCalendar(@PathVariable Long facilityId){
-
-        return scheduleService.getCalendarByFacility(facilityId);
-
-    }
 
     @GetMapping("/add")
     public String addSchedule(Model model, HttpSession session){
@@ -76,8 +79,12 @@ public class ScheduleController {
     }
 
     @PostMapping("/save")
-    public String saveSchedule(@ModelAttribute("schedules") ScheduleDTO scheduleDTO){
-        scheduleService.addSchedule(scheduleDTO);
+    public String saveSchedule(@Validated @ModelAttribute("schedules") ScheduleDTO scheduleDTO, BindingResult result, Model model){
+        if(result.hasErrors()){
+
+            return "owner/schedule/AddSchedule";
+
+        }        scheduleService.addSchedule(scheduleDTO);
         return "redirect:/schedule/add";
     }
 

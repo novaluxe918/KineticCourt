@@ -95,7 +95,12 @@
                         <a class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant hover:text-primary" title="Edit Rate">
                             <span class="material-symbols-outlined text-lg">edit_note</span>
                         </a>
-                        <a class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-error-container hover:text-error transition-all flex items-center justify-center text-on-surface-variant" title="Maintenance Mode">
+                        <a th:href="@{/court/maintenance/{id}(id=${c.id})}"
+                           class="w-10 h-10 border border-outline-variant rounded-xl hover:bg-error-container hover:text-error transition-all flex items-center justify-center text-on-surface-variant"
+                           title="Maintenance Mode"
+                        onclick="return confirm('Đưa sân vào chế độ bảo trì?')"
+                         th:classappend="${c.status.name() == 'AVAILABLE'} ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
+                            (${c.status.name() == 'BOOKED'} ? ' bg-red-50 text-red-700 border-red-100' :  ' bg-amber-50 text-amber-700 border-amber-100' )">
                             <span class="material-symbols-outlined text-lg">build</span>
                         </a>
 

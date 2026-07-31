@@ -1,0 +1,25 @@
+package com.hoainhi.sportfields.service.impl;
+
+import com.hoainhi.sportfields.entity.ScheduleDetails;
+import com.hoainhi.sportfields.repository.ScheduleDetailRepository;
+import com.hoainhi.sportfields.service.ScheduleDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ScheduleDetailSerivceimp implements ScheduleDetailService {
+    @Autowired
+    private ScheduleDetailRepository scheduleDetailRepository;
+
+    @Override
+    public List<ScheduleDetails> getByFacility(Long facilityId) {
+        return scheduleDetailRepository.findBySchedule_Court_Facility_Id(facilityId);
+    }
+
+    @Override
+    public List<ScheduleDetails> getAll() {
+        return  scheduleDetailRepository.findAll();
+    }
+}

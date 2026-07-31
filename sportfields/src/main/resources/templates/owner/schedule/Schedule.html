@@ -23,9 +23,11 @@
         location_on
     </span>
 
-
-        <select id="schedule-facility"
-                class="w-full h-12
+        <form method="get"
+              th:action="@{/schedule/schedule_owner}">
+          <select name="facilityId"
+                  onchange="this.form.submit()"
+                  class="w-full h-12
                    pl-10 pr-4
                    rounded-xl
                    border border-outline-variant
@@ -39,17 +41,20 @@
                    focus:border-primary
                    transition-all">
 
-          <option value="">
-            -- Chọn cơ sở --
-          </option>
+            <option value="">
+              -- Chọn cơ sở --
+            </option>
 
-          <option th:each="facility : ${facilities}"
-                  th:value="${facility.id}"
-                  th:text="${facility.name_facility}"
-          >
-          </option>
+            <option th:each="facility : ${facilities}"
+                    th:value="${facility.id}"
+                    th:text="${facility.name_facility}"
+                    th:selected="${facility.id == selectFacility}"
+            >
+            </option>
 
-        </select>
+          </select>
+        </form>
+
 
 
 
@@ -63,30 +68,6 @@
           </a>
         </div>
         <!-- DATE NAV -->
-      </div>
-    </div>
-    <!-- LEGEND & STATS -->
-    <div class="flex flex-wrap items-center justify-between gap-6 mb-8 px-2">
-      <div class="flex items-center gap-8">
-        <div class="flex items-center gap-3">
-          <span class="w-5 h-5 rounded-lg bg-primary shadow-sm shadow-primary/20"></span>
-          <span class="text-xs font-black text-on-surface font-headline-md uppercase tracking-wider">Booked</span>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="w-5 h-5 rounded-lg bg-emerald-500 shadow-sm shadow-emerald-500/20"></span>
-          <span class="text-xs font-black text-on-surface font-headline-md uppercase tracking-wider">Available</span>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="w-5 h-5 rounded-lg bg-slate-400 shadow-sm shadow-slate-400/20"></span>
-          <span class="text-xs font-black text-on-surface font-headline-md uppercase tracking-wider">Maintenance</span>
-        </div>
-      </div>
-      <div class="flex items-center gap-6 text-[11px] font-black uppercase tracking-widest text-on-surface-variant bg-white px-6 py-4 rounded-2xl border border-outline-variant/20 shadow-sm">
-        <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> 12 Slots Free</span>
-        <span class="w-px h-4 bg-outline-variant/30"></span>
-        <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> 8 Booked</span>
-        <span class="w-px h-4 bg-outline-variant/30"></span>
-        <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> 2 Maintenance</span>
       </div>
     </div>
     <!-- SCHEDULE GRID CONTAINER -->
@@ -104,81 +85,27 @@
           </tr>
           </thead>
           <tbody class="divide-y divide-outline-variant/10">
-          <tr class="hover:bg-surface-container-lowest transition-colors">
+          <tr th:each="schedule : ${schedules}" class="hover:bg-surface-container-lowest transition-colors">
             <td class="px-6 py-5">
               <div class="flex flex-col">
-                <span class="font-headline-md text-sm font-black text-on-surface">Court 01</span>
-                <span class="text-[10px] uppercase font-bold text-on-surface-variant/40 tracking-wider">Premium Arena</span>
+                <span th:text="${schedule.schedule.court.name_court}" class="font-headline-md text-sm font-black text-on-surface"></span>
               </div>
             </td>
             <td class="px-6 py-5">
               <div class="flex items-center gap-2 text-on-surface font-medium">
                 <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                <span class="text-sm">05:00 AM - 07:00 AM</span>
+                <span th:text="${schedule.time_start}" class="text-sm"></span> - <span th:text="${schedule.time_end}" class="text-sm"></span>
               </div>
             </td>
-            <td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Oct 24, 2023</td>
-            <td class="px-6 py-5 text-sm font-black text-on-surface">$35.00</td>
+            <td th:text="${schedule.schedule.date_start}" class="px-6 py-5 text-sm text-on-surface-variant font-medium"></td>
+            <td th:text="${schedule.price}" class="px-6 py-5 text-sm font-black text-on-surface"></td>
             <td class="px-6 py-5">
-              <span class="inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black bg-primary/10 text-primary uppercase tracking-wider">Booked</span>
+              <span th:text="${schedule.status}" class="inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black bg-primary/10 text-primary uppercase tracking-wider"></span>
             </td>
             <td class="px-6 py-5">
               <div class="flex items-center justify-end gap-2">
-                <button class="p-2 text-on-surface-variant/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all" title="Xem chi tiết"><span class="material-symbols-outlined text-xl">visibility</span></button>
                 <button class="p-2 text-on-surface-variant/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all" title="Sửa"><span class="material-symbols-outlined text-xl">edit</span></button>
                 <button class="p-2 text-on-surface-variant/60 hover:text-error hover:bg-error/5 rounded-lg transition-all" title="Xóa"><span class="material-symbols-outlined text-xl">delete_outline</span></button>
-              </div>
-            </td>
-          </tr>
-          <tr class="hover:bg-surface-container-lowest transition-colors">
-            <td class="px-6 py-5">
-              <div class="flex flex-col">
-                <span class="font-headline-md text-sm font-black text-on-surface">Court 02</span>
-                <span class="text-[10px] uppercase font-bold text-on-surface-variant/40 tracking-wider">Standard</span>
-              </div>
-            </td>
-            <td class="px-6 py-5">
-              <div class="flex items-center gap-2 text-on-surface font-medium">
-                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                <span class="text-sm">05:00 AM - 09:00 AM</span>
-              </div>
-            </td>
-            <td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Oct 24, 2023</td>
-            <td class="px-6 py-5 text-sm font-black text-on-surface">$0.00</td>
-            <td class="px-6 py-5">
-              <span class="inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black bg-slate-100 text-slate-600 uppercase tracking-wider">Maintenance</span>
-            </td>
-            <td class="px-6 py-5">
-              <div class="flex items-center justify-end gap-2">
-                <button class="p-2 text-on-surface-variant/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"><span class="material-symbols-outlined text-xl">visibility</span></button>
-                <button class="p-2 text-on-surface-variant/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"><span class="material-symbols-outlined text-xl">edit</span></button>
-                <button class="p-2 text-on-surface-variant/60 hover:text-error hover:bg-error/5 rounded-lg transition-all"><span class="material-symbols-outlined text-xl">delete_outline</span></button>
-              </div>
-            </td>
-          </tr>
-          <tr class="hover:bg-surface-container-lowest transition-colors">
-            <td class="px-6 py-5">
-              <div class="flex flex-col">
-                <span class="font-headline-md text-sm font-black text-on-surface">Court 03</span>
-                <span class="text-[10px] uppercase font-bold text-on-surface-variant/40 tracking-wider">Standard</span>
-              </div>
-            </td>
-            <td class="px-6 py-5">
-              <div class="flex items-center gap-2 text-on-surface font-medium">
-                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                <span class="text-sm">09:00 AM - 10:00 AM</span>
-              </div>
-            </td>
-            <td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Oct 24, 2023</td>
-            <td class="px-6 py-5 text-sm font-black text-on-surface">$25.00</td>
-            <td class="px-6 py-5">
-              <span class="inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black bg-emerald-50 text-emerald-700 uppercase tracking-wider">Available</span>
-            </td>
-            <td class="px-6 py-5">
-              <div class="flex items-center justify-end gap-2">
-                <button class="p-2 text-on-surface-variant/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"><span class="material-symbols-outlined text-xl">visibility</span></button>
-                <button class="p-2 text-on-surface-variant/60 hover:text-primary hover:bg-primary/5 rounded-lg transition-all"><span class="material-symbols-outlined text-xl">edit</span></button>
-                <button class="p-2 text-on-surface-variant/60 hover:text-error hover:bg-error/5 rounded-lg transition-all"><span class="material-symbols-outlined text-xl">delete_outline</span></button>
               </div>
             </td>
           </tr>

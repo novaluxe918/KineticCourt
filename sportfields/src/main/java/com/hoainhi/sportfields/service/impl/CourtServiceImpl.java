@@ -59,5 +59,15 @@ public class CourtServiceImpl implements CourtService {
         return courtRepository.findAll();
     }
 
+    @Override
+    public Court getById(Long id) {
+        return courtRepository.findById(id).orElseThrow(null);
+    }
+
+    @Override
+    public void save(Court court) {
+        courtRepository.save(court);
+    }
+
 
 }

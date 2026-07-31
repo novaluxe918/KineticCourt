@@ -97,4 +97,16 @@ import java.util.List;
     public List<Court> getCourts(@PathVariable Long facilityId){
         return courtService.getCourtByFacility(facilityId);
     }
+
+    @GetMapping("/maintenance/{id}")
+    public String maintenanceCourt(@PathVariable Long id){
+        Court court = courtService.getById(id);
+
+        if (court != null){
+            court.setStatus(Status.MAINTENANCE);
+            courtService.save(court);
+
+        }
+        return "redirect:/court/court_owner";
+    }
 }

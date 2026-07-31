@@ -15,4 +15,6 @@ public interface CourtService {
     public void delteteCourt(Long id);
 
     List<Court> getAllCourt();
+    Court getById(Long id);
+    public void save(Court court);
 }
