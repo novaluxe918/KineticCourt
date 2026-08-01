@@ -25,15 +25,23 @@
             <label class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider" for="facility-select">Select Facility</label>
             <div class="relative">
               <select th:field="*{facility_id}" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none appearance-none transition-all" id="facility-select">
-                <option value="" disabled="" selected="">Choose a facility...</option>
+                <option value="">Choose a facility...</option>
                 <option th:each="f: ${facilities}" th:value="${f.id}" th:text="${f.name_facility}"></option>
               </select>
-              <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-secondary pointer-events-none">expand_more</span>
+              <div class="text-red-300 mt-1"
+                   th:if="${#fields.hasErrors('facility_id')}"
+                   th:errors="*{facility_id}">
+              </div>
             </div>
-          </div><div class="space-y-2">
+          </div>
+          <div class="space-y-2">
           <label class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider" for="court-name">Court Name</label>
           <input th:field="*{name_court}" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none transition-all" id="court-name" placeholder="e.g., Court 05, Pro-Match Gamma" type="text">
         </div>
+          <div class="text-red-300 mt-1"
+               th:if="${#fields.hasErrors('name_court')}"
+               th:errors="*{name_court}">
+          </div>
           <!-- Hourly Rate -->
 
           <!-- Surface Type -->
@@ -41,11 +49,28 @@
           <!-- Status -->
           <div class="space-y-2">
             <label class="font-label-md text-label-md text-on-surface-variant block uppercase tracking-wider" for="status">Initial Status</label>
-            <select th:field="*{status}" class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none appearance-none transition-all" id="status">
-              <option  value="AVAILABLE">Available</option>
-              <option value="MAINTENANCE">Maintenance</option>
-              <option value="INACTIVE">Closed</option>
+            <select th:field="*{status}" id="status"
+                    class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg">
+
+              <option value="">-- Chọn trạng thái --</option>
+
+              <option th:value="${T(com.hoainhi.sportfields.enums.Status).AVAILABLE}">
+                Available
+              </option>
+
+              <option th:value="${T(com.hoainhi.sportfields.enums.Status).MAINTENANCE}">
+                Maintenance
+              </option>
+
+              <option th:value="${T(com.hoainhi.sportfields.enums.Status).INACTIVE}">
+                Closed
+              </option>
+
             </select>
+          </div>
+          <div class="text-red-300 mt-1"
+               th:if="${#fields.hasErrors('status')}"
+               th:errors="*{status}">
           </div>
           <!-- Description (Full Width) -->
 

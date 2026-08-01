@@ -13,7 +13,7 @@ public class Court {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_court")
-    private long id;
+    private Long id;
 
     @Column(columnDefinition = "varchar(100) not null")
     private String name_court;

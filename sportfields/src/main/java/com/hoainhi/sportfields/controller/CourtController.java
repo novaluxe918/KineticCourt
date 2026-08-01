@@ -9,11 +9,13 @@ import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -72,16 +74,22 @@ import java.util.List;
     }
 
     @GetMapping("/add")
-    public String addCourt(Model model){
+    public String addCourt( Model model){
+
         model.addAttribute("court", new CourtDTO());
-        List<Facility> facilities = facilitySeviceimpl.getAll();
+        List<Facility> facilities = facilitySeviceimpl.getApproved();
          model.addAttribute("facilities", facilities);
 
         return "owner/courts/AddCourt";
     }
 
     @PostMapping("/save")
-    public String saveCourt(@ModelAttribute("court") CourtDTO courtDTO){
+    public String saveCourt(@Valid @ModelAttribute("court") CourtDTO courtDTO,BindingResult result, Model model){
+        if(result.hasErrors()){
+           model.addAttribute("facilities", facilitySeviceimpl.getApproved());
+            return "owner/courts/AddCourt";
+
+        }
         if(courtDTO.getId() == null){
 
             courtService.addCourt(courtDTO);
