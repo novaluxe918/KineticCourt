@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public interface ScheduleService {
     Schedule addSchedule(ScheduleDTO scheduleDTO);
-
+    ScheduleDTO getScheduleDTOById(Long id);
+    Schedule updateSchedule(ScheduleDTO dto);
 
 }

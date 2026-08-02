@@ -56,6 +56,13 @@ public class CourtServiceImpl implements CourtService {
 
     @Override
     public Court updateCourt(CourtDTO courtDTO) {
+        Court court = courtRepository.findById(courtDTO.getId()).orElseThrow(() -> new RuntimeException("Không tìm thấy sân"));
+        court.setName_court(court.getName_court());
+        court.setStatus(courtDTO.getStatus());
+        Facility facility = faciRepository.findById(courtDTO.getFacility_id()).orElseThrow(() -> new RuntimeException("Không tìm thấy cơ sở"));
+
+        court.setFacility(facility);
+
         return null;
     }
 

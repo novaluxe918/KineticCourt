@@ -65,6 +65,19 @@ public class ScheduleController {
         return "owner/schedule/Schedule";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editSchedule(@PathVariable Long id, Model model, HttpSession session){
+
+        User user = (User) session.getAttribute("loginUser");
+        ScheduleDTO scheduleDTO = scheduleService.getScheduleDTOById(id);
+        scheduleDTO.setIsEdit(true);
+        model.addAttribute("schedules", scheduleDTO);
+        model.addAttribute("facilities", facilitySeviceimpl.getFacilityByOwner(user.getId()));
+        model.addAttribute("courts", courtService.getCourtByOwner(user.getId()));
+
+        return "owner/schedule/AddSchedule";
+
+    }
 
     @GetMapping("/add")
     public String addSchedule(Model model, HttpSession session){
@@ -84,7 +97,13 @@ public class ScheduleController {
 
             return "owner/schedule/AddSchedule";
 
-        }        scheduleService.addSchedule(scheduleDTO);
+        }
+        if (scheduleDTO.getId() == null){
+            scheduleService.addSchedule(scheduleDTO);
+        }else {
+            scheduleService.updateSchedule(scheduleDTO);
+        }
+
         return "redirect:/schedule/add";
     }
 

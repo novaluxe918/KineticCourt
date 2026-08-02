@@ -14,7 +14,7 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_schedule")
-    private Long id_schedule;
+    private Long id;
 
     private LocalDate date_start;
 
@@ -27,6 +27,7 @@ public class Schedule {
     @OneToMany(mappedBy = "schedule", fetch = FetchType.EAGER)
     private List<BookingDetails> bookingDetails;
 
-    @OneToMany(mappedBy = "schedule", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "schedule", fetch = FetchType.EAGER,  cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<ScheduleDetails> scheduleDetails;
 }

@@ -13,6 +13,8 @@ import java.util.List;
 
 @ValidDateRange
 public class ScheduleDTO {
+    private Long id;
+
     @NotNull(message = "Vui lòng chọn sân")
     private Long id_court;
 
@@ -23,6 +25,8 @@ public class ScheduleDTO {
     @NotNull(message = "Vui lòng chọn ngày kết thúc")
     @FutureOrPresent(message = "Ngày kết thúc không được ở quá khứ")
     private LocalDate date_end;
+
+    private Boolean isEdit = false;
 
     @Valid
     private List<ScheduleDetailDTO> scheduleDetails;

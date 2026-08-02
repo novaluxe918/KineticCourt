@@ -18,6 +18,7 @@
             <p class="font-body-md text-body-md text-secondary max-w-2xl">Thiết lập khung giờ hoạt động và giá thuê linh hoạt cho các sân trong cơ sở của bạn.</p>
         </div>
         <form th:object="${schedules}" method="post" th:action="@{/schedule/save}" class="grid grid-cols-12 gap-gutter" id="schedule-form">
+            <input type="hidden" th:field="*{id}">
             <!-- Left Column: Core Setup -->
             <div class="col-span-12 lg:col-span-8 space-y-gutter">
                 <!-- Facility & Court Selection Card -->
@@ -84,25 +85,27 @@
                     </div>
                     <div class="space-y-4" id="time-slots-container">
                         <!-- Slot Row 1 -->
-                        <div class="time-slot grid grid-cols-12 gap-4 items-end p-4 bg-surface-container-lowest border border-outline-variant rounded-lg transition-all hover:border-primary-container/50">
+                        <div th:each="detail, stat : *{scheduleDetails}" class="time-slot grid grid-cols-12 gap-4 items-end p-4 bg-surface-container-lowest border border-outline-variant rounded-lg transition-all hover:border-primary-container/50">
+                            <input type="hidden"
+                                   th:field="*{scheduleDetails[__${stat.index}__].id}">
                             <div class="col-span-4 space-y-2">
                                 <label class="block font-label-md text-label-md text-secondary">Giờ bắt đầu</label>
                                 <div class="relative">
-                                    <input name="scheduleDetails[0].time_start" class="w-full p-3 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="time" />
+                                    <input th:field="*{scheduleDetails[__${stat.index}__].time_start}" class="w-full p-3 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="time" />
                                     <p class="text-red-500 text-sm" th:errors="*{scheduleDetails[0].time_start}"></p>
                                 </div>
                             </div>
                             <div class="col-span-4 space-y-2">
                                 <label class="block font-label-md text-label-md text-secondary">Giờ kết thúc</label>
                                 <div class="relative">
-                                    <input name="scheduleDetails[0].time_end" class="w-full p-3 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="time" />
+                                    <input  th:field="*{scheduleDetails[__${stat.index}__].time_end}" class="w-full p-3 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="time" />
                                     <p class="text-red-500 text-sm" th:errors="*{scheduleDetails[0].time_end}"></p>
                                 </div>
                             </div>
                             <div class="col-span-3 space-y-2">
                                 <label class="block font-label-md text-label-md text-secondary">Đơn giá (1h)</label>
                                 <div class="relative">
-                                    <input  name="scheduleDetails[0].price" class=" price-input w-full p-3 pr-12 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none text-right" type="number" />
+                                    <input  th:field="*{scheduleDetails[__${stat.index}__].price}" class=" price-input w-full p-3 pr-12 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none text-right" type="number" />
                                     <span class="absolute right-3 top-1/2 -translate-y-1/2 text-secondary text-xs font-bold">VND</span>
                                     <p class="text-red-500 text-sm" th:errors="*{scheduleDetails[0].price}"></p>
                                 </div>
@@ -169,8 +172,8 @@
                         </li>
                     </ul>
                     <div class="mt-8 pt-6 border-t border-white/10 space-y-3 relative z-10">
-                        <button class="w-full bg-primary-container hover:bg-[#ff8533] text-white py-4 rounded-xl font-headline-md text-headline-md font-bold transition-all shadow-lg active:scale-[0.98]" type="submit">
-                            Tạo lịch ngay
+                        <button th:text="${schedules.isEdit} ? 'Update Schedule' : 'Add Schedule'" class="w-full bg-primary-container hover:bg-[#ff8533] text-white py-4 rounded-xl font-headline-md text-headline-md font-bold transition-all shadow-lg active:scale-[0.98]" type="submit">
+
                         </button>
                         <button class="w-full py-3 text-white/70 hover:text-white font-label-md text-label-md transition-colors" type="button">
                             Hủy thiết lập

@@ -11,6 +11,8 @@ import java.time.LocalTime;
 @Data
 @ValidTimeRange
 public class ScheduleDetailDTO {
+    private Long id;
+
     @NotNull(message = "Vui lòng chọn giờ bắt đầu")
     private LocalTime time_start;
 
