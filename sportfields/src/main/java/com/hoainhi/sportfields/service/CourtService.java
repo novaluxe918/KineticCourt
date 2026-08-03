@@ -3,6 +3,8 @@ package com.hoainhi.sportfields.service;
 import com.hoainhi.sportfields.dto.CourtDTO;
 import com.hoainhi.sportfields.entity.Court;
 import com.hoainhi.sportfields.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,4 +20,14 @@ public interface CourtService {
     List<Court> getAllCourt();
     Court getById(Long id);
     public void save(Court court);
+    Page<Court> getCourtByOwnerPaging(
+            Long ownerId,
+            Pageable pageable
+    );
+
+
+    Page<Court> getCourtByFacilityPaging(
+            Long facilityId,
+            Pageable pageable
+    );
 }

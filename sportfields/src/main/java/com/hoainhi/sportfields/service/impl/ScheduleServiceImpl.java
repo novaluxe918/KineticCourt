@@ -15,6 +15,8 @@ import com.hoainhi.sportfields.repository.ScheduleRepository;
 import com.hoainhi.sportfields.service.ScheduleService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -138,6 +140,11 @@ public class ScheduleServiceImpl implements ScheduleService {
                 new RuntimeException("Không tìm thấy Schedule"));
 
         scheduleRepository.delete(schedule);
+    }
+
+    @Override
+    public Page<Schedule> getScheduleByOwner(Long userId, Pageable pageable) {
+        return scheduleRepository.findByCourt_Facility_User_Id(userId, pageable);
     }
 
 

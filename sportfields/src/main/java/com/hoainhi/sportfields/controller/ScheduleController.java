@@ -3,10 +3,7 @@ package com.hoainhi.sportfields.controller;
 import com.hoainhi.sportfields.dto.CalendarCourtDTO;
 import com.hoainhi.sportfields.dto.CourtDTO;
 import com.hoainhi.sportfields.dto.ScheduleDTO;
-import com.hoainhi.sportfields.entity.Court;
-import com.hoainhi.sportfields.entity.Facility;
-import com.hoainhi.sportfields.entity.ScheduleDetails;
-import com.hoainhi.sportfields.entity.User;
+import com.hoainhi.sportfields.entity.*;
 import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
 import com.hoainhi.sportfields.service.impl.ScheduleDetailSerivceimp;
@@ -14,6 +11,9 @@ import com.hoainhi.sportfields.service.impl.ScheduleServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,12 +41,15 @@ public class ScheduleController {
     @GetMapping("/schedule_owner")
     public String showSchedule(
             @RequestParam(required = false) Long facilityId,
+            @RequestParam(defaultValue = "0") int page,
             Model model,
             HttpServletRequest request,
             HttpSession session){
 
         User user = (User) session.getAttribute("loginUser");
+        Pageable pageable = PageRequest.of(page, 5);
 
+        Page<Schedule> schedule = scheduleService.getScheduleByOwner(user.getId(), pageable);
         List<ScheduleDetails > schedules;
 
         if (facilityId == null){
@@ -61,7 +64,7 @@ public class ScheduleController {
         model.addAttribute("facilities", facilities);
         model.addAttribute("currentUrl", request.getRequestURI());
         model.addAttribute("schedules", schedules);
-
+        model.addAttribute("schedule", schedule);
         return "owner/schedule/Schedule";
     }
 

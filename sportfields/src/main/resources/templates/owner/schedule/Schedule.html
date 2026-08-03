@@ -112,6 +112,35 @@
           </tbody>
         </table>
       </div>
+      <div class="flex justify-center gap-3 mt-8">
+
+
+        <a th:if="${schedule.hasPrevious()}"
+           th:href="@{/schedule(page=${schedule.number - 1})}"
+           class="px-4 py-2 border rounded-lg">
+
+          Previous
+        </a>
+
+
+        <span class="px-4 py-2">
+    Trang
+    <span th:text="${schedule.number + 1}"></span>
+    /
+    <span th:text="${schedule.totalPages}"></span>
+</span>
+
+
+        <a th:if="${schedule.hasNext()}"
+           th:href="@{/schedule(page=${schedules.number + 1})}"
+           class="px-4 py-2 border rounded-lg">
+
+          Next
+
+        </a>
+
+
+      </div>
     </div>
   </div>
 </main>

@@ -9,6 +9,8 @@ import com.hoainhi.sportfields.repository.FaciRepository;
 import com.hoainhi.sportfields.service.CourtService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -80,6 +82,20 @@ public class CourtServiceImpl implements CourtService {
     @Override
     public void save(Court court) {
         courtRepository.save(court);
+    }
+
+    @Override
+    public Page<Court> getCourtByOwnerPaging(Long ownerId, Pageable pageable) {
+        return courtRepository.findPageByFacility_User_IdAndFacility_Status(
+                ownerId,
+                FaciStatus.APPROVED,
+                pageable
+        );
+    }
+
+    @Override
+    public Page<Court> getCourtByFacilityPaging(Long facilityId, Pageable pageable) {
+        return courtRepository.findPageByFacility_IdAndFacility_Status(facilityId,FaciStatus.APPROVED, pageable);
     }
 
 

@@ -13,6 +13,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,11 +36,16 @@ import java.util.List;
     public String showCourt(
             HttpServletRequest request,
             Model model,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
             @RequestParam(required = false) Long facilityId,
             HttpSession session) {
 
         // 1. Lấy user đang login
         User user = (User) session.getAttribute("loginUser");
+
+        Pageable pageable = PageRequest.of(page, size);
+
 
         if (user == null) {
             return "redirect:/login";
@@ -48,25 +56,22 @@ import java.util.List;
                 facilitySeviceimpl.getFacilityByOwner(user.getId());
 
 
-        List<Court> courts;
+        Page<Court> courts;
 
         if (facilityId == null) {
             // chưa chọn facility → lấy tất cả court của owner
-            courts = courtService.getCourtByOwner(user.getId());
+            courts = courtService.getCourtByFacilityPaging(facilityId, pageable);
         } else {
 
-            courts = courtService.getCourtByFacility(facilityId);
+            courts = courtService.getCourtByOwnerPaging(user.getId(), pageable);
         }
 
 
-        if (courts == null) {
-            courts = new ArrayList<>();
-        }
 
 
         // 6. đẩy dữ liệu ra view
         model.addAttribute("facilities", facilities);
-        model.addAttribute("court", courts);
+        model.addAttribute("courts", courts);
         model.addAttribute("selectedFacility", facilityId);
         model.addAttribute("currentUrl", request.getRequestURI());
 

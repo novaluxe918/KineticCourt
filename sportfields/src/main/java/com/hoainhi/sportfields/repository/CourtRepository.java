@@ -3,6 +3,8 @@ package com.hoainhi.sportfields.repository;
 import com.hoainhi.sportfields.entity.Court;
 
 import com.hoainhi.sportfields.enums.FaciStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,5 +23,16 @@ public interface CourtRepository extends JpaRepository<Court, Long> {
              FaciStatus status
      );
 
-     List<Court> findByFacility_User_Id(Long userId);
+     Page<Court> findPageByFacility_User_IdAndFacility_Status(
+             Long ownerId,
+             FaciStatus status,
+             Pageable pageable
+     );
+
+
+     Page<Court> findPageByFacility_IdAndFacility_Status(
+             Long facilityId,
+             FaciStatus status,
+             Pageable pageable
+     );
 }
