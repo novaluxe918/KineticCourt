@@ -104,7 +104,12 @@ public class ScheduleController {
             scheduleService.updateSchedule(scheduleDTO);
         }
 
-        return "redirect:/schedule/add";
+        return "redirect:/schedule/schedule_owner";
+    }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        scheduleService.deleteSchedule(id);
+        return "redirect:/schedule/schedule_owner";
     }
 
 

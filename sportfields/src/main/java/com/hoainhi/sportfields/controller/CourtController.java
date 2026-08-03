@@ -130,7 +130,12 @@ import java.util.List;
         Court court = courtService.getById(id);
         CourtDTO courtDTO = new CourtDTO();
         BeanUtils.copyProperties(court, courtDTO);
+        if(court.getFacility() != null){
+           courtDTO.setFacility_id(court.getFacility().getId());
+
+        }
         courtDTO.setIsEdit(true);
+        model.addAttribute("facilities", facilitySeviceimpl.getApproved());
         model.addAttribute("court", courtDTO);
         return "owner/courts/AddCourt";
     }

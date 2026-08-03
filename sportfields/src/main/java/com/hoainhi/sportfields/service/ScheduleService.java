@@ -13,5 +13,6 @@ public interface ScheduleService {
     Schedule addSchedule(ScheduleDTO scheduleDTO);
     ScheduleDTO getScheduleDTOById(Long id);
     Schedule updateSchedule(ScheduleDTO dto);
+    void deleteSchedule(Long id);
 
 }

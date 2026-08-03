@@ -56,9 +56,10 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy Schedule với id = " + id));
         ScheduleDTO scheduleDTO = new ScheduleDTO();
         scheduleDTO.setId(schedule.getId());
+        scheduleDTO.setFacility_id(schedule.getCourt().getFacility().getId());
+        scheduleDTO.setId_court(schedule.getCourt().getId());
         scheduleDTO.setDate_start(schedule.getDate_start());
         scheduleDTO.setDate_end(schedule.getDate_end());
-        scheduleDTO.setId_court(schedule.getCourt().getId());
 
         List<ScheduleDetailDTO> details = new ArrayList<>();
 
@@ -71,7 +72,6 @@ public class ScheduleServiceImpl implements ScheduleService {
             d.setTime_end(sd.getTime_end());
             d.setPrice(sd.getPrice());
             d.setStatus(sd.getStatus());
-
             details.add(d);
         }
 
@@ -88,6 +88,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         Court court = courtRepository.findById(dto.getId_court())
                 .orElseThrow(() -> new RuntimeException("Court not found"));
 
+
         schedule.setCourt(court);
         schedule.setDate_start(dto.getDate_start());
         schedule.setDate_end(dto.getDate_end());
@@ -95,7 +96,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         // Danh sách detail hiện có trong DB
         List<ScheduleDetails> oldDetails = schedule.getScheduleDetails();
 
-        // Map để tìm nhanh theo id
+
         Map<Long, ScheduleDetails> oldMap = oldDetails.stream()
                 .collect(Collectors.toMap(ScheduleDetails::getId, d -> d));
 
@@ -117,7 +118,9 @@ public class ScheduleServiceImpl implements ScheduleService {
             detail.setTime_start(item.getTime_start());
             detail.setTime_end(item.getTime_end());
             detail.setPrice(item.getPrice());
-            detail.setStatus(item.getStatus());
+            if(item.getStatus() != null){
+                detail.setStatus(item.getStatus());
+            }
 
             newDetails.add(detail);
         }
@@ -129,6 +132,13 @@ public class ScheduleServiceImpl implements ScheduleService {
        return scheduleRepository.save(schedule);
     }
 
+    @Override
+    public void deleteSchedule(Long id) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Không tìm thấy Schedule"));
+
+        scheduleRepository.delete(schedule);
+    }
 
 
 }

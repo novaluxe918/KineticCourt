@@ -30,7 +30,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="block font-label-md text-label-md text-secondary">Chọn cơ sở</label>
-                            <select id="facility" class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none">
+                            <select th:field="*{facility_id}" id="facility" class="w-full p-3 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none">
                                 <option value="">-- Chọn cơ sở --</option>
                                 <option  th:each="f : ${facilities}"
                                          th:value="${f.id}"
@@ -88,6 +88,11 @@
                         <div th:each="detail, stat : *{scheduleDetails}" class="time-slot grid grid-cols-12 gap-4 items-end p-4 bg-surface-container-lowest border border-outline-variant rounded-lg transition-all hover:border-primary-container/50">
                             <input type="hidden"
                                    th:field="*{scheduleDetails[__${stat.index}__].id}">
+
+                            <input
+                                    type="hidden"
+                                    name="scheduleDetails[0].status"
+                                    th:value="${detail.status}">
                             <div class="col-span-4 space-y-2">
                                 <label class="block font-label-md text-label-md text-secondary">Giờ bắt đầu</label>
                                 <div class="relative">
