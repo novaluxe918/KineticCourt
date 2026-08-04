@@ -15,4 +15,7 @@ public interface Service_sv {
     Page<Services> getServiceByFacility(Long facilityId, Pageable pageable);
     Services addService(ServiceDTO serviceDTO);
     Page<Services> findByTitleContaining(String name, Pageable pageable);
+    Services updateService(ServiceDTO dto);
+    ServiceDTO getServiceDTOById(Long id);
+     void deleteService(Long id);
 }

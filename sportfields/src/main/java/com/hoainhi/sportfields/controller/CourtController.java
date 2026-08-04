@@ -60,10 +60,10 @@ import java.util.List;
 
         if (facilityId == null) {
             // chưa chọn facility → lấy tất cả court của owner
-            courts = courtService.getCourtByFacilityPaging(facilityId, pageable);
+            courts = courtService.getCourtByOwnerPaging(user.getId(), pageable);
         } else {
 
-            courts = courtService.getCourtByOwnerPaging(user.getId(), pageable);
+            courts = courtService.getCourtByFacilityPaging(facilityId, pageable);
         }
 
 
@@ -93,7 +93,6 @@ import java.util.List;
         if(result.hasErrors()){
            model.addAttribute("facilities", facilitySeviceimpl.getApproved());
             return "owner/courts/AddCourt";
-
         }
         if(courtDTO.getId() == null){
 

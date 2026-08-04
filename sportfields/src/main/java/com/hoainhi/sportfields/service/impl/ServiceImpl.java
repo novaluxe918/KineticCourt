@@ -46,5 +46,31 @@ public class ServiceImpl implements Service_sv {
         return serviceRepository.findByTitleContaining(name, pageable);
     }
 
+    @Override
+    public Services updateService(ServiceDTO dto) {
+        Services services = serviceRepository.findById(dto.getId()).orElseThrow();
+        services.setTitle(dto.getTitle());
+        services.setDescription(dto.getDescription());
+        services.setPrice(dto.getPrice());
+        services.setUnit(dto.getUnit());
+        Facility facility = faciRepository.findById(dto.getFacilityId()).orElseThrow();
+        services.setFacility(facility);
+        return serviceRepository.save(services);
+    }
+
+    @Override
+    public ServiceDTO getServiceDTOById(Long id) {
+        Services services = serviceRepository.findById(id).orElseThrow();
+        ServiceDTO dto = new ServiceDTO();
+        BeanUtils.copyProperties(services, dto);
+        dto.setFacilityId(services.getFacility().getId());
+        return dto;
+    }
+
+    @Override
+    public void deleteService(Long id) {
+        serviceRepository.deleteById(id);
+    }
+
 
 }
