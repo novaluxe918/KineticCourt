@@ -10,7 +10,7 @@
 <header th:fragment="header" class="glass-nav fixed top-0 w-full z-50 border-b border-surface-variant/30 transition-all duration-300">
     <nav class="flex justify-between items-center px-gutter py-4 w-full max-w-container-max mx-auto">
         <div class="flex items-center gap-12">
-            <a class="font-headline-md text-headline-md font-extrabold text-primary tracking-tighter" href="#">
+            <a th:href="@{/home}" class="font-headline-md text-headline-md font-extrabold text-primary tracking-tighter" href="#">
                 KINETIC<span class="text-on-background">COURT</span>
             </a>
             <div class="hidden lg:flex gap-8 items-center">

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{client/layout/LayoutClient}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main layout:fragment="main" class="max-w-container-max mx-auto px-margin-desktop py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 mt-20">
+  <!-- Left Section: Schedule Grid -->
+  <div class="lg:col-span-8 xl:col-span-9 flex flex-col gap-6">
+    <!-- Header & Toolbar -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface">Đặt Lịch Sân Tập</h1>
+        <p class="text-on-surface-variant font-body-md">Chọn sân và khung giờ phù hợp với bạn.</p>
+      </div>
+      <!-- Date Picker Interaction -->
+      <div class="flex items-center gap-2 bg-surface-container border border-outline-variant p-2 rounded-xl">
+        <button class="p-1 hover:bg-surface-container-high rounded transition-colors">
+          <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+        </button>
+        <div class="flex flex-col items-center px-4">
+          <span class="font-label-md text-primary">Thứ Tư</span>
+          <span class="font-headline-md text-on-surface leading-none">24 Tháng 5</span>
+        </div>
+        <button class="p-1 hover:bg-surface-container-high rounded transition-colors">
+          <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+        </button>
+      </div>
+    </div>
+    <!-- Legends -->
+    <div class="flex flex-wrap items-center gap-6 p-4 bg-white border border-outline-variant rounded-xl shadow-sm">
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 bg-white border border-outline-variant rounded-sm"></div>
+        <span class="text-label-md text-on-surface-variant">Trống</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 bg-primary-container rounded-sm"></div>
+        <span class="text-label-md text-on-surface-variant">Đang chọn</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 bg-surface-container-highest rounded-sm"></div>
+        <span class="text-label-md text-on-surface-variant">Đã đặt</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 bg-inverse-surface flex items-center justify-center rounded-sm">
+          <span class="material-symbols-outlined text-[10px] text-white" data-icon="lock">lock</span>
+        </div>
+        <span class="text-label-md text-on-surface-variant">Khóa/Sửa chữa</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 bg-tertiary-container rounded-sm"></div>
+        <span class="text-label-md text-on-surface-variant">Sự kiện</span>
+      </div>
+    </div>
+    <!-- Time Grid Table -->
+    <div class="overflow-x-auto border border-outline-variant rounded-xl bg-white shadow-sm hide-scrollbar">
+      <div class="min-w-[1000px]">
+        <!-- Time Labels -->
+        <div class="grid grid-cols-[100px_repeat(18,1fr)] bg-surface-container-low border-b border-outline-variant">
+          <div class="p-3 border-r border-outline-variant text-label-md text-on-surface-variant font-bold">SÂN / GIỜ</div>
+          <!-- 05:00 to 22:00 (18 hours) -->
+          <div class="p-3 text-center text-label-md text-on-surface-variant">05:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">06:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">07:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">08:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">09:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">10:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">11:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">12:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">13:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">14:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">15:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">16:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">17:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">18:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">19:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">20:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">21:00</div>
+          <div class="p-3 text-center text-label-md text-on-surface-variant">22:00</div>
+        </div>
+        <!-- Court Rows -->
+        <!-- Row 1 -->
+        <div class="grid grid-cols-[100px_repeat(18,1fr)] border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
+          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 01</div>
+          <!-- Cells -->
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '05:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '06:00')"></button>
+          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
+          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '09:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '10:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '11:00')"></button>
+          <div class="p-4 border-r border-outline-variant bg-inverse-surface flex items-center justify-center"><span class="material-symbols-outlined text-[14px] text-white" data-icon="construction">construction</span></div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '13:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '14:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '15:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '16:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '17:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '18:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '19:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '20:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '21:00')"></button>
+          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '22:00')"></button>
+        </div>
+        <!-- Row 2 -->
+        <div class="grid grid-cols-[100px_repeat(18,1fr)] border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
+          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 02</div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '05:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '06:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '07:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '08:00')"></button>
+          <div class="p-4 border-r border-outline-variant bg-tertiary-container text-[10px] text-on-tertiary flex items-center justify-center">SỰ KIỆN</div>
+          <div class="p-4 border-r border-outline-variant bg-tertiary-container text-[10px] text-on-tertiary flex items-center justify-center">SỰ KIỆN</div>
+          <div class="p-4 border-r border-outline-variant bg-tertiary-container text-[10px] text-on-tertiary flex items-center justify-center">SỰ KIỆN</div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '12:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '13:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '14:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '15:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '16:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '17:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '18:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '19:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '20:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '21:00')"></button>
+          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '22:00')"></button>
+        </div>
+        <!-- Row 3 -->
+        <div class="grid grid-cols-[100px_repeat(18,1fr)] border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
+          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 03</div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '05:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '06:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '07:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '08:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '09:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '10:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '11:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '12:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '13:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '14:00')"></button>
+          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
+          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
+          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '18:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '19:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '20:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '21:00')"></button>
+          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '22:00')"></button>
+        </div>
+        <!-- Row 4 -->
+        <div class="grid grid-cols-[100px_repeat(18,1fr)] border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
+          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 04</div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '05:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '06:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '07:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '08:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '09:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '10:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '11:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '12:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '13:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '14:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '15:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '16:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '17:00')"></button>
+          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
+          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '20:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '21:00')"></button>
+          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '22:00')"></button>
+        </div>
+        <!-- Row 5 -->
+        <div class="grid grid-cols-[100px_repeat(18,1fr)] hover:bg-surface-container-lowest transition-colors">
+          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 05</div>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '05:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '06:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '07:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '08:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '09:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '10:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '11:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '12:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '13:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '14:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '15:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '16:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '17:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '18:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '19:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '20:00')"></button>
+          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '21:00')"></button>
+          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '22:00')"></button>
+        </div>
+      </div>
+    </div>
+    <!-- Promotion / Visual Component -->
+    <div class="relative h-64 rounded-2xl overflow-hidden shadow-lg mt-4">
+      <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10 flex flex-col justify-center px-10 text-white">
+        <span class="bg-primary px-3 py-1 rounded-full text-label-md w-fit mb-4">Gợi ý dành cho bạn</span>
+        <h2 class="font-headline-lg text-headline-lg mb-2">Ưu đãi giờ vàng</h2>
+        <p class="font-body-md text-surface-container-high max-w-sm">Giảm ngay 20% cho các khung giờ từ 08:00 đến 11:00 mỗi sáng Thứ Tư hàng tuần.</p>
+      </div>
+      <img class="w-full h-full object-cover" data-alt="A professional high-angle shot of a premium indoor badminton court facility during the day. The lighting is bright and clear, showing high-quality wooden flooring, white line markings, and a professional net. The atmosphere is energetic and clean, reflecting a high-end corporate sports club aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCDc9JDmOkDAk_8KtoAyZL2Uhmr9xO_f-MNLo4h7TkX8oCN9cnsLPhirisSTwZZtv1rDwSAXNhePanLJAyL_rfr2OZFiteU25jc6r4sJj_5adEquN15un3Q09ujfrOt7ENxM3N0omLP3jUQ4Kaw3aPfKJszQP3LwUks91syBWdhX10dmEJaHLasSTypYPJwK7zPTLXP6DM4Gun5swIDk9pWc6GYxDAXT_JbNylBI31trG-_YJsi-u0hsCnYxuBx-6KvYn-3ujB88Q"/>
+    </div>
+  </div>
+  <!-- Right Section: Booking Panel -->
+  <aside class="lg:col-span-4 xl:col-span-3">
+    <div class="sticky top-24 flex flex-col gap-6 bg-white border border-outline-variant rounded-2xl p-6 shadow-md">
+      <div class="border-b border-outline-variant pb-4">
+        <h2 class="font-headline-md text-headline-md text-on-surface">Chi tiết đặt sân</h2>
+        <p class="text-on-surface-variant font-body-md mt-1" id="selected-date-text">Thứ Tư, 24 Tháng 5, 2024</p>
+      </div>
+      <div class="flex flex-col gap-4 min-h-[120px]" id="selected-slots-container">
+        <!-- Default message when no slot is selected -->
+        <div class="flex flex-col items-center justify-center text-center py-8 opacity-50" id="no-selection-msg">
+          <span class="material-symbols-outlined text-4xl mb-2" data-icon="touch_app">touch_app</span>
+          <p class="text-label-md">Vui lòng chọn sân và giờ trên lịch</p>
+        </div>
+        <!-- Selected slots will be injected here -->
+      </div>
+      <div class="bg-surface-container-low p-4 rounded-xl space-y-3">
+        <div class="flex justify-between items-center text-on-surface-variant font-label-md">
+          <span>Giá thuê (tạm tính)</span>
+          <span id="subtotal-val">0đ</span>
+        </div>
+        <div class="flex justify-between items-center text-on-surface-variant font-label-md">
+          <span>Phí dịch vụ</span>
+          <span>0đ</span>
+        </div>
+        <div class="pt-3 border-t border-outline-variant flex justify-between items-end">
+          <span class="font-bold text-on-surface">Tổng cộng</span>
+          <div class="text-right">
+            <span class="text-headline-md text-primary-container font-headline-md leading-none" id="total-price-val">0đ</span>
+          </div>
+        </div>
+      </div>
+      <button class="w-full bg-primary-container text-white py-4 rounded-xl font-headline-md disabled:opacity-50 disabled:grayscale transition-all active:scale-95 shadow-lg shadow-primary-container/20" disabled="" id="btn-confirm">
+        Xác nhận đặt sân
+      </button>
+      <div class="flex items-center gap-2 text-on-surface-variant text-[12px]">
+        <span class="material-symbols-outlined text-[16px]" data-icon="info">info</span>
+        <span>Bạn có thể hủy đặt sân trước 12 tiếng.</span>
+      </div>
+    </div>
+  </aside>
+</main>
+</body>
+</html>

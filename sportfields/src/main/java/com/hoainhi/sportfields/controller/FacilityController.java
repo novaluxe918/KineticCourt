@@ -3,16 +3,20 @@ package com.hoainhi.sportfields.controller;
 import com.hoainhi.sportfields.dto.FacilityDTO;
 import com.hoainhi.sportfields.dto.WardsDTO;
 import com.hoainhi.sportfields.entity.Facility;
+import com.hoainhi.sportfields.entity.Services;
 import com.hoainhi.sportfields.entity.User;
 import com.hoainhi.sportfields.service.CloudinaryService;
 import com.hoainhi.sportfields.service.FacilityService;
 import com.hoainhi.sportfields.service.WardSevice;
+import com.hoainhi.sportfields.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +37,8 @@ public class FacilityController {
     @Autowired
     private WardSevice wardSevice;
 
+    @Autowired
+    private ServiceImpl service;
     @GetMapping("/add")
     public String addFacility( Model model){
         model.addAttribute("facilityDTO" , new FacilityDTO());
@@ -124,5 +130,15 @@ public class FacilityController {
     public String deleteFaci(@PathVariable Long id){
         facilityService.deleteFaci(id);
         return "redirect:/facility/facilities_owner";
+    }
+
+    @GetMapping("view/{id}")
+    public String detailFacility(@PathVariable Long id, Model model, Pageable pageable){
+        FacilityDTO facility = facilityService.getFacilityById(id);
+        Page<Services> page = service.findByFacility_Id(id, pageable );
+        model.addAttribute("page", page);
+        model.addAttribute("facility", facility);
+
+        return "client/facility/Detail";
     }
 }

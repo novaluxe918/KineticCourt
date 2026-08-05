@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.dto;
 
+import com.hoainhi.sportfields.entity.Services;
 import com.hoainhi.sportfields.enums.FaciStatus;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import org.hibernate.validator.constraints.pl.NIP;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 public class FacilityDTO {
@@ -39,4 +41,5 @@ public class FacilityDTO {
  @NotNull(message = "Phải có giờ đóng cửa")
     private LocalTime close_time;
     private Boolean isEdit = false;
+
 }

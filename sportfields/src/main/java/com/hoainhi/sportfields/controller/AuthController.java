@@ -84,9 +84,5 @@ public class AuthController {
         return "client/Home";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession httpSession){
-        httpSession.invalidate();
-        return "client/home/Home";
-    }
+
 }

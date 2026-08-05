@@ -18,4 +18,5 @@ public interface Service_sv {
     Services updateService(ServiceDTO dto);
     ServiceDTO getServiceDTOById(Long id);
      void deleteService(Long id);
+     Page<Services> findByFacility_Id(Long facilityId,Pageable pageable);
 }

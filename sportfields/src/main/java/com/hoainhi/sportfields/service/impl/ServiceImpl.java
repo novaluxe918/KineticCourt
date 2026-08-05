@@ -72,5 +72,10 @@ public class ServiceImpl implements Service_sv {
         serviceRepository.deleteById(id);
     }
 
+    @Override
+    public Page<Services> findByFacility_Id(Long facilityId, Pageable pageable) {
+        return serviceRepository.findByFacility_Id(facilityId, pageable);
+    }
+
 
 }
