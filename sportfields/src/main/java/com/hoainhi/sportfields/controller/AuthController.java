@@ -3,6 +3,7 @@ package com.hoainhi.sportfields.controller;
 import com.hoainhi.sportfields.dto.AccountDTO;
 import com.hoainhi.sportfields.entity.User;
 import com.hoainhi.sportfields.enums.Role;
+import com.hoainhi.sportfields.enums.UserStatus;
 import com.hoainhi.sportfields.service.AccountService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -72,16 +73,20 @@ public class AuthController {
             modelMap.addAttribute("message", "Email không tồn tại");
             return "client/auth/Login";
         }
-        session.setAttribute("loginUser", user);
+        if(user.getStatus() == UserStatus.LOCKED){
+           modelMap.addAttribute("message", "Tài khoản của bạn đã bị khóa vui lòng liên hệ quản trị viên");
+            return "client/auth/Login";
+
+        }        session.setAttribute("loginUser", user);
         if(user.getRole() == Role.Admin){
-            return "redirect:/dashboard";
+            return "redirect:/admin/dashboard";
 
         }
         if(user.getRole() == Role.Owner){
             return "redirect:/facility/facilities_owner";
 
         }
-        return "client/Home";
+        return "client/home/Home";
     }
 
 

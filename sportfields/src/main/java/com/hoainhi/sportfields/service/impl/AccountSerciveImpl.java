@@ -22,6 +22,8 @@ public class AccountSerciveImpl implements AccountService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+
     @Override
     public User registerUser(AccountDTO accountDTO) {
 
@@ -45,9 +47,12 @@ public class AccountSerciveImpl implements AccountService {
     @Override
     public User loginUser(AccountDTO accountDTO) {
         Optional<User> optionalUser = accountRepository.findByEmail(accountDTO.getEmail());
-        if(optionalUser.isPresent() && bCryptPasswordEncoder.matches(accountDTO.getPassword(), optionalUser.get().getPassword())){
+        if(optionalUser.isPresent()
+                && bCryptPasswordEncoder.matches(accountDTO.getPassword(), optionalUser.get().getPassword())){
             return optionalUser.get();
         }
+
+
 
 
         return null;
