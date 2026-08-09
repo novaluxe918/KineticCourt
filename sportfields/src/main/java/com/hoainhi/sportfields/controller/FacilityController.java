@@ -126,13 +126,13 @@ public class FacilityController {
         return facilityService.getFacilityById(id);
     }
 
-    @GetMapping("delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteFaci(@PathVariable Long id){
         facilityService.deleteFaci(id);
         return "redirect:/facility/facilities_owner";
     }
 
-    @GetMapping("view/{id}")
+    @GetMapping("/view/{id}")
     public String detailFacility(@PathVariable Long id, Model model, Pageable pageable){
         FacilityDTO facility = facilityService.getFacilityById(id);
         Page<Services> page = service.findByFacility_Id(id, pageable );
@@ -140,5 +140,12 @@ public class FacilityController {
         model.addAttribute("facility", facility);
 
         return "client/facility/Detail";
+    }
+
+    @GetMapping("/list")
+    public String listFacility(Model model){
+        List<Facility> facilities = facilityService.getApproved();
+        model.addAttribute("facilities", facilities);
+        return "client/facility/ListFacility";
     }
 }
