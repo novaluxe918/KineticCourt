@@ -1,6 +1,7 @@
 package com.hoainhi.sportfields.service.impl;
 
 import com.hoainhi.sportfields.entity.User;
+import com.hoainhi.sportfields.enums.UserStatus;
 import com.hoainhi.sportfields.repository.UserRepository;
 import com.hoainhi.sportfields.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public void toggleUserStatus(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy user"));
+        if(user.getStatus() == UserStatus.ACTIVE){
+           user.setStatus(UserStatus.LOCKED);
+
+        } else {
+            user.setStatus(UserStatus.ACTIVE);
+        }
+        userRepository.save(user);
     }
 }

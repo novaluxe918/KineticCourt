@@ -1,6 +1,7 @@
 package com.hoainhi.sportfields.entity;
 
 import com.hoainhi.sportfields.enums.Role;
+import com.hoainhi.sportfields.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Generated;
@@ -37,6 +38,10 @@ public class User {
     private String avatar;
     private String phone;
     private LocalDate createdAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserStatus status = UserStatus.ACTIVE;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Facility> facilities;

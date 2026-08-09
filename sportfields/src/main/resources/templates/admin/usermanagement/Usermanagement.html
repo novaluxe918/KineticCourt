@@ -69,6 +69,7 @@
                     <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">User</th>
                     <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Email</th>
                     <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Role</th>
+                    <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
                     <th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
                 </tr>
                 </thead>
@@ -77,15 +78,36 @@
                 <tr th:each="user : ${users}" class="hover:bg-surface-container-low/50 transition-colors" style="transition: transform 0.2s ease-out; transform: translateX(0px);">
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
-                            <span th:text="${user.full_name}" class="font-body-md font-semibold text-on-surface">Alex Thompson</span>
+                            <span th:text="${user.full_name}" class="font-body-md font-semibold text-on-surface"></span>
                         </div>
                     </td>
                     <td th:text="${user.email}" class="px-6 py-4 text-body-md text-on-surface-variant"></td>
                     <td class="px-6 py-4">
                         <span th:text="${user.role}" class="px-3 py-1 rounded-full text-[12px] font-bold uppercase tracking-tight bg-secondary-container text-on-secondary-container"></span>
                     </td>
+                    <td class="px-6 py-4">
+                        <span th:if="${user.status.name() == 'ACTIVE'}"
+                              class="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+        Active
+    </span>
+
+                        <span th:if="${user.status.name() == 'LOCKED'}"
+                              class="px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
+        Locked
+    </span>
+                    </td>
                     <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2"><button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">lock</span></button></div>
+                        <div class="flex items-center justify-end gap-2">
+                            <form method="post" th:action="@{/admin/toggle/{id}(id=${user.id})}"
+                                  th:attr="onsubmit=${user.status.name() == 'ACTIVE'}
+                       ? 'return confirm(\'Bạn có chắc muốn khóa tài khoản này không?\')'
+                       : 'return confirm(\'Bạn có chắc muốn mở khóa tài khoản này không?\')'">
+                                <button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant">
+                                    <span th:text="${user.status.name() == 'ACTIVE' ? 'lock' : 'lock_open'}" class="material-symbols-outlined text-[20px]">lock</span>
+                                </button>
+                            </form>
+
+                        </div>
                     </td>
                 </tr>
 
