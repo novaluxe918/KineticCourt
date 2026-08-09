@@ -116,15 +116,30 @@
         </div>
         <!-- Table Footer / Pagination -->
         <div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
-            <p class="text-label-md text-on-surface-variant">Showing 1 to 5 of 1,284 users</p>
             <div class="flex items-center gap-2">
-                <button class="px-3 py-1 rounded border border-outline-variant text-on-surface-variant hover:bg-white transition-colors disabled:opacity-50" disabled="">Previous</button>
-                <button class="px-3 py-1 rounded bg-primary text-white font-bold">1</button>
-                <button class="px-3 py-1 rounded hover:bg-white text-on-surface-variant transition-colors">2</button>
-                <button class="px-3 py-1 rounded hover:bg-white text-on-surface-variant transition-colors">3</button>
-                <span class="px-2">...</span>
-                <button class="px-3 py-1 rounded hover:bg-white text-on-surface-variant transition-colors">257</button>
-                <button class="px-3 py-1 rounded border border-outline-variant text-on-surface-variant hover:bg-white transition-colors">Next</button>
+                <!-- Previous -->
+                <a th:if="${userPage.hasPrevious()}"
+                   th:href="@{/admin/usermanagement(page=${userPage.number - 1},size=${userPage.size})}"
+                   class="px-3 py-1 rounded border border-outline-variant">
+                    Previous
+                </a>
+
+                <!-- Page numbers -->
+                <a th:each="i : ${#numbers.sequence(0, userPage.totalPages - 1)}"
+                   th:href="@{/admin/usermanagement(page=${i},size=${userPage.size})}"
+                   th:text="${i + 1}"
+                   th:classappend="${i == userPage.number}
+                       ? ' bg-primary text-white font-bold'
+                       : ' text-on-surface-variant hover:bg-white'"
+                   class="px-3 py-1 rounded transition-colors">
+                </a>
+
+                <!-- Next -->
+                <a th:if="${userPage.hasNext()}"
+                   th:href="@{/admin/usermanagement(page=${userPage.number + 1},size=${userPage.size})}"
+                   class="px-3 py-1 rounded border border-outline-variant">
+                    Next
+                </a>
             </div>
         </div>
     </div>

@@ -7,12 +7,12 @@ import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
 import com.hoainhi.sportfields.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,9 +41,11 @@ public class AdminController {
     }
 
     @GetMapping("/usermanagement")
-    public String showUserManage(Model model){
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
+    public String showUserManage(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "5") int size, Model model){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<User> users = userService.getAllUsers(pageable);
+        model.addAttribute("users", users.getContent());
+        model.addAttribute("userPage", users);
         model.addAttribute("activePage", "users");
         return "admin/usermanagement/Usermanagement";
     }
