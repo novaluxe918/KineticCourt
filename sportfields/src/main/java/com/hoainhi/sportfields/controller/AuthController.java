@@ -20,9 +20,23 @@ public class AuthController {
     @Autowired
     private AccountService accountSercive;
 
-    @RequestMapping("/login")
-    public String showLogin(Model model){
+    @GetMapping("/login")
+    public String showLogin(@RequestParam(required = false) String error,Model model){
+        if ("locked".equals(error)) {
+            model.addAttribute(
+                    "message",
+                    "Tài khoản của bạn đã bị khóa."
+            );
+        }
+
+        if ("google".equals(error)) {
+            model.addAttribute(
+                    "message",
+                    "Tài khoản Google chưa được đăng ký."
+            );
+        }
         model.addAttribute("accountDTO", new AccountDTO());
+
         return "client/auth/Login";
     }
 
