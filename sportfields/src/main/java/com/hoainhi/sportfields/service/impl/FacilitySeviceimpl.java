@@ -58,7 +58,7 @@ public class FacilitySeviceimpl  implements FacilityService {
     @Override
     public Facility updateFacility(User user, FacilityDTO facilityDTO) {
 
-        Facility facility = faciRepository.findById(facilityDTO.getId_facility())
+        Facility facility = faciRepository.findById(facilityDTO.getId())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy"));
 
         facility.setName_facility(facilityDTO.getName_facility());

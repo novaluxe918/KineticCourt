@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-<main layout:fragment="main" class="max-w-container-max mx-auto px-margin-desktop py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 mt-20">
+<main layout:fragment="main" class=" mx-auto px-margin-desktop py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 mt-20">
   <!-- Left Section: Schedule Grid -->
   <div class="lg:col-span-8 xl:col-span-9 flex flex-col gap-6">
     <!-- Header & Toolbar -->
@@ -59,140 +59,101 @@
     <div class="overflow-x-auto border border-outline-variant rounded-xl bg-white shadow-sm hide-scrollbar">
       <div class="min-w-[1000px]">
         <!-- Time Labels -->
-        <div class="grid grid-cols-[100px_repeat(18,1fr)] bg-surface-container-low border-b border-outline-variant">
-          <div class="p-3 border-r border-outline-variant text-label-md text-on-surface-variant font-bold">SÂN / GIỜ</div>
-          <!-- 05:00 to 22:00 (18 hours) -->
-          <div class="p-3 text-center text-label-md text-on-surface-variant">05:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">06:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">07:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">08:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">09:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">10:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">11:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">12:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">13:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">14:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">15:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">16:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">17:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">18:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">19:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">20:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">21:00</div>
-          <div class="p-3 text-center text-label-md text-on-surface-variant">22:00</div>
-        </div>
+<!--        <div class="grid grid-cols-[180px_repeat(18,minmax(0,1fr))] bg-surface-container-low border-b border-outline-variant">-->
+<!--          <div class="p-1 border-r border-outline-variant text-label-md text-on-surface-variant font-bold">SÂN / GIỜ</div>-->
+<!--          &lt;!&ndash; 05:00 to 22:00 (18 hours) &ndash;&gt;-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant"></div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">06:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">07:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">08:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">09:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">10:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">11:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">12:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">13:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">14:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">15:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">16:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">17:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">18:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">19:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">20:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">21:00</div>-->
+<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">22:00</div>-->
+<!--        </div>-->
         <!-- Court Rows -->
         <!-- Row 1 -->
-        <div class="grid grid-cols-[100px_repeat(18,1fr)] border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
-          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 01</div>
-          <!-- Cells -->
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '05:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '06:00')"></button>
-          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
-          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '09:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '10:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '11:00')"></button>
-          <div class="p-4 border-r border-outline-variant bg-inverse-surface flex items-center justify-center"><span class="material-symbols-outlined text-[14px] text-white" data-icon="construction">construction</span></div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '13:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '14:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '15:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '16:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '17:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '18:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '19:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '20:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '21:00')"></button>
-          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 01', '22:00')"></button>
-        </div>
-        <!-- Row 2 -->
-        <div class="grid grid-cols-[100px_repeat(18,1fr)] border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
-          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 02</div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '05:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '06:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '07:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '08:00')"></button>
-          <div class="p-4 border-r border-outline-variant bg-tertiary-container text-[10px] text-on-tertiary flex items-center justify-center">SỰ KIỆN</div>
-          <div class="p-4 border-r border-outline-variant bg-tertiary-container text-[10px] text-on-tertiary flex items-center justify-center">SỰ KIỆN</div>
-          <div class="p-4 border-r border-outline-variant bg-tertiary-container text-[10px] text-on-tertiary flex items-center justify-center">SỰ KIỆN</div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '12:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '13:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '14:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '15:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '16:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '17:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '18:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '19:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '20:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '21:00')"></button>
-          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 02', '22:00')"></button>
-        </div>
-        <!-- Row 3 -->
-        <div class="grid grid-cols-[100px_repeat(18,1fr)] border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
-          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 03</div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '05:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '06:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '07:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '08:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '09:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '10:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '11:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '12:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '13:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '14:00')"></button>
-          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
-          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
-          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '18:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '19:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '20:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '21:00')"></button>
-          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 03', '22:00')"></button>
-        </div>
-        <!-- Row 4 -->
-        <div class="grid grid-cols-[100px_repeat(18,1fr)] border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
-          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 04</div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '05:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '06:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '07:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '08:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '09:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '10:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '11:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '12:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '13:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '14:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '15:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '16:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '17:00')"></button>
-          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
-          <div class="p-4 border-r border-outline-variant bg-surface-container-highest cursor-not-allowed"></div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '20:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '21:00')"></button>
-          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 04', '22:00')"></button>
-        </div>
-        <!-- Row 5 -->
-        <div class="grid grid-cols-[100px_repeat(18,1fr)] hover:bg-surface-container-lowest transition-colors">
-          <div class="p-4 border-r border-outline-variant font-headline-md text-[14px] flex items-center bg-surface-container-low font-bold">Sân 05</div>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '05:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '06:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '07:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '08:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '09:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '10:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '11:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '12:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '13:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '14:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '15:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '16:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '17:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '18:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '19:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '20:00')"></button>
-          <button class="p-4 border-r border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '21:00')"></button>
-          <button class="p-4 border-outline-variant hover:bg-primary-container/10 transition-all" onclick="toggleSlot(this, 'Sân 05', '22:00')"></button>
-        </div>
+          <div class="overflow-x-auto border border-outline-variant rounded-xl bg-white shadow-sm">
+
+              <div class="min-w-[1850px]">
+
+                  <!-- ================= HEADER ================= -->
+                  <div class="grid grid-cols-[100px_repeat(35,minmax(50px,1fr))]
+                    border-b border-outline-variant
+                    transition-colors">
+
+                      <!-- SÂN / GIỜ -->
+                      <div class="h-12 p-1
+                        border-r border-outline-variant
+                        font-headline-md text-[14px]
+                        flex items-center justify-center
+                        bg-surface-container-low
+                        font-bold
+                        whitespace-nowrap">
+                          SÂN / GIỜ
+                      </div>
+
+                      <!-- TIME SLOT -->
+                      <div th:each="time : ${timeSlot}"
+                           th:text="${time}"
+                           class="h-12 min-w-[50px]
+                        p-1
+                        border-r border-outline-variant
+                        bg-surface-container-highest
+                        flex items-center justify-center
+                        text-[12px]
+                        whitespace-nowrap">
+                      </div>
+
+                  </div>
+
+
+                  <!-- ================= COURTS ================= -->
+                  <div th:each="court : ${courts}"
+                       class="grid grid-cols-[100px_repeat(35,minmax(50px,1fr))]
+                    border-b border-outline-variant
+                    transition-colors">
+
+                      <!-- TÊN SÂN -->
+                      <div th:text="${court.name_court}"
+                           class="h-12 p-1
+                        border-r border-outline-variant
+                        font-headline-md text-[14px]
+                        flex items-center
+                        bg-surface-container-low
+                        font-bold
+                        whitespace-nowrap">
+                      </div>
+
+
+                      <!-- 35 SLOT -->
+                      <button th:each="time : ${timeSlot}"
+                              type="button"
+                              class="h-12 min-w-[50px]
+                           p-1
+                           border-r border-outline-variant
+                           bg-white
+                           hover:bg-primary-container/10
+                           transition-all"
+                              th:attr="onclick=|toggleSlot(this, '${court.name_court}', '${time}')|">
+                      </button>
+
+                  </div>
+
+              </div>
+
+          </div>
+
       </div>
     </div>
     <!-- Promotion / Visual Component -->

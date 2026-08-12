@@ -9,7 +9,6 @@ import com.hoainhi.sportfields.service.CloudinaryService;
 import com.hoainhi.sportfields.service.FacilityService;
 import com.hoainhi.sportfields.service.WardSevice;
 import com.hoainhi.sportfields.service.impl.ServiceImpl;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -75,7 +74,7 @@ public class FacilityController {
         }
 
 
-        if (facilityDTO.getId_facility() == null) {
+        if (facilityDTO.getId() == null) {
             facilityService.addfacility(facilityDTO, user);
         } else {
             facilityService.updateFacility(user, facilityDTO);

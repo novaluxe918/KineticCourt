@@ -35,7 +35,7 @@ public class CourtServiceImpl implements CourtService {
 
     @Override
     public List<Court> getCourtByFacility(Long facilityId) {
-        return courtRepository.findByFacility_IdAndFacility_Status(facilityId, FaciStatus.APPROVED);
+        return courtRepository.findByFacility_Id(facilityId);
     }
 
     @Override

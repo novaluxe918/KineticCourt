@@ -13,7 +13,7 @@ import java.util.List;
 
 @Data
 public class FacilityDTO {
- private Long id_facility;
+ private Long id;
 
    @NotEmpty(message = "Không được để trống tên cơ sở ")
    private String name_facility;
