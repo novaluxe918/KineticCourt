@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
   Page<Schedule> findByCourt_Facility_User_Id(Long userId, Pageable pageable);
+
 }

@@ -1,7 +1,5 @@
 package com.hoainhi.sportfields.controller;
 
-import com.hoainhi.sportfields.dto.CalendarCourtDTO;
-import com.hoainhi.sportfields.dto.CourtDTO;
 import com.hoainhi.sportfields.dto.ScheduleDTO;
 import com.hoainhi.sportfields.entity.*;
 import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
@@ -20,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

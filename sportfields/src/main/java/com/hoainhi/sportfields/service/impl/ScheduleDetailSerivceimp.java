@@ -6,6 +6,7 @@ import com.hoainhi.sportfields.service.ScheduleDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -21,5 +22,10 @@ public class ScheduleDetailSerivceimp implements ScheduleDetailService {
     @Override
     public List<ScheduleDetails> getAll() {
         return  scheduleDetailRepository.findAll();
+    }
+
+    @Override
+    public List<ScheduleDetails> getScheduleDetails(Long courtId, LocalDate date) {
+        return scheduleDetailRepository.findByTimeScheduleDetails(courtId, date);
     }
 }

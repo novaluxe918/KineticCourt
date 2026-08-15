@@ -85,35 +85,58 @@
                     </div>
                     <div class="space-y-4" id="time-slots-container">
                         <!-- Slot Row 1 -->
-                        <div th:each="detail, stat : *{scheduleDetails}" class="time-slot grid grid-cols-12 gap-4 items-end p-4 bg-surface-container-lowest border border-outline-variant rounded-lg transition-all hover:border-primary-container/50">
+                        <div th:each="detail, stat : *{scheduleDetails}"
+                             class="time-slot grid grid-cols-12 gap-4 items-end p-4 bg-surface-container-lowest border border-outline-variant rounded-lg">
+
                             <input type="hidden"
                                    th:field="*{scheduleDetails[__${stat.index}__].id}">
 
-                            <input
-                                    type="hidden"
-                                    name="scheduleDetails[0].status"
-                                    th:value="${detail.status}">
+                            <input type="hidden"
+                                   th:field="*{scheduleDetails[__${stat.index}__].status}">
+
+                            <!-- Giờ bắt đầu -->
                             <div class="col-span-4 space-y-2">
-                                <label class="block font-label-md text-label-md text-secondary">Giờ bắt đầu</label>
-                                <div class="relative">
-                                    <input th:field="*{scheduleDetails[__${stat.index}__].time_start}" class="w-full p-3 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="time" />
-                                    <p class="text-red-500 text-sm" th:errors="*{scheduleDetails[0].time_start}"></p>
-                                </div>
+                                <label class="block font-label-md text-secondary">
+                                    Giờ bắt đầu
+                                </label>
+
+                                <input type="time"
+                                       th:field="*{scheduleDetails[__${stat.index}__].time_start}"
+                                       class="w-full p-3 bg-white border border-outline-variant rounded-lg">
+
+                                <p class="text-red-500 text-sm"
+                                   th:errors="*{scheduleDetails[__${stat.index}__].time_start}">
+                                </p>
                             </div>
+
+                            <!-- Giờ kết thúc -->
                             <div class="col-span-4 space-y-2">
-                                <label class="block font-label-md text-label-md text-secondary">Giờ kết thúc</label>
-                                <div class="relative">
-                                    <input  th:field="*{scheduleDetails[__${stat.index}__].time_end}" class="w-full p-3 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none" type="time" />
-                                    <p class="text-red-500 text-sm" th:errors="*{scheduleDetails[0].time_end}"></p>
-                                </div>
+                                <label class="block font-label-md text-secondary">
+                                    Giờ kết thúc
+                                </label>
+
+                                <input type="time"
+                                       th:field="*{scheduleDetails[__${stat.index}__].time_end}"
+                                       class="w-full p-3 bg-white border border-outline-variant rounded-lg">
+
+                                <p class="text-red-500 text-sm"
+                                   th:errors="*{scheduleDetails[__${stat.index}__].time_end}">
+                                </p>
                             </div>
+
+                            <!-- Giá -->
                             <div class="col-span-3 space-y-2">
-                                <label class="block font-label-md text-label-md text-secondary">Đơn giá (1h)</label>
-                                <div class="relative">
-                                    <input  th:field="*{scheduleDetails[__${stat.index}__].price}" class=" price-input w-full p-3 pr-12 bg-white border border-outline-variant rounded-lg font-body-md text-body-md focus:ring-2 focus:ring-primary-container focus:outline-none text-right" type="number" />
-                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-secondary text-xs font-bold">VND</span>
-                                    <p class="text-red-500 text-sm" th:errors="*{scheduleDetails[0].price}"></p>
-                                </div>
+                                <label class="block font-label-md text-secondary">
+                                    Đơn giá (1h)
+                                </label>
+
+                                <input type="number"
+                                       th:field="*{scheduleDetails[__${stat.index}__].price}"
+                                       class="price-input w-full p-3 pr-12 bg-white border border-outline-variant rounded-lg">
+
+                                <p class="text-red-500 text-sm"
+                                   th:errors="*{scheduleDetails[__${stat.index}__].price}">
+                                </p>
                             </div>
                             <div class="col-span-1 flex justify-center">
                                 <button class="delete-slot p-2 text-error hover:bg-error/10 rounded-lg transition-colors" type="button">
@@ -169,7 +192,7 @@
                         </li>
                         <li class="flex justify-between">
                             <span>Số khung giờ:</span>
-                            <span id="summarySlot" class="font-semibold">1</span>
+                            <span id="summarySlot" class="font-semibold"  th:text="${#lists.size(schedules.scheduleDetails)}"></span>
                         </li>
                         <li class="flex justify-between">
                             <span>Giá trung bình:</span>

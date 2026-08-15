@@ -100,7 +100,7 @@ public class AuthController {
             return "redirect:/facility/facilities_owner";
 
         }
-        return "client/home/Home";
+        return "redirect:/home";
     }
 
 

@@ -8,6 +8,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -35,5 +36,5 @@ public class ScheduleDTO {
     private Boolean isEdit = false;
 
     @Valid
-    private List<ScheduleDetailDTO> scheduleDetails;
+    private List<ScheduleDetailDTO> scheduleDetails = new ArrayList<>();
 }

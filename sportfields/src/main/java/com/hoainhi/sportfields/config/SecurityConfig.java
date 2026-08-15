@@ -37,10 +37,6 @@ public class SecurityConfig {
                 ).permitAll()
                 .anyRequest().permitAll()
         )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
                 .oauth2Login(oauth -> oauth
                         .loginPage("/login")
                         .successHandler(successHandler)

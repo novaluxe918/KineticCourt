@@ -17,18 +17,36 @@
         <p class="text-on-surface-variant font-body-md">Chọn sân và khung giờ phù hợp với bạn.</p>
       </div>
       <!-- Date Picker Interaction -->
-      <div class="flex items-center gap-2 bg-surface-container border border-outline-variant p-2 rounded-xl">
-        <button class="p-1 hover:bg-surface-container-high rounded transition-colors">
-          <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
-        </button>
         <div class="flex flex-col items-center px-4">
-          <span class="font-label-md text-primary">Thứ Tư</span>
-          <span class="font-headline-md text-on-surface leading-none">24 Tháng 5</span>
+
+
+            <form th:action="@{/booking/book}" method="get">
+
+                <input type="hidden"
+                       name="facilityId"
+                       th:value="${facilityId}">
+
+                <div class="flex flex-col items-center px-4">
+
+                    <label for="bookingDate"
+                           class="font-label-md text-primary">
+                        Chọn ngày
+                    </label>
+
+                    <input type="date"
+                           id="bookingDate"
+                           name="date"
+                           th:value="${date}"
+                           onchange="this.form.submit()"
+                           class="mt-2 px-4 py-2 rounded-xl
+                      border border-outline-variant
+                      bg-white
+                      cursor-pointer">
+
+                </div>
+
+            </form>
         </div>
-        <button class="p-1 hover:bg-surface-container-high rounded transition-colors">
-          <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-        </button>
-      </div>
     </div>
     <!-- Legends -->
     <div class="flex flex-wrap items-center gap-6 p-4 bg-white border border-outline-variant rounded-xl shadow-sm">
@@ -48,7 +66,7 @@
         <div class="w-4 h-4 bg-inverse-surface flex items-center justify-center rounded-sm">
           <span class="material-symbols-outlined text-[10px] text-white" data-icon="lock">lock</span>
         </div>
-        <span class="text-label-md text-on-surface-variant">Khóa/Sửa chữa</span>
+        <span class="text-label-md text-on-surface-variant">Đóng cửa</span>
       </div>
       <div class="flex items-center gap-2">
         <div class="w-4 h-4 bg-tertiary-container rounded-sm"></div>
@@ -58,36 +76,13 @@
     <!-- Time Grid Table -->
     <div class="overflow-x-auto border border-outline-variant rounded-xl bg-white shadow-sm hide-scrollbar">
       <div class="min-w-[1000px]">
-        <!-- Time Labels -->
-<!--        <div class="grid grid-cols-[180px_repeat(18,minmax(0,1fr))] bg-surface-container-low border-b border-outline-variant">-->
-<!--          <div class="p-1 border-r border-outline-variant text-label-md text-on-surface-variant font-bold">SÂN / GIỜ</div>-->
-<!--          &lt;!&ndash; 05:00 to 22:00 (18 hours) &ndash;&gt;-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant"></div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">06:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">07:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">08:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">09:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">10:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">11:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">12:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">13:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">14:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">15:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">16:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">17:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">18:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">19:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">20:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">21:00</div>-->
-<!--          <div class="p-4 text-center text-label-md text-on-surface-variant">22:00</div>-->
-<!--        </div>-->
-        <!-- Court Rows -->
+
         <!-- Row 1 -->
           <div class="overflow-x-auto border border-outline-variant rounded-xl bg-white shadow-sm">
 
               <div class="min-w-[1850px]">
 
-                  <!-- ================= HEADER ================= -->
+
                   <div class="grid grid-cols-[100px_repeat(35,minmax(50px,1fr))]
                     border-b border-outline-variant
                     transition-colors">
@@ -103,7 +98,6 @@
                           SÂN / GIỜ
                       </div>
 
-                      <!-- TIME SLOT -->
                       <div th:each="time : ${timeSlot}"
                            th:text="${time}"
                            class="h-12 min-w-[50px]
@@ -119,13 +113,13 @@
 
 
                   <!-- ================= COURTS ================= -->
-                  <div th:each="court : ${courts}"
+                  <div th:each="show : ${showDTOS}"
                        class="grid grid-cols-[100px_repeat(35,minmax(50px,1fr))]
                     border-b border-outline-variant
                     transition-colors">
 
                       <!-- TÊN SÂN -->
-                      <div th:text="${court.name_court}"
+                      <div th:text="${show.court.name_court}"
                            class="h-12 p-1
                         border-r border-outline-variant
                         font-headline-md text-[14px]
@@ -136,17 +130,20 @@
                       </div>
 
 
-                      <!-- 35 SLOT -->
-                      <button th:each="time : ${timeSlot}"
-                              type="button"
-                              class="h-12 min-w-[50px]
-                           p-1
-                           border-r border-outline-variant
-                           bg-white
-                           hover:bg-primary-container/10
-                           transition-all"
-                              th:attr="onclick=|toggleSlot(this, '${court.name_court}', '${time}')|">
-                      </button>
+                      <div th:each="slot : ${show.timeShowDTOS}"
+                           class="h-12 min-w-[50px] border-r">
+
+                          <button th:if="${slot.status.name() == 'AVAILABLE'}"
+                                  type="button"
+                                  class="w-full h-full  bg-white hover:bg-primary-container/10">
+                          </button>
+
+                          <div th:unless="${slot.status.name() == 'CLOSED'}"
+                               class="w-full h-full bg-inverse-surface flex items-center justify-center">
+                              🔒
+                          </div>
+
+                      </div>
 
                   </div>
 
