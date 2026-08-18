@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("btn-confirm");
 
 
-    // =========================================
+
     // CLICK BOOKING
-    // =========================================
+
 
     bookingBlocks.forEach(block => {
 
@@ -69,9 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // =========================================
-    // UPDATE ASIDE
-    // =========================================
+
 
     function updateSelectedSlots() {
 
@@ -90,9 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        // =====================================
-        // KHÔNG CÓ SLOT
-        // =====================================
+
 
         if (selectedBlocks.length === 0) {
 
@@ -108,9 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // =====================================
-        // CÓ SLOT
-        // =====================================
+
 
         noSelectionMsg.classList.add("hidden");
 

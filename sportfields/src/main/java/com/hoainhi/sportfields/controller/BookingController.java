@@ -1,17 +1,16 @@
 package com.hoainhi.sportfields.controller;
 
-import com.hoainhi.sportfields.dto.BookingBlockDTO;
-import com.hoainhi.sportfields.dto.FacilityDTO;
-import com.hoainhi.sportfields.dto.ShowDTO;
-import com.hoainhi.sportfields.dto.TimeShowDTO;
+import com.hoainhi.sportfields.dto.*;
 import com.hoainhi.sportfields.entity.Court;
 import com.hoainhi.sportfields.entity.Facility;
 import com.hoainhi.sportfields.entity.ScheduleDetails;
+import com.hoainhi.sportfields.entity.User;
 import com.hoainhi.sportfields.enums.ScheduleStatus;
 import com.hoainhi.sportfields.repository.FaciRepository;
 import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
 import com.hoainhi.sportfields.service.impl.ScheduleDetailSerivceimp;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -39,8 +38,14 @@ public class BookingController {
 
     @GetMapping("/book")
     public String bookingClient(@RequestParam Long facilityId, Model model,
-                                @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate date){
+                                @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate date, HttpSession session){
 
+
+        User user = (User) session.getAttribute("loginUser");
+
+        if(user == null){
+            return "redirect:/facility/view/" + facilityId + "?error=loginRequired";
+        }
         if(date == null){
             date = LocalDate.now();
         }  // thoi gian hien tai

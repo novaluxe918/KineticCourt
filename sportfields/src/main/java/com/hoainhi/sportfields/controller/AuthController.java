@@ -77,7 +77,7 @@ public class AuthController {
         if(user.getRole() == Role.Owner){
             return new ModelAndView("owner/facility/Facility", model);
         }
-        return new ModelAndView("client/Home", model);
+        return new ModelAndView("client/home/Home", model);
     }
 
     @PostMapping("/login")
