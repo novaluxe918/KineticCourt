@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.controller;
 
+import com.hoainhi.sportfields.dto.BookingBlockDTO;
 import com.hoainhi.sportfields.dto.FacilityDTO;
 import com.hoainhi.sportfields.dto.ShowDTO;
 import com.hoainhi.sportfields.dto.TimeShowDTO;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,55 +44,88 @@ public class BookingController {
         if(date == null){
             date = LocalDate.now();
         }  // thoi gian hien tai
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
         List<String> timeSlots = new ArrayList<>(); // dto time , status
         LocalTime time = LocalTime.of(5, 0);
         LocalTime end = LocalTime.of(22, 0);
-        while (!time.isAfter(end)){
-            timeSlots.add(time.toString());
+        while (!time.isAfter(end)) {
+            timeSlots.add(time.format(formatter));
             time = time.plusMinutes(30);
         }
-        List<Court> courts = courtService.getCourtByFacility(facilityId);
-        // courts => list schedudetail => status trong => dong
-        List<ShowDTO> showDTOS = new ArrayList<>();
-        for(Court court : courts){
-            List<TimeShowDTO> timeShowDTOS = new ArrayList<>();
-            for(String timeValue : timeSlots){
-                List<ScheduleDetails> scheduleDetails = scheduleDetailSerivceimp.getScheduleDetails(court.getId(), date);
-                LocalTime currentTime  = LocalTime.parse(timeValue);
-              TimeShowDTO timeShowDTO = new TimeShowDTO();
-              timeShowDTO.setTime(timeValue);
-                boolean closed = scheduleDetails.stream()
-                        .anyMatch(detail -> {
+        List<Court> courts =
+                courtService.getCourtByFacility(facilityId);
 
-                            LocalTime startTime =
-                                    detail.getTime_start();
+        List<ShowDTO> showDTOS =
+                new ArrayList<>();
 
-                            LocalTime endTime =
-                                    detail.getTime_end();
+        for (Court court : courts) {
 
-                            return !currentTime.isBefore(startTime)
-                                    && currentTime.isBefore(endTime);
-                        });
-                if (closed) {
-
-                    timeShowDTO.setStatus(
-                            ScheduleStatus.CLOSED
+            // Lấy schedule của sân trong ngày được chọn
+            List<ScheduleDetails> scheduleDetails =
+                    scheduleDetailSerivceimp.getScheduleDetails(
+                            court.getId(),
+                            date
                     );
 
-                } else {
+            List<BookingBlockDTO> bookingBlockDTOS =
+                    new ArrayList<>();
 
-                    timeShowDTO.setStatus(
-                            ScheduleStatus.AVAILABLE
-                    );
-                }
+            for (ScheduleDetails details : scheduleDetails) {
+
+                LocalTime start =
+                        details.getTime_start();
+
+                LocalTime endTime =
+                        details.getTime_end();
 
 
-                timeShowDTOS.add(timeShowDTO);
+
+                // 1. TÍNH VỊ TRÍ BẮT ĐẦU
+
+                long minuteFromStart =
+                        Duration.between(
+                                LocalTime.of(5, 0),
+                                start
+                        ).toMinutes();
+
+                int startSlot =
+                        (int) (minuteFromStart / 30);
+
+
+
+                // 2. TÍNH SỐ SLOT
+
+                long durationMinutes =
+                        Duration.between(start, endTime).toMinutes();
+
+                int slotCount =
+                        (int) (durationMinutes / 30);
+
+
+
+
+                BookingBlockDTO blockDTO =
+                        new BookingBlockDTO();
+
+                blockDTO.setStartTime(start);
+                blockDTO.setEndTime(endTime);
+
+                blockDTO.setStartColumn(startSlot);
+                blockDTO.setSlotCount(slotCount);
+                blockDTO.setPrice(details.getPrice());
+                bookingBlockDTOS.add(blockDTO);
             }
 
-           ShowDTO showDTO = new ShowDTO();
+
+            ShowDTO showDTO =
+                    new ShowDTO();
+
             showDTO.setCourt(court);
-            showDTO.setTimeShowDTOS(timeShowDTOS);
+            showDTO.setBookingBlocks(
+                    bookingBlockDTOS
+            );
+
             showDTOS.add(showDTO);
         }
         model.addAttribute("date", date);

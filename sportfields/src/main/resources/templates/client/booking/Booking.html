@@ -74,74 +74,224 @@
       </div>
     </div>
     <!-- Time Grid Table -->
-    <div class="overflow-x-auto border border-outline-variant rounded-xl bg-white shadow-sm hide-scrollbar">
-      <div class="min-w-[1000px]">
+      <!-- ================================================= -->
+      <!-- BOOKING TABLE -->
+      <!-- ================================================= -->
 
-        <!-- Row 1 -->
-          <div class="overflow-x-auto border border-outline-variant rounded-xl bg-white shadow-sm">
+      <div class="overflow-x-auto w-full
+            border border-outline-variant
+            rounded-xl
+            bg-white
+            shadow-sm
+            hide-scrollbar">
 
-              <div class="min-w-[1850px]">
+          <div class="min-w-[1800px]">
 
+              <!-- ===================================================== -->
+              <!-- HEADER -->
+              <!-- ===================================================== -->
 
-                  <div class="grid grid-cols-[100px_repeat(35,minmax(50px,1fr))]
-                    border-b border-outline-variant
-                    transition-colors">
+              <div class="grid grid-cols-[100px_minmax(0,1fr)]
+                    border-b border-outline-variant">
 
-                      <!-- SÂN / GIỜ -->
-                      <div class="h-12 p-1
-                        border-r border-outline-variant
-                        font-headline-md text-[14px]
+                  <!-- ================================================= -->
+                  <!-- SÂN / GIỜ -->
+                  <!-- ================================================= -->
+
+                  <div class="h-12
+                        w-[100px]
+                        min-w-[100px]
+                        box-border
+                        border-r-2 border-outline-variant
                         flex items-center justify-center
                         bg-surface-container-low
                         font-bold
-                        whitespace-nowrap">
-                          SÂN / GIỜ
-                      </div>
-
-                      <div th:each="time : ${timeSlot}"
-                           th:text="${time}"
-                           class="h-12 min-w-[50px]
-                        p-1
-                        border-r border-outline-variant
-                        bg-surface-container-highest
-                        flex items-center justify-center
                         text-[12px]
-                        whitespace-nowrap">
-                      </div>
+                        text-primary
+                        text-center
+                        leading-tight
+                        px-1
+                        relative
+                        z-20">
+
+                      <span>SÂN / GIỜ</span>
 
                   </div>
 
 
-                  <!-- ================= COURTS ================= -->
-                  <div th:each="show : ${showDTOS}"
-                       class="grid grid-cols-[100px_repeat(35,minmax(50px,1fr))]
-                    border-b border-outline-variant
-                    transition-colors">
+                  <!-- ================================================= -->
+                  <!-- TIME HEADER -->
+                  <!-- ================================================= -->
 
-                      <!-- TÊN SÂN -->
-                      <div th:text="${show.court.name_court}"
-                           class="h-12 p-1
-                        border-r border-outline-variant
-                        font-headline-md text-[14px]
-                        flex items-center
-                        bg-surface-container-low
-                        font-bold
-                        whitespace-nowrap">
+                  <div class="relative h-12 overflow-visible
+                        bg-surface-container-highest">
+
+                      <!-- ============================================= -->
+                      <!-- 34 KHOẢNG THỜI GIAN -->
+                      <!-- ============================================= -->
+
+                      <div class="absolute inset-0
+                            grid
+                            grid-cols-[repeat(34,minmax(50px,1fr))]">
+
+                          <div th:each="i : ${#numbers.sequence(1,34)}"
+                               class="h-12
+                                bg-surface-container-highest">
+                          </div>
+
                       </div>
 
 
-                      <div th:each="slot : ${show.timeShowDTOS}"
-                           class="h-12 min-w-[50px] border-r">
+                      <!-- ============================================= -->
+                      <!-- 35 MỐC GIỜ -->
+                      <!-- ============================================= -->
 
-                          <button th:if="${slot.status.name() == 'AVAILABLE'}"
-                                  type="button"
-                                  class="w-full h-full  bg-white hover:bg-primary-container/10">
-                          </button>
 
-                          <div th:unless="${slot.status.name() == 'CLOSED'}"
-                               class="w-full h-full bg-inverse-surface flex items-center justify-center">
-                              🔒
+
+                      <div th:each="time, stat : ${timeSlot}"
+                           class="absolute
+            top-0
+            h-12
+            flex
+            items-center
+            text-[12px]
+            whitespace-nowrap
+            z-10
+            pointer-events-none"
+
+                           th:style="'left: calc('
+            + ${stat.index}
+            + ' * (100% / 34));'
+            + 'transform: translateX('
+            + (${stat.index == 0}
+                ? '0%'
+                : (${stat.index == 33}
+                    ? '-65%'
+                    : (${stat.index == 34}
+                        ? '-100%'
+                        : '-50%')))
+            + ');'">
+
+    <span th:text="${time}"
+          class="
+                 bg-surface-container-highest
+                 text-primary
+                 font-medium">
+    </span>
+
+                      </div>
+
+                  </div>
+
+              </div>
+
+
+              <!-- ===================================================== -->
+              <!-- COURTS -->
+              <!-- ===================================================== -->
+
+              <div th:each="show : ${showDTOS}"
+                   class="grid grid-cols-[100px_minmax(0,1fr)]
+                    border-b border-outline-variant">
+
+                  <!-- ================================================= -->
+                  <!-- COURT NAME -->
+                  <!-- ================================================= -->
+
+                  <div class="h-12
+                        w-[100px]
+                        min-w-[100px]
+                        box-border
+                        border-r-2 border-outline-variant
+                        bg-surface-container-low
+                        flex items-center
+                        justify-center
+                        px-2
+                        overflow-hidden">
+
+                <span th:text="${show.court.name_court}"
+                      class="w-full
+                             text-center
+                             font-bold
+                             text-[12px]
+                             text-primary
+                             leading-tight
+                             whitespace-normal
+                             break-words
+                             line-clamp-2">
+                </span>
+
+                  </div>
+
+
+                  <!-- ================================================= -->
+                  <!-- TIME AREA -->
+                  <!-- ================================================= -->
+
+                  <div class="relative h-12 overflow-hidden">
+
+
+
+                      <div class="absolute inset-0
+                            grid
+                            grid-cols-[repeat(34,minmax(50px,1fr))]">
+
+                          <div th:each="i : ${#numbers.sequence(1,34)}"
+                               class="h-12
+                                border-r
+                                border-outline-variant
+                                bg-inverse-surface
+                                flex items-center
+                                justify-center">
+
+                        <span class="material-symbols-outlined
+                                     text-white
+                                     text-[16px]">
+                            lock
+                        </span>
+
                           </div>
+
+                      </div>
+
+
+                      <!-- ============================================= -->
+                      <!-- BOOKING BLOCK -->
+                      <!-- ============================================= -->
+
+                      <div th:each="block : ${show.bookingBlocks}"
+                           class="booking-block absolute
+                            top-0
+                            bottom-0
+                            bg-white
+                            border
+                            border-outline-variant
+                            z-20
+                            flex
+                            items-center
+                            justify-center
+                            text-primary
+                            text-xs
+                            font-bold
+                            cursor-pointer
+                             duration-150
+            hover:bg-[#ff6b00]
+            hover:border-[#ff6b00]
+            hover:text-white
+                            overflow-hidden
+                            whitespace-nowrap"
+
+                           th:attr="  data-court=${show.court.name_court},
+        data-start=${block.startTime},
+        data-end=${block.endTime},
+        data-price=${block.price}"
+
+                           th:style="'left: calc('
+                            + ${block.startColumn}
+                            + ' * (100% / 34));'
+                            + 'width: calc('
+                            + ${block.slotCount}
+                            + ' * (100% / 34));'">
 
                       </div>
 
@@ -152,7 +302,6 @@
           </div>
 
       </div>
-    </div>
     <!-- Promotion / Visual Component -->
     <div class="relative h-64 rounded-2xl overflow-hidden shadow-lg mt-4">
       <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10 flex flex-col justify-center px-10 text-white">
@@ -168,7 +317,7 @@
     <div class="sticky top-24 flex flex-col gap-6 bg-white border border-outline-variant rounded-2xl p-6 shadow-md">
       <div class="border-b border-outline-variant pb-4">
         <h2 class="font-headline-md text-headline-md text-on-surface">Chi tiết đặt sân</h2>
-        <p class="text-on-surface-variant font-body-md mt-1" id="selected-date-text">Thứ Tư, 24 Tháng 5, 2024</p>
+        <p class="text-on-surface-variant font-body-md mt-1" id="selected-date-text" th:text="${#temporals.format(date, 'dd/MM/yyyy')}"></p>
       </div>
       <div class="flex flex-col gap-4 min-h-[120px]" id="selected-slots-container">
         <!-- Default message when no slot is selected -->

@@ -9,4 +9,5 @@ import java.util.List;
 public class ShowDTO {
     List<TimeShowDTO> timeShowDTOS;
     Court court;
+    private List<BookingBlockDTO> bookingBlocks;
 }
