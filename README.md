@@ -9,9 +9,9 @@ Hệ thống đồng thời cung cấp các chức năng quản lý dành cho qu
 Ứng dụng được phát triển theo mô hình Spring Boot MVC, sử dụng Thymeleaf để xây dựng giao diện phía máy chủ.
 
 # Mục tiêu
-Hỗ trợ khách hàng tìm kiếm và lựa chọn sân cầu lông phù hợp.
-Cho phép khách hàng xem lịch sân theo ngày và khung giờ.
-Hỗ trợ đặt sân trực tuyến.
+- Hỗ trợ khách hàng tìm kiếm và lựa chọn sân cầu lông phù hợp.
+- Cho phép khách hàng xem lịch sân theo ngày và khung giờ.
+- Hỗ trợ đặt sân trực tuyến.
 Cho phép chủ cơ sở quản lý cơ sở, sân, lịch hoạt động và dịch vụ.
 Hỗ trợ Admin quản lý người dùng và các cơ sở trên hệ thống.
 Giảm thiểu việc quản lý sân thủ công và hạn chế tình trạng trùng lịch đặt sân.
