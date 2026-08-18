@@ -50,6 +50,8 @@ Backend
 - Spring Data JPA / Hibernate
 - Spring Security
 - OAuth 2.0 / Google Login
+
+  
 Frontend
 - Thymeleaf
 - HTML5
