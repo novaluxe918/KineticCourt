@@ -46,9 +46,11 @@ public class BookingController {
         if(user == null){
             return "redirect:/facility/view/" + facilityId + "?error=loginRequired";
         }
+        LocalDate today = LocalDate.now();
         if(date == null){
-            date = LocalDate.now();
+            date = today;
         }  // thoi gian hien tai
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         List<String> timeSlots = new ArrayList<>(); // dto time , status
@@ -133,6 +135,7 @@ public class BookingController {
 
             showDTOS.add(showDTO);
         }
+        model.addAttribute("today", today);
         model.addAttribute("date", date);
         model.addAttribute("facilityId", facilityId);
         model.addAttribute("showDTOS", showDTOS);
