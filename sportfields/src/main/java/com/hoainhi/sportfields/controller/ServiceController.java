@@ -87,7 +87,7 @@ public class ServiceController {
     public String addService(Model model, HttpSession session){
         User user = (User) session.getAttribute("loginUser");
         model.addAttribute("service", new ServiceDTO());
-        model.addAttribute("facilities", facilitySeviceimpl.getApproved());
+        model.addAttribute("facilities", facilitySeviceimpl.getFacilityByOwner(user.getId()));
         return "owner/services/AddService";
     }
 

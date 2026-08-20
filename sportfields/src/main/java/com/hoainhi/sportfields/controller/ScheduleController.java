@@ -50,7 +50,7 @@ public class ScheduleController {
         List<ScheduleDetails > schedules;
 
         if (facilityId == null){
-            schedules = scheduleDetailSerivceimp.getAll();
+            schedules = scheduleDetailSerivceimp.getByOwner(user.getId());
         }else {
             schedules = scheduleDetailSerivceimp.getByFacility(facilityId);
         }
@@ -83,7 +83,7 @@ public class ScheduleController {
     public String addSchedule(Model model, HttpSession session){
         User user = (User) session.getAttribute("loginUser");
         List<Facility> facilities = facilitySeviceimpl.getFacilityByOwner(user.getId());
-        List<Court> courts = courtService.getAllCourt();
+        List<Court> courts = courtService.getCourtByOwner(user.getId());
         model.addAttribute("courts", courts);
         model.addAttribute("schedules", new ScheduleDTO());
         model.addAttribute("facilities", facilities);

@@ -27,4 +27,17 @@ public interface ScheduleDetailRepository extends JpaRepository<ScheduleDetails,
             Long courtId,
             LocalDate date
     );
+
+    @Query(value = """
+    SELECT sd.*
+    FROM schedule_details sd
+    JOIN schedules s
+        ON sd.id_schedule = s.id_schedule
+    JOIN courts c
+        ON s.id_court = c.id_court
+    JOIN facilities f
+        ON c.facility_id = f.id_facility
+    WHERE f.owner_id = ?1
+    """, nativeQuery = true)
+    List<ScheduleDetails> findByOwner(Long ownerId);
 }

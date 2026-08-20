@@ -79,10 +79,11 @@ import java.util.List;
     }
 
     @GetMapping("/add")
-    public String addCourt( Model model){
+    public String addCourt( Model model, HttpSession session){
+        User user = (User) session.getAttribute("loginUser");
+        List<Facility> facilities = facilitySeviceimpl.getFacilityByOwner(user.getId());
 
         model.addAttribute("court", new CourtDTO());
-        List<Facility> facilities = facilitySeviceimpl.getApproved();
          model.addAttribute("facilities", facilities);
 
         return "owner/courts/AddCourt";

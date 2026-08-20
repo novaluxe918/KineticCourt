@@ -15,7 +15,7 @@
   </div>
   <!-- Registration Bento Layout -->
   <form th:action="@{/facility/save}" th:object="${facilityDTO}" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start" method="post">
-    <input type="hidden" th:field="*{id_facility}">
+    <input type="hidden" th:field="*{id}">
     <!-- Left Column: Form Details -->
     <div class="lg:col-span-7 space-y-gutter">
       <!-- Basic Info Card -->

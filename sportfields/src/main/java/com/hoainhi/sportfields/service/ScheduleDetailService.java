@@ -13,4 +13,6 @@ public interface ScheduleDetailService {
     List<ScheduleDetails> getAll();
 
     List<ScheduleDetails> getScheduleDetails(Long courtId, LocalDate date);
+
+    List<ScheduleDetails> getByOwner(Long ownerId);
 }
