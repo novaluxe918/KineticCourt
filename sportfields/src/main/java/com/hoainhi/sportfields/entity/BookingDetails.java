@@ -13,13 +13,13 @@ public class BookingDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_bkDetail")
    private long id;
-   private LocalDate booking_date;
+
 
     @ManyToOne
     @JoinColumn(name = "id_booking", nullable = false)
     private Booking booking;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_schedule", nullable = false)
-    private Schedule schedule;
+    @ManyToOne
+    @JoinColumn(name = "id_scheduleDetail", nullable = false)
+    private ScheduleDetails scheduleDetails;
 }

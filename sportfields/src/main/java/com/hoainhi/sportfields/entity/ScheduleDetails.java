@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,4 +27,7 @@ public class ScheduleDetails {
     @ManyToOne
     @JoinColumn(name = "id_schedule", nullable = false)
     private Schedule schedule;
+
+    @OneToMany(mappedBy = "scheduleDetails", fetch = FetchType.EAGER)
+    private List<BookingDetails> bookingDetails;
 }

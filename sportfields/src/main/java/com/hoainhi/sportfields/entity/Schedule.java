@@ -24,8 +24,7 @@ public class Schedule {
     @JoinColumn(name = "id_court", nullable = false)
     private Court court;
 
-    @OneToMany(mappedBy = "schedule", fetch = FetchType.EAGER)
-    private List<BookingDetails> bookingDetails;
+
 
     @OneToMany(mappedBy = "schedule", fetch = FetchType.EAGER,  cascade = CascadeType.ALL,
             orphanRemoval = true)

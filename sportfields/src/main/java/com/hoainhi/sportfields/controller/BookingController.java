@@ -1,17 +1,17 @@
 package com.hoainhi.sportfields.controller;
 
 import com.hoainhi.sportfields.dto.*;
-import com.hoainhi.sportfields.entity.Court;
-import com.hoainhi.sportfields.entity.Facility;
-import com.hoainhi.sportfields.entity.ScheduleDetails;
-import com.hoainhi.sportfields.entity.User;
+import com.hoainhi.sportfields.entity.*;
 import com.hoainhi.sportfields.enums.ScheduleStatus;
 import com.hoainhi.sportfields.repository.FaciRepository;
 import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
 import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
 import com.hoainhi.sportfields.service.impl.ScheduleDetailSerivceimp;
+import com.hoainhi.sportfields.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +35,12 @@ public class BookingController {
 
     @Autowired
     private ScheduleDetailSerivceimp scheduleDetailSerivceimp;
+
+    @Autowired
+    private ServiceImpl service;
+
+    @Autowired
+    private FacilitySeviceimpl facilitySeviceimpl;
 
     @GetMapping("/book")
     public String bookingClient(@RequestParam Long facilityId, Model model,
@@ -135,7 +141,6 @@ public class BookingController {
 
             showDTOS.add(showDTO);
         }
-        model.addAttribute("today", today);
         model.addAttribute("date", date);
         model.addAttribute("facilityId", facilityId);
         model.addAttribute("showDTOS", showDTOS);
@@ -143,5 +148,17 @@ public class BookingController {
 
         return "client/booking/Booking";
     }
+
+    @GetMapping("/booking_detail")
+    public String bookingDetail(@RequestParam Long facilityId, Model model, Pageable pageable) {
+
+        Page<Services> servicesPage = service.findByFacility_Id(facilityId, pageable);
+
+        model.addAttribute("page", servicesPage);
+        model.addAttribute("facilityId", facilityId);
+
+        return "client/booking/BookingDetail";
+    }
+
 
 }

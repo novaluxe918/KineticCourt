@@ -37,7 +37,7 @@
                            id="bookingDate"
                            name="date"
                            th:value="${date}"
-                           th:min="${today}"
+                           th:min="${date}"
                            onchange="this.form.submit()"
                            class="mt-2 px-4 py-2 rounded-xl
                       border border-outline-variant
@@ -73,6 +73,12 @@
         <div class="w-4 h-4 bg-tertiary-container rounded-sm"></div>
         <span class="text-label-md text-on-surface-variant">Sự kiện</span>
       </div>
+        <div class="flex items-center gap-2">
+             <span class="material-symbols-outlined text-tertiary">
+        build
+    </span>
+            <span class="text-label-md text-on-surface-variant">Bảo trì</span>
+        </div>
     </div>
     <!-- Time Grid Table -->
       <!-- ================================================= -->
@@ -222,6 +228,8 @@
                              line-clamp-2">
                 </span>
 
+
+
                   </div>
 
 
@@ -344,9 +352,27 @@
           </div>
         </div>
       </div>
-      <button class="w-full bg-primary-container text-white py-4 rounded-xl font-headline-md disabled:opacity-50 disabled:grayscale transition-all active:scale-95 shadow-lg shadow-primary-container/20" disabled="" id="btn-confirm">
-        Xác nhận đặt sân
-      </button>
+        <a th:href="@{/booking/booking_detail(facilityId=${facilityId})}"
+           id="btn-confirm"
+           class="w-full
+          flex items-center justify-center gap-2
+          bg-[#ff6b00]
+          hover:bg-[#e85f00]
+          text-white
+          py-4
+          rounded-xl
+          font-bold
+          text-base
+          transition-all duration-200
+          hover:shadow-lg hover:shadow-orange-500/30
+          active:scale-[0.98]">
+
+    <span class="material-symbols-outlined text-[22px]">
+        check_circle
+    </span>
+
+            <span>Xác nhận đặt sân</span>
+        </a>
       <div class="flex items-center gap-2 text-on-surface-variant text-[12px]">
         <span class="material-symbols-outlined text-[16px]" data-icon="info">info</span>
         <span>Bạn có thể hủy đặt sân trước 12 tiếng.</span>

@@ -116,7 +116,7 @@
 
 
         <a th:if="${schedule.hasPrevious()}"
-           th:href="@{/schedule(page=${schedule.number - 1})}"
+           th:href="@{/schedule/schedule_owner(page=${schedule.number - 1})}"
            class="px-4 py-2 border rounded-lg">
 
           Previous
@@ -132,7 +132,7 @@
 
 
         <a th:if="${schedule.hasNext()}"
-           th:href="@{/schedule(page=${schedules.number + 1})}"
+           th:href="@{/schedule/schedule_owner(page=${schedule.number + 1})}"
            class="px-4 py-2 border rounded-lg">
 
           Next

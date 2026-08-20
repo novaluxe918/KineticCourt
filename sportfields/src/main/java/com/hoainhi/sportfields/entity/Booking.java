@@ -23,6 +23,8 @@ public class Booking {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    private LocalDate booking_date;
+
     @OneToMany(mappedBy = "booking", fetch = FetchType.EAGER)
     private List<BookingDetails> bookingDetail;
 
