@@ -19,4 +19,15 @@ public interface Service_sv {
     ServiceDTO getServiceDTOById(Long id);
      void deleteService(Long id);
      Page<Services> findByFacility_Id(Long facilityId,Pageable pageable);
+
+    Page<Services> getServiceByOwner(
+            Long ownerId,
+            Pageable pageable
+    );
+
+    Page<Services> getServiceByFacilityAndOwner(
+            Long facilityId,
+            Long ownerId,
+            Pageable pageable
+    );
 }

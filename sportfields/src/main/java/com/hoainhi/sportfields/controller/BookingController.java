@@ -123,7 +123,7 @@ public class BookingController {
 
                 blockDTO.setStartTime(start);
                 blockDTO.setEndTime(endTime);
-
+                blockDTO.setId(details.getId());
                 blockDTO.setStartColumn(startSlot);
                 blockDTO.setSlotCount(slotCount);
                 blockDTO.setPrice(details.getPrice());
@@ -150,13 +150,14 @@ public class BookingController {
     }
 
     @GetMapping("/booking_detail")
-    public String bookingDetail(@RequestParam Long facilityId, Model model, Pageable pageable) {
+    public String bookingDetail(@RequestParam Long facilityId,@RequestParam List<Long> selectedSlots ,Model model, Pageable pageable) {
 
         Page<Services> servicesPage = service.findByFacility_Id(facilityId, pageable);
-
+        List<ScheduleDetails> details = scheduleDetailSerivceimp.getByIds(selectedSlots);
         model.addAttribute("page", servicesPage);
         model.addAttribute("facilityId", facilityId);
-
+        model.addAttribute("details", details);
+        model.addAttribute("selectSlots", selectedSlots);
         return "client/booking/BookingDetail";
     }
 

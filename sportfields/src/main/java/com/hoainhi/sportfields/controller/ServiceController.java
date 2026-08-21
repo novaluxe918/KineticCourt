@@ -48,14 +48,20 @@ public class ServiceController {
         Pageable pageable = PageRequest.of(page, size);
         Page<Services> servicesPage;
 
-        if(facilityId !=null){
-            servicesPage = service.getServiceByFacility(facilityId, pageable);
+        if (facilityId != null) {
 
-        } else if(StringUtils.hasText(name)){
-            servicesPage = service.findByTitleContaining(name, pageable);
-        }else {
-            servicesPage = service.findPaginated(pageable);
+            servicesPage = service.getServiceByFacilityAndOwner(
+                    facilityId,
+                    user.getId(),
+                    pageable
+            );
 
+        } else {
+
+            servicesPage = service.getServiceByOwner(
+                    user.getId(),
+                    pageable
+            );
         }
 
 

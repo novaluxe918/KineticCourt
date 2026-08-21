@@ -40,4 +40,7 @@ public interface ScheduleDetailRepository extends JpaRepository<ScheduleDetails,
     WHERE f.owner_id = ?1
     """, nativeQuery = true)
     List<ScheduleDetails> findByOwner(Long ownerId);
+
+    List<ScheduleDetails> findByIdIn(List<Long> ids);
+
 }

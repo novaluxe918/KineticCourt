@@ -77,5 +77,15 @@ public class ServiceImpl implements Service_sv {
         return serviceRepository.findByFacility_Id(facilityId, pageable);
     }
 
+    @Override
+    public Page<Services> getServiceByOwner(Long ownerId, Pageable pageable) {
+        return serviceRepository.findByOwner(ownerId, pageable);
+    }
+
+    @Override
+    public Page<Services> getServiceByFacilityAndOwner(Long facilityId, Long ownerId, Pageable pageable) {
+        return serviceRepository.findByFacilityAndOwner(facilityId, ownerId, pageable);
+    }
+
 
 }

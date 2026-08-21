@@ -15,4 +15,5 @@ public interface ScheduleDetailService {
     List<ScheduleDetails> getScheduleDetails(Long courtId, LocalDate date);
 
     List<ScheduleDetails> getByOwner(Long ownerId);
+    List<ScheduleDetails> getByIds(List<Long> ids);
 }

@@ -33,4 +33,9 @@ public class ScheduleDetailSerivceimp implements ScheduleDetailService {
     public List<ScheduleDetails> getByOwner(Long ownerId) {
         return scheduleDetailRepository.findByOwner(ownerId);
     }
+
+    @Override
+    public List<ScheduleDetails> getByIds(List<Long> ids) {
+        return scheduleDetailRepository.findByIdIn(ids);
+    }
 }

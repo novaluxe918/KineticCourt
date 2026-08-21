@@ -21,27 +21,96 @@
                     <span class="material-symbols-outlined text-primary">calendar_today</span>
                     Booking Summary
                 </h2>
-                <div class="flex flex-col md:flex-row gap-6">
-                    <div class="flex-grow flex flex-col justify-center space-y-3">
-                        <div class="flex justify-between items-start border-b border-surface-container pb-3">
-                            <div>
-                                <span class="font-label-md text-label-md text-secondary block mb-1">Court</span>
-                                <span class="font-body-lg text-body-lg font-semibold text-on-surface">Sân 01 - Victor Quận 1</span>
-                            </div>
+                <div class="flex flex-col gap-4">
+
+                    <!-- FACILITY -->
+                    <div class="flex justify-between items-start border-b border-surface-container pb-3">
+
+                        <div>
+
+            <span class="font-label-md text-label-md text-secondary block mb-1">
+                Facility
+            </span>
+
+                            <span th:text="${details[0].schedule.court.facility.name_facility}"
+                                  class="font-body-lg text-body-lg font-semibold text-on-surface">
+            </span>
+
                         </div>
-                        <div class="flex justify-between items-start border-b border-surface-container pb-3">
-                            <div>
-                                <span class="font-label-md text-label-md text-secondary block mb-1">Date</span>
-                                <span class="font-body-md text-body-md text-on-surface">Thứ Hai, 20/05/2024</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="font-label-md text-label-md text-secondary block mb-1">Time</span>
-                                <span class="font-body-md text-body-md text-on-surface font-semibold">18:00 - 19:00</span>
-                            </div>
-                        </div>
+
                     </div>
+
+
+                    <!-- COURT -->
+                    <div class="flex justify-between items-start border-b border-surface-container pb-3">
+
+                        <div>
+
+            <span class="font-label-md text-label-md text-secondary block mb-1">
+                Court
+            </span>
+
+                            <span th:text="${details[0].schedule.court.name_court}"
+                                  class="font-body-lg text-body-lg font-semibold text-on-surface">
+            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DATE -->
+                    <div class="flex justify-between items-start border-b border-surface-container pb-3">
+
+                        <div>
+
+            <span class="font-label-md text-label-md text-secondary block mb-1">
+                Date
+            </span>
+
+                            <span th:text="${details[0].schedule.date_start}"
+                                  class="font-body-md text-body-md text-on-surface">
+            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TIME -->
+                    <div>
+
+        <span class="font-label-md text-label-md text-secondary block mb-2">
+            Time
+        </span>
+
+
+                        <!-- Các khung giờ -->
+                        <div class="space-y-2">
+
+                            <div th:each="detail : ${details}"
+                                 class="flex justify-between items-center
+                        bg-surface-container-low
+                        border border-outline-variant
+                        rounded-lg
+                        px-4 py-3">
+
+                <span class="font-body-md text-on-surface">
+
+                    <span th:text="${detail.time_start}"></span>
+
+                    -
+
+                    <span th:text="${detail.time_end}"></span>
+
+                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
             </section>
             <!-- Additional Services -->
@@ -86,7 +155,7 @@
                 <div class="space-y-4 mb-6">
                     <div class="flex justify-between items-center">
                         <span class="font-body-md text-body-md text-secondary">Court Fee (1 hour)</span>
-                        <span class="font-body-md text-body-md text-on-surface font-semibold">150.000đ</span>
+                        <span th:text="${#numbers.formatDecimal(#aggregates.sum(details.![price]), 0, 'COMMA', 0, 'POINT')} + 'đ'" class="font-body-md text-body-md text-on-surface font-semibold"></span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="font-body-md text-body-md text-secondary">Services Fee</span>
@@ -99,7 +168,7 @@
                 </div>
                 <div class="border-t border-surface-container pt-4 mb-8 flex justify-between items-end">
                     <span class="font-headline-md text-headline-md text-on-surface">Total</span>
-                    <span class="font-headline-lg text-headline-lg text-primary">150.000đ</span>
+                    <span th:text="${#numbers.formatDecimal(#aggregates.sum(details.![price]), 0, 'COMMA', 0, 'POINT')} + 'đ'" class="font-headline-lg text-headline-lg text-primary"></span>
                 </div>
                 <!-- Payment Methods -->
                 <h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-4">Select Payment Method</h3>

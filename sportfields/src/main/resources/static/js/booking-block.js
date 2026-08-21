@@ -21,6 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmButton =
         document.getElementById("btn-confirm");
 
+        const facilityId =
+            document.querySelector(
+                'input[name="facilityId"]'
+            ).value;
+
 
 
     // CLICK BOOKING
@@ -98,9 +103,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
             totalPriceVal.textContent = "0đ";
 
-            confirmButton.disabled = true;
+             confirmButton.classList.remove(
+                  "bg-[#ff6b00]",
+                  "hover:bg-[#e85f00]",
+                  "cursor-pointer"
+              );
 
-            return;
+              confirmButton.classList.add(
+                  "bg-gray-400",
+                  "opacity-60",
+                  "cursor-not-allowed",
+                  "pointer-events-none"
+              );
+
+              confirmButton.removeAttribute("href");
+
+              return;
         }
 
 
@@ -111,12 +129,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let totalPrice = 0;
 
-
+        const selectedIds=[];
         selectedBlocks.forEach(block => {
+
 
             // Lấy dữ liệu từ HTML
             const court =
                 block.dataset.court;
+            const id = block.dataset.id;
+            selectedIds.push(id);
+
 
             const start =
                 block.dataset.start;
@@ -172,8 +194,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             selectedSlotsContainer.appendChild(slot);
 
-        });
 
+        });
+         console.log("Selected IDs:", selectedIds);
 
 
 
@@ -183,9 +206,23 @@ document.addEventListener("DOMContentLoaded", function () {
         totalPriceVal.textContent =
             totalPrice.toLocaleString("vi-VN") + "đ";
 
-
+          confirmButton.href =
+                    "/booking/booking_detail" +
+                    "?facilityId=" + facilityId +
+                    "&selectedSlots=" + selectedIds.join(",");
         // Enable button
-        confirmButton.disabled = false;
+       confirmButton.classList.remove(
+              "bg-gray-400",
+              "opacity-60",
+              "cursor-not-allowed",
+              "pointer-events-none"
+          );
+
+          confirmButton.classList.add(
+              "bg-[#ff6b00]",
+              "hover:bg-[#e85f00]",
+              "cursor-pointer"
+          );
 
     }
 

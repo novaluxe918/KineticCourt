@@ -6,6 +6,7 @@ import java.time.LocalTime;
 
 @Data
 public class BookingBlockDTO {
+    private Long id;
     private LocalTime startTime;
     private LocalTime endTime;
     private int startColumn;
