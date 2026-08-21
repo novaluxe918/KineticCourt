@@ -121,10 +121,14 @@
                 </h2>
                 <div class="space-y-4">
                     <!-- Service Item -->
-                    <div th:each="service : ${page.content}" class="flex items-center justify-between p-4 border border-surface-variant rounded-lg bg-surface-bright">
-                        <div class="flex items-center gap-4">
+                    <div th:each="service : ${page.content}"
+                         th:attr="
+         data-id=${service.id},
+         data-price=${service.price}"
+                         class=" service-item flex items-center justify-between p-4 border border-surface-variant rounded-lg bg-surface-bright">
+                        <div class=" flex items-center gap-4">
                             <div>
-                                <h3 th:text="${service.title}" class="font-body-md text-body-md font-semibold text-on-surface">Thuê vợt</h3>
+                                <h3 th:text="${service.title}" class="font-body-md text-body-md font-semibold text-on-surface"></h3>
                                 <p class="font-label-md text-label-md text-primary">
                                     <span th:text="${service.price}"></span>
                                     /
@@ -133,11 +137,11 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-colors">
+                            <button type="button" class="btn-minus w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-colors">
                                 <span class="material-symbols-outlined text-sm">remove</span>
                             </button>
-                            <span class="font-body-md text-body-md w-4 text-center">0</span>
-                            <button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-colors">
+                            <span class=" service-quantity font-body-md text-body-md w-4 text-center">0</span>
+                            <button type="button" class="btn-plus w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface transition-colors">
                                 <span class="material-symbols-outlined text-sm">add</span>
                             </button>
                         </div>
@@ -159,16 +163,17 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="font-body-md text-body-md text-secondary">Services Fee</span>
-                        <span class="font-body-md text-body-md text-on-surface font-semibold">0đ</span>
+                        <span id="service-fee" class="font-body-md text-body-md text-on-surface font-semibold"></span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="font-body-md text-body-md text-secondary">Discount</span>
                         <span class="font-body-md text-body-md text-primary font-semibold">0đ</span>
                     </div>
                 </div>
-                <div class="border-t border-surface-container pt-4 mb-8 flex justify-between items-end">
+                <div  class="border-t border-surface-container pt-4 mb-8 flex justify-between items-end">
                     <span class="font-headline-md text-headline-md text-on-surface">Total</span>
-                    <span th:text="${#numbers.formatDecimal(#aggregates.sum(details.![price]), 0, 'COMMA', 0, 'POINT')} + 'đ'" class="font-headline-lg text-headline-lg text-primary"></span>
+                    <span id="total-price" th:attr="data-court-total=${courtTotal}"
+                          th:text="${#numbers.formatDecimal(courtTotal, 0, 'COMMA', 0, 'POINT')} + 'đ'" class="font-headline-lg text-headline-lg text-primary"></span>
                 </div>
                 <!-- Payment Methods -->
                 <h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-4">Select Payment Method</h3>

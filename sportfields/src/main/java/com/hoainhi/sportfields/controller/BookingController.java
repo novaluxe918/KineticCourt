@@ -154,10 +154,12 @@ public class BookingController {
 
         Page<Services> servicesPage = service.findByFacility_Id(facilityId, pageable);
         List<ScheduleDetails> details = scheduleDetailSerivceimp.getByIds(selectedSlots);
+        double courtTotal = details.stream().mapToDouble(ScheduleDetails::getPrice).sum();
         model.addAttribute("page", servicesPage);
         model.addAttribute("facilityId", facilityId);
         model.addAttribute("details", details);
         model.addAttribute("selectSlots", selectedSlots);
+        model.addAttribute("courtTotal", courtTotal);
         return "client/booking/BookingDetail";
     }
 
