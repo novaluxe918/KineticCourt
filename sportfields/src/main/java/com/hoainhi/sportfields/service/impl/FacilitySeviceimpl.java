@@ -66,7 +66,8 @@ public class FacilitySeviceimpl  implements FacilityService {
         facility.setPhone(facilityDTO.getPhone());
         facility.setDescription(facilityDTO.getDescription());
         facility.setWards(facilityDTO.getWards());
-
+        facility.setOpen_time(facilityDTO.getOpen_time());
+        facility.setClose_time(facilityDTO.getClose_time());
         facility.setUser(user);
 
         if (facilityDTO.getImg_url() != null) {

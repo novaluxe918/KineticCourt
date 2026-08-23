@@ -112,33 +112,60 @@
           </tbody>
         </table>
       </div>
-      <div class="flex justify-center gap-3 mt-8">
+      <div class="flex justify-center gap-2 mt-8">
 
-
+        <!-- Previous -->
         <a th:if="${schedule.hasPrevious()}"
-           th:href="@{/schedule/schedule_owner(page=${schedule.number - 1})}"
-           class="px-4 py-2 border rounded-lg">
+           th:href="@{/schedule/schedule_owner(
+           page=${schedule.number - 1},
+           size=${schedule.size},
+           facilityId=${selectedFacility}
+       )}"
+           class="h-8 w-8 flex items-center justify-center rounded-lg
+              border border-outline-variant bg-white
+              text-on-surface-variant
+              hover:bg-surface-container transition-colors">
 
-          Previous
+        <span class="material-symbols-outlined !text-[18px]">
+            chevron_left
+        </span>
         </a>
 
 
-        <span class="px-4 py-2">
-    Trang
-    <span th:text="${schedule.number + 1}"></span>
-    /
-    <span th:text="${schedule.totalPages}"></span>
-</span>
+        <!-- Số trang -->
+        <th:block th:if="${schedule.totalPages > 0}">
+
+          <a th:each="i : ${#numbers.sequence(0, schedule.totalPages - 1)}"
+             th:href="@{/schedule/schedule_owner(
+               page=${i},
+               size=${schedule.size},
+               facilityId=${selectedFacility}
+           )}"
+             th:text="${i + 1}"
+             th:class="${i == schedule.number}
+               ? 'h-8 w-8 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold text-[13px]'
+               : 'h-8 w-8 flex items-center justify-center rounded-lg border border-outline-variant bg-white text-on-surface-variant hover:bg-surface-container transition-colors'">
+          </a>
+
+        </th:block>
 
 
+        <!-- Next -->
         <a th:if="${schedule.hasNext()}"
-           th:href="@{/schedule/schedule_owner(page=${schedule.number + 1})}"
-           class="px-4 py-2 border rounded-lg">
+           th:href="@{/schedule/schedule_owner(
+           page=${schedule.number + 1},
+           size=${schedule.size},
+           facilityId=${selectedFacility}
+       )}"
+           class="h-8 w-8 flex items-center justify-center rounded-lg
+              border border-outline-variant bg-white
+              text-on-surface-variant
+              hover:bg-surface-container transition-colors">
 
-          Next
-
+        <span class="material-symbols-outlined !text-[18px]">
+            chevron_right
+        </span>
         </a>
-
 
       </div>
     </div>
