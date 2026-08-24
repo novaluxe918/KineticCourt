@@ -56,11 +56,6 @@ public class AdminController {
         return "redirect:/admin/usermanagement";
     }
 
-    @GetMapping("/facilities")
-    public String showFacilities(Model model){
-        model.addAttribute("activePage", "facilities");
-        model.addAttribute("facilities", facilitySeviceimpl.getAll());
-        return "admin/facilities/Facilities";
-    }
+
 
 }

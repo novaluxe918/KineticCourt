@@ -142,6 +142,7 @@ public class BookingController {
             showDTOS.add(showDTO);
         }
         model.addAttribute("date", date);
+        model.addAttribute("today", today);
         model.addAttribute("facilityId", facilityId);
         model.addAttribute("showDTOS", showDTOS);
         model.addAttribute("timeSlot", timeSlots);

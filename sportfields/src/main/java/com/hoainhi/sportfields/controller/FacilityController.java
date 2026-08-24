@@ -96,10 +96,17 @@ public class FacilityController {
         return "owner/facility/Facility";
     }
 
-   @GetMapping("/{id}/approve")
+    @GetMapping("/facilities")
+    public String showFacilities(Model model){
+        model.addAttribute("activePage", "facilities");
+        model.addAttribute("facilities", facilityService.getAll());
+        return "admin/facilities/Facilities";
+    }
+
+   @GetMapping("/approve/{id}")
     public String approve(@PathVariable Long id){
          facilityService.approve(id);
-         return "admin/facilities/Facilities";
+       return "redirect:/facility/facilities";
     }
 
     @GetMapping("edit/{id}")
