@@ -58,6 +58,7 @@ Frontend
 - CSS3
 - Tailwind CSS
 - JavaScript
+
 Database
 - MySQL
 
