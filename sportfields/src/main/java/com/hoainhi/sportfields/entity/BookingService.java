@@ -10,8 +10,8 @@ public class BookingService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_bkService")
-    private long id;
-    private double price;
+    private Long id;
+    private Double price;
     private int quantity;
 
     @ManyToOne

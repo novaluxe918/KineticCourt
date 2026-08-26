@@ -4,10 +4,7 @@ import com.hoainhi.sportfields.dto.*;
 import com.hoainhi.sportfields.entity.*;
 import com.hoainhi.sportfields.enums.ScheduleStatus;
 import com.hoainhi.sportfields.repository.FaciRepository;
-import com.hoainhi.sportfields.service.impl.CourtServiceImpl;
-import com.hoainhi.sportfields.service.impl.FacilitySeviceimpl;
-import com.hoainhi.sportfields.service.impl.ScheduleDetailSerivceimp;
-import com.hoainhi.sportfields.service.impl.ServiceImpl;
+import com.hoainhi.sportfields.service.impl.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,6 +34,8 @@ public class BookingController {
     @Autowired
     private ScheduleDetailSerivceimp scheduleDetailSerivceimp;
 
+    @Autowired
+    private BookingServiceimpl bookingServiceimpl;
     @Autowired
     private ServiceImpl service;
 
@@ -164,5 +164,11 @@ public class BookingController {
         return "client/booking/BookingDetail";
     }
 
+//    @GetMapping("/confirm_bk")
+//    public String confirmBooking(HttpSession session, @ModelAttribute BookingDTO bookingDTO){
+//        User user = (User) session.getAttribute("loginUser");
+//        bookingServiceimpl.saveBooking(bookingDTO, user);
+//        return "client/booking/ConfirmBooking";
+//    }
 
 }

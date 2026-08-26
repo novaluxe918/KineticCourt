@@ -13,9 +13,9 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_booking")
-    private long id;
+    private Long id;
 
-    private double total;
+    private Double total;
     private String status;
     private LocalDate createdAt;
 
