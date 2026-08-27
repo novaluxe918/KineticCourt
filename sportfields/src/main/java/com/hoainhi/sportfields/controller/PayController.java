@@ -1,10 +1,12 @@
 package com.hoainhi.sportfields.controller;
 
+import com.hoainhi.sportfields.service.impl.BookingServiceimpl;
 import com.hoainhi.sportfields.service.impl.PaypalServiceimpl;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +22,16 @@ public class PayController {
     @Autowired
     private PaypalServiceimpl paypalServiceimpl;
 
+    @Autowired
+    private BookingServiceimpl bookingServiceimpl;
+
     // Xử lý gửi request thanh toán sang PayPal
     @GetMapping ("/pay")
-    public String makePayment(@RequestParam("courtTotal") String price) {
+    public String makePayment(HttpSession session) {
         try {
+            Double courtTotal = (Double) session.getAttribute("courtTotal");
             Payment payment = paypalServiceimpl.createPayment(
-                    Double.parseDouble(price),
+                  courtTotal,
                     "USD",
                     "paypal",
                     "sale",

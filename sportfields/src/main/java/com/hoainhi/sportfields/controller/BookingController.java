@@ -151,11 +151,19 @@ public class BookingController {
     }
 
     @GetMapping("/booking_detail")
-    public String bookingDetail(@RequestParam Long facilityId,@RequestParam List<Long> selectedSlots ,Model model, Pageable pageable) {
+    public String bookingDetail(@RequestParam Long facilityId,@RequestParam List<Long> selectedSlots ,Model model, Pageable pageable, HttpSession session) {
 
         Page<Services> servicesPage = service.findByFacility_Id(facilityId, pageable);
         List<ScheduleDetails> details = scheduleDetailSerivceimp.getByIds(selectedSlots);
         double courtTotal = details.stream().mapToDouble(ScheduleDetails::getPrice).sum();
+        User user = (User) session.getAttribute("loginUser");
+
+        session.setAttribute("bookingUser", user);
+        session.setAttribute("selectedSlots", selectedSlots);
+        session.setAttribute("courtTotal", courtTotal);
+        session.setAttribute("facilityId", facilityId);
+        session.setAttribute("bookingDate", details.get(0).getSchedule().getDate_start());
+
         model.addAttribute("page", servicesPage);
         model.addAttribute("facilityId", facilityId);
         model.addAttribute("details", details);
@@ -164,11 +172,6 @@ public class BookingController {
         return "client/booking/BookingDetail";
     }
 
-//    @GetMapping("/confirm_bk")
-//    public String confirmBooking(HttpSession session, @ModelAttribute BookingDTO bookingDTO){
-//        User user = (User) session.getAttribute("loginUser");
-//        bookingServiceimpl.saveBooking(bookingDTO, user);
-//        return "client/booking/ConfirmBooking";
-//    }
+
 
 }

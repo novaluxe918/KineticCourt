@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.entity;
 
+import com.hoainhi.sportfields.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,7 +17,10 @@ public class Booking {
     private Long id;
 
     private Double total;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status;
+
     private LocalDate createdAt;
 
     @ManyToOne
