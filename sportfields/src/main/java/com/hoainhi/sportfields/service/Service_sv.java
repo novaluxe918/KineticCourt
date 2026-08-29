@@ -30,4 +30,6 @@ public interface Service_sv {
             Long ownerId,
             Pageable pageable
     );
+    Services findById(Long id);
+
 }

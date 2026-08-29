@@ -87,5 +87,12 @@ public class ServiceImpl implements Service_sv {
         return serviceRepository.findByFacilityAndOwner(facilityId, ownerId, pageable);
     }
 
+    @Override
+    public Services findById(Long id) {
+        return serviceRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Không tìm thấy dịch vụ")
+        );
+    }
+
 
 }

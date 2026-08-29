@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const courtTotal =
         Number(totalPriceElement.dataset.courtTotal);
 
+      const paymentButton =
+             document.getElementById("btn-payment");
+
+
 
     serviceItems.forEach(item => {
 
