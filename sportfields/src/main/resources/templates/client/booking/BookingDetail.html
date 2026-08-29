@@ -68,9 +68,9 @@
                 Date
             </span>
 
-                            <span th:text="${details[0].schedule.date_start}"
+                            <span th:text="${#temporals.format(bookingDate, 'dd/MM/yyyy')}"
                                   class="font-body-md text-body-md text-on-surface">
-            </span>
+</span>
 
                         </div>
 
@@ -127,6 +127,19 @@
          data-price=${service.price}"
                          class=" service-item flex items-center justify-between p-4 border border-surface-variant rounded-lg bg-surface-bright">
                         <div class=" flex items-center gap-4">
+                            <input type="hidden"
+                                   name="serviceIds"
+                                   th:value="${service.id}"
+                                   form="checkout-form"
+                                   class="service-id">
+
+                            <!-- GỬI SỐ LƯỢNG -->
+                            <input type="hidden"
+                                   name="quantities"
+                                   value="0"
+                                   form="checkout-form"
+                                   class="service-quantity-input">
+
                             <div>
                                 <h3 th:text="${service.title}" class="font-body-md text-body-md font-semibold text-on-surface"></h3>
                                 <p class="font-label-md text-label-md text-primary">
@@ -194,9 +207,16 @@
                         <span class="material-symbols-outlined text-secondary">account_balance</span>
                     </label>
                 </div>
-                <a  th:href="@{/paypal/pay}" class="w-full flex items-center justify-center bg-primary text-on-primary py-4 rounded-lg font-headline-md text-headline-md hover:bg-surface-tint transition-colors shadow-sm active:scale-[0.98]">
-                    Xác nhận &amp; Thanh toán
-                </a>
+                <form id="checkout-form" th:action="@{/booking/checkout}" method="post">
+
+                    <button type="submit"
+                            class="w-full flex items-center justify-center bg-primary text-on-primary py-4 rounded-lg font-headline-md text-headline-md hover:bg-surface-tint transition-colors shadow-sm active:scale-[0.98]">
+
+                        Xác nhận &amp; Thanh toán
+
+                    </button>
+
+                </form>
                 <p class="text-center font-label-md text-label-md text-secondary mt-4 flex items-center justify-center gap-1">
                     <span class="material-symbols-outlined text-sm">lock</span> Secure Transaction
                 </p>

@@ -148,7 +148,7 @@ public class BookingController {
     }
 
     @GetMapping("/booking_detail")
-    public String bookingDetail(@RequestParam Long facilityId,@RequestParam List<Long> selectedSlots ,Model model, Pageable pageable, HttpSession session) {
+    public String bookingDetail(@RequestParam Long facilityId,@RequestParam List<Long> selectedSlots, @RequestParam LocalDate date ,Model model, Pageable pageable, HttpSession session) {
 
         Page<Services> servicesPage = service.findByFacility_Id(facilityId, pageable);
         List<ScheduleDetails> details = scheduleDetailSerivceimp.getByIds(selectedSlots);
@@ -159,13 +159,14 @@ public class BookingController {
         session.setAttribute("selectedSlots", selectedSlots);
         session.setAttribute("courtTotal", courtTotal);
         session.setAttribute("facilityId", facilityId);
-        session.setAttribute("bookingDate", details.get(0).getSchedule().getDate_start());
+        session.setAttribute("bookingDate", date);
 
         model.addAttribute("page", servicesPage);
         model.addAttribute("facilityId", facilityId);
         model.addAttribute("details", details);
         model.addAttribute("selectSlots", selectedSlots);
         model.addAttribute("courtTotal", courtTotal);
+        model.addAttribute("bookingDate", date);
         return "client/booking/BookingDetail";
     }
 
@@ -175,5 +176,37 @@ public class BookingController {
     }
 
 
+    @PostMapping("/checkout")
+    public String checkout( @RequestParam(required = false) List<Long> serviceIds,
+                            @RequestParam(required = false) List<Integer> quantities,
+                            HttpSession session){
+        System.out.println("serviceIds = " + serviceIds);
+        System.out.println("quantities = " + quantities);
+
+        List<BookingServiceDTO> bookingServiceDTOS = new ArrayList<>();
+        if(serviceIds != null && quantities != null){
+            for (int i = 0; i < serviceIds.size(); i++) {
+
+                Integer quantity = quantities.get(i);
+
+                if (quantity != null && quantity > 0) {
+
+                    Services services =
+                           service.findById(serviceIds.get(i));
+
+                    BookingServiceDTO dto =
+                            new BookingServiceDTO();
+
+                    dto.setServiceId(services.getId());
+                    dto.setQuantity(quantity);
+                    dto.setPrice(services.getPrice());
+
+                    bookingServiceDTOS.add(dto);
+                }
+            }
+        }
+        session.setAttribute("selectedServices", bookingServiceDTOS);
+        return "redirect:/paypal/pay";
+    }
 
 }

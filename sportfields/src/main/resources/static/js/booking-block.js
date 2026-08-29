@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 'input[name="facilityId"]'
             ).value;
 
-
+ const selectedDate = document.getElementById("bookingDate").value;
 
     // CLICK BOOKING
 
@@ -206,10 +206,11 @@ document.addEventListener("DOMContentLoaded", function () {
         totalPriceVal.textContent =
             totalPrice.toLocaleString("vi-VN") + "đ";
 
-          confirmButton.href =
-                    "/booking/booking_detail" +
-                    "?facilityId=" + facilityId +
-                    "&selectedSlots=" + selectedIds.join(",");
+      confirmButton.href =
+                "/booking/booking_detail" +
+                "?facilityId=" + facilityId +
+                "&date=" + selectedDate +
+                "&selectedSlots=" + selectedIds.join(",");
         // Enable button
        confirmButton.classList.remove(
               "bg-gray-400",

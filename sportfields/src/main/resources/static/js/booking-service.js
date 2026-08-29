@@ -27,6 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const quantityElement =
             item.querySelector(".service-quantity");
 
+             const quantityInput =
+                        item.querySelector(".service-quantity-input");
+
+
         let quantity = 0;
 
 
@@ -36,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             quantity++;
 
             quantityElement.textContent = quantity;
+               quantityInput.value = quantity;
 
             updateTotal();
         });
@@ -49,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             quantityElement.textContent = quantity;
+               quantityInput.value = quantity;
 
             updateTotal();
         });

@@ -3,6 +3,7 @@ package com.hoainhi.sportfields.controller;
 import com.hoainhi.sportfields.dto.BookingServiceDTO;
 import com.hoainhi.sportfields.entity.*;
 import com.hoainhi.sportfields.enums.BookingStatus;
+import com.hoainhi.sportfields.service.BookingServiceItemService;
 import com.hoainhi.sportfields.service.impl.*;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -35,6 +36,9 @@ public class PayController {
 
     @Autowired
     private ServiceImpl service;
+
+    @Autowired
+    private BookingServiceItemService bookingServiceItemService;
 
     @Autowired
     private BookingDetailServiceImpl bookingDetailService;
@@ -78,6 +82,9 @@ public class PayController {
                 List<Long> selectedSlots =
                         (List<Long>) session.getAttribute("selectedSlots");
 
+                List<BookingServiceDTO> selectedServices =
+                        (List<BookingServiceDTO>)
+                                session.getAttribute("selectedServices");
 
                 Double courtTotal =
                         (Double) session.getAttribute("courtTotal");
@@ -92,6 +99,7 @@ public class PayController {
                 booking.setStatus(BookingStatus.PENDING);
                 booking = bookingServiceimpl.saveBooking(booking);
 
+
                 List<ScheduleDetails> details = scheduleDetailSerivceimp.getByIds(selectedSlots);
 
                 for(ScheduleDetails scheduleDetails : details){
@@ -100,7 +108,33 @@ public class PayController {
                     bookingDetails.setScheduleDetails(scheduleDetails);
                    bookingDetailService.save(bookingDetails);
                 }
+                if (selectedServices != null) {
 
+                    for (BookingServiceDTO serviceDTO : selectedServices) {
+
+                        Services services =
+                                service.findById(
+                                        serviceDTO.getServiceId()
+                                );
+
+                        BookingService bookingService =
+                                new BookingService();
+
+                        bookingService.setBooking(booking);
+
+                        bookingService.setService(services);
+
+                        bookingService.setQuantity(
+                                serviceDTO.getQuantity()
+                        );
+
+                        bookingService.setPrice(
+                                serviceDTO.getPrice()
+                        );
+
+                       bookingServiceItemService.save(bookingService);
+                    }
+                }
                 model.addAttribute("message", "Thanh toán thành công!");
                 return "redirect:/booking/history";
             }
