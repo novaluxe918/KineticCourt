@@ -24,5 +24,10 @@ public class BookingServiceimpl implements BookingService {
         return bookingRepository.save(booking);
     }
 
+    @Override
+    public List<Booking> getBookingHistory(Long userId) {
+        return bookingRepository.findByUser_IdOrderByCreatedAtDesc(userId);
+    }
+
 
 }

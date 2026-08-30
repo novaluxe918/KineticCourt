@@ -171,7 +171,10 @@ public class BookingController {
     }
 
     @GetMapping("/history")
-    public String bookingHistory(){
+    public String bookingHistory(HttpSession session, Model model){
+        User user = (User) session.getAttribute("loginUser");
+        List<Booking> bookings = bookingServiceimpl.getBookingHistory(user.getId());
+        model.addAttribute("bookings", bookings);
         return "client/booking/BookingHistory";
     }
 

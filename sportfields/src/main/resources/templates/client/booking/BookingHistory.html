@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-<main layout:fragment="main" class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<main layout:fragment="main" class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 mt-10">
     <!-- Breadcrumbs & Title -->
     <nav class="mb-6 flex items-center gap-2 text-sm font-medium text-secondary">
         <a class="hover:text-primary transition-colors" href="#">Trang chủ</a>
@@ -27,31 +27,45 @@
     <!-- Bookings Grid -->
     <div class="grid grid-cols-1 gap-6" id="bookings-container">
         <!-- Booking Card 1: Upcoming -->
-        <div class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="upcoming">
+        <div th:with="firstDetail=${booking.bookingDetail[0]}"  th:each="booking : ${bookings}"  class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="upcoming">
             <div class="md:w-64 h-48 md:h-auto overflow-hidden relative flex-shrink-0">
-                <img class="w-full h-full object-cover" data-alt="A high-end indoor badminton court with vibrant blue flooring and bright orange lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChHhgyNc2ZWVF6NBpuFGvhv09f43l9W2BQW-X05VbaaIl5VVNDWrvdCEgyruM281fFwnhW_kFRVw5dC9B-j5-rC-y2kMBXfsMlQAxQnIngSLDoZMGWgXIanO_wIBZeReZWPlXdm4a6-Pyv8aiZYLc60o-PkKwIFlLwk_TE-sO51CggLRbybsZYjYp9fteuqvCunNMy8_yZWzLoG3utwKrQW18k6Hv0L8q0A8buJQX15pbV24AEmDVuceFi6O2rw4q8imdE3c2DibA"/>
+                <img th:src="${firstDetail.scheduleDetails.schedule.court.facility.img_url}" class="w-full h-full object-cover" data-alt="A high-end indoor badminton court with vibrant blue flooring and bright orange lines." />
                 <div class="absolute top-4 left-4">
-                    <span class="bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Sắp tới</span>
+                    <span th:text="${booking.status}" class="bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"></span>
                 </div>
             </div>
             <div class="flex-grow p-6 flex flex-col justify-between">
                 <div>
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-headline-md text-on-surface">CLB Cầu Lông Ngôi Sao</h3>
-                        <span class="font-semibold text-primary">240.000đ</span>
+                        <h3 th:text="${firstDetail.scheduleDetails.schedule.court.facility.name_facility}" class="font-headline-md text-on-surface"></h3>
+                        <span  th:text="${#numbers.formatDecimal(booking.total, 0, 'COMMA', 0, 'POINT')} + 'đ'" class="font-semibold text-primary"></span>
                     </div>
                     <div class="flex flex-col gap-3 text-secondary mb-4">
                         <div class="flex items-center gap-3">
                             <span class="material-symbols-outlined text-outline text-sm">calendar_today</span>
-                            <span class="text-sm font-medium">Thứ 7, 24 Tháng 8, 2024</span>
+                            <span   th:text="${#temporals.format(booking.booking_date, 'dd/MM/yyyy')}"> class="text-sm font-medium"></span>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-outline text-sm">schedule</span>
-                            <span class="text-sm font-medium">17:00 - 19:00 (2 giờ)</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-outline text-sm">location_on</span>
-                            <span class="text-sm font-medium">Sân số 4, Tầng 3, Quận 10</span>
+                        <div class="flex flex-col gap-2">
+                            <div th:each="detail : ${booking.bookingDetail}" class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-outline text-sm">schedule</span>
+                                <span class="text-sm font-medium">
+
+                            <span th:text="${detail.scheduleDetails.schedule.court.name_court}">
+                            </span>
+
+                            :
+
+                            <span th:text="${detail.scheduleDetails.time_start}">
+                            </span>
+
+                            -
+
+                            <span th:text="${detail.scheduleDetails.time_end}">
+                            </span>
+
+                        </span>
+                            </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -66,107 +80,73 @@
             </div>
         </div>
         <!-- Booking Card 2: Completed -->
-        <div class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="completed">
-            <div class="md:w-64 h-48 md:h-auto overflow-hidden relative flex-shrink-0">
-                <img class="w-full h-full object-cover grayscale-[30%]" data-alt="A luxury indoor sports center with multiple badminton courts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCcMcnsI1BaVDFyoFpL1Oxtj6lLJD_93J1-TE_jxByTscwQvoMz9S7TM0AwIF5jk_2R-dkpeNbPcyTTnXkZglgjdc5qEYWFr4oq-hs_ZiyGQ9M1zHFAI3smcDQuJGltx8ufo1pI6zKDumXLgvR5TLAngXoHtd9gB2iGUcwjRH0mnIpe3fHrmA8GpZieVgcxZuutn5Nd8DkZHQyqFBISpKtGSGVSIAfb2jXj7nl165zGQTlVz2c-uQbFMGgGr4wpniEthjU98PG_nw"/>
-                <div class="absolute top-4 left-4">
-                    <span class="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Đã hoàn thành</span>
-                </div>
-            </div>
-            <div class="flex-grow p-6 flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-headline-md text-on-surface">Kinetic Arena - Court A1</h3>
-                        <span class="font-semibold text-secondary">180.000đ</span>
-                    </div>
-                    <div class="flex flex-col gap-3 text-secondary mb-4">
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-outline text-sm">calendar_today</span>
-                            <span class="text-sm font-medium">Chủ nhật, 18 Tháng 8, 2024</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-outline text-sm">schedule</span>
-                            <span class="text-sm font-medium">08:00 - 10:00 (2 giờ)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-wrap gap-3 mt-4">
-                    <button class="bg-[#a33e00] text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> Đánh giá ngay
-                    </button>
-                    <button class="border border-outline text-on-surface-variant text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-surface-variant/50 transition-colors">
-                        Đặt lại sân này
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Booking Card 3: Cancelled -->
-        <div class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row opacity-80" data-status="completed">
-            <div class="md:w-64 h-48 md:h-auto overflow-hidden relative flex-shrink-0">
-                <img class="w-full h-full object-cover grayscale opacity-80" data-alt="A modern athletic facility entrance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB26d1XrbrDsb5-szgDSB1JgMAzfJSAsT6SjBFHVDwRCybLAzOAgKA0ArNJdcCFW_0eI49mSiP9CCRbAmirvtjG7FY-aLYzHzGh3wLoC7GpbXu34T8UMUV_i4KjQDRm3c7n8DeXMQIbOIV_x_VAwtQgWMUHHkop8dseRtRtgw23LHfJLymunAmX_cdvWpVl7lLSkVrjE4DFItMulkBI1Dg_Swu4UygtFLAoR24-hNlNph7ZvMxaop24Q4io1ZVV_lszGxCi8l-RxFQ"/>
-                <div class="absolute top-4 left-4">
-                    <span class="bg-error-container/50 text-error px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Đã hủy</span>
-                </div>
-            </div>
-            <div class="flex-grow p-6 flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-headline-md text-on-surface-variant">Sân Cầu Lông Bình Minh</h3>
-                        <span class="font-semibold text-on-surface-variant line-through">120.000đ</span>
-                    </div>
-                    <div class="flex flex-col gap-3 text-secondary mb-4">
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-outline text-sm">calendar_today</span>
-                            <span class="text-sm font-medium">Thứ 3, 13 Tháng 8, 2024</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-outline text-sm">schedule</span>
-                            <span class="text-sm font-medium">19:00 - 20:00 (1 giờ)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-wrap gap-3 mt-4">
-                    <button class="bg-surface-container-high text-secondary text-sm font-semibold px-6 py-2.5 rounded-lg cursor-not-allowed">
-                        Đã hoàn tiền
-                    </button>
-                </div>
-            </div>
-        </div>
+<!--        <div class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="completed">-->
+<!--            <div class="md:w-64 h-48 md:h-auto overflow-hidden relative flex-shrink-0">-->
+<!--                <img class="w-full h-full object-cover grayscale-[30%]" data-alt="A luxury indoor sports center with multiple badminton courts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCcMcnsI1BaVDFyoFpL1Oxtj6lLJD_93J1-TE_jxByTscwQvoMz9S7TM0AwIF5jk_2R-dkpeNbPcyTTnXkZglgjdc5qEYWFr4oq-hs_ZiyGQ9M1zHFAI3smcDQuJGltx8ufo1pI6zKDumXLgvR5TLAngXoHtd9gB2iGUcwjRH0mnIpe3fHrmA8GpZieVgcxZuutn5Nd8DkZHQyqFBISpKtGSGVSIAfb2jXj7nl165zGQTlVz2c-uQbFMGgGr4wpniEthjU98PG_nw"/>-->
+<!--                <div class="absolute top-4 left-4">-->
+<!--                    <span class="bg-surface-container-high text-secondary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Đã hoàn thành</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="flex-grow p-6 flex flex-col justify-between">-->
+<!--                <div>-->
+<!--                    <div class="flex justify-between items-start mb-4">-->
+<!--                        <h3 class="font-headline-md text-on-surface">Kinetic Arena - Court A1</h3>-->
+<!--                        <span class="font-semibold text-secondary">180.000đ</span>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-col gap-3 text-secondary mb-4">-->
+<!--                        <div class="flex items-center gap-3">-->
+<!--                            <span class="material-symbols-outlined text-outline text-sm">calendar_today</span>-->
+<!--                            <span class="text-sm font-medium">Chủ nhật, 18 Tháng 8, 2024</span>-->
+<!--                        </div>-->
+<!--                        <div class="flex items-center gap-3">-->
+<!--                            <span class="material-symbols-outlined text-outline text-sm">schedule</span>-->
+<!--                            <span class="text-sm font-medium">08:00 - 10:00 (2 giờ)</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flex flex-wrap gap-3 mt-4">-->
+<!--                    <button class="bg-[#a33e00] text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">-->
+<!--                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> Đánh giá ngay-->
+<!--                    </button>-->
+<!--                    <button class="border border-outline text-on-surface-variant text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-surface-variant/50 transition-colors">-->
+<!--                        Đặt lại sân này-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Booking Card 3: Cancelled &ndash;&gt;-->
+<!--        <div class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row opacity-80" data-status="completed">-->
+<!--            <div class="md:w-64 h-48 md:h-auto overflow-hidden relative flex-shrink-0">-->
+<!--                <img class="w-full h-full object-cover grayscale opacity-80" data-alt="A modern athletic facility entrance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB26d1XrbrDsb5-szgDSB1JgMAzfJSAsT6SjBFHVDwRCybLAzOAgKA0ArNJdcCFW_0eI49mSiP9CCRbAmirvtjG7FY-aLYzHzGh3wLoC7GpbXu34T8UMUV_i4KjQDRm3c7n8DeXMQIbOIV_x_VAwtQgWMUHHkop8dseRtRtgw23LHfJLymunAmX_cdvWpVl7lLSkVrjE4DFItMulkBI1Dg_Swu4UygtFLAoR24-hNlNph7ZvMxaop24Q4io1ZVV_lszGxCi8l-RxFQ"/>-->
+<!--                <div class="absolute top-4 left-4">-->
+<!--                    <span class="bg-error-container/50 text-error px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Đã hủy</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="flex-grow p-6 flex flex-col justify-between">-->
+<!--                <div>-->
+<!--                    <div class="flex justify-between items-start mb-4">-->
+<!--                        <h3 class="font-headline-md text-on-surface-variant">Sân Cầu Lông Bình Minh</h3>-->
+<!--                        <span class="font-semibold text-on-surface-variant line-through">120.000đ</span>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-col gap-3 text-secondary mb-4">-->
+<!--                        <div class="flex items-center gap-3">-->
+<!--                            <span class="material-symbols-outlined text-outline text-sm">calendar_today</span>-->
+<!--                            <span class="text-sm font-medium">Thứ 3, 13 Tháng 8, 2024</span>-->
+<!--                        </div>-->
+<!--                        <div class="flex items-center gap-3">-->
+<!--                            <span class="material-symbols-outlined text-outline text-sm">schedule</span>-->
+<!--                            <span class="text-sm font-medium">19:00 - 20:00 (1 giờ)</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="flex flex-wrap gap-3 mt-4">-->
+<!--                    <button class="bg-surface-container-high text-secondary text-sm font-semibold px-6 py-2.5 rounded-lg cursor-not-allowed">-->
+<!--                        Đã hoàn tiền-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <!-- Booking Card 4: Upcoming -->
-        <div class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="upcoming">
-            <div class="md:w-64 h-48 md:h-auto overflow-hidden relative flex-shrink-0">
-                <img class="w-full h-full object-cover" data-alt="A dynamic shot of a shuttlecock resting on a high-tech synthetic badminton court surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ0j1jEuDAIxMZPQ78O76qnML5HhdA8kH9O885x2QKj3YHFDC7ArTDeqdwZK1mhmxoesPGsXuKSYWaoMEiNaFKXrwEYj7ovS3OVDszXQe12Fvu8VSjX-Ybd4fCNEMfigVaE7enYXdA6g6edk_vNCS5_GbAsNaVhL82CLBi6l6hfbUZaPHhMsiRGtLQFSqm0xwUv3QmvV0hRpkfIIV0QrDQwoGDJk6GWmN-URoiqMBtklEY3KMFv2qqAb4NQ06eTNUNIfnuHBjw9d8"/>
-                <div class="absolute top-4 left-4">
-                    <span class="bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Sắp tới</span>
-                </div>
-            </div>
-            <div class="flex-grow p-6 flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-headline-md text-on-surface">Pro Badminton Hub</h3>
-                        <span class="font-semibold text-primary">300.000đ</span>
-                    </div>
-                    <div class="flex flex-col gap-3 text-secondary mb-4">
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-outline text-sm">calendar_today</span>
-                            <span class="text-sm font-medium">Thứ 2, 26 Tháng 8, 2024</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-outline text-sm">schedule</span>
-                            <span class="text-sm font-medium">20:00 - 22:00 (2 giờ)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-wrap gap-3 mt-4">
-                    <button class="bg-primary text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]">visibility</span> Xem chi tiết
-                    </button>
-                    <button class="border border-error text-error text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-error-container/10 transition-colors">
-                        Hủy đặt sân
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- Pagination (Implicit for list) -->
     <div class="mt-12 flex justify-center items-center gap-4">
