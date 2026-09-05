@@ -5,8 +5,10 @@ import com.hoainhi.sportfields.entity.*;
 import com.hoainhi.sportfields.enums.ScheduleStatus;
 import com.hoainhi.sportfields.repository.FaciRepository;
 import com.hoainhi.sportfields.service.impl.*;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -174,17 +176,16 @@ public class BookingController {
     public String bookingHistory(HttpSession session, Model model){
         User user = (User) session.getAttribute("loginUser");
         List<Booking> bookings = bookingServiceimpl.getBookingHistory(user.getId());
+         // tao list enum =>
         model.addAttribute("bookings", bookings);
         return "client/booking/BookingHistory";
     }
 
-
+// controller
     @PostMapping("/checkout")
     public String checkout( @RequestParam(required = false) List<Long> serviceIds,
                             @RequestParam(required = false) List<Integer> quantities,
                             HttpSession session){
-        System.out.println("serviceIds = " + serviceIds);
-        System.out.println("quantities = " + quantities);
 
         List<BookingServiceDTO> bookingServiceDTOS = new ArrayList<>();
         if(serviceIds != null && quantities != null){
@@ -210,6 +211,12 @@ public class BookingController {
         }
         session.setAttribute("selectedServices", bookingServiceDTOS);
         return "redirect:/paypal/pay";
+    }
+
+    @GetMapping("/booking_own")
+    public String bookingOwner(HttpServletRequest request, Model model){
+        model.addAttribute("currentUrl", request.getRequestURI());
+        return "owner/booking/Booking";
     }
 
 }

@@ -27,11 +27,19 @@
     <!-- Bookings Grid -->
     <div class="grid grid-cols-1 gap-6" id="bookings-container">
         <!-- Booking Card 1: Upcoming -->
-        <div th:with="firstDetail=${booking.bookingDetail[0]}"  th:each="booking : ${bookings}"  class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="upcoming">
+        <div th:each="booking : ${bookings}"  th:with="firstDetail=${booking.bookingDetail[0]}"   class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="upcoming">
             <div class="md:w-64 h-48 md:h-auto overflow-hidden relative flex-shrink-0">
                 <img th:src="${firstDetail.scheduleDetails.schedule.court.facility.img_url}" class="w-full h-full object-cover" data-alt="A high-end indoor badminton court with vibrant blue flooring and bright orange lines." />
                 <div class="absolute top-4 left-4">
-                    <span th:text="${booking.status}" class="bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"></span>
+                    <span th:text="${
+            booking.status.name() == 'PENDING'
+            ? 'Chờ xác nhận'
+            : booking.status.name() == 'APPROVED'
+                ? 'Đã xác nhận'
+                : booking.status.name() == 'CANCELLED'
+                    ? 'Đã hủy'
+                    : 'Đã hoàn thành'
+        }"class="bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"></span>
                 </div>
             </div>
             <div class="flex-grow p-6 flex flex-col justify-between">
@@ -43,7 +51,11 @@
                     <div class="flex flex-col gap-3 text-secondary mb-4">
                         <div class="flex items-center gap-3">
                             <span class="material-symbols-outlined text-outline text-sm">calendar_today</span>
-                            <span   th:text="${#temporals.format(booking.booking_date, 'dd/MM/yyyy')}"> class="text-sm font-medium"></span>
+
+                            <span
+                                    th:text="${#temporals.format(booking.booking_date, 'dd/MM/yyyy')}"
+                                    class="text-sm font-medium">
+    </span>
                         </div>
                         <div class="flex flex-col gap-2">
                             <div th:each="detail : ${booking.bookingDetail}" class="flex items-center gap-3">
@@ -73,7 +85,8 @@
                     <button class="bg-primary text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
                         <span class="material-symbols-outlined text-[18px]">visibility</span> Xem chi tiết
                     </button>
-                    <button class="border border-error text-error text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-error-container/10 transition-colors">
+                    <button th:if="${booking.status == T(com.hoainhi.sportfields.enums.BookingStatus).PENDING
+            or booking.status == T(com.hoainhi.sportfields.enums.BookingStatus).APPROVE}"  class="border border-error text-error text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-error-container/10 transition-colors">
                         Hủy đặt sân
                     </button>
                 </div>

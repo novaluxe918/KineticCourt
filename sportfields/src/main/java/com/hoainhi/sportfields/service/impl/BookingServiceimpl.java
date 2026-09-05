@@ -26,7 +26,15 @@ public class BookingServiceimpl implements BookingService {
 
     @Override
     public List<Booking> getBookingHistory(Long userId) {
-        return bookingRepository.findByUser_IdOrderByCreatedAtDesc(userId);
+        List<Booking> bookings = bookingRepository.findBookingHistory(userId);
+        LocalDate today = LocalDate.now();
+        for(Booking booking : bookings){
+            if(booking.getStatus() == BookingStatus.APPROVE && booking.getBooking_date().isBefore(today)){
+                booking.setStatus(BookingStatus.COMPLETED);
+                bookingRepository.save(booking);
+            }
+        }
+        return bookings;
     }
 
 
