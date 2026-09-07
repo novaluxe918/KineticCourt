@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-<main layout:fragment="main" class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 mt-10">
+<main layout:fragment="main" class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 mt-20">
     <!-- Breadcrumbs & Title -->
     <nav class="mb-6 flex items-center gap-2 text-sm font-medium text-secondary">
         <a class="hover:text-primary transition-colors" href="#">Trang chủ</a>
@@ -82,10 +82,10 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-3 mt-4">
-                    <button class="bg-primary text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+                    <button type="button" th:data-id="${booking.id}" class="btn-detail bg-primary text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
                         <span class="material-symbols-outlined text-[18px]">visibility</span> Xem chi tiết
                     </button>
-                    <button th:if="${booking.status == T(com.hoainhi.sportfields.enums.BookingStatus).PENDING
+                    <button  th:if="${booking.status == T(com.hoainhi.sportfields.enums.BookingStatus).PENDING
             or booking.status == T(com.hoainhi.sportfields.enums.BookingStatus).APPROVE}"  class="border border-error text-error text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-error-container/10 transition-colors">
                         Hủy đặt sân
                     </button>
@@ -171,6 +171,7 @@
             <span class="material-symbols-outlined text-sm">chevron_right</span>
         </button>
     </div>
+    <div th:replace="~{client/booking/ModalDetail :: detailHistory}"></div>
 </main>
 </body>
 </html>
