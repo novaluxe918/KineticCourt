@@ -1,6 +1,7 @@
 package com.hoainhi.sportfields.service;
 
 import com.hoainhi.sportfields.dto.BookingDTO;
+import com.hoainhi.sportfields.dto.BookingDetailDTO;
 import com.hoainhi.sportfields.entity.Booking;
 import com.hoainhi.sportfields.entity.User;
 import jakarta.servlet.http.HttpSession;
@@ -13,5 +14,6 @@ public interface BookingService {
 
     Booking saveBooking(Booking booking);
     List<Booking> getBookingHistory(Long userId);
+    BookingDetailDTO getBookingDetail(Long id);
 
 }

@@ -2,13 +2,10 @@ package com.hoainhi.sportfields.controller;
 
 import com.hoainhi.sportfields.dto.*;
 import com.hoainhi.sportfields.entity.*;
-import com.hoainhi.sportfields.enums.ScheduleStatus;
-import com.hoainhi.sportfields.repository.FaciRepository;
 import com.hoainhi.sportfields.service.impl.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -218,7 +215,14 @@ public class BookingController {
         model.addAttribute("currentUrl", request.getRequestURI());
         return "owner/booking/Booking";
     }
+    @GetMapping("/detail/{id}")
+    @ResponseBody
+    public Booking getBookingDetail(@PathVariable Long id){
+        System.out.println("ID nhận được: " + id);
+        Booking booking = bookingServiceimpl.findById(id);
+        System.out.println("3. Booking ID: " + booking.getId());
 
-
+        return booking;
+    }
 
 }

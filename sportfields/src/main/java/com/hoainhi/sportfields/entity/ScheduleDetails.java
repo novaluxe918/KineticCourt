@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hoainhi.sportfields.enums.ScheduleStatus;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -29,5 +30,6 @@ public class ScheduleDetails {
     private Schedule schedule;
 
     @OneToMany(mappedBy = "scheduleDetails", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<BookingDetails> bookingDetails;
 }

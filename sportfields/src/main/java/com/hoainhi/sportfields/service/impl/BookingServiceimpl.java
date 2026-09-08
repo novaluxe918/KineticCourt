@@ -1,6 +1,7 @@
 package com.hoainhi.sportfields.service.impl;
 
 import com.hoainhi.sportfields.dto.BookingDTO;
+import com.hoainhi.sportfields.dto.BookingDetailDTO;
 import com.hoainhi.sportfields.entity.Booking;
 import com.hoainhi.sportfields.entity.BookingDetails;
 import com.hoainhi.sportfields.entity.ScheduleDetails;
@@ -35,6 +36,14 @@ public class BookingServiceimpl implements BookingService {
             }
         }
         return bookings;
+    }
+
+    @Override
+    public BookingDetailDTO getBookingDetail(Long id) {
+        Booking booking = bookingRepository.findById(id).orElseThrow();
+        BookingDetailDTO bookingDetailDTO = new BookingDetailDTO();
+
+        return null;
     }
 
 

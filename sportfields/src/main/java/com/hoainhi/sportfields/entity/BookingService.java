@@ -1,5 +1,6 @@
 package com.hoainhi.sportfields.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class BookingService {
 
     @ManyToOne
     @JoinColumn(name = "id_booking", nullable = false)
+    @JsonIgnore
     private Booking booking;
 
     @ManyToOne
