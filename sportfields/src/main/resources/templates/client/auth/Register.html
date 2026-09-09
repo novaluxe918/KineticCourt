@@ -213,6 +213,11 @@
             <form method="post"
                   th:object="${accountDTO}"
                   th:action="@{/register}" class="space-y-5" >
+
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}">
+
                 <input type="hidden" th:field="*{role}">
                 <div class="space-y-1">
                     <label class="block font-label-md text-on-surface-variant ml-1">Họ và Tên</label>

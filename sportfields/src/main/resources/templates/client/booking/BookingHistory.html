@@ -19,15 +19,15 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-surface-variant pb-4">
         <h1 class="font-headline-xl text-on-surface">Lịch sử đặt sân</h1>
         <div class="flex bg-surface-container-low p-1 rounded-lg">
-            <button class="px-6 py-2 text-sm transition-all active-tab" id="btn-all" onclick="filterBookings('all')">Tất cả</button>
-            <button class="px-6 py-2 text-sm font-medium transition-all text-secondary hover:text-primary" id="btn-upcoming" onclick="filterBookings('upcoming')">Sắp tới</button>
+            <button class="px-6 py-2 text-sm transition-all text-secondary hover:text-primary active-tab" id="btn-all" onclick="filterBookings('all')">Tất cả</button>
+            <button class="px-6 py-2 text-sm font-medium transition-all text-secondary hover:text-primary" id="btn-upcoming" onclick="filterBookings('upcoming')">Chờ xác nhận</button>
             <button class="px-6 py-2 text-sm font-medium transition-all text-secondary hover:text-primary" id="btn-completed" onclick="filterBookings('completed')">Đã hoàn thành</button>
         </div>
     </div>
     <!-- Bookings Grid -->
     <div class="grid grid-cols-1 gap-6" id="bookings-container">
         <!-- Booking Card 1: Upcoming -->
-        <div th:each="booking : ${bookings}"  th:with="firstDetail=${booking.bookingDetail[0]}"   class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="upcoming">
+        <div th:each="booking : ${bookings}"  th:data-status="${booking.status}" th:with="firstDetail=${booking.bookingDetail[0]}"   class="booking-card bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col md:flex-row" data-status="upcoming">
             <div class="md:w-64 h-48 md:h-auto overflow-hidden relative flex-shrink-0">
                 <img th:src="${firstDetail.scheduleDetails.schedule.court.facility.img_url}" class="w-full h-full object-cover" data-alt="A high-end indoor badminton court with vibrant blue flooring and bright orange lines." />
                 <div class="absolute top-4 left-4">

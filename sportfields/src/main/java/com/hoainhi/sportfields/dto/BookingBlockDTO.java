@@ -12,5 +12,6 @@ public class BookingBlockDTO {
     private int startColumn;
     private int slotCount;
     private Double price;
+    private boolean booked;
 
 }

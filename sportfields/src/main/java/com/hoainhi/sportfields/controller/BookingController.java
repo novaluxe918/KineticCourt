@@ -62,81 +62,7 @@ public class BookingController {
             timeSlots.add(time.format(formatter));
             time = time.plusMinutes(30);
         }
-        List<Court> courts =
-                courtService.getCourtByFacility(facilityId);
-
-        List<ShowDTO> showDTOS =
-                new ArrayList<>();
-
-        for (Court court : courts) {
-
-            // Lấy schedule của sân trong ngày được chọn
-            List<ScheduleDetails> scheduleDetails =
-                    scheduleDetailSerivceimp.getScheduleDetails(
-                            court.getId(),
-                            date
-                    );
-
-            List<BookingBlockDTO> bookingBlockDTOS =
-                    new ArrayList<>();
-
-            for (ScheduleDetails details : scheduleDetails) {
-
-                LocalTime start =
-                        details.getTime_start();
-
-                LocalTime endTime =
-                        details.getTime_end();
-
-
-
-                // 1. TÍNH VỊ TRÍ BẮT ĐẦU
-
-                long minuteFromStart =
-                        Duration.between(
-                                LocalTime.of(5, 0),
-                                start
-                        ).toMinutes();
-
-                int startSlot =
-                        (int) (minuteFromStart / 30);
-
-
-
-                // 2. TÍNH SỐ SLOT
-
-                long durationMinutes =
-                        Duration.between(start, endTime).toMinutes();
-
-                int slotCount =
-                        (int) (durationMinutes / 30);
-
-
-
-
-                BookingBlockDTO blockDTO =
-                        new BookingBlockDTO();
-
-                blockDTO.setStartTime(start);
-                blockDTO.setEndTime(endTime);
-                blockDTO.setId(details.getId());
-                blockDTO.setStartColumn(startSlot);
-                blockDTO.setSlotCount(slotCount);
-                blockDTO.setPrice(details.getPrice());
-                bookingBlockDTOS.add(blockDTO);
-            }
-
-
-            ShowDTO showDTO =
-                    new ShowDTO();
-
-            showDTO.setCourt(court);
-            showDTO.setBookingBlocks(
-                    bookingBlockDTOS
-            );
-
-            showDTOS.add(showDTO);
-        }
+        List<ShowDTO> showDTOS = bookingServiceimpl.getShowBooking(facilityId, date);
         model.addAttribute("date", date);
         model.addAttribute("today", today);
         model.addAttribute("facilityId", facilityId);
@@ -173,7 +99,6 @@ public class BookingController {
     public String bookingHistory(HttpSession session, Model model){
         User user = (User) session.getAttribute("loginUser");
         List<Booking> bookings = bookingServiceimpl.getBookingHistory(user.getId());
-         // tao list enum =>
         model.addAttribute("bookings", bookings);
         return "client/booking/BookingHistory";
     }
@@ -217,12 +142,11 @@ public class BookingController {
     }
     @GetMapping("/detail/{id}")
     @ResponseBody
-    public Booking getBookingDetail(@PathVariable Long id){
+    public BookingDetailDTO getBookingDetail(@PathVariable Long id){
         System.out.println("ID nhận được: " + id);
-        Booking booking = bookingServiceimpl.findById(id);
-        System.out.println("3. Booking ID: " + booking.getId());
+        BookingDetailDTO bookingDetailDTO = bookingServiceimpl.getBookingDetail(id);
 
-        return booking;
+        return bookingDetailDTO;
     }
 
 }

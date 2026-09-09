@@ -286,7 +286,9 @@
             hover:text-white
                             overflow-hidden
                             whitespace-nowrap"
-
+                             th:classappend="${block.booked}
+        ? 'bg-gray-400 text-white pointer-events-none pointer-events-none'
+        : ' bg-white text-primary cursor-pointer duration-150 hover:bg-[#ff6b00] hover:border-[#ff6b00] hover:text-white'"
                              th:data-court="${show.court.name_court}"
                              th:data-id="${block.id}"
                              th:data-start="${block.startTime}"

@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -17,5 +19,16 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
         ORDER BY b.booking_date DESC
     """)
     List<Booking> findBookingHistory(@Param("userId") Long userId);
+    @Query("""
+        SELECT COUNT(b) > 0
+        FROM Booking b
+        JOIN b.bookingDetail bd
+        WHERE b.booking_date = :bookingDate
+        AND bd.scheduleDetails.id = :scheduleDetailId
+    """)
+    boolean existsBooking(
+            @Param("bookingDate") LocalDate bookingDate,
+            @Param("scheduleDetailId") Long scheduleDetailId
+    );
 
 }

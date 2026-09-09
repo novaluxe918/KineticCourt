@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="w-full relative overflow-hidden">
+  <div class="absolute -top-32 right-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -top-24 left-10 w-72 h-72 bg-secondary-container/30 rounded-full blur-2xl pointer-events-none"></div>
+  <div class="max-w-[1320px] mx-auto px-margin-desktop pt-6">
+    <!-- Breadcrumb Navigation -->
+    <nav class="flex items-center gap-2 font-label-md text-label-md text-secondary mb-4">
+      <a class="hover:text-primary-container transition-colors flex items-center gap-1.5" data-path="home" href="#">
+        <span class="material-symbols-outlined text-[18px]">home</span>
+        Trang chủ
+      </a>
+      <span class="material-symbols-outlined text-[16px] text-surface-container-highest">chevron_right</span>
+      <a class="hover:text-primary-container transition-colors" data-path="account" href="#">Tài khoản</a>
+      <span class="material-symbols-outlined text-[16px] text-surface-container-highest">chevron_right</span>
+      <span class="text-on-surface font-semibold">Lịch sử thanh toán</span>
+    </nav>
+    <!-- Page Header & Action -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b-0">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-md shadow-primary-container/20">
+            <span class="material-symbols-outlined text-[22px]">receipt_long</span>
+          </div>
+          <h1 class="font-headline-xl text-headline-lg md:text-headline-xl text-on-surface tracking-tight">Lịch sử thanh toán</h1>
+        </div>
+        <p class="font-body-md text-body-md text-secondary max-w-2xl">
+          Theo dõi chi tiết các giao dịch, trạng thái thanh toán và tải biên lai điện tử bảo chứng cho từng lượt đặt sân Kinetic Court.
+        </p>
+      </div>
+      <!-- Quick Summary Export Actions -->
+      <div class="flex items-center gap-3">
+        <button class="flex items-center gap-2 bg-surface-container-lowest text-on-surface hover:bg-surface-container-low px-4 py-2.5 rounded-lg shadow-sm font-label-md text-label-md transition-all" id="btn-export-statement">
+          <span class="material-symbols-outlined text-secondary text-[20px]">download</span>
+          Xuất sao kê (CSV)
+        </button>
+        <button class="flex items-center gap-2 bg-primary-container hover:bg-primary text-on-primary px-5 py-2.5 rounded-lg shadow-md font-headline-md text-label-md transition-all" id="btn-quick-receipt" onclick="openReceiptModal('TXN-884920')">
+          <span class="material-symbols-outlined text-[18px]">print</span>
+          Hóa đơn mới nhất
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- KPI Summary Cards Section -->
+<div class="max-w-[1320px] mx-auto px-margin-desktop mt-4 w-full">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+    <!-- KPI 1: Tổng chi tiêu -->
+    <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+      <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary-container/5 rounded-full group-hover:scale-125 transition-transform"></div>
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-label-md text-label-md text-secondary uppercase tracking-wider">Tổng chi tiêu (Năm nay)</span>
+        <div class="w-9 h-9 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container">
+          <span class="material-symbols-outlined text-[20px]">payments</span>
+        </div>
+      </div>
+      <div>
+        <div class="font-headline-xl text-headline-lg text-on-surface tracking-tight">1.240.000<span class="text-headline-md text-primary-container font-headline-md ml-1">₫</span></div>
+        <div class="flex items-center gap-1.5 mt-2 font-body-md text-[13px] text-secondary">
+<span class="inline-flex items-center text-primary font-semibold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +18.4%
+            </span>
+          <span>so với tháng trước</span>
+        </div>
+      </div>
+    </div>
+    <!-- KPI 2: Giao dịch thành công -->
+    <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-label-md text-label-md text-secondary uppercase tracking-wider">Giao dịch thành công</span>
+        <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+          <span class="material-symbols-outlined text-[20px]">check_circle</span>
+        </div>
+      </div>
+      <div>
+        <div class="font-headline-xl text-headline-lg text-on-surface tracking-tight">17 <span class="font-body-md text-body-md text-secondary">giao dịch</span></div>
+        <div class="flex items-center gap-1.5 mt-2 font-body-md text-[13px] text-secondary">
+          <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+          <span>Tỉ lệ thanh toán xong: 94.4%</span>
+        </div>
+      </div>
+    </div>
+    <!-- KPI 3: Hoàn tiền đã xử lý -->
+    <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-label-md text-label-md text-secondary uppercase tracking-wider">Đã hoàn tiền</span>
+        <div class="w-9 h-9 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+          <span class="material-symbols-outlined text-[20px]">currency_exchange</span>
+        </div>
+      </div>
+      <div>
+        <div class="font-headline-xl text-headline-lg text-on-surface tracking-tight">120.000<span class="text-headline-md text-secondary font-headline-md ml-1">₫</span></div>
+        <div class="flex items-center gap-1.5 mt-2 font-body-md text-[13px] text-secondary">
+          <span class="font-semibold text-secondary">1 giao dịch</span>
+          <span>(Hủy sân trước 24h)</span>
+        </div>
+      </div>
+    </div>
+    <!-- KPI 4: Phương thức ưu tiên -->
+    <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all">
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-label-md text-label-md text-secondary uppercase tracking-wider">Phương thức ưu tiên</span>
+        <div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container">
+          <span class="material-symbols-outlined text-[20px]">credit_card</span>
+        </div>
+      </div>
+      <div>
+        <div class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+          <span>VNPay QR</span>
+          <span class="font-label-md text-[11px] bg-primary-container/15 text-primary px-2 py-0.5 rounded-full font-semibold">68%</span>
+        </div>
+        <div class="flex items-center gap-2 mt-2 font-body-md text-[13px] text-secondary">
+          <span>Dự phòng: Visa ending *4291</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Filter, Search & Status Tabs Section -->
+<div class="max-w-[1320px] mx-auto px-margin-desktop mt-8 w-full">
+  <div class="bg-surface-container-lowest rounded-xl shadow-sm p-5 flex flex-col gap-4">
+    <!-- Status Tabs -->
+    <div class="flex items-center justify-between flex-wrap gap-3 pb-3">
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 max-w-full" id="status-filter-tabs">
+        <button class="status-tab-btn active px-4 py-2 rounded-lg font-headline-md text-label-md bg-primary-container text-on-primary shadow-sm transition-colors" data-status="all">
+          Tất cả (18)
+        </button>
+        <button class="status-tab-btn px-4 py-2 rounded-lg font-headline-md text-label-md bg-surface-container-low text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" data-status="completed">
+          Thành công (16)
+        </button>
+        <button class="status-tab-btn px-4 py-2 rounded-lg font-headline-md text-label-md bg-surface-container-low text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" data-status="pending">
+          Đang xử lý (1)
+        </button>
+        <button class="status-tab-btn px-4 py-2 rounded-lg font-headline-md text-label-md bg-surface-container-low text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" data-status="refunded">
+          Đã hoàn tiền (1)
+        </button>
+        <button class="status-tab-btn px-4 py-2 rounded-lg font-headline-md text-label-md bg-surface-container-low text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" data-status="failed">
+          Thất bại (0)
+        </button>
+      </div>
+      <!-- Right helper tag -->
+      <div class="hidden lg:flex items-center gap-2 font-body-md text-[13px] text-secondary">
+        <span class="material-symbols-outlined text-[18px] text-primary-container">info</span>
+        Hóa đơn điện tử VAT được lập tự động trong 15 phút
+      </div>
+    </div>
+    <!-- Controls: Method filter, Date range, Search and Export -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 pt-2">
+      <!-- Search Code / Booking ID -->
+      <div class="lg:col-span-4 relative">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[20px]">search</span>
+        <input class="w-full bg-surface-container-low pl-10 pr-4 py-2.5 rounded-lg font-body-md text-body-md text-on-surface placeholder:text-secondary focus:outline-none focus:bg-surface-container transition-all" id="filter-search-input" placeholder="Tìm theo mã TXN, mã đặt sân (#KC...)" type="text"/>
+      </div>
+      <!-- Payment Method Select -->
+      <div class="lg:col-span-3 relative">
+        <select class="w-full appearance-none bg-surface-container-low px-4 py-2.5 pr-10 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container transition-all cursor-pointer" id="filter-method-select">
+          <option value="all">Tất cả phương thức</option>
+          <option value="vnpay">VNPay QR Cổng thanh toán</option>
+          <option value="card">Thẻ tín dụng / Ghi nợ Quốc tế</option>
+          <option value="momo">Ví điện tử MoMo</option>
+          <option value="transfer">Chuyển khoản VietQR</option>
+        </select>
+        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[20px]">expand_more</span>
+      </div>
+      <!-- Date Range Filter -->
+      <div class="lg:col-span-3 relative">
+        <div class="flex items-center bg-surface-container-low px-3 py-2 rounded-lg text-on-surface gap-2">
+          <span class="material-symbols-outlined text-secondary text-[20px]">calendar_today</span>
+          <input class="bg-transparent font-body-md text-[13px] text-on-surface focus:outline-none w-full cursor-pointer" type="date" value="2024-08-01"/>
+          <span class="text-secondary">-</span>
+          <input class="bg-transparent font-body-md text-[13px] text-on-surface focus:outline-none w-full cursor-pointer" type="date" value="2024-08-31"/>
+        </div>
+      </div>
+      <!-- Clear / Action buttons -->
+      <div class="lg:col-span-2 flex items-center gap-2">
+        <button class="w-full flex items-center justify-center gap-1 bg-surface-container hover:bg-surface-container-high text-secondary hover:text-on-surface font-label-md text-label-md py-2.5 px-3 rounded-lg transition-colors" onclick="resetFilters()">
+          <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+          Đặt lại
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Transactions Table Section -->
+<div class="max-w-[1320px] mx-auto px-margin-desktop mt-6 w-full">
+  <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+    <!-- Desktop Table (visible md and up) -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+        <tr class="bg-surface-container-low text-secondary font-label-md text-[13px] tracking-wider uppercase">
+          <th class="py-4 px-6 font-semibold">Mã giao dịch &amp; Đặt sân</th>
+          <th class="py-4 px-6 font-semibold">Thông tin sân / CLB</th>
+          <th class="py-4 px-6 font-semibold">Thời gian GD</th>
+          <th class="py-4 px-6 font-semibold">Phương thức</th>
+          <th class="py-4 px-6 font-semibold text-right">Số tiền</th>
+          <th class="py-4 px-6 font-semibold text-center">Trạng thái</th>
+          <th class="py-4 px-6 font-semibold text-center">Thao tác</th>
+        </tr>
+        </thead>
+        <tbody class="divide-y-0 text-on-surface font-body-md text-body-md" id="transactions-tbody">
+        <!-- Row 1 (VNPay - Thành công) -->
+        <tr class="hover:bg-surface-container-low/70 transition-colors group">
+          <td class="py-4 px-6">
+            <div class="font-headline-md text-label-md text-on-surface font-bold">#TXN-884920</div>
+            <div class="flex items-center gap-1.5 text-[12px] text-secondary mt-0.5">
+              <span class="material-symbols-outlined text-[14px]">sports_tennis</span>
+              Đơn đặt: <a class="text-primary-container hover:underline font-medium" href="#">#KC-982347</a>
+            </div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-semibold text-on-surface">CLB Cầu Lông Ngôi Sao</div>
+            <div class="text-[13px] text-secondary">Sân thi đấu số 4 (Thảm Yonex)</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-medium text-on-surface">24/08/2024</div>
+            <div class="text-[12px] text-secondary">16:45:12</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-[12px]">
+                <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+              </div>
+              <div>
+                <div class="font-medium text-[14px]">VNPay QR</div>
+                <div class="text-[11px] text-secondary">Ví ngân hàng</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 px-6 text-right">
+            <div class="font-headline-md text-[17px] font-bold text-on-surface">240.000<span class="text-[14px] text-primary-container font-headline-md">₫</span></div>
+            <div class="text-[11px] text-secondary">Đã gồm VAT 8%</div>
+          </td>
+          <td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-semibold bg-surface-container text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                  Thành công
+                </span>
+          </td>
+          <td class="py-4 px-6 text-center">
+            <div class="flex items-center justify-center gap-1">
+              <button class="p-2 text-secondary hover:text-primary-container hover:bg-surface-container rounded-lg transition-colors" onclick="openReceiptModal('TXN-884920')" title="Xem biên lai điện tử">
+                <span class="material-symbols-outlined text-[20px]">visibility</span>
+              </button>
+              <button class="p-2 text-secondary hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="triggerDownloadPDF('TXN-884920')" title="Tải hóa đơn PDF">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <!-- Row 2 (Visa Card - Thành công) -->
+        <tr class="hover:bg-surface-container-low/70 transition-colors group bg-surface-container-lowest">
+          <td class="py-4 px-6">
+            <div class="font-headline-md text-label-md text-on-surface font-bold">#TXN-884811</div>
+            <div class="flex items-center gap-1.5 text-[12px] text-secondary mt-0.5">
+              <span class="material-symbols-outlined text-[14px]">sports_tennis</span>
+              Đơn đặt: <a class="text-primary-container hover:underline font-medium" href="#">#KC-982109</a>
+            </div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-semibold text-on-surface">Sân Victor Quận 1</div>
+            <div class="text-[13px] text-secondary">Sân đôi VIP 02</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-medium text-on-surface">22/08/2024</div>
+            <div class="text-[12px] text-secondary">08:15:30</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+                <span class="material-symbols-outlined text-[18px]">credit_card</span>
+              </div>
+              <div>
+                <div class="font-medium text-[14px]">Visa / Master</div>
+                <div class="text-[11px] text-secondary">Ending ****4291</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 px-6 text-right">
+            <div class="font-headline-md text-[17px] font-bold text-on-surface">360.000<span class="text-[14px] text-primary-container font-headline-md">₫</span></div>
+            <div class="text-[11px] text-secondary">Đã gồm VAT 8%</div>
+          </td>
+          <td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-semibold bg-surface-container text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                  Thành công
+                </span>
+          </td>
+          <td class="py-4 px-6 text-center">
+            <div class="flex items-center justify-center gap-1">
+              <button class="p-2 text-secondary hover:text-primary-container hover:bg-surface-container rounded-lg transition-colors" onclick="openReceiptModal('TXN-884811')" title="Xem biên lai điện tử">
+                <span class="material-symbols-outlined text-[20px]">visibility</span>
+              </button>
+              <button class="p-2 text-secondary hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="triggerDownloadPDF('TXN-884811')" title="Tải hóa đơn PDF">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <!-- Row 3 (Đã hoàn tiền - Refunded) -->
+        <tr class="hover:bg-surface-container-low/70 transition-colors group bg-surface-container-low/30">
+          <td class="py-4 px-6">
+            <div class="font-headline-md text-label-md text-on-surface font-bold">#TXN-883902</div>
+            <div class="flex items-center gap-1.5 text-[12px] text-secondary mt-0.5">
+              <span class="material-symbols-outlined text-[14px]">sports_tennis</span>
+              Đơn đặt: <a class="text-primary-container hover:underline font-medium" href="#">#KC-978430</a>
+            </div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-semibold text-on-surface">Nhà Thi Đấu Rạch Miễu</div>
+            <div class="text-[13px] text-secondary">Sân tiêu chuẩn C01 (Hủy lịch)</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-medium text-on-surface">19/08/2024</div>
+            <div class="text-[12px] text-secondary">11:20:00</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-[12px]">
+                <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+              </div>
+              <div>
+                <div class="font-medium text-[14px]">Ví MoMo</div>
+                <div class="text-[11px] text-secondary">0903***889</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 px-6 text-right">
+            <div class="font-headline-md text-[17px] font-bold text-secondary line-through">120.000₫</div>
+            <div class="text-[11px] text-secondary font-medium">+120.000₫ hoàn ví</div>
+          </td>
+          <td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[12px] font-semibold bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[14px]">undo</span>
+                  Đã hoàn tiền
+                </span>
+          </td>
+          <td class="py-4 px-6 text-center">
+            <div class="flex items-center justify-center gap-1">
+              <button class="p-2 text-secondary hover:text-primary-container hover:bg-surface-container rounded-lg transition-colors" onclick="openReceiptModal('TXN-883902')" title="Xem biên lai hoàn tiền">
+                <span class="material-symbols-outlined text-[20px]">visibility</span>
+              </button>
+              <button class="p-2 text-secondary hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="triggerDownloadPDF('TXN-883902')" title="Tải văn bản hoàn tiền PDF">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <!-- Row 4 (Đang xử lý - Pending) -->
+        <tr class="hover:bg-surface-container-low/70 transition-colors group">
+          <td class="py-4 px-6">
+            <div class="font-headline-md text-label-md text-on-surface font-bold">#TXN-885002</div>
+            <div class="flex items-center gap-1.5 text-[12px] text-secondary mt-0.5">
+              <span class="material-symbols-outlined text-[14px]">sports_tennis</span>
+              Đơn đặt: <a class="text-primary-container hover:underline font-medium" href="#">#KC-983110</a>
+            </div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-semibold text-on-surface">Sân Cầu Lông Kỳ Hòa</div>
+            <div class="text-[13px] text-secondary">Sân số 1 (Gói 2 giờ cuối tuần)</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-medium text-on-surface">Hôm nay</div>
+            <div class="text-[12px] text-secondary">Vừa xong (10:14)</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-[12px]">
+                <span class="material-symbols-outlined text-[18px]">account_balance</span>
+              </div>
+              <div>
+                <div class="font-medium text-[14px]">VietQR Bank</div>
+                <div class="text-[11px] text-secondary">Đang khớp lệnh</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 px-6 text-right">
+            <div class="font-headline-md text-[17px] font-bold text-on-surface">300.000<span class="text-[14px] text-primary-container font-headline-md">₫</span></div>
+            <div class="text-[11px] text-primary font-semibold">Chờ xác nhận</div>
+          </td>
+          <td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-semibold bg-primary-fixed text-on-primary-fixed-variant">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+                  Đang xử lý
+                </span>
+          </td>
+          <td class="py-4 px-6 text-center">
+            <div class="flex items-center justify-center gap-1">
+              <button class="p-2 text-secondary hover:text-primary-container hover:bg-surface-container rounded-lg transition-colors" onclick="openReceiptModal('TXN-885002')" title="Xem chi tiết giao dịch">
+                <span class="material-symbols-outlined text-[20px]">schedule</span>
+              </button>
+              <button class="p-2 text-surface-container-highest cursor-not-allowed rounded-lg" disabled="">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <!-- Row 5 (VNPay - Thành công) -->
+        <tr class="hover:bg-surface-container-low/70 transition-colors group">
+          <td class="py-4 px-6">
+            <div class="font-headline-md text-label-md text-on-surface font-bold">#TXN-883100</div>
+            <div class="flex items-center gap-1.5 text-[12px] text-secondary mt-0.5">
+              <span class="material-symbols-outlined text-[14px]">sports_tennis</span>
+              Đơn đặt: <a class="text-primary-container hover:underline font-medium" href="#">#KC-974550</a>
+            </div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-semibold text-on-surface">CLB Cầu Lông Lan Anh</div>
+            <div class="text-[13px] text-secondary">Sân VIP 01</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="font-medium text-on-surface">15/08/2024</div>
+            <div class="text-[12px] text-secondary">19:30:45</div>
+          </td>
+          <td class="py-4 px-6">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-[12px]">
+                <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+              </div>
+              <div>
+                <div class="font-medium text-[14px]">VNPay QR</div>
+                <div class="text-[11px] text-secondary">Cổng thanh toán</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 px-6 text-right">
+            <div class="font-headline-md text-[17px] font-bold text-on-surface">220.000<span class="text-[14px] text-primary-container font-headline-md">₫</span></div>
+            <div class="text-[11px] text-secondary">Đã gồm VAT 8%</div>
+          </td>
+          <td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-semibold bg-surface-container text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                  Thành công
+                </span>
+          </td>
+          <td class="py-4 px-6 text-center">
+            <div class="flex items-center justify-center gap-1">
+              <button class="p-2 text-secondary hover:text-primary-container hover:bg-surface-container rounded-lg transition-colors" onclick="openReceiptModal('TXN-883100')" title="Xem biên lai điện tử">
+                <span class="material-symbols-outlined text-[20px]">visibility</span>
+              </button>
+              <button class="p-2 text-secondary hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="triggerDownloadPDF('TXN-883100')" title="Tải hóa đơn PDF">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Pagination and Record Counter -->
+    <div class="p-5 bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="font-body-md text-body-md text-secondary">
+        Hiển thị <span class="font-semibold text-on-surface">1 - 5</span> trên tổng số <span class="font-semibold text-on-surface">18</span> giao dịch
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="w-9 h-9 rounded-lg bg-surface-container-lowest text-secondary flex items-center justify-center hover:bg-surface-container hover:text-on-surface transition-colors disabled:opacity-40" disabled="">
+          <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+        </button>
+        <button class="w-9 h-9 rounded-lg bg-primary-container text-on-primary font-headline-md text-label-md flex items-center justify-center shadow-sm">
+          1
+        </button>
+        <button class="w-9 h-9 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container font-headline-md text-label-md flex items-center justify-center transition-colors">
+          2
+        </button>
+        <button class="w-9 h-9 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container font-headline-md text-label-md flex items-center justify-center transition-colors">
+          3
+        </button>
+        <button class="w-9 h-9 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container font-headline-md text-label-md flex items-center justify-center transition-colors">
+          4
+        </button>
+        <button class="w-9 h-9 rounded-lg bg-surface-container-lowest text-secondary flex items-center justify-center hover:bg-surface-container hover:text-on-surface transition-colors">
+          <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Booking and Payment Sync Hint Banner -->
+<div class="max-w-[1320px] mx-auto px-margin-desktop mt-8 w-full">
+  <div class="bg-gradient-to-r from-surface-container-high/60 via-surface-container-low to-surface-container-high/60 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-[28px]">account_balance_wallet</span>
+      </div>
+      <div>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Cần tích hợp hóa đơn VAT cho Công ty hoặc Đội thể thao?</h3>
+        <p class="font-body-md text-body-md text-secondary mt-1">Hệ thống Kinetic Court hỗ trợ xuất hóa đơn điện tử tự động sang phần mềm kế toán theo mã số thuế doanh nghiệp.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 shrink-0">
+      <a class="px-4 py-2.5 bg-surface-container-lowest text-on-surface font-headline-md text-label-md rounded-lg hover:bg-surface-container shadow-sm transition-all flex items-center gap-2" data-path="my-bookings" href="#">
+        <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+        Lịch đặt sân
+      </a>
+      <button class="px-5 py-2.5 bg-primary-container text-on-primary font-headline-md text-label-md rounded-lg hover:bg-primary shadow-sm transition-all flex items-center gap-2" onclick="alert('Đang kết nối cổng dịch vụ hóa đơn điện tử...');">
+        <span class="material-symbols-outlined text-[18px]">business</span>
+        Cài đặt MST
+      </button>
+    </div>
+  </div>
+</div>
+<!-- E-Receipt Modal / Drawer Component -->
+<div class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-opacity duration-200" id="receipt-modal-backdrop">
+  <div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden relative transform transition-transform">
+    <!-- Modal Header -->
+    <div class="p-6 bg-surface-container-low flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+          <span class="material-symbols-outlined text-[20px]">receipt</span>
+        </div>
+        <div>
+          <h4 class="font-headline-md text-headline-md text-on-surface font-bold">Biên lai thanh toán điện tử</h4>
+          <div class="font-body-md text-[13px] text-secondary">Chứng từ giao dịch hợp lệ của Kinetic Court</div>
+        </div>
+      </div>
+      <button class="w-8 h-8 rounded-full bg-surface-container-high hover:bg-surface-container-highest text-secondary hover:text-on-surface flex items-center justify-center transition-colors" onclick="closeReceiptModal()">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+    <!-- Receipt Content Card -->
+    <div class="p-6 space-y-6">
+      <!-- Status Banner inside receipt -->
+      <div class="p-4 rounded-xl bg-surface-container-low flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary text-[24px]">verified</span>
+          <div>
+            <div class="font-label-md text-label-md text-on-surface">Thanh toán hoàn tất</div>
+            <div class="text-[12px] text-secondary" id="receipt-timestamp">24/08/2024 - 16:45:12</div>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="font-label-md text-[12px] text-secondary">Số tiền</div>
+          <div class="font-headline-md text-[20px] text-primary font-bold" id="receipt-amount">240.000₫</div>
+        </div>
+      </div>
+      <!-- Database Field Mapping Breakdown -->
+      <div class="space-y-3 bg-surface-container-lowest text-on-surface font-body-md text-[14px]">
+        <div class="flex justify-between py-1.5 border-b-0">
+          <span class="text-secondary">Mã giao dịch (transaction_code):</span>
+          <span class="font-semibold text-on-surface" id="receipt-txn-code">TXN-884920</span>
+        </div>
+        <div class="flex justify-between py-1.5 border-b-0">
+          <span class="text-secondary">Mã đặt sân liên kết (id_booking):</span>
+          <span class="font-semibold text-primary-container" id="receipt-booking-id">#KC-982347</span>
+        </div>
+        <div class="flex justify-between py-1.5 border-b-0">
+          <span class="text-secondary">Địa điểm &amp; Sân đấu:</span>
+          <span class="font-medium text-right" id="receipt-court-name">CLB Cầu Lông Ngôi Sao - Sân 4</span>
+        </div>
+        <div class="flex justify-between py-1.5 border-b-0">
+          <span class="text-secondary">Phương thức (payment_method):</span>
+          <span class="font-medium text-on-surface" id="receipt-method">VNPay QR (Napas 247)</span>
+        </div>
+        <div class="flex justify-between py-1.5 border-b-0">
+          <span class="text-secondary">Thời gian đặt sân:</span>
+          <span class="font-medium text-on-surface">18:00 - 20:00 (24/08/2024)</span>
+        </div>
+        <div class="flex justify-between py-1.5 border-b-0">
+          <span class="text-secondary">Thuế giá trị gia tăng (VAT 8%):</span>
+          <span class="font-medium text-on-surface">17.778₫</span>
+        </div>
+        <div class="flex justify-between py-2 pt-3 bg-surface-container-low px-3 rounded-lg font-semibold text-body-md">
+          <span>Tổng số tiền đã thanh toán:</span>
+          <span class="text-primary-container font-headline-md text-[18px]">240.000₫</span>
+        </div>
+      </div>
+      <!-- Security Badge -->
+      <div class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-[12px] text-secondary">
+        <span class="material-symbols-outlined text-[18px] text-primary">lock</span>
+        <span>Giao dịch được mã hóa 256-bit SSL tiêu chuẩn PCI-DSS Level 1.</span>
+      </div>
+    </div>
+    <!-- Modal Footer -->
+    <div class="p-6 bg-surface-container-low flex items-center justify-end gap-3">
+      <button class="px-4 py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high font-label-md text-label-md text-secondary hover:text-on-surface transition-colors" onclick="closeReceiptModal()">
+        Đóng
+      </button>
+      <button class="px-5 py-2.5 rounded-lg bg-primary-container hover:bg-primary font-headline-md text-label-md text-on-primary shadow-md transition-all flex items-center gap-2" onclick="triggerPrintReceipt()">
+        <span class="material-symbols-outlined text-[18px]">download</span>
+        Tải hóa đơn (PDF)
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

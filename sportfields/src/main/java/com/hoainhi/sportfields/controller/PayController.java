@@ -46,25 +46,66 @@ public class PayController {
     @GetMapping ("/pay")
     public String makePayment(HttpSession session) {
         try {
-            Double courtTotal = (Double) session.getAttribute("courtTotal");
-            Payment payment = paypalServiceimpl.createPayment(
-                  courtTotal,
-                    "USD",
-                    "paypal",
-                    "sale",
-                    "Payment description",
-                    CANCEL_URL,
-                    SUCCESS_URL
-            );
+
+
+            Double courtTotal =
+                    (Double) session.getAttribute("courtTotal");
+
+
+
+
+            List<BookingServiceDTO> selectedServices =
+                    (List<BookingServiceDTO>)
+                            session.getAttribute("selectedServices");
+
+
+
+
+            Double serviceTotal = 0.0;
+
+            if (selectedServices != null) {
+
+                for (BookingServiceDTO serviceDTO : selectedServices) {
+
+                    serviceTotal +=
+                            serviceDTO.getPrice()
+                                    * serviceDTO.getQuantity();
+                }
+            }
+
+
+
+            Double total =
+                    courtTotal + serviceTotal;
+
+
+            Payment payment =
+                    paypalServiceimpl.createPayment(
+                            total,
+                            "USD",
+                            "paypal",
+                            "sale",
+                            "Payment description",
+                            CANCEL_URL,
+                            SUCCESS_URL
+                    );
+
+
+
 
             for (Links link : payment.getLinks()) {
+
                 if (link.getRel().equals("approval_url")) {
+
                     return "redirect:" + link.getHref();
                 }
             }
+
         } catch (PayPalRESTException e) {
+
             e.printStackTrace();
         }
+
         return "redirect:/paypal";
     }
 
@@ -92,9 +133,29 @@ public class PayController {
                 LocalDate bookingDate =
                         (LocalDate) session.getAttribute("bookingDate");
 
+
+
+// Tính tiền dịch vụ
+                Double serviceTotal = 0.0;
+
+                if (selectedServices != null) {
+
+                    for (BookingServiceDTO serviceDTO : selectedServices) {
+
+                        serviceTotal +=
+                                serviceDTO.getPrice()
+                                        * serviceDTO.getQuantity();
+                    }
+                }
+
+
+// Tổng tiền
+                Double total =
+                        courtTotal + serviceTotal;
+
                 Booking booking = new Booking();
                 booking.setUser(user);
-                booking.setTotal(courtTotal);
+                booking.setTotal(total);
                 booking.setBooking_date(bookingDate);
                 booking.setStatus(BookingStatus.PENDING);
                 booking = bookingServiceimpl.saveBooking(booking);

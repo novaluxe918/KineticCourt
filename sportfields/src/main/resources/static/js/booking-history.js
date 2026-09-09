@@ -1,13 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
 
 
-
+//click vao nut xem chi tiet
     document.querySelectorAll(".btn-detail").forEach(button => {
 
         button.addEventListener("click", function () {
-
             openBookingDetailModal(this);
-
         });
 
     });
@@ -20,15 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btnClose) {
 
         btnClose.addEventListener("click", function () {
-
             closeBookingDetailModal();
-
         });
 
     }
 
 
-    // Click ra ngoài modal
+
+
     const modal =
         document.getElementById("detailHistoryModal");
 
@@ -37,9 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.addEventListener("click", function (event) {
 
             if (event.target === modal) {
-
                 closeBookingDetailModal();
-
             }
 
         });
@@ -49,9 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// ========================================
-// Mở modal + lấy thông tin booking
-// ========================================
 
 function openBookingDetailModal(button) {
 
@@ -68,9 +60,7 @@ function openBookingDetailModal(button) {
             console.log("URL:", response.url);
 
             if (!response.ok) {
-
                 throw new Error("Không lấy được booking");
-
             }
 
             return response.json();
@@ -82,9 +72,7 @@ function openBookingDetailModal(button) {
             console.log("Booking:", data);
 
 
-            // =========================
-            // Thông tin cơ bản
-            // =========================
+
 
             document.getElementById("modalStatus").innerText =
                 data.status ?? "-";
@@ -93,77 +81,33 @@ function openBookingDetailModal(button) {
             document.getElementById("modalDate").innerText =
                 data.booking_date ?? "-";
 
+         let total = Number(data.total) || 0;
 
-            document.getElementById("modalTotal").innerText =
-                formatMoney(data.total);
-
-
-            // =========================
-            // Thông tin sân
-            // =========================
-
-            if (
-                data.bookingDetail &&
-                data.bookingDetail.length > 0
-            ) {
-
-                let detail =
-                    data.bookingDetail[0];
+         document.getElementById("modalTotal").innerText =
+             formatMoney(total);
 
 
-                let scheduleDetails =
-                    detail.scheduleDetails;
 
 
-                if (scheduleDetails) {
-
-                    let schedule =
-                        scheduleDetails.schedule;
+            document.getElementById("modalClubName").innerText =
+                data.name_facility ?? "-";
 
 
-                    let court =
-                        schedule?.court;
+            document.getElementById("modalAddress").innerText =
+                data.address ?? "-";
 
 
-                    let facility =
-                        court?.facility;
+
+            document.getElementById("modalCourtName").innerText =
+                data.name_court ?? "-";
 
 
-                    // Tên CLB
-                    document.getElementById("modalClubName").innerText =
-                        facility?.name_facility ?? "-";
+            document.getElementById("modalTime").innerText =
+                (data.time_start ?? "") +
+                " - " +
+                (data.time_end ?? "");
 
 
-                    // Địa chỉ
-                    document.getElementById("modalAddress").innerText =
-                        facility?.address ?? "-";
-
-
-                    // Tên sân
-                    document.getElementById("modalCourtName").innerText =
-                        court?.name_court ?? "-";
-
-
-                    // Thời gian
-                    let start =
-                        scheduleDetails.time_start ?? "";
-
-
-                    let end =
-                        scheduleDetails.time_end ?? "";
-
-
-                    document.getElementById("modalTime").innerText =
-                        start + " - " + end;
-
-                }
-
-            }
-
-
-            // =========================
-            // Dịch vụ
-            // =========================
 
             let serviceContainer =
                 document.getElementById("modalServices");
@@ -173,11 +117,11 @@ function openBookingDetailModal(button) {
 
 
             if (
-                data.bookingService &&
-                data.bookingService.length > 0
+                data.services &&
+                data.services.length > 0
             ) {
 
-                data.bookingService.forEach(item => {
+                data.services.forEach(item => {
 
                     let li =
                         document.createElement("li");
@@ -187,25 +131,13 @@ function openBookingDetailModal(button) {
                         "flex justify-between items-center py-1";
 
 
-                    let serviceName =
-                        item.service?.title ?? "Dịch vụ";
-
-
-                    let quantity =
-                        item.quantity ?? 0;
-
-
-                    let price =
-                        item.price ?? 0;
-
-
                     li.innerHTML = `
                         <span class="font-body-md text-body-md text-on-background">
-                            ${quantity}x ${serviceName}
+                            ${item.quantity ?? 0}x ${item.title ?? "Dịch vụ"}
                         </span>
 
                         <span class="font-body-md text-sm text-on-surface-variant">
-                            ${formatMoney(price)}
+                            ${formatMoney(item.price)}
                         </span>
                     `;
 
@@ -225,19 +157,23 @@ function openBookingDetailModal(button) {
             }
 
 
+            // ========================================
+            // Hiển thị modal
+            // ========================================
 
-            document.getElementById("detailHistoryModal")
-                .classList.remove("hidden");
+            const modal =
+                document.getElementById("detailHistoryModal");
 
 
-            document.getElementById("detailHistoryModal")
-                .classList.add("flex");
+            modal.classList.remove("hidden");
+
+            modal.classList.add("flex");
 
         })
 
         .catch(error => {
 
-            console.log(error);
+            console.error("Lỗi:", error);
 
             alert("Không thể tải thông tin đặt sân.");
 
@@ -250,27 +186,61 @@ function openBookingDetailModal(button) {
 
 function closeBookingDetailModal() {
 
-    document.getElementById("detailHistoryModal")
-        .classList.add("hidden");
+    const modal =
+        document.getElementById("detailHistoryModal");
 
 
-    document.getElementById("detailHistoryModal")
-        .classList.remove("flex");
+    modal.classList.add("hidden");
+
+    modal.classList.remove("flex");
 
 }
 
 
-// ========================================
-// Format tiền
-// ========================================
+function filterBookings(type){
+const bookings = document.querySelectorAll(".booking-card");
+
+    bookings.forEach(booking => {
+
+        const status = booking.dataset.status;
+
+        if (type === "all") {
+
+            booking.style.display = "";
+
+        } else if (type === "upcoming") {
+
+            if (status === "PENDING") {
+                booking.style.display = "";
+            } else {
+                booking.style.display = "none";
+            }
+
+        } else if (type === "completed") {
+
+            if (status === "COMPLETED") {
+                booking.style.display = "";
+            } else {
+                booking.style.display = "none";
+            }
+        }
+    });
+
+
+    // Đổi trạng thái nút đang chọn
+    document.querySelectorAll(".flex button").forEach(button => {
+        button.classList.remove("active-tab");
+    });
+
+    document.getElementById("btn-" + type)?.classList.add("active-tab");
+}
 
 function formatMoney(value) {
 
     if (value == null) {
-
         return "-";
-
     }
+
 
     return Number(value).toLocaleString("vi-VN") + "đ";
 
