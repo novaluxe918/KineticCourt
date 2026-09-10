@@ -3,6 +3,7 @@ package com.hoainhi.sportfields.controller;
 import com.hoainhi.sportfields.dto.BookingServiceDTO;
 import com.hoainhi.sportfields.entity.*;
 import com.hoainhi.sportfields.enums.BookingStatus;
+import com.hoainhi.sportfields.enums.PaymentStatus;
 import com.hoainhi.sportfields.service.BookingServiceItemService;
 import com.hoainhi.sportfields.service.impl.*;
 import com.paypal.api.payments.Links;
@@ -39,6 +40,9 @@ public class PayController {
 
     @Autowired
     private BookingServiceItemService bookingServiceItemService;
+
+    @Autowired
+    private PaymentServiceImpl paymentService;
 
     @Autowired
     private BookingDetailServiceImpl bookingDetailService;
@@ -160,6 +164,14 @@ public class PayController {
                 booking.setStatus(BookingStatus.PENDING);
                 booking = bookingServiceimpl.saveBooking(booking);
 
+                Payments payments = new Payments();
+                payments.setBooking(booking);
+                payments.setPayment_method("Paypal");
+                payments.setStatus(PaymentStatus.COMPLETED);
+                payments.setTransaction_code(paymentId);
+                payments.setAmount(total);
+                payments.setPayment_date(LocalDate.now());
+                paymentService.savePayment(payments);
 
                 List<ScheduleDetails> details = scheduleDetailSerivceimp.getByIds(selectedSlots);
 
@@ -210,5 +222,12 @@ public class PayController {
     public String cancelPay(Model model) {
         model.addAttribute("message", "Giao dịch đã bị huỷ.");
         return "client/pay/cancel";
+    }
+
+    @GetMapping("/payment_history")
+    public String paymentHistory(Model model, @PathVariable Long id){
+        Payments payments = paymentService.findById(id);
+        model.addAttribute("payments", payments);
+        return "client/payment/Payment";
     }
 }

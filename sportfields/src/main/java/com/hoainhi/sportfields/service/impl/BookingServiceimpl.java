@@ -243,5 +243,18 @@ public class BookingServiceimpl implements BookingServices {
         return showDTOS;
     }
 
+    @Override
+    public List<Booking> getOwnerBookings(Long ownerId) {
+        return bookingRepository.findByCourtOwnerId(ownerId);
+    }
+
+    @Override
+    public void updateStatus(Long bookingId, BookingStatus status) {
+        Booking booking = bookingRepository.findById(bookingId).orElseThrow();
+
+        booking.setStatus(status);
+         bookingRepository.save(booking);
+    }
+
 
 }

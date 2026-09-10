@@ -2,6 +2,7 @@ package com.hoainhi.sportfields.controller;
 
 import com.hoainhi.sportfields.dto.*;
 import com.hoainhi.sportfields.entity.*;
+import com.hoainhi.sportfields.enums.BookingStatus;
 import com.hoainhi.sportfields.service.impl.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -136,7 +137,11 @@ public class BookingController {
     }
 
     @GetMapping("/booking_own")
-    public String bookingOwner(HttpServletRequest request, Model model){
+    public String bookingOwner(HttpServletRequest request, Model model, HttpSession session){
+        User user = (User) session.getAttribute("loginUser");
+        List<Booking> bookings = bookingServiceimpl.getOwnerBookings(user.getId());
+
+        model.addAttribute("bookings", bookings);
         model.addAttribute("currentUrl", request.getRequestURI());
         return "owner/booking/Booking";
     }
@@ -149,4 +154,21 @@ public class BookingController {
         return bookingDetailDTO;
     }
 
+    @PostMapping("/approve/{id}")
+    public String approveBooking(@PathVariable Long id){
+        bookingServiceimpl.updateStatus(id, BookingStatus.APPROVE);
+        return "redirect:/booking/booking_own";
+    }
+
+    @PostMapping("/complete/{id}")
+    public String completeBooking(@PathVariable Long id){
+        bookingServiceimpl.updateStatus(id, BookingStatus.COMPLETED);
+        return "redirect:/booking/booking_own";
+    }
+
+    @PostMapping("/cancel/{id}")
+    public String cancelBooking(@PathVariable Long id){
+        bookingServiceimpl.updateStatus(id, BookingStatus.CANCELLED);
+        return "redirect:/booking/booking_own";
+    }
 }

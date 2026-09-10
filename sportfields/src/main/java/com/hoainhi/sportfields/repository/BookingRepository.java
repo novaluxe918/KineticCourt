@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Book;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -30,5 +31,18 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             @Param("bookingDate") LocalDate bookingDate,
             @Param("scheduleDetailId") Long scheduleDetailId
     );
+
+    @Query("""
+        SELECT DISTINCT b
+        FROM Booking b
+        JOIN b.bookingDetail bd
+        JOIN bd.scheduleDetails sd
+        JOIN sd.schedule s
+        JOIN s.court c
+        JOIN c.facility f
+        WHERE f.user.id = :ownerId
+        ORDER BY b.booking_date DESC
+    """)
+    List<Booking> findByCourtOwnerId(Long ownerId);
 
 }
