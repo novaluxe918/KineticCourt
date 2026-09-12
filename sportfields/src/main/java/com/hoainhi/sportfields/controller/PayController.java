@@ -1,6 +1,7 @@
 package com.hoainhi.sportfields.controller;
 
 import com.hoainhi.sportfields.dto.BookingServiceDTO;
+import com.hoainhi.sportfields.dto.PaymentHistoryDTO;
 import com.hoainhi.sportfields.entity.*;
 import com.hoainhi.sportfields.enums.BookingStatus;
 import com.hoainhi.sportfields.enums.PaymentStatus;
@@ -225,8 +226,10 @@ public class PayController {
     }
 
     @GetMapping("/payment_history")
-    public String paymentHistory(Model model, @PathVariable Long id){
-        Payments payments = paymentService.findById(id);
+    public String paymentHistory(Model model, HttpSession session){
+        User user = (User) session.getAttribute("loginUser");
+
+        List<PaymentHistoryDTO> payments = paymentService.getPaymentHistoryByUser(user.getId());
         model.addAttribute("payments", payments);
         return "client/payment/Payment";
     }

@@ -69,21 +69,18 @@
           </thead>
           <tbody class="divide-y-0 text-on-surface font-body-md text-body-md" id="transactions-tbody">
           <!-- Row 1 (VNPay - Thành công) -->
-          <tr class="hover:bg-surface-container-low/70 transition-colors group">
+          <tr th:each="payment : ${payments}" class="hover:bg-surface-container-low/70 transition-colors group">
             <td class="py-4 px-6">
-              <div class="font-headline-md text-label-md text-on-surface font-bold">#TXN-884920</div>
+              <div th:text="${payment.paymentId}" class="font-headline-md text-label-md text-on-surface font-bold">#TXN-884920</div>
               <div class="flex items-center gap-1.5 text-[12px] text-secondary mt-0.5">
-                <span class="material-symbols-outlined text-[14px]">sports_tennis</span>
-                Đơn đặt: <a class="text-primary-container hover:underline font-medium" href="#">#KC-982347</a>
               </div>
             </td>
-            <td class="py-4 px-6">
-              <div class="font-semibold text-on-surface">CLB Cầu Lông Ngôi Sao</div>
-              <div class="text-[13px] text-secondary">Sân thi đấu số 4 (Thảm Yonex)</div>
+            <td  class="py-4 px-6">
+              <div th:text="${payment.facility_name}" class="font-semibold text-on-surface"></div>
+              <div th:text="${payment.name_court}" class="text-[13px] text-secondary"></div>
             </td>
             <td class="py-4 px-6">
-              <div class="font-medium text-on-surface">24/08/2024</div>
-              <div class="text-[12px] text-secondary">16:45:12</div>
+              <div th:text="${payment.payment_date}" class="font-medium text-on-surface">24/08/2024</div>
             </td>
             <td class="py-4 px-6">
               <div class="flex items-center gap-2">
@@ -91,14 +88,13 @@
                   <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
                 </div>
                 <div>
-                  <div class="font-medium text-[14px]">VNPay QR</div>
+                  <div th:text="${payment.payment_method}" class="font-medium text-[14px]"></div>
                   <div class="text-[11px] text-secondary">Ví ngân hàng</div>
                 </div>
               </div>
             </td>
             <td class="py-4 px-6 text-right">
-              <div class="font-headline-md text-[17px] font-bold text-on-surface">240.000<span class="text-[14px] text-primary-container font-headline-md">₫</span></div>
-              <div class="text-[11px] text-secondary">Đã gồm VAT 8%</div>
+              <div th:text="${payment.amount}" class="font-headline-md text-[17px] font-bold text-on-surface">240.000<span class="text-[14px] text-primary-container font-headline-md">₫</span></div>
             </td>
             <td class="py-4 px-6 text-center">
 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-semibold bg-surface-container text-on-surface">

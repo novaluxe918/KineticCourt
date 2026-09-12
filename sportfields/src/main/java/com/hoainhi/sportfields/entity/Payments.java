@@ -21,7 +21,7 @@ public class Payments {
     private PaymentStatus status;
 
     private String transaction_code;
-    private double amount;
+    private Double amount;
 
     @OneToOne
     @JoinColumn(name = "id_booking")
